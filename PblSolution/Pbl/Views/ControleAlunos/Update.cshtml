@@ -1,0 +1,97 @@
+﻿@model Pbl.Models.Aluno
+@{
+    ViewBag.Title = "Update";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a><a href="@Url.Action("Index","ControleAlunos")" title="Vá para Controle Alunos" class="tip-bottom"><i class="fa fa-users"></i> Alunos</a></div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+
+                <form action="" method="post" class="form-styles">
+                    <input name="idAluno" type="hidden" value="@Model.idAluno" />
+                    <h1>Atualizar Aluno</h1>
+                    <ul>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nome</label>
+                                <div class="col-md-4 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input name="nomeAluno" placeholder="Nome "  value="@Model.nomeAluno" class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nome</label>
+                                <div class="col-md-4 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input name="cpfAluno" placeholder="Nome "  value="@Model.cpfAluno" class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Nome</label>
+                                <div class="col-md-4 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input name="matriculaAluno" placeholder="Nome " value="@Model.matriculaAluno" class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        @Html.AntiForgeryToken()
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"></label>
+                                <div class="col-md-4">
+                                    <button type="submit" value="Alterar" class="btn btn-warning">Alterar <span class="glyphicon glyphicon-send"></span></button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+    
+    
+            @*
+           <div class="widget-title"><span class="icon"><i class="icon-th"></i></span><h5>Atualizar Aluno</h5></div>
+
+            <div class="widget-content nopadding">
+            <form action="" method="post" class="form-horizontal">
+                <input name="idAluno" type="hidden" value="@Model.idAluno" />
+                <div class="control-group">
+                    <label class="control-label">Nome :</label>
+                    <div class="controls">
+                        <input name="nomeAluno" type="text" class="span11" value="@Model.nomeAluno" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">CPF :</label>
+                    <div class="controls">
+                        <input name="cpfAluno" type="text" class="span11" value="@Model.cpfAluno" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Matricula :</label>
+                    <div class="controls">
+                        <input name="matriculaAluno" type="text" class="span11" value="@Model.matriculaAluno"/>
+                    </div>
+                </div>
+                @Html.AntiForgeryToken()
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">Alterar</button>
+                </div>
+            </form>
+        </div>*@
+            </div>
+        </div>
+    </div>
+</div>

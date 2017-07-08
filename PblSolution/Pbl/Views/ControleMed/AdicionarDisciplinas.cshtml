@@ -1,0 +1,77 @@
+﻿@model Pbl.Models.ViewModel.AdicionarDisciplinasViewModel
+
+@{
+    ViewBag.Title = "AdicionarDisciplinas";
+}
+
+<h2>AdicionarDisciplinas</h2>
+
+<h2>Cadastradas</h2>
+<table class="table">
+    <tr>
+        <th>
+            Disciplina
+        </th>
+        <th>
+            Ativa
+        </th>
+        <th>
+            Tipo Disciplina
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.disciplinasCadastradas)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.descDisciplina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ativo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDisciplina.descTipoDisciplina)
+            </td>
+            <td>
+                <a href="">Remover</a>
+            </td>
+        </tr>
+    }
+</table>
+
+
+<h2>Disponiveis</h2>
+<table class="table">
+    <tr>
+        <th>
+            Disciplina
+        </th>
+        <th>
+            Ativa
+        </th>
+        <th>
+            Tipo Disciplina
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.disciplinasDisponiveis)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.descDisciplina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ativo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoDisciplina.descTipoDisciplina)
+            </td>
+            <td>
+                <a href="">Adicionar</a>
+            </td>
+        </tr>
+    }
+
+</table>

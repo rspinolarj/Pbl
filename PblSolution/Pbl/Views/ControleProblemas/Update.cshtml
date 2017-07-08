@@ -1,0 +1,105 @@
+﻿@model Pbl.Models.Problema
+@{
+    ViewBag.Title = "Update";
+}
+<script type="text/javascript">
+    $mensagem = "@ViewBag.Message";
+    if ($mensagem) {
+        alert($mensagem);
+    }
+</script>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><img src="~/Content/img/home.png" class="home" />Home</a><a href="@Url.Action("Index","ControleProblemas")" title="Vá para Controle Problemas" class="tip-bottom"><img src="~/Content/img/client.png" class="home" />Problemas</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+                <form action="" method="post" class="form-styles">
+                    <h1>Cadastro de Problemas</h1>
+                    @using (Html.BeginForm("Update", "ControleProblemas"))
+                    {
+                        @Html.ValidationSummary(true, "Algo deu errado")
+                        @Html.TextBoxFor(c => c.idProblema, new { @class = "form-control", @type = "hidden", @value = Model.idProblema })
+
+                        <ul>
+                            <li>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Titulo</label>
+                                    <div class="col-md-4 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                            <textarea class="form-control" name="tituloProblema" placeholder="Titulo">@Model.tituloProblema</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-group formselect">
+                                    <label class="col-md-4 control-label formbox">Descrição</label>
+                                    <div class="col-md-4 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                            <textarea class="form-control" name="descProblema" placeholder="Descrição">@Model.descProblema</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            @Html.AntiForgeryToken()
+                            <li>
+                                <div class="form-group groupbuttonb">
+                                    <label class="col-md-4 control-label"></label>
+                                    <div class="col-md-4">
+                                        <button type="submit" value="Alterar" class="btn btn-warning">Alterar <span class="glyphicon glyphicon-send"></span></button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        @*
+    <ul>
+        <li>
+            <input name="tituloProblema" type="text" placeholder="Titulo" value="@Model.tituloProblema" />
+            <span>Informe o titulo</span>
+        </li>
+        <li>
+            <textarea name="descProblema" placeholder="Descrição">@Model.descProblema</textarea>
+            <!--<input name="descProblema" type="text" placeholder="Descrição" />-->
+            <span>Informe a descrição</span>
+        </li>
+        @Html.AntiForgeryToken()
+        <li>
+            <input type="submit" value="Salvar" />
+        </li>
+    </ul>
+                        *@
+
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*
+    <h2>Atualizar problema</h2>
+
+    @using (Html.BeginForm("Update","ControleProblemas"))
+    {
+        @Html.ValidationSummary(true,"Algo deu errado")
+        @Html.TextBoxFor(c => c.idProblema, new { @class="form-control", @type="hidden", @value=Model.idProblema})
+        <div class="form-group">
+            <label for="tituloProblema">Titulo</label>
+            @Html.TextBoxFor(c => c.tituloProblema, new { @class="form-control", @value=Model.tituloProblema})
+            @Html.ValidationMessageFor(c => c.tituloProblema)
+        </div>
+        <div class="form-group">
+            <label for="descProblema">Descrição</label>
+            @Html.TextAreaFor(c => c.descProblema, new { @class="form-control", @value = Model.descProblema})
+            @Html.ValidationMessageFor(c => c.descProblema)
+        </div>
+        @Html.AntiForgeryToken();
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    }*@
+

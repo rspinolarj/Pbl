@@ -1,0 +1,139 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style type="text/css">
+        #flotcontainer {
+            width: 600px;
+            height: 400px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="adjust-nav">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <img src="~/Content/img/logo.png" />
+
+                    </a>
+
+                </div>
+
+                <span class="logout-spn">
+                    <a href="#" style="color:#fff;"> LOGOUT <img class="logout-img" src="~/Content/img/logout.png" alt="Logout"> </a>
+                </span>
+            </div>
+        </div>
+        <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+
+
+                    <li class="active-link">
+                        <a href="@Url.Action("Index", "Home")"><i class="fa fa-desktop active "></i>Home <span class="badge">Included</span></a>
+                    </li>
+
+
+                    <li>
+                        <a href="@Url.Action("Index", "ControleAlunos")"><i class="fa fa-table "></i>Alunos  <span class="badge">Included</span></a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "ControleProfessores")"><i class="fa fa-edit "></i>Professores <span class="badge">Included</span></a>
+                    </li>
+
+
+                    <li>
+                        <a href="@Url.Action("Index", "ControleMed")"><i class="fa fa-qrcode "></i>MED</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "ControleSemestres")"><i class="fa fa-bar-chart-o"></i>Semestre</a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "ControleProblemas")"><i class="fa fa-edit "></i>Problemas</a>
+                    </li>
+                    <li>
+                        <a href="#" data-toggle="collapse" data-target="#toggleSub"><i class="fa fa-table "></i>Disciplinas</a>
+                        <div class="collapse" id="toggleSub" style="height: 0px;">
+                            <ul class="nav nav-list">
+                                <li><a href="@Url.Action("Index","ControleTipoDisciplina")">Gerenciar Tipos</a></li>
+                                <li><a href="@Url.Action("Index","ControleDisciplinas")">Gerenciar Disciplinas</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                @RenderBody()
+
+            </div>
+            <!-- /. PAGE INNER  -->
+        </div>
+        <!-- /. PAGE WRAPPER  -->
+
+    </div>
+    <div class="footer">
+        <div class="row">
+            <div class="col-lg-12">
+                &copy;  2014 yourdomain.com | Design by: <a href="http://binarytheme.com" style="color:#fff;" target="_blank">www.binarytheme.com</a>
+            </div>
+        </div>
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+    </script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://static.pureexample.com/js/flot/excanvas.min.js"></script>
+    <script src="http://static.pureexample.com/js/flot/jquery.flot.min.js"></script>
+    <script src="http://static.pureexample.com/js/flot/jquery.flot.pie.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var data = [
+                { label: "Menor que 60", data: 5 },
+                { label: ">= 60 e Menor que 80", data: 30 },
+                { label: ">= 80", data: 10 }
+            ];
+
+            var options = {
+                series: {
+                    pie: { show: true }
+                },
+                legend: {
+                    show: false
+                }
+            };
+
+            $.plot($("#flotcontainer"), data, options);
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

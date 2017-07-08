@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Pbl.Models.Aluno>
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript">
+    $mensagem = "@ViewBag.Message";
+    if ($mensagem) {
+        alert($mensagem);
+    }
+</script>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a><a href="@Url.Action("Index","ControleAlunos")" title="Vá para Controle Alunos" class="tip-bottom"><i class="fa fa-users"></i> Alunos</a></div>
+</div>
+<h2>Controle de Alunos @Html.ActionLink("Adicionar", "Create", null, new { @class = "classname" })</h2>
+<div class="container-fluid">
+    <div class="row-fluid">       
+        <div class="span12">
+            <div class="widget-box">
+                   
+                <div class="widget-content nopadding">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Cpf</th>
+                                    <th>Matricula</th>
+                                    <th>Opções</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var aluno in Model)
+                                {
+                                    <tr class="gradeX">
+                                        <td>@Html.DisplayFor(c => aluno.nomeAluno)</td>
+                                        <td>@Html.DisplayFor(c => aluno.cpfAluno)</td>
+                                        <td>@Html.DisplayFor(c => aluno.matriculaAluno)</td>
+                                        <td>
+                                            <i class="fa fa-pencil "></i> @Html.ActionLink("Alterar", "Update", new { id = aluno.idAluno }, new { @class = "alter" })
+                                            <i class="fa fa-times"></i>  @Html.ActionLink("Deletar", "Delete", new { id = aluno.idAluno }, new { @class = "alter" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

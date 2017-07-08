@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Pbl.Models.AvaliacaoTutoria>
+
+@{
+    ViewBag.Title = "SelecionarAluno";
+}
+
+<h2>SelecionarAluno</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.notaProfessor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtFim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ControleNotas.idControleNotas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProblemaXMed.idProblemaxMed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Grupo.descGrupo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.notaProfessor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtFim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ControleNotas.idControleNotas)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProblemaXMed.idProblemaxMed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grupo.descGrupo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idAvaliacaoTutoria }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idAvaliacaoTutoria }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idAvaliacaoTutoria })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Pbl.Models.Aula>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Turma.descTurma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Disciplina.descDisciplina)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Professor.nomeProfessor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Turma.descTurma)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disciplina.descDisciplina)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Professor.nomeProfessor)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idAula }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idAula }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idAula })
+        </td>
+    </tr>
+}
+
+</table>

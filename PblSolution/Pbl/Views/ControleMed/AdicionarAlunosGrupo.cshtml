@@ -1,0 +1,76 @@
+﻿@model Pbl.Models.ViewModel.AlunosGrupoViewModel
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h1>Grupo: @Model.grupo.descGrupo</h1>
+<h1>Professor: @Model.grupo.Professor.nomeProfessor</h1>
+
+<h2>Alunos Cadastrados</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th>
+            Cpf
+        </th>
+        <th>
+            Matricula
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.AlunosInscritos)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno.nomeAluno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno.cpfAluno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno.matriculaAluno)
+            </td>
+            <td><a href="@Url.Action("RemoverAlunosGrupo", "ControleMed", new { idGrupo = Model.grupo.idGrupo, idInscricaoTurma = item.idInscricaoTurma })">Desvincular</a></td>
+        </tr>
+    }
+
+</table>
+
+<h2>Alunos Disponiveis</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nome
+        </th>
+        <th>
+            Cpf
+        </th>
+        <th>
+            Matricula
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.AlunosDisponiveis)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno.nomeAluno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno.cpfAluno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno.matriculaAluno)
+            </td>
+            <td><a href="@Url.Action("AdicionarAlunosGrupo", "ControleMed", new { idGrupo = Model.grupo.idGrupo, idInscricaoTurma = item.idInscricaoTurma })">Vincular</a></td>
+        </tr>
+    }
+
+</table>

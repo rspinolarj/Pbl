@@ -1,0 +1,45 @@
+﻿@model Pbl.Models.Usuario
+
+@{
+    ViewBag.Title = "Details";
+}
+<div id="content-header">
+    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><img src="~/Content/img/home.png" class="home" />Home</a><a href="@Url.Action("Index","Usuarios/Details")" title="Vá para os Usuarios" class="tip-bottom"><img src="~/Content/img/client.png" class="home" />Usuarios</a></div>
+</div>
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.senha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.senha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoUsuario.descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoUsuario.descricao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idUsuario }) |
+    @Html.ActionLink("Back to List", "Index", "home")
+</p>

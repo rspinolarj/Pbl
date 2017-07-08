@@ -1,0 +1,55 @@
+﻿@model Pbl.Models.ViewModel.InscricaoAlunoViewModel
+
+@{
+    ViewBag.Title = "ControleTurma";
+}
+
+<h2>ControleTurma</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-striped table-hover" id="myTable">
+    <thead>
+        <tr>
+            <th>Aluno Cadastrado</th>
+            <th>CPF</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aluno in Model.alunosDisponiveis)
+        {
+            <tr>
+                <td>@Html.DisplayFor(c => aluno.nomeAluno)</td>
+                <td>@Html.DisplayFor(c => aluno.cpfAluno)</td>
+                <td>Botão ADICIONAR :D (JAVASCRIPT)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@using (Html.BeginForm("ControleTurma", "ControleMed"))
+{
+    <table class="table table-striped table-hover" id="myTable">
+        <thead>
+            <tr>
+                <th>Aluno Cadastrado</th>
+                <th>CPF</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.alunosCadastrados.Count; i++)
+            {
+                <tr>
+                    <td><input type="hidden" name="["+@i+"]alunos" value="@Model.alunosCadastrados[i].idAluno" /></td>
+                    <td>@Html.DisplayFor(c => Model.alunosCadastrados[i].nomeAluno , new {@name = "["+i+"]alunos", @value = Model.alunosCadastrados[i].idAluno })</td>
+                    <td>@Html.DisplayFor(c => Model.alunosCadastrados[i].cpfAluno)</td>
+                    <td>Botão DELETAR :D (JAVASCRIPT)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Salvar</button>
+}

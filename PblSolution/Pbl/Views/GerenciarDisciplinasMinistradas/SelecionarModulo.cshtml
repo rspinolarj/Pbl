@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Pbl.Models.Modulo>
+
+@{
+    ViewBag.Title = "SelecionarModulo";
+}
+
+<h2>@(((Pbl.Models.Aula) ViewData["Aula"]).Turma.Med.descMed) , Turma: @(((Pbl.Models.Aula)ViewData["Aula"]).Turma.descTurma), Aula: @(((Pbl.Models.Aula)ViewData["Aula"]).Disciplina.descDisciplina)</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.descModulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtFim)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Semestre.descSemestre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.descModulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtInicio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtFim)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Semestre.descSemestre)
+        </td>
+        <td>
+            @Html.ActionLink("Selecionar","SelecionarAlunos", new { idAula = ((Pbl.Models.Aula)ViewData["Aula"]).Turma.Med.descMed, idModulo = item.idModulo }, new { @class = "alter" })
+        </td>
+    </tr>
+}
+</table>

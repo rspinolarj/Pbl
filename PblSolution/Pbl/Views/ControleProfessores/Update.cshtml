@@ -1,0 +1,93 @@
+﻿@model Pbl.Models.Professor
+@{
+    ViewBag.Title = "Update";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a><a href="@Url.Action("Index","ControleProfessores")" title="Vá para Controle Professores" class="tip-bottom"><i class="fa fa-graduation-cap"></i> Professor</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+                <form action="" method="post" class="form-styles">
+                    <h1>Update</h1>
+                    @using (Html.BeginForm("Update", "ControleProfessores"))
+                    {
+                        @Html.TextBoxFor(c => c.idProfessor, new { @value = Model.idProfessor, @type = "hidden" })
+                        <ul>
+                            <li>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Nome do Professor</label>
+                                    <div class="col-md-4 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input name="nomeProfessor" placeholder="Nome " value="@Model.nomeProfessor" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">CPF do Professor</label>
+                                    <div class="col-md-4 inputGroupContainer">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input name="cpfProfessor" placeholder="CPF " value="@Model.cpfProfessor" class="form-control" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            @Html.AntiForgeryToken()
+                            <li>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"></label>
+                                    <div class="col-md-4">
+                                        <button type="submit" value="Alterar" class="btn btn-warning">Alterar <span class="glyphicon glyphicon-send"></span></button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        @*
+    <ul>
+        <li>
+            <input name="nomeProfessor" type="text" placeholder="Titulo" value="@Model.nomeProfessor" />
+            <span>Informe o titulo</span>
+        </li>
+        <li>
+            <input name="cpfProfessor" type="text" placeholder="Titulo" value="@Model.cpfProfessor" />
+            <span>Informe o titulo</span>
+        </li>
+        @Html.AntiForgeryToken()
+        <li>
+            <input type="submit" value="Alterar" />
+        </li>
+    </ul>
+                        *@
+                    }
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*
+    <h2>Update</h2>
+
+    @using (Html.BeginForm("Update", "ControleProfessores"))
+    {
+        @Html.TextBoxFor(c => c.idProfessor, new { @value = Model.idProfessor, @type = "hidden" })
+        @Html.TextBoxFor(c => c.senhaProfessor, new { @value = Model.senhaProfessor, @type = "hidden" })
+        <div class="form-group">
+            <label for="nomeProfessor">Nome </label>
+            @Html.TextBoxFor(c => c.nomeProfessor, new { @value = Model.nomeProfessor, @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="cpfProfessor">CPF </label>
+            @Html.TextBoxFor(c => c.cpfProfessor, new { @value = Model.cpfProfessor, @class = "form-control" })
+        </div>
+        @Html.AntiForgeryToken();
+        <button type="submit" class="btn btn-primary">Alterar</button>
+    }
+*@

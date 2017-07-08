@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Pbl.Models.Grupo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.descGrupo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ativo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Med.descMed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Professor.nomeProfessor)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.descGrupo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ativo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Med.descMed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Professor.nomeProfessor)
+        </td>
+        <td>
+            @Html.ActionLink("Selecionar","SelecionarProblema", "GerenciarProblemasMinistados", new { idGrupo = item.idGrupo}, new {@class = "alter" })
+        </td>
+    </tr>
+}
+
+</table>
