@@ -8,18 +8,30 @@
         alert($mensagem);
     }
 </script>
-<div id="content-header">
-    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><img src="~/Content/img/home.png" class="home" />Home</a><a href="@Url.Action("Index","ControleProblemas")" title="Vá para Controle Problemas" class="tip-bottom"><img src="~/Content/img/client.png" class="home" />Problemas</a></div>
-</div>
-<h2>Cadastro de Problemas @Html.ActionLink("Adicionar", "Create", null, new { @class = "classname" })</h2>
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="widget-box">
 
-                <div class="widget-content nopadding">
+
+<h3>
+    Cadastro de Problemas 
+    <small> Pagina para cadastrar os problemas</small>
+</h3>
+
+
+<div class="container-fluid">
+    <!-- START DATATABLE 1 -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <a href='<%: @Url.Action("Adicionar", "Create", null) %>'>
+                        <i class="fa fa-plus"></i>
+                        Adicionar Problema
+                    </a>
+
+                </div>
+                <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover" id="myTable">
+                        <table id="datatable1" class="table table-striped table-hover">
                             <thead>
                                 <tr>
                                     <th>Problema</th>
@@ -29,7 +41,7 @@
                             <tbody>
                                 @foreach (var problema in Model)
                                 {
-                                    <tr>
+                                    <tr class="gradeX">
                                         <td>@Html.DisplayFor(c => problema.tituloProblema)</td>
                                         <td>
                                             <i class="fa fa-pencil "></i>  @Html.ActionLink("Alterar", "Update", new { id = problema.idProblema }, new { @class = "alter" })
@@ -41,9 +53,62 @@
                             </tbody>
                         </table>
                     </div>
-               </div>
+                </div>
             </div>
         </div>
     </div>
-
 </div>
+
+@section Styles {
+    @Styles.Render("~/bundles/datatablesCss")
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/demoDatatable")
+}
+
+
+
+
+@*
+
+    <div id="content-header">
+        <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><img src="~/Content/img/home.png" class="home" />Home</a><a href="@Url.Action("Index","ControleProblemas")" title="Vá para Controle Problemas" class="tip-bottom"><img src="~/Content/img/client.png" class="home" />Problemas</a></div>
+    </div>
+    <h2>Cadastro de Problemas @Html.ActionLink("Adicionar", "Create", null, new { @class = "classname" })</h2>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="widget-box">
+
+                    <div class="widget-content nopadding">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th>Problema</th>
+                                        <th>Opções</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var problema in Model)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(c => problema.tituloProblema)</td>
+                                            <td>
+                                                <i class="fa fa-pencil "></i>  @Html.ActionLink("Alterar", "Update", new { id = problema.idProblema }, new { @class = "alter" })
+                                                <i class="fa fa-times "></i>  @Html.ActionLink("Deletar", "Delete", new { id = problema.idProblema }, new { @class = "alter" })
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+*@
