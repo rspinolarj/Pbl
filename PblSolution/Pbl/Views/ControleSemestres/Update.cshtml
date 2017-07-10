@@ -9,6 +9,100 @@
     }
 </script>
 
+<h3>
+    Cadastro de Semestres
+    <small> Formulario para Alteração dos Semestres</small>
+</h3>
+<div class="panel panel-default">
+    <div class="panel-heading">Alterar Semestre</div>
+    <div class="panel-body">
+        <form action="" method="post" class="form-horizontal">
+            @using (Html.BeginForm("Update", "ControleSemestres"))
+            {
+                @Html.ValidationSummary(true, "Algo não está certo")
+                @Html.TextBoxFor(c => c.idSemestre, new { @value = Model.idSemestre, @type = "hidden" })
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Data Inicio Modulo 1</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(c => c.DataInicioModulo1, new { @class = "form-control", @type = "date" })
+                            @Html.ValidationMessageFor(c => c.DataInicioModulo1)
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Data Final Modulo 1</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(c => c.DataFinalModulo1, new { @class = "form-control", @type = "date" })
+                            @Html.ValidationMessageFor(c => c.DataFinalModulo1)
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Data Inicio Modulo 2</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(c => c.DataInicioModulo2, new { @class = "form-control", @type = "date" })
+                            @Html.ValidationMessageFor(c => c.DataInicioModulo2)
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Data Final Modulo 2</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(c => c.DataFinalModulo2, new { @class = "form-control", @type = "date" })
+                            @Html.ValidationMessageFor(c => c.DataFinalModulo2)
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Data Inicio Modulo 3</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(c => c.DataInicioModulo3, new { @class = "form-control", @type = "date" })
+                            @Html.ValidationMessageFor(c => c.DataInicioModulo3)
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Data Final Modulo 3</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(c => c.DataFinalModulo3, new { @class = "form-control", @type = "date" })
+                            @Html.ValidationMessageFor(c => c.DataFinalModulo3)
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Descrição</label>
+                        <div class="col-sm-10">
+                            @Html.TextBoxFor(c => c.Descricao, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.Descricao)
+                        </div>
+                    </div>
+                </fieldset>
+
+            <!-- Success button with label -->
+                <button type="submit" value="Salvar" class="btn btn-labeled btn-success">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>Cadastrar
+                </button>
+            }
+        </form>
+    </div>
+</div>
+
+<!-- END panel-->
+
+
+
 <div id="content-header">
     <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><img src="~/Content/img/home.png" class="home" />Home</a><a href="@Url.Action("Index","ControleSemestres")" title="Vá para Controle Semestres" class="tip-bottom"><img src="~/Content/img/client.png" class="home" />Semestres</a></div>
 </div>
