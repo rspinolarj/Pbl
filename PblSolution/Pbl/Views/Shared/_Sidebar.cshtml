@@ -52,6 +52,31 @@
                     </li>
                 </ul>
             </li>
+            <li class="@Html.isActive(controller: "Dashboard")">
+                <a href="#diretor" title="Diretor" data-toggle="collapse">
+                    <div class="label label-info pull-right">3</div>
+                    <em class="icon-speedometer"></em>
+                    <span data-localize="sidebar.nav.Diretor">Diretor</span>
+                </a>
+                <ul id="diretor" class="nav sidebar-subnav collapse">
+                    <li class="sidebar-subnav-header">Diretor</li>
+                    <li class="@Html.isActive("ControleAlunos", "Index")">
+                        <a href="@Url.Action("Index", "ControleAlunos")" title="Alunos">
+                            <span>Alunos</span>
+                        </a>
+                    </li>
+                    <li class="@Html.isActive("ControleProfessores", "Index")">
+                        <a href="@Url.Action("Index", "ControleProfessores")" title="Professores">
+                            <span>Professores</span>
+                        </a>
+                    </li>
+                    <li class="@Html.isActive("ControleMed", "Index")">
+                        <a href="@Url.Action("Index", "ControleMed")" title="MED">
+                            <span>MED</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class="@Html.isActive(controller: "Widgets")">
                 <a href="@Url.Action("Index", "Widgets")" title="Widgets">
                     <div class="label label-success pull-right">30</div>
