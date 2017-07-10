@@ -2,120 +2,105 @@
 @{
     ViewBag.Title = "Create";
 }
-<meta charset="utf-8">
 <script type="text/javascript">
     $mensagem = "@ViewBag.Message";
     if ($mensagem) {
         alert($mensagem);
     }
 </script>
-<div id="content-header">
-    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a><a href="@Url.Action("Index","ControleProfessores")" title="Vá para Controle Professores" class="tip-bottom"><i class="fa fa-graduation-cap"></i> Professor</a></div>
-</div>
+<h3>
+    Professor
+    <small>Formulário para Cadastro de Professores</small>
+</h3>
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span6">
-            <div class="widget-box">
-                <form action="" method="post" class="form-styles">
-                    <h1>Cadastro de Professores</h1>
-                    @using (Html.BeginForm("Create", "ControleProfessores"))
-                    {
-                        @Html.ValidationSummary(true, "Algo não está certo.");
-                        <ul>
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Nome do Professor</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="nomeProfessor" placeholder="Nome do Professor" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">CPF do Professor</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="cpfProfessor" placeholder="CPF do Professor" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Senha do Professor</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="senhaProfessor" placeholder="Senha do Professor" class="form-control" type="password">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            @Html.AntiForgeryToken()
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label"></label>
-                                    <div class="col-md-4">
-                                        <button type="submit" value="Salvar" class="btn btn-warning">Cadastrar <span class="glyphicon glyphicon-send"></span></button>
-                                    </div>
-                                </div>
-
-                            </li>
-                        </ul>
-                        @*
-                        <ul>
-                            <li>
-                                <input name="nomeProfessor" type="text" placeholder="Nome Professor" />
-                                <span>Informe o Nome</span>
-                            </li>
-                            <li>
-                                <input name="cpfProfessor" type="text" placeholder="CPF" />
-                                <span>Informe o CPF</span>
-                            </li>
-                            <li>
-                                <input name="senhaProfessor" type="password" placeholder="Senha" />
-                                <span>Informe a senha</span>
-                            </li>
-                            @Html.AntiForgeryToken()
-                            <li>
-                                <input type="submit" value="Salvar" />
-                            </li>
-                        </ul>
-                        *@
-                    }
-                </form>
-                @*
-    <h2>
-        Cadastro de Professores
-    </h2>
-    @using (Html.BeginForm("Create", "ControleProfessores"))
-    {
-        @Html.ValidationSummary(true, "Algo não está certo.");
-        <div class="form-group">
-            @Html.LabelFor(m => m.nomeProfessor)
-            @Html.TextBoxFor(m => m.nomeProfessor, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.nomeProfessor)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.cpfProfessor)
-            @Html.TextBoxFor(m => m.cpfProfessor, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.cpfProfessor)
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.senhaProfessor)
-            @Html.TextBoxFor(m => m.senhaProfessor, new { @class = "form-control", type = "password" })
-            @Html.ValidationMessageFor(m => m.senhaProfessor)
-        </div>
-        @Html.AntiForgeryToken()
-        <button type="submit" class="btn btn-primary">Save</button>
-    }*@
-
-            </div>
-        </div>
+<div class="panel panel-default">
+    <div class="panel-heading">Cadastro</div>
+    <div class="panel-body">
+        <form action="" method="post" class="form-horizontal">
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nome</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="nomeProfessor" placeholder="Nome" class="form-control input-sm" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">CPF</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="cpfProfessor" placeholder="CPF" id="cpf" onsubmit="verificarCPF(this);" class="form-control input-sm" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Matrícula</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="matriculaProfessor" placeholder="Matrícula" class="form-control input-sm" />
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Success button with label -->
+            <button type="submit" class="btn btn-labeled btn-success">
+                <span class="btn-label">
+                    <i class="fa fa-check"></i>
+                </span>Cadastrar
+            </button>
+        </form>
     </div>
 </div>
+<!-- END panel-->
+
+
+@section scripts{
+    <script>
+        //arquivo funcoes_cpf.js
+        // validador CPF
+        function verificarCPF(c) {
+            var i;
+            s = c.value;
+            var c = s.substr(0, 9);
+            var dv = s.substr(9, 2);
+            var d1 = 0;
+            var v = false;
+
+            for (i = 0; i < 9; i++) {
+                d1 += c.charAt(i) * (10 - i);
+            }
+            if (d1 == 0) {
+                alert("CPF Inválido")
+                v = true;
+                return false;
+            }
+            d1 = 11 - (d1 % 11);
+            if (d1 > 9) d1 = 0;
+            if (dv.charAt(0) != d1) {
+                alert("CPF Inválido")
+                v = true;
+                return false;
+            }
+
+            d1 *= 2;
+            for (i = 0; i < 9; i++) {
+                d1 += c.charAt(i) * (11 - i);
+            }
+            d1 = 11 - (d1 % 11);
+            if (d1 > 9) d1 = 0;
+            if (dv.charAt(1) != d1) {
+                alert("CPF Inválido")
+                v = true;
+                return false;
+            }
+            if (!v) {
+                alert(c + "nCPF Válido")
+            }
+        }
+
+
+    </script>
+
+}
+
+

@@ -2,92 +2,97 @@
 @{
     ViewBag.Title = "Update";
 }
+<script type="text/javascript">
+    $mensagem = "@ViewBag.Message";
+    if ($mensagem) {
+        alert($mensagem);
+    }
+</script>
+<h3>
+    Professor
+    <small>Formulário para Edição de Professor</small>
+</h3>
 
-<div id="content-header">
-    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a><a href="@Url.Action("Index","ControleProfessores")" title="Vá para Controle Professores" class="tip-bottom"><i class="fa fa-graduation-cap"></i> Professor</a></div>
-</div>
-
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span6">
-            <div class="widget-box">
-                <form action="" method="post" class="form-styles">
-                    <h1>Update</h1>
-                    @using (Html.BeginForm("Update", "ControleProfessores"))
-                    {
-                        @Html.TextBoxFor(c => c.idProfessor, new { @value = Model.idProfessor, @type = "hidden" })
-                        <ul>
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Nome do Professor</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="nomeProfessor" placeholder="Nome " value="@Model.nomeProfessor" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">CPF do Professor</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <input name="cpfProfessor" placeholder="CPF " value="@Model.cpfProfessor" class="form-control" type="text">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            @Html.AntiForgeryToken()
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label"></label>
-                                    <div class="col-md-4">
-                                        <button type="submit" value="Alterar" class="btn btn-warning">Alterar <span class="glyphicon glyphicon-send"></span></button>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                        @*
-    <ul>
-        <li>
-            <input name="nomeProfessor" type="text" placeholder="Titulo" value="@Model.nomeProfessor" />
-            <span>Informe o titulo</span>
-        </li>
-        <li>
-            <input name="cpfProfessor" type="text" placeholder="Titulo" value="@Model.cpfProfessor" />
-            <span>Informe o titulo</span>
-        </li>
-        @Html.AntiForgeryToken()
-        <li>
-            <input type="submit" value="Alterar" />
-        </li>
-    </ul>
-                        *@
-                    }
-                </form>
-            </div>
-        </div>
+<div class="panel panel-default">
+    <div class="panel-heading">Cadastro</div>
+    <div class="panel-body">
+        <form action="" method="post" class="form-horizontal">
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nome</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="nomeProfessor" placeholder="Nome" class="form-control input-sm" value="@Model.nomeProfessor" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">CPF</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="cpfProfessor" placeholder="CPF" id="cpf" onsubmit="verificarCPF(this);" class="form-control input-sm" value="@Model.cpfProfessor" />
+                    </div>
+                </div>
+            </fieldset>
+            
+            <!-- Success button with label -->
+            <button type="submit" class="btn btn-labeled btn-success">
+                <span class="btn-label">
+                    <i class="fa fa-check"></i>
+                </span>Cadastrar
+            </button>
+        </form>
     </div>
 </div>
+<!-- END panel-->
 
-@*
-    <h2>Update</h2>
 
-    @using (Html.BeginForm("Update", "ControleProfessores"))
-    {
-        @Html.TextBoxFor(c => c.idProfessor, new { @value = Model.idProfessor, @type = "hidden" })
-        @Html.TextBoxFor(c => c.senhaProfessor, new { @value = Model.senhaProfessor, @type = "hidden" })
-        <div class="form-group">
-            <label for="nomeProfessor">Nome </label>
-            @Html.TextBoxFor(c => c.nomeProfessor, new { @value = Model.nomeProfessor, @class = "form-control" })
-        </div>
-        <div class="form-group">
-            <label for="cpfProfessor">CPF </label>
-            @Html.TextBoxFor(c => c.cpfProfessor, new { @value = Model.cpfProfessor, @class = "form-control" })
-        </div>
-        @Html.AntiForgeryToken();
-        <button type="submit" class="btn btn-primary">Alterar</button>
-    }
-*@
+
+@section scripts{
+    <script>
+        //arquivo funcoes_cpf.js
+        // validador CPF
+        function verificarCPF(c) {
+            var i;
+            s = c.value;
+            var c = s.substr(0, 9);
+            var dv = s.substr(9, 2);
+            var d1 = 0;
+            var v = false;
+
+            for (i = 0; i < 9; i++) {
+                d1 += c.charAt(i) * (10 - i);
+            }
+            if (d1 == 0) {
+                alert("CPF Inválido")
+                v = true;
+                return false;
+            }
+            d1 = 11 - (d1 % 11);
+            if (d1 > 9) d1 = 0;
+            if (dv.charAt(0) != d1) {
+                alert("CPF Inválido")
+                v = true;
+                return false;
+            }
+
+            d1 *= 2;
+            for (i = 0; i < 9; i++) {
+                d1 += c.charAt(i) * (11 - i);
+            }
+            d1 = 11 - (d1 % 11);
+            if (d1 > 9) d1 = 0;
+            if (dv.charAt(1) != d1) {
+                alert("CPF Inválido")
+                v = true;
+                return false;
+            }
+            if (!v) {
+                alert(c + "nCPF Válido")
+            }
+        }
+
+
+    </script>
+
+}
