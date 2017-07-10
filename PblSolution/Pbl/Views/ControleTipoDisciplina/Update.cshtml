@@ -2,6 +2,43 @@
 @{
     ViewBag.Title = "Alterar tipo de disciplina";
 }
+
+
+
+
+<h3>
+    Alteração dos Tipos de Disciplinas
+    <small> Formulario para Alteração dos Tipos de Disciplinas</small>
+</h3>
+<div class="panel panel-default">
+    <div class="panel-heading">Update</div>
+    <div class="panel-body">
+        <form action="" method="post" class="form-horizontal">
+            <input name="idTIpoDisciplina" type="hidden" value="@Model.idTipoDisciplina" />
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Descrição</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="descTipoDisciplina" placeholder="Descrição">@Model.descTipoDisciplina</textarea>
+                        </div>
+                    </div>
+                </fieldset>
+
+            <!-- Success button with label -->
+                <button type="submit" value="Alterar" class="btn btn-labeled btn-success">
+                    <span class="btn-label">
+                        <i class="fa fa-check"></i>
+                    </span>Cadastrar
+                </button>
+        </form>
+    </div>
+</div>
+
+<!-- END panel-->
+
+
+@*
+
 <div id="content-header">
     <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><img src="~/Content/img/home.png" class="home" />Home</a><a href="@Url.Action("Index","ControleTipoDisciplina")" title="Vá para Controle Tipo Disciplinas" class="tip-bottom"><img src="~/Content/img/client.png" class="home" />Tipo disciplina</a></div>
 </div>
@@ -48,7 +85,7 @@
             <input type="submit" value="Alterar" />
         </li>
     </ul>
-                    *@
+                    
                 </form>
             </div>
         </div>
