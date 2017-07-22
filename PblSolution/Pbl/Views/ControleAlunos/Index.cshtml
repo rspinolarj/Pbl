@@ -49,9 +49,14 @@
                                     <td>@Html.DisplayFor(c => aluno.cpfAluno)</td>
                                     <td>@Html.DisplayFor(c => aluno.matriculaAluno)</td>
                                     <td>
-                                        <i class="fa fa-pencil "></i> @Html.ActionLink("Alterar", "Update", new { id = aluno.idAluno }, new { @class = "alter" })
-                                        <i class="fa fa-times"></i>  @Html.ActionLink("Deletar", "Delete", new { id = aluno.idAluno }, new { @class = "alter" })
-                                    </td>
+                                        <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("Update","ControleAlunos", new { id = aluno.idAluno })'">
+                                            <em class="fa fa-pencil"></em>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '@Url.Action("Delete","ControleAlunos", new { id = aluno.idAluno })'">
+                                            <em class="fa fa-times"></em>
+                                        </button>
+
+</td>
                                 </tr>
                             }
                             </tbody>

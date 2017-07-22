@@ -3,6 +3,101 @@
     ViewBag.Title = "Update";
 }
 
+<h3>
+    Aluno
+    <small>Formulário para Atualização dos Alunos</small>
+</h3>
+<div class="panel panel-default">
+    <div class="panel-heading">Update</div>
+    <div class="panel-body">
+        <form action="" method="post" class="form-horizontal">
+            <input name="idAluno" type="hidden" value="@Model.idAluno" />
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nome</label>
+                    <div class="col-sm-10">
+                        <input name="nomeAluno" placeholder="Nome " value="@Model.nomeAluno" class="form-control" type="text">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">CPF</label>
+                    <div class="col-sm-10">
+                        <input name="cpfAluno" placeholder="Nome " value="@Model.cpfAluno" class="form-control" type="text">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Matrícula</label>
+                    <div class="col-sm-10">
+                        <input name="matriculaAluno" placeholder="Nome " value="@Model.matriculaAluno" class="form-control" type="text">
+                    </div>
+                </div>
+            </fieldset>
+            <!-- Success button with label -->
+            <button type="submit" class="btn btn-labeled btn-success">
+                <span class="btn-label">
+                    <i class="fa fa-check"></i>
+                </span>Alterar
+            </button>
+        </form>
+    </div>
+</div>
+<!-- END panel-->
+
+@section scripts{
+    <script>
+    //arquivo funcoes_cpf.js
+    // validador CPF
+    function verificarCPF(c) {
+        var i;
+        s = c.value;
+        var c = s.substr(0, 9);
+        var dv = s.substr(9, 2);
+        var d1 = 0;
+        var v = false;
+
+        for (i = 0; i < 9; i++) {
+            d1 += c.charAt(i) * (10 - i);
+        }
+        if (d1 == 0) {
+            alert("CPF Inválido")
+            v = true;
+            return false;
+        }
+        d1 = 11 - (d1 % 11);
+        if (d1 > 9) d1 = 0;
+        if (dv.charAt(0) != d1) {
+            alert("CPF Inválido")
+            v = true;
+            return false;
+        }
+
+        d1 *= 2;
+        for (i = 0; i < 9; i++) {
+            d1 += c.charAt(i) * (11 - i);
+        }
+        d1 = 11 - (d1 % 11);
+        if (d1 > 9) d1 = 0;
+        if (dv.charAt(1) != d1) {
+            alert("CPF Inválido")
+            v = true;
+            return false;
+        }
+        if (!v) {
+            alert(c + "nCPF Válido")
+        }
+    }
+
+
+    </script>
+}
+
+@*
+
 <div id="content-header">
     <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a><a href="@Url.Action("Index","ControleAlunos")" title="Vá para Controle Alunos" class="tip-bottom"><i class="fa fa-users"></i> Alunos</a></div>
 </div>
@@ -61,37 +156,7 @@
                 </form>
     
     
-            @*
-           <div class="widget-title"><span class="icon"><i class="icon-th"></i></span><h5>Atualizar Aluno</h5></div>
-
-            <div class="widget-content nopadding">
-            <form action="" method="post" class="form-horizontal">
-                <input name="idAluno" type="hidden" value="@Model.idAluno" />
-                <div class="control-group">
-                    <label class="control-label">Nome :</label>
-                    <div class="controls">
-                        <input name="nomeAluno" type="text" class="span11" value="@Model.nomeAluno" />
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">CPF :</label>
-                    <div class="controls">
-                        <input name="cpfAluno" type="text" class="span11" value="@Model.cpfAluno" />
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label">Matricula :</label>
-                    <div class="controls">
-                        <input name="matriculaAluno" type="text" class="span11" value="@Model.matriculaAluno"/>
-                    </div>
-                </div>
-                @Html.AntiForgeryToken()
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-success">Alterar</button>
-                </div>
-            </form>
-        </div>*@
             </div>
         </div>
     </div>
-</div>
+</div>*@

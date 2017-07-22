@@ -33,7 +33,9 @@
                                         <td>MED @Html.DisplayFor(c => item.descMed)</td>
                                         <td>@Html.DisplayFor(c => item.Semestre.descSemestre)</td>
                                         <td>
-                                            <i class="fa fa-cog "></i> @Html.ActionLink("Gerenciar", "GerenciarMed", new { id = item.idMed }, new { @class = "alter" })
+                                            <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("GerenciarMed","ControleMed", new { id = item.idMed })'">
+                                                <em class="fa fa-cog"></em>
+                                            </button>
                                         </td>
                                     </tr>
                                 }

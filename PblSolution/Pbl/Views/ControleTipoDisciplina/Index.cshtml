@@ -45,8 +45,12 @@
                                     <tr class="gradeX">
                                         <td>@Html.DisplayFor(c => item.descTipoDisciplina)</td>
                                         <td>
-                                            <i class="fa fa-pencil "></i>  @Html.ActionLink("Alterar", "Update", new { id = item.idTipoDisciplina }, new { @class = "alter" })
-                                            <i class="fa fa-times "></i> @Html.ActionLink("Deletar", "Delete", new { id = item.idTipoDisciplina }, new { @class = "alter" })
+                                            <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("Update","ControleTipoDisciplina", new { id = item.idTipoDisciplina })'">
+                                                <em class="fa fa-pencil"></em>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '@Url.Action("Delete","ControleTipoDisciplina", new { id = item.idTipoDisciplina })'">
+                                                <em class="fa fa-times"></em>
+                                            </button>
                                         </td>
                                     </tr>
                                 }
