@@ -18,196 +18,84 @@
 
 
 <div class="container-fluid">
-    <!-- START DATATABLE 1 -->
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading"> Turma @Model.med.idMed
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-@using (Html.BeginForm("AdicionarTurma", "ControleMed"))
-{
-                        <table id="datatable1" class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Turmas</th>
-                                    <th>Opções</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var turma in Model.turmasCadastradas)
-                                {
-                                    <input type="hidden" name="idTurma" value="@turma.idMed" />
-                                        <tr class="gradeX">
-                                            <td>@Html.DisplayFor(modelItem => turma.descTurma)</td>
-                                            <td>
-                                                <i class="fa fa-pencil "></i>  @Html.ActionLink("Alterar", "Update", new { id = turma.idTurma }, new { @class = "alter" })
-                                                <i class="fa fa-times "></i>  @Html.ActionLink("Deletar", "Delete", new { id = turma.idTurma }, new { @class = "alter" })
-                                                <i class="fa fa-plus "></i> <a href="@Url.Action("AdicionarAlunosTurma","ControleMed",new { idTurma = turma.idTurma })" class="alter">Adicionar Alunos </a>
-                                                <i class="fa fa-cog "></i> <a href="@Url.Action("AdicionarAulasTurma", "ControleMed", new { idTurma = turma.idTurma })" class="alter">Administrar Aulas</a>
-                                            </td>
-                                        </tr>
-                                }
-                            </tbody>
-                        </table>
-}
-                        @Html.ValidationSummary(true, "Algo deu errado")
-                        <input type="hidden" name="id" value="@Model.med.idMed" />
 
-                        @Html.AntiForgeryToken()
-                        
-                        <div class="col-lg-4">
-                            <!-- START panel-->
-                            <div id="panelDemo7" class="panel panel-default">
-                                <div class="panel-heading">Turmas</div>
-                                <div class="panel-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                                </div>
-                                <div class="panel-footer">
-                                    <button type="button" class="btn btn-labeled btn-default">
-                                        Gerenciar Turmas
-                                        <span class="btn-label btn-label-right">
-                                            <i class="fa fa-arrow-right"></i>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- END panel-->
-                        </div>
-                    </div>
-                </div>
+    <div class="col-lg-4">
+        <!-- START panel-->
+        <div id="panelDemo7" class="panel panel-default">
+            <div class="panel-heading">Turmas</div>
+            <div class="panel-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-labeled btn-default">
+                    Gerenciar Turmas
+                    <span class="btn-label btn-label-right">
+                        <i class="fa fa-arrow-right"></i>
+                    </span>
+                </button>
             </div>
         </div>
+        <!-- END panel-->
     </div>
-</div>
 
-
-
-<div class="container-fluid">
-    <!-- START DATATABLE 1 -->
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Turma @Model.med.idMed
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        @using (Html.BeginForm("VincularProblemas", "ControleMed"))
-                        {
-                            <table id="datatable1" class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Problemas</th>
-                                        <th>Opções</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var problema in Model.problemasCadastrados)
-                                    {
-                                        <tr class="gradeX">
-                                            <td>@Html.DisplayFor(modelItem => problema.tituloProblema)</td>
-                                            <td>
-                                                <img class="actimg" src="~/Content/img/delet.png" /> @Ajax.ActionLink("Deletar", "DeletarVinculoProblema", "ControleMed", new { idMed = Model.med.idMed, idProblema = problema.idProblema }, new AjaxOptions { HttpMethod = "POST" }, new { @class = "alter" })
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        }
-                        @Html.ValidationSummary(true, "Algo deu errado")
-                        @Html.TextBox("idMed", Model.med.idMed, new { @class = "form-control", @type = "hidden" })
-                        @Html.AntiForgeryToken()
-
-                        <div class="col-lg-4">
-                            <!-- START panel-->
-                            <div id="panelDemo7" class="panel panel-default">
-                                <div class="panel-heading">Problema</div>
-                                <div class="panel-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                                </div>
-                                <div class="panel-footer">
-                                    <button type="button" class="btn btn-labeled btn-default">
-                                        Vincular Problema
-                                        <span class="btn-label btn-label-right">
-                                            <i class="fa fa-arrow-right"></i>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- END panel-->
-                        </div>
-                    </div>
-                </div>
+    <div class="col-lg-4">
+        <!-- START panel-->
+        <div id="panelDemo7" class="panel panel-default">
+            <div class="panel-heading">Problema</div>
+            <div class="panel-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-labeled btn-default">
+                    Vincular Problema
+                    <span class="btn-label btn-label-right">
+                        <i class="fa fa-arrow-right"></i>
+                    </span>
+                </button>
             </div>
         </div>
+        <!-- END panel-->
     </div>
-</div>
 
-
-
-<div class="container-fluid">
-    <!-- START DATATABLE 1 -->
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Turma @Model.med.idMed
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        @using (Html.BeginForm("AdicionarGrupos", "ControleMed", new { idMed = Model.med.idMed }))
-                        {
-                            <table id="datatable1" class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Grupo</th>
-                                        <th>Professor Responsável</th>
-                                        <th>Opções</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var grupo in Model.gruposCadastrados)
-                                    {
-                                        <tr>
-                                            <td>@grupo.descGrupo</td>
-                                            <td>@grupo.Professor.nomeProfessor</td>
-                                            <td>
-                                                <img class="actimg" src="~/Content/img/delet.png" /> @Html.ActionLink("Deletar", "DeletarGrupo", "ControleMed", new { idGrupo = grupo.idGrupo }, new { @class = "alter" })
-                                                <img class="actimg" src="~/Content/img/adicao2.png"> @Html.ActionLink("Adicionar Alunos", "AdicionarAlunosGrupo", "ControleMed", new { idGrupo = grupo.idGrupo }, new { @class = "alter" })
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        }
-                        @Html.AntiForgeryToken()
-
-                        <div class="col-lg-4">
-                            <!-- START panel-->
-                            <div id="panelDemo7" class="panel panel-default">
-                                <div class="panel-heading">Grupo</div>
-                                <div class="panel-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                                </div>
-                                <div class="panel-footer">
-                                    <button type="button" class="btn btn-labeled btn-default">
-                                        Adicionar Grupo
-                                        <span class="btn-label btn-label-right">
-                                            <i class="fa fa-arrow-right"></i>
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                            <!-- END panel-->
-                        </div>
-
-                    </div>
-                </div>
+    <div class="col-lg-4">
+        <!-- START panel-->
+        <div id="panelDemo7" class="panel panel-default">
+            <div class="panel-heading">Grupo</div>
+            <div class="panel-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-labeled btn-default">
+                    Adicionar Grupo
+                    <span class="btn-label btn-label-right">
+                        <i class="fa fa-arrow-right"></i>
+                    </span>
+                </button>
             </div>
         </div>
+        <!-- END panel-->
     </div>
+
+    <div class="col-lg-4">
+        <!-- START panel-->
+        <div id="panelDemo7" class="panel panel-default">
+            <div class="panel-heading">Disciplinas</div>
+            <div class="panel-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-labeled btn-default">
+                    Gerenciar Disciplina
+                    <span class="btn-label btn-label-right">
+                        <i class="fa fa-arrow-right"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
+        <!-- END panel-->
+    </div>
+
+
 </div>
 
 
