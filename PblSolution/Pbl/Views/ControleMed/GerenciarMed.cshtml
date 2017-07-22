@@ -56,11 +56,25 @@
                         <input type="hidden" name="id" value="@Model.med.idMed" />
 
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-labeled btn-success">
-                            <span class="btn-label">
-                                <i class="fa fa-check"></i>
-                            </span>Nova turma
-                        </button>
+                        
+                        <div class="col-lg-4">
+                            <!-- START panel-->
+                            <div id="panelDemo7" class="panel panel-default">
+                                <div class="panel-heading">Turmas</div>
+                                <div class="panel-body">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                </div>
+                                <div class="panel-footer">
+                                    <button type="button" class="btn btn-labeled btn-default">
+                                        Gerenciar Turmas
+                                        <span class="btn-label btn-label-right">
+                                            <i class="fa fa-arrow-right"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- END panel-->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -105,11 +119,25 @@
                         @Html.ValidationSummary(true, "Algo deu errado")
                         @Html.TextBox("idMed", Model.med.idMed, new { @class = "form-control", @type = "hidden" })
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-labeled btn-success">
-                            <span class="btn-label">
-                                <i class="fa fa-check"></i>
-                            </span>Vincular Problema
-                        </button>
+
+                        <div class="col-lg-4">
+                            <!-- START panel-->
+                            <div id="panelDemo7" class="panel panel-default">
+                                <div class="panel-heading">Problema</div>
+                                <div class="panel-body">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                </div>
+                                <div class="panel-footer">
+                                    <button type="button" class="btn btn-labeled btn-default">
+                                        Vincular Problema
+                                        <span class="btn-label btn-label-right">
+                                            <i class="fa fa-arrow-right"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- END panel-->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -155,11 +183,26 @@
                             </table>
                         }
                         @Html.AntiForgeryToken()
-                        <button type="submit" class="btn btn-labeled btn-success">
-                            <span class="btn-label">
-                                <i class="fa fa-check"></i>
-                            </span>Adicionar Grupo
-                        </button>
+
+                        <div class="col-lg-4">
+                            <!-- START panel-->
+                            <div id="panelDemo7" class="panel panel-default">
+                                <div class="panel-heading">Grupo</div>
+                                <div class="panel-body">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                </div>
+                                <div class="panel-footer">
+                                    <button type="button" class="btn btn-labeled btn-default">
+                                        Adicionar Grupo
+                                        <span class="btn-label btn-label-right">
+                                            <i class="fa fa-arrow-right"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- END panel-->
+                        </div>
+
                     </div>
                 </div>
             </div>
