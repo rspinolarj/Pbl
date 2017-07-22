@@ -1155,6 +1155,7 @@
     <Content Include="Views\Forms\FormValidation.cshtml" />
     <Content Include="Views\Forms\FormWizard.cshtml" />
     <Content Include="Views\Forms\FormXEditable.cshtml" />
+    <Content Include="Views\Shared\_SidebarDiretor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
