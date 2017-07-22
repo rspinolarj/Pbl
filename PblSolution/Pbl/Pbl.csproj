@@ -212,6 +212,7 @@
     <Compile Include="Models\Disciplina.cs">
       <DependentUpon>ModelFamerv.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Enumeradores.cs" />
     <Compile Include="Models\FichaAvaliacao.cs">
       <DependentUpon>ModelFamerv.tt</DependentUpon>
     </Compile>
@@ -1157,6 +1158,8 @@
     <Content Include="Views\Forms\FormWizard.cshtml" />
     <Content Include="Views\Forms\FormXEditable.cshtml" />
     <Content Include="Views\Shared\_SidebarDiretor.cshtml" />
+    <Content Include="Views\Shared\_SidebarAluno.cshtml" />
+    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
