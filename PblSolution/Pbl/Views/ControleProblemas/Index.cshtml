@@ -44,8 +44,12 @@
                                     <tr class="gradeX">
                                         <td>@Html.DisplayFor(c => problema.tituloProblema)</td>
                                         <td>
-                                            <i class="fa fa-pencil "></i>  @Html.ActionLink("Alterar", "Update", new { id = problema.idProblema }, new { @class = "alter" })
-                                            <i class="fa fa-times "></i>  @Html.ActionLink("Deletar", "Delete", new { id = problema.idProblema }, new { @class = "alter" })
+                                            <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("Update","ControleProblemas", new { id = problema.idProblema })'">
+                                                <em class="fa fa-pencil"></em>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '@Url.Action("Delete","ControleProblemas", new { id = problema.idProblema })'">
+                                                <em class="fa fa-times"></em>
+                                            </button>
 
                                         </td>
                                     </tr>
