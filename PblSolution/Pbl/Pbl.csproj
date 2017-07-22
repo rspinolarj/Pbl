@@ -660,6 +660,7 @@
     <Content Include="Scripts\demo\demo-jqcloud.js" />
     <Content Include="Scripts\demo\demo-jqgrid.js" />
     <Content Include="Scripts\demo\demo-nestable.js" />
+    <Content Include="Scripts\demo\demo-optionMove.js" />
     <Content Include="Scripts\demo\demo-panels.js" />
     <Content Include="Scripts\demo\demo-rtl.js" />
     <Content Include="Scripts\demo\demo-search.js" />
