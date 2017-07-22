@@ -119,6 +119,10 @@ namespace Pbl
                 "~/Scripts/demo/demo-jqcloud.js"
             ));
 
+            bundles.Add(new ScriptBundle("~/bundles/demoOptionMove").Include(
+                "~/Scripts/demo/demo-optionMove.js"
+            ));
+
             // Main Vendor
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
