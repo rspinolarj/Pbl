@@ -10,7 +10,9 @@
     <small> Pagina para adicionar disciplinas</small>
 </h3>
 
-
+@using (Html.BeginForm("AdicionarDisciplinasMed", "ControleMed", new { @id = "frm-example" }))
+{
+    @Html.AntiForgeryToken()
 <div class="container-fluid">
     <!-- START DATATABLE 1 -->
     <div class="row">
@@ -21,35 +23,38 @@
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table id="datatable2" class="table table-striped table-hover">
+                        
+                        <table id="example" class="display DataTable" cellspacing="0" width="100%">
                             <thead>
-                                <tr>
-                                    <th>
-                                        Disciplina
-                                    </th>
-                                    
-                                    <th>
-                                        Tipo Disciplina
-                                    </th>
-                                </tr>
+                                <tr><th>Disciplina</th><th>Tipo de Disciplina</th></tr>
                             </thead>
+
                             <tbody>
-                                @foreach (var item in Model.disciplinasCadastradas)
+                                @foreach (var item in Model.disciplinasDisponiveis)
                                 {
-                                    <tr class="gradeX">
+                                    <tr>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.descDisciplina)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.TipoDisciplina.descTipoDisciplina)
                                         </td>
+
                                     </tr>
                                 }
+
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12" style="text-align:center;">
+            <button type="button" id="delRow"><<</button>
+            <button type="button" id="addRow">>></button>
         </div>
     </div>
     <div class="row">
@@ -60,41 +65,36 @@
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table id="datatableDemo2" class="table table-striped table-hover">
+                        <table id="datatableDemo2" class="display DataTable" cellspacing="0" width="100%">
                             <thead>
-                                <tr>
-                                    <th>
-                                        Disciplina
-                                    </th>
-                                    <th>
-                                        Tipo Disciplina
-                                    </th>
-                                </tr>
+                                <tr><th>Disciplina</th><th>Tipo de Disciplina</th></tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.disciplinasCadastradas)
                                 {
-                                    <tr class="gradeX">
+                                    <tr>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.descDisciplina)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.TipoDisciplina.descTipoDisciplina)
                                         </td>
-                                        
+
                                     </tr>
                                 }
                             </tbody>
                         </table>
+                        <button type="submit">Enviar</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+}
 @section Styles {
     @Styles.Render("~/bundles/datatablesCss")
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 }
 @section Scripts {
     @Scripts.Render("~/bundles/datatables")
@@ -127,9 +127,96 @@
             });
 
     </script>
+    <script>
+
+        $(document).ready(function () {
+            var oTable = $('#example').DataTable();
+            var dTable = $('#datatableDemo2').DataTable();
+
+            $('#example tbody').on('click', 'tr', function () {
+                $(this).toggleClass('selected');
+                var pos = oTable.row(this).index();
+                var row = oTable.row(pos).data();
+                console.log(row);
+            });
+
+            $('#datatableDemo2 tbody').on('click', 'tr', function () {
+                $(this).toggleClass('selected');
+                var pos = dTable.row(this).index();
+                var row = dTable.row(pos).data();
+                console.log(row);
+            });
+
+            $('#addRow').click(function () {
+                var oData = oTable.rows('.selected').data();
+                
+                for (var i = 0; i < oData.length; i++) {
+                    
+                    dTable.row.add([
+                            oData[i][0],
+                            oData[i][1]
+                    ]).draw(false);
+                        
+
+                        
+                    //alert("Disciplina: " + oData[i][0] + " Tipo de Disciplina: " + oData[i][1]);
+                }
+                var rows = oTable
+                    .rows('.selected')
+                    .remove()
+                    .draw();
+
+            });
+            $('#delRow').click(function () {
+                var dData = dTable.rows('.selected').data();
+
+                for (var i = 0; i < dData.length; i++) {
+
+                    oTable.row.add([
+                        dData[i][0],
+                        dData[i][1]
+                    ]).draw(false);
+
+
+
+                    //alert("Disciplina: " + oData[i][0] + " Tipo de Disciplina: " + oData[i][1]);
+                }
+                var rows = dTable
+                    .rows('.selected')
+                    .remove()
+                    .draw();
+
+            });
+        });
+    </script>
+    <script>
+        var table = $('#datatableDemo2').DataTable();
+
+        // Handle form submission event
+        $('#frm-example').on('submit', function (e) {
+            var form = this;
+            // Encode a set of form elements from all pages as an array of names and values
+            var params = table.$('input,select,textarea').serializeArray();
+            e.preventDefault();
+            // Iterate over all form elements
+            $.each(params, function () {
+                // If element doesn't exist in DOM
+                if (!$.contains(document, form[this.name])) {
+                    // Create a hidden element
+                    
+                    alert(this.value);
+                    $(form).append(
+                        $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('name', 'tableDisciplina[]')
+                            .val(this.value)
+                    );
+                }
+            });
+        });
+    </script>
+
 }
-
-
 
 @*
     <h2>AdicionarDisciplinas</h2>
