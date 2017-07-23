@@ -6,15 +6,9 @@ namespace Pbl.Controllers
     public class HomeController : Controller
     {
 
-
+        [Authorize]
         public ActionResult Index()
         {
-            if (Session["Usuario"] == null)
-            {
-                return RedirectToAction("Login","Login");
-            }
-
-            Usuario u = (Usuario)Session["Usuario"];
             return View();
         }
     }

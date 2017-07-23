@@ -149,6 +149,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AcompanhamentoMedsController.cs" />
     <Compile Include="Controllers\ControleAlunosController.cs" />
     <Compile Include="Controllers\ControleDisciplinasController.cs" />
     <Compile Include="Controllers\ControleMedController.cs" />
@@ -1159,6 +1160,7 @@
     <Content Include="Views\Forms\FormXEditable.cshtml" />
     <Content Include="Views\Shared\_SidebarDiretor.cshtml" />
     <Content Include="Views\Shared\_SidebarAluno.cshtml" />
+    <Content Include="Views\AcompanhamentoMeds\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

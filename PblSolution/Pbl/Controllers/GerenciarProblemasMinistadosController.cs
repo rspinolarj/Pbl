@@ -11,18 +11,17 @@ namespace Pbl.Controllers
     public class GerenciarProblemasMinistadosController : Controller
     {
         // GET: GerenciarProblemasMinistados
+        [Authorize(Roles = "Diretor,Professor")]
         public ActionResult Index()
         {
-            Usuario user = (Usuario)Session["usuario"];
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
+            int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
+            Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
             Professor prof = user.Professor.First();
             List<Grupo> problemasMinistrados = new MGrupo().Bring(c => c.idProfessor == prof.idProfessor);
             return View(problemasMinistrados);
         }
 
+        [Authorize(Roles = "Diretor,Professor")]
         public ActionResult SelecionarProblema(int idGrupo)
         {
             Grupo grupo = new MGrupo().BringOne(c => c.idGrupo == idGrupo);
@@ -32,6 +31,7 @@ namespace Pbl.Controllers
             return View(problemas);
         }
 
+        [Authorize(Roles = "Diretor,Professor")]
         public ActionResult MontarFichaAvaliativa(int idProblemaXMed, int idGrupo)
         {
             ProblemaXMed problemaXMed = new MProblemaXMed().BringOne(c => c.idProblemaxMed == idProblemaXMed);
@@ -39,7 +39,7 @@ namespace Pbl.Controllers
             List<AvaliacaoTutoria> avaliacaoTutoria = mAvaliacaoTutoria.Bring(c => (c.idGrupo == idGrupo) && (c.idProblemaxMed == idProblemaXMed));
             if (avaliacaoTutoria.Count != 0)
             {
-                return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistados",new { avaliacoes = avaliacaoTutoria });
+                return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistados", new { avaliacoes = avaliacaoTutoria });
             }
             List<Modulo> modulos = new MModulo().Bring(c => c.idSemestre == problemaXMed.Med.idSemestre);
             AvaliacaoTutoria novaAvaliacao = new AvaliacaoTutoria();
@@ -49,6 +49,7 @@ namespace Pbl.Controllers
             return View(novaAvaliacao);
         }
 
+        [Authorize(Roles = "Diretor,Professor")]
         public ActionResult CriarAvaliacao(AvaliacaoTutoria novaAvaliacao, int idModulo)
         {
             MAvaliacaoTutoria mAvaliacaoTutoria = new MAvaliacaoTutoria();
@@ -72,10 +73,11 @@ namespace Pbl.Controllers
                 avaliacaoAluno.idProblemaxMed = novaAvaliacao.idProblemaxMed;
                 mAvaliacaoTutoria.Add(avaliacaoAluno);
             }
-                List<AvaliacaoTutoria> avaliacoesTutoria = mAvaliacaoTutoria.Bring(c => (c.idGrupo == grupo.idGrupo) && (c.idProblemaxMed == novaAvaliacao.idProblemaxMed));
-            return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistados",new { avaliacoes = avaliacoesTutoria } );
+            List<AvaliacaoTutoria> avaliacoesTutoria = mAvaliacaoTutoria.Bring(c => (c.idGrupo == grupo.idGrupo) && (c.idProblemaxMed == novaAvaliacao.idProblemaxMed));
+            return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistados", new { avaliacoes = avaliacoesTutoria });
         }
 
+        [Authorize(Roles = "Diretor,Professor")]
         public ActionResult SelecionarAluno(List<AvaliacaoTutoria> avalicoes)
         {
             if (avalicoes == null)
