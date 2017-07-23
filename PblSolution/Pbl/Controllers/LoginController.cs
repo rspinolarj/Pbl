@@ -22,8 +22,7 @@ namespace Pbl.Controllers
             {
                 return View();
             }
-            FormsAuthentication.SetAuthCookie(user.login, false);
-            Session["Usuario"] = user;
+            FormsAuthentication.SetAuthCookie(user.idUsuario.ToString(), false);
             return RedirectToAction("Index","Home");
         }
 

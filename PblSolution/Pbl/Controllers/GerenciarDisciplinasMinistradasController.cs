@@ -12,18 +12,17 @@ namespace Pbl.Controllers
     public class GerenciarDisciplinasMinistradasController : Controller
     {
         // GET: GerenciarDisciplinasMinistradas
+        [Authorize(Roles = "Diretor,Professor")]
         public ActionResult Index()
         {
-            Usuario user = (Usuario)Session["usuario"];
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Login");
-            }
+            int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
+            Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
             Professor prof = user.Professor.First();
             List<Aula> aulasMinistradas = new MAula().Bring(c => c.idProfessor == prof.idProfessor);
             return View(aulasMinistradas);
         }
 
+        [Authorize(Roles = "Diretor,Professor")]
         public ActionResult SelecionarModulo(int idAula)
         {
             Med med = new MAula().BringOne(c => c.idAula == idAula).Turma.Med;
@@ -33,6 +32,7 @@ namespace Pbl.Controllers
             return View(listModulos);
         }
 
+        [Authorize(Roles = "Diretor,Professor")]
         public ActionResult SelecionarAlunos(int idAula, int idModulo)
         {
             Med med = new MAula().BringOne(c => c.idAula == idAula).Turma.Med;
@@ -65,6 +65,7 @@ namespace Pbl.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Diretor,Professor")]
         public ActionResult AvaliarAluno(int idInscricaoTurma, int idModulo, int idAula)
         {
             Med med = new MAula().BringOne(c => c.idAula == idAula).Turma.Med;
@@ -82,6 +83,7 @@ namespace Pbl.Controllers
             return View(controleNotasAula);
         }
 
+        [Authorize(Roles = "Diretor,Professor")]
         public ActionResult AvaliarAlunoAction(ControleNotasXAula controleNotasAula)
         {
             MControleNotasXAula mControleNotasXAula = new MControleNotasXAula();
@@ -90,7 +92,7 @@ namespace Pbl.Controllers
                 mControleNotasXAula.Update(controleNotasAula);
             }
 
-            return RedirectToAction("SelecionarAlunos", "GerenciarDisciplinasMinistradas",new {IdAula = controleNotasAula.idAula, IdModulo = controleNotasAula.ControleNotas.idModulo });
+            return RedirectToAction("SelecionarAlunos", "GerenciarDisciplinasMinistradas", new { IdAula = controleNotasAula.idAula, IdModulo = controleNotasAula.ControleNotas.idModulo });
         }
     }
 }

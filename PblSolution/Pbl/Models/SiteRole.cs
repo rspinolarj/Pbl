@@ -40,7 +40,8 @@ namespace Pbl.Models
 
         public override string[] GetRolesForUser(string username)
         {
-            Usuario user = new MUsuario().BringOne(c => c.login == username);
+            int idUsuario = Convert.ToInt32(username);
+            Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
             string[] role = { user.TipoUsuario.descricao.TrimEnd() };
             return role;
         }
