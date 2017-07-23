@@ -1159,7 +1159,6 @@
     <Content Include="Views\Forms\FormXEditable.cshtml" />
     <Content Include="Views\Shared\_SidebarDiretor.cshtml" />
     <Content Include="Views\Shared\_SidebarAluno.cshtml" />
-    <Content Include="Views\Usuarios\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
