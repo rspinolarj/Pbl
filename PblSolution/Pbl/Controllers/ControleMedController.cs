@@ -31,6 +31,12 @@ namespace Pbl.Controllers
             return View(viewModel);
         }
 
+        public ActionResult VincularDisciplinasMed()
+        {
+            var keys = Request.Form.AllKeys;
+            return null;
+        }
+
         [Authorize(Roles = "Diretor")]
         public ActionResult GerenciarMed(int id)
         {
