@@ -47,25 +47,26 @@ namespace Pbl.Controllers
                 return RedirectToAction("AdicionarDisciplinas", "ControleMed", new { idMed = med.idMed });
             }
             ViewBag.Message = TempData["Message"];
-            GerenciarMedViewModel dados = new GerenciarMedViewModel();
-            dados.problemasCadastrados = new MProblemaXMed().RetornaProblemasCadastrados(id);
-            dados.turmasCadastradas = new MTurma().Bring(c => c.idMed == id);
-            dados.gruposCadastrados = new MGrupo().Bring(c => c.idMed == id);
-            dados.med = med;
-            return View(dados);
+            return View(med);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Diretor")]
-        public ActionResult AdicionarTurma(int id)
+        public ActionResult GerenciarTurmas(int idMed)
+        {
+            ViewBag.idMed = idMed;
+            return View(new MTurma().Bring(c => c.idMed == idMed));
+        }
+
+
+        [Authorize(Roles = "Diretor")]
+        public ActionResult AdicionarTurma(int idMed)
         {
 
             ViewData["idProfessor"] = new SelectList(new MProfessor().BringAll(), "idProfessor", "nomeProfessor");
-            ViewData["disciplinasMinistradas"] = new SelectList(new MMed().BringOne(c => c.idMed == id).Disciplina, "idDisciplina", "descDisciplina");
+            ViewData["disciplinasMinistradas"] = new SelectList(new MMed().BringOne(c => c.idMed == idMed).Disciplina, "idDisciplina", "descDisciplina");
             ViewBag.Message = TempData["Message"];
             Turma nova = new Turma();
-            nova.idMed = id;
+            nova.idMed = idMed;
             return View(nova);
         }
         /*
@@ -108,8 +109,6 @@ namespace Pbl.Controllers
             return RedirectToAction("GerenciarMed", new { id = nova.idMed });
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Diretor")]
         public ActionResult VincularProblemas(int idMed)
         {
@@ -202,7 +201,7 @@ namespace Pbl.Controllers
             novo.idAluno = idAluno;
             new MInscricaoTurma().Add(novo);
             MControleNotas mControleNotas = new MControleNotas();
-            
+
             Turma turma = new MTurma().BringOne(c => c.idTurma == idTurma);
             foreach (var item in turma.Med.Semestre.Modulo)
             {
@@ -222,8 +221,13 @@ namespace Pbl.Controllers
             return AdicionarAlunosTurma(idTurma);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Diretor")]
+        public ActionResult GerenciarGrupos(int idMed)
+        {
+            ViewBag.idMed = idMed;
+            return View(new MGrupo().Bring(c => c.idMed == idMed));
+        }
+
         [Authorize(Roles = "Diretor")]
         public ActionResult AdicionarGrupos(int idMed)
         {
@@ -248,7 +252,7 @@ namespace Pbl.Controllers
             Grupo selecionado = mGrupo.BringOne(c => c.idGrupo == idGrupo);
             int idMed = selecionado.idMed;
             TempData["Message"] = mGrupo.Delete(selecionado) ? "Grupo Deletado com Sucesso" : "Algo Errado Ocorreu";
-            return RedirectToAction("GerenciarMed", "ControleMed", new { id = idMed });
+            return RedirectToAction("GerenciarGrupos", "ControleMed", new { id = idMed });
         }
 
         [Authorize(Roles = "Diretor")]

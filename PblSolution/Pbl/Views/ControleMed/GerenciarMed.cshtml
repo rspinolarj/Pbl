@@ -1,4 +1,4 @@
-﻿@model Pbl.Models.ViewModel.GerenciarMedViewModel
+﻿@model Pbl.Models.Med
 @{
     ViewBag.Title = "AdicionarTurmas";
 }
@@ -24,15 +24,15 @@
         <div id="panelDemo7" class="panel panel-default">
             <div class="panel-heading">Turmas</div>
             <div class="panel-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                <p>Aqui fica o controle das turmas cadastradas para esta MED, adicione uma turma escolhendo quais professores ministrarão as disciplinas previamentes cadastradas nesta MED. Após o cadastro da turma, basta adicionar os alunos que estarão vinculadas as mesmas</p>
             </div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-labeled btn-default">
+                <a href="@Url.Action("GerenciarTurmas", "ControleMed", new { idMed = Model.idMed })" type="button" class="btn btn-labeled btn-default">
                     Gerenciar Turmas
                     <span class="btn-label btn-label-right">
                         <i class="fa fa-arrow-right"></i>
                     </span>
-                </button>
+                </a>
             </div>
         </div>
         <!-- END panel-->
@@ -43,15 +43,15 @@
         <div id="panelDemo7" class="panel panel-default">
             <div class="panel-heading">Problema</div>
             <div class="panel-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                <p>Aqui ficam os problemas que esta MED utilizará para avaliação de seus discentes, os problemas são cadastrados na aba lateral do menu e aqui são somente vinculados.</p>
             </div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-labeled btn-default">
+                <a href="@Url.Action("VincularProblemas","ControleMed",new { @idMed = Model.idMed })" type="button" class="btn btn-labeled btn-default">
                     Vincular Problema
                     <span class="btn-label btn-label-right">
                         <i class="fa fa-arrow-right"></i>
                     </span>
-                </button>
+                </a>
             </div>
         </div>
         <!-- END panel-->
@@ -62,15 +62,15 @@
         <div id="panelDemo7" class="panel panel-default">
             <div class="panel-heading">Grupo</div>
             <div class="panel-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                <p>Aqui ficam os grupos para a avaliação de cada um dos problemas tratados nesta MED, os alunos, já cadastrados em alguma turma, podem ser vinculados a um professor que será responsável por suas avaliações de tutoria</p>
             </div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-labeled btn-default">
-                    Adicionar Grupo
-                    <span class="btn-label btn-label-right">
-                        <i class="fa fa-arrow-right"></i>
-                    </span>
-                </button>
+                <a href="@Url.Action("GerenciarGrupos", "ControleMed", new { idMed = Model.idMed })" type="button" class="btn btn-labeled btn-default">
+                Adicionar Grupo
+                <span class="btn-label btn-label-right">
+                <i class="fa fa-arrow-right"></i>
+                </span>
+                </a>
             </div>
         </div>
         <!-- END panel-->
@@ -81,15 +81,15 @@
         <div id="panelDemo7" class="panel panel-default">
             <div class="panel-heading">Disciplinas</div>
             <div class="panel-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                <p>Disciplinas cadastradas para serem trabalhadas nesta MED</p>
             </div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-labeled btn-default">
+                <a href="" type="button" class="btn btn-labeled btn-default">
                     Gerenciar Disciplina
                     <span class="btn-label btn-label-right">
                         <i class="fa fa-arrow-right"></i>
                     </span>
-                </button>
+                </a>
             </div>
         </div>
         <!-- END panel-->

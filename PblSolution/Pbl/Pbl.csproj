@@ -1161,6 +1161,8 @@
     <Content Include="Views\Shared\_SidebarDiretor.cshtml" />
     <Content Include="Views\Shared\_SidebarAluno.cshtml" />
     <Content Include="Views\AcompanhamentoMeds\Index.cshtml" />
+    <Content Include="Views\ControleMed\GerenciarTurmas.cshtml" />
+    <Content Include="Views\ControleMed\GerenciarGrupos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
