@@ -36,7 +36,7 @@
                 @Html.DisplayFor(modelItem => item.Med.descMed)
             </td>
             <td>
-                @Html.ActionLink("Adicionar Alunos", "AdicionarAlunosTurmaa", new { id = item.idTurma }) |
+                @Html.ActionLink("Adicionar Alunos", "AdicionarAlunosTurma", new { idTurma = item.idTurma }) |
                 @Html.ActionLink("Deletar Turma", "RemoverTurma", new { id = item.idTurma })
             </td>
         </tr>
