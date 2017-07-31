@@ -13,7 +13,7 @@ namespace Pbl.Models.DbClasses
 
         public MInscricaoTurma()
         {
-            db = Singletone.InstanceFamerv;           
+            db = Singletone.InstanceFamerv;
         }
 
         public bool Add(InscricaoTurma t)
@@ -43,7 +43,7 @@ namespace Pbl.Models.DbClasses
 
         public InscricaoTurma BringOne(Expression<Func<InscricaoTurma, bool>> predicate)
         {
-            return db.InscricaoTurma.Where(predicate).FirstOrDefault();
+            return db.InscricaoTurma.SingleOrDefault(predicate);
         }
 
         public bool Delete(InscricaoTurma t)

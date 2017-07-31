@@ -21,22 +21,6 @@ namespace Pbl.Controllers
             return View(new MMed().BringAll());
         }
 
-        public ActionResult AdicionarDisciplinas(int idMed)
-        {
-            AdicionarDisciplinasViewModel viewModel = new AdicionarDisciplinasViewModel();
-            viewModel.med = new MMed().BringOne(c => c.idMed == idMed);
-            viewModel.disciplinasDisponiveis = new MDisciplina().BringAll();
-            viewModel.disciplinasCadastradas = viewModel.med.Disciplina.ToList();
-            viewModel.disciplinasDisponiveis.RemoveAll(c => viewModel.disciplinasCadastradas.Contains(c));
-            return View(viewModel);
-        }
-
-        public ActionResult VincularDisciplinasMed()
-        {
-            var keys = Request.Form.AllKeys;
-            return null;
-        }
-
         [Authorize(Roles = "Diretor")]
         public ActionResult GerenciarMed(int id)
         {
@@ -50,13 +34,41 @@ namespace Pbl.Controllers
             return View(med);
         }
 
+        #region Disciplinas
+        public ActionResult AdicionarDisciplinas(int idMed)
+        {
+            AdicionarDisciplinasViewModel viewModel = new AdicionarDisciplinasViewModel();
+            viewModel.med = new MMed().BringOne(c => c.idMed == idMed);
+            viewModel.disciplinasDisponiveis = new MDisciplina().BringAll();
+            viewModel.disciplinasCadastradas = viewModel.med.Disciplina.ToList();
+            viewModel.disciplinasDisponiveis.RemoveAll(c => viewModel.disciplinasCadastradas.Contains(c));
+            return View(viewModel);
+        }
+
+        public ActionResult VincularDisciplinasMed()
+        {
+            var keys = Request.Form.AllKeys;
+            int idMed = Convert.ToInt32(Request.Form["idMed"]);
+            var disciplinas = Request.Form["disciplina[]"].Split(',');
+            MDisciplina mdisciplina = new MDisciplina();
+            List<Disciplina> listDisciplinas = new List<Disciplina>();
+            foreach (var disciplina in disciplinas)
+            {
+                int idDisciplina = Convert.ToInt32(disciplina);
+                listDisciplinas.Add(mdisciplina.BringOne(c => c.idDisciplina == idDisciplina));
+            }
+            new MMed().AdicionarDisciplinas(idMed, listDisciplinas);
+            return RedirectToAction("GerenciarMed", new { id = idMed });
+        }
+        #endregion
+
+        #region Turmas
         [Authorize(Roles = "Diretor")]
         public ActionResult GerenciarTurmas(int idMed)
         {
             ViewBag.idMed = idMed;
             return View(new MTurma().Bring(c => c.idMed == idMed));
         }
-
 
         [Authorize(Roles = "Diretor")]
         public ActionResult AdicionarTurma(int idMed)
@@ -69,23 +81,7 @@ namespace Pbl.Controllers
             nova.idMed = idMed;
             return View(nova);
         }
-        /*
-            AdicionarTurmaViewModel viewModel = new AdicionarTurmaViewModel();
-            viewModel.aulasMinistradas = new List<Aula>();
-            Turma novaTurma = new Turma() { idMed = id };
-            viewModel.turma = novaTurma;
-            foreach (var disciplina in new MMed().BringOne(c => c.idMed == id).Disciplina)
-            {
-                Aula aula = new Aula();
-                aula.Disciplina = disciplina;
-                aula.idDisciplina = disciplina.idDisciplina;
-                viewModel.aulasMinistradas.Add(aula);
-            }
-            ViewData["aulas"] = viewModel.aulasMinistradas;
-            ViewData["idProfessor"] = new SelectList(new MProfessor().BringAll(), "idProfessor", "nomeProfessor");
-            ViewBag.Message = TempData["Message"];
-            return View(viewModel);
-             */
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Diretor")]
@@ -107,49 +103,6 @@ namespace Pbl.Controllers
             dados.turmasCadastradas = new MTurma().Bring(c => c.idMed == nova.idMed);
             dados.med = new MMed().BringOne(c => c.idMed == nova.idMed);*/
             return RedirectToAction("GerenciarMed", new { id = nova.idMed });
-        }
-
-        [Authorize(Roles = "Diretor")]
-        public ActionResult VincularProblemas(int idMed)
-        {
-            VincularProblemaViewModel dados = new VincularProblemaViewModel();
-            dados.MedAtual = new MMed().BringOne(c => c.idMed == idMed);
-            dados.ListProblemasCadastrados = new MProblemaXMed().Bring(c => c.idMed == idMed);
-            dados.ListProblemaDisponiveis = new MProblemaXMed().RetornaProblemasDisponiveis(dados.MedAtual.idMed);
-            return View(dados);
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Diretor")]
-        public void DeletarVinculoProblema(int idProblema, int idMed)
-        {
-            MProblemaXMed mProblemaXMed = new MProblemaXMed();
-            ProblemaXMed cadastroProblemaEncontrado = mProblemaXMed.BringOne(c => (c.idMed == idMed) && (c.idProblema == idProblema));
-            TempData["Message"] = mProblemaXMed.Delete(cadastroProblemaEncontrado) ? "Vinculo deletado" : "Algo Errado Ocorreu";
-            GerenciarMedViewModel dados = new GerenciarMedViewModel();
-            dados.problemasCadastrados = new MProblemaXMed().RetornaProblemasCadastrados(idMed);
-            dados.turmasCadastradas = new MTurma().Bring(c => c.idMed == idMed);
-            dados.med = new MMed().BringOne(c => c.idMed == idMed);
-            //Response.Redirect(Url.Action("GerenciarMed", "ControleMed", idMed));
-            Response.Redirect(Request.RawUrl);
-            //Page.Response.Redirect(Page.Request.Url.ToString(), true);
-            //return RedirectToAction("GerenciarMed", new { id = idMed });
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "Diretor")]
-        public ActionResult AdicionarProblema(int idMed, int idProblema)
-        {
-            MProblemaXMed mProblemaXMed = new MProblemaXMed();
-            ProblemaXMed novo = new ProblemaXMed();
-            novo.idMed = idMed;
-            novo.idProblema = idProblema;
-            ViewBag.Message = mProblemaXMed.Add(novo) ? "Problema Vinculado" : "Algo errado ocorreu";
-            VincularProblemaViewModel dados = new VincularProblemaViewModel();
-            dados.MedAtual = new MMed().BringOne(c => c.idMed == novo.idMed);
-            dados.ListProblemasCadastrados = new MProblemaXMed().Bring(c => c.idMed == novo.idMed);
-            dados.ListProblemaDisponiveis = new MProblemaXMed().RetornaProblemasDisponiveis(dados.MedAtual.idMed);
-            return View("VincularProblemas", dados);
         }
 
         [Authorize(Roles = "Diretor")]
@@ -193,34 +146,118 @@ namespace Pbl.Controllers
                View("AdicionarAlunosTurma", viewModel);
         }
 
+        [HttpPost]
         [Authorize(Roles = "Diretor")]
-        public ActionResult AdicionarAlunosTurmaAction(int idAluno, int idTurma)
+        public ActionResult AdicionarAlunosTurmaAction(int idTurma)
         {
-            InscricaoTurma novo = new InscricaoTurma();
-            novo.idTurma = idTurma;
-            novo.idAluno = idAluno;
-            new MInscricaoTurma().Add(novo);
-            MControleNotas mControleNotas = new MControleNotas();
-
+            var alunos = Request.Form["alunos[]"].Split(',');
+            List<Aluno> listAlunos = new List<Aluno>();
+            MAluno mAluno = new MAluno();
             Turma turma = new MTurma().BringOne(c => c.idTurma == idTurma);
-            foreach (var item in turma.Med.Semestre.Modulo)
+            MInscricaoTurma mInscricaoTurma = new MInscricaoTurma();
+            List<InscricaoTurma> alunosInscritos = mInscricaoTurma.Bring(c => c.idTurma == turma.idTurma);
+            List<InscricaoTurma> alunosInscrever = new List<InscricaoTurma>();
+            MControleNotas mControleNotas = new MControleNotas();
+            foreach (var item in alunos)
             {
-                ControleNotas controleNotas = new ControleNotas();
-                controleNotas.idInscricaoTurma = novo.idInscricaoTurma;
-                controleNotas.idModulo = item.idModulo;
-                mControleNotas.Add(controleNotas);
+                InscricaoTurma novo = new InscricaoTurma();
+                novo.idAluno = Convert.ToInt32(item);
+                novo.idTurma = turma.idTurma;
+                alunosInscrever.Add(novo);
+            }
+            foreach (var item in alunosInscritos)
+            {
+                if (alunosInscrever.SingleOrDefault(c => c.idAluno == item.idAluno) == null)
+                {
+                    mInscricaoTurma.Delete(item);
+                }
+            }
+            foreach (var item in alunosInscrever)
+            {
+                if (alunosInscritos.SingleOrDefault(c => (c.idAluno == item.idAluno) && (c.idTurma == idTurma)) != null)
+                {
+                    continue;
+                }
+                mInscricaoTurma.Add(item);
+                foreach (var modulo in turma.Med.Semestre.Modulo)
+                {
+                    ControleNotas controleNotas = new ControleNotas();
+                    controleNotas.idInscricaoTurma = item.idInscricaoTurma;
+                    controleNotas.idModulo = modulo.idModulo;
+                    mControleNotas.Add(controleNotas);
+                }
             }
             return AdicionarAlunosTurma(idTurma);
         }
+        #endregion
 
+        #region Problemas
         [Authorize(Roles = "Diretor")]
-        public ActionResult RemoverAlunosTurma(int idAluno, int idTurma)
+        public ActionResult VincularProblemas(int idMed)
         {
-            MInscricaoTurma mIncricaoTurma = new MInscricaoTurma();
-            mIncricaoTurma.Delete(mIncricaoTurma.BringOne(c => (c.idAluno == idAluno) && (c.idTurma == idTurma)));
-            return AdicionarAlunosTurma(idTurma);
+            VincularProblemaViewModel dados = new VincularProblemaViewModel();
+            dados.MedAtual = new MMed().BringOne(c => c.idMed == idMed);
+            dados.ListProblemasCadastrados = new MProblemaXMed().Bring(c => c.idMed == idMed);
+            dados.ListProblemaDisponiveis = new MProblemaXMed().RetornaProblemasDisponiveis(dados.MedAtual.idMed);
+            return View(dados);
         }
 
+        //[HttpPost]
+        //[Authorize(Roles = "Diretor")]
+        //public void DeletarVinculoProblema(int idProblema, int idMed)
+        //{
+        //    MProblemaXMed mProblemaXMed = new MProblemaXMed();
+        //    ProblemaXMed cadastroProblemaEncontrado = mProblemaXMed.BringOne(c => (c.idMed == idMed) && (c.idProblema == idProblema));
+        //    TempData["Message"] = mProblemaXMed.Delete(cadastroProblemaEncontrado) ? "Vinculo deletado" : "Algo Errado Ocorreu";
+        //    GerenciarMedViewModel dados = new GerenciarMedViewModel();
+        //    dados.problemasCadastrados = new MProblemaXMed().RetornaProblemasCadastrados(idMed);
+        //    dados.turmasCadastradas = new MTurma().Bring(c => c.idMed == idMed);
+        //    dados.med = new MMed().BringOne(c => c.idMed == idMed);
+        //    //Response.Redirect(Url.Action("GerenciarMed", "ControleMed", idMed));
+        //    Response.Redirect(Request.RawUrl);
+        //    //Page.Response.Redirect(Page.Request.Url.ToString(), true);
+        //    //return RedirectToAction("GerenciarMed", new { id = idMed });
+        //}
+
+        [HttpPost]
+        [Authorize(Roles = "Diretor")]
+        public ActionResult AdicionarProblemas(int idMed)
+        {
+            var problemas = Request.Form["problemas[]"].Split(',');
+            MProblemaXMed mProblemaXMed = new MProblemaXMed();
+            List<Problema> listProblemasAdicionar = new List<Problema>();
+            List<Problema> listProblemasCadastrados = mProblemaXMed.RetornaProblemasCadastrados(idMed);
+            MProblema mProblema = new MProblema();
+            foreach (var item in problemas)
+            {
+                int idProblema = Convert.ToInt32(item);
+                Problema problema = mProblema.BringOne(c => c.idProblema == idProblema);
+                listProblemasAdicionar.Add(problema);
+            }
+            foreach (var item in listProblemasCadastrados)
+            {
+                if (!listProblemasAdicionar.Contains(item))
+                {
+                    ProblemaXMed problemaXMed = mProblemaXMed.BringOne(c => (c.idMed == idMed) && (c.idProblema == item.idProblema));
+                    mProblemaXMed.Delete(problemaXMed);
+                }
+            }
+            foreach (var item in listProblemasAdicionar)
+            {
+                if (listProblemasCadastrados.Contains(item))
+                {
+                    continue;
+                }
+                ProblemaXMed novo = new ProblemaXMed();
+                novo.idMed = idMed;
+                novo.idProblema = item.idProblema;
+                mProblemaXMed.Add(novo);
+            }
+            return View("GerenciarMed", new { id = idMed });
+        }
+        #endregion
+
+        #region Grupos
         [Authorize(Roles = "Diretor")]
         public ActionResult GerenciarGrupos(int idMed)
         {
@@ -295,6 +332,10 @@ namespace Pbl.Controllers
             new MInscricaoTurmaXGrupo().Remove(idGrupo, idInscricaoTurma);
             return RedirectToAction("AdicionarAlunosGrupo", "ControleMed", new { idGrupo = idGrupo });
         }
+        #endregion
+
+
+
 
         [Authorize(Roles = "Diretor")]
         public ActionResult AdicionarAulasTurma(int idTurma)

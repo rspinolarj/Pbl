@@ -41,7 +41,7 @@ namespace Pbl.Models.DbClasses
 
         public Problema BringOne(Expression<Func<Problema, bool>> predicate)
         {
-            return db.Problema.Where(predicate).FirstOrDefault();
+            return db.Problema.SingleOrDefault(predicate);
         }
 
         public bool Delete(Problema t)

@@ -146,7 +146,7 @@
           <Key>
             <PropertyRef Name="idPergunta" />
           </Key>
-          <Property Name="idPergunta" Type="int" Nullable="false" />
+          <Property Name="idPergunta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pergunta" Type="varchar" MaxLength="300" />
           <Property Name="valor" Type="decimal" Precision="5" Scale="2" />
         </EntityType>
@@ -215,8 +215,8 @@
             <PropertyRef Name="idTipoProva" />
           </Key>
           <Property Name="idTipoProva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="pesoProva" Type="decimal" Precision="5" Scale="2" />
-          <Property Name="descTipoProva" Type="varchar" MaxLength="50" />
+          <Property Name="pesoProva" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="descTipoProva" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="TipoUsuario">
           <Key>
@@ -691,37 +691,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SpCrudAluno" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
           <Parameter Name="nome" Type="varchar" Mode="In" />
@@ -783,7 +752,6 @@
         </Function>
         <Function Name="SpCrudSemestre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
-          <Parameter Name="descricao" Type="varchar" Mode="In" />
           <Parameter Name="dtIni1" Type="date" Mode="In" />
           <Parameter Name="dtIni2" Type="date" Mode="In" />
           <Parameter Name="dtIni3" Type="date" Mode="In" />
@@ -802,6 +770,7 @@
           <Parameter Name="descricao" Type="varchar" Mode="In" />
           <Parameter Name="StatementType" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="SpVerificaSemestreAtivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="pblsolutionModelStoreContainer">
           <EntitySet Name="Aluno" EntityType="Self.Aluno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ano" EntityType="Self.Ano" Schema="dbo" store:Type="Tables" />
@@ -1162,6 +1131,10 @@
             <End Role="Professor" EntitySet="Professor" />
             <End Role="Aula" EntitySet="Aula" />
           </AssociationSet>
+          <AssociationSet Name="FK_AvaliacaoTutoria_Grupo" Association="pblsolutionModel.FK_AvaliacaoTutoria_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
+          </AssociationSet>
           <AssociationSet Name="FK_FichaAvaliacao_AvaliacaoTutoria" Association="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria">
             <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
             <End Role="FichaAvaliacao" EntitySet="FichaAvaliacao" />
@@ -1262,10 +1235,86 @@
             <End Role="Professor" EntitySet="Professor" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <AssociationSet Name="FK_AvaliacaoTutoria_Grupo" Association="pblsolutionModel.FK_AvaliacaoTutoria_Grupo">
-            <End Role="Grupo" EntitySet="Grupo" />
-            <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
-          </AssociationSet>
+          <FunctionImport Name="SpCrudAluno1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="nome" Mode="In" Type="String" />
+            <Parameter Name="cpf" Mode="In" Type="String" />
+            <Parameter Name="senha" Mode="In" Type="String" />
+            <Parameter Name="matricula" Mode="In" Type="String" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudAno1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="ano" Mode="In" Type="String" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudDisciplina1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="idTipoDisciplina" Mode="In" Type="Int32" />
+            <Parameter Name="descricao" Mode="In" Type="String" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudGrupo1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="idProfessor" Mode="In" Type="Int32" />
+            <Parameter Name="descricao" Mode="In" Type="String" />
+            <Parameter Name="idMed" Mode="In" Type="Int32" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudMed1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="descricao" Mode="In" Type="String" />
+            <Parameter Name="idSemestre" Mode="In" Type="Int32" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudModulo1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="descricao" Mode="In" Type="String" />
+            <Parameter Name="dtInicio" Mode="In" Type="DateTime" />
+            <Parameter Name="dtFim" Mode="In" Type="DateTime" />
+            <Parameter Name="idSemestre" Mode="In" Type="Int32" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudProblema1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="titulo" Mode="In" Type="String" />
+            <Parameter Name="descricao" Mode="In" Type="String" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudProfessor1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="nome" Mode="In" Type="String" />
+            <Parameter Name="cpf" Mode="In" Type="String" />
+            <Parameter Name="senha" Mode="In" Type="String" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudProva1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="idTipoProva" Mode="In" Type="Int32" />
+            <Parameter Name="valorQuestao" Mode="In" Type="Decimal" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudSemestre1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="dtIni1" Mode="In" Type="DateTime" />
+            <Parameter Name="dtIni2" Mode="In" Type="DateTime" />
+            <Parameter Name="dtIni3" Mode="In" Type="DateTime" />
+            <Parameter Name="dtFim1" Mode="In" Type="DateTime" />
+            <Parameter Name="dtFim2" Mode="In" Type="DateTime" />
+            <Parameter Name="dtFim3" Mode="In" Type="DateTime" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudTipoDisciplina1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="descricao" Mode="In" Type="String" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpCrudTipoProva1">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="descricao" Mode="In" Type="String" />
+            <Parameter Name="StatementType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpVerificaSemestreAtivo" />
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1318,15 +1367,15 @@
           </Key>
           <Property Name="idAvaliacaoTutoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idProblemaxMed" Type="Int32" />
+          <Property Name="idGrupo" Type="Int32" Nullable="false" />
           <Property Name="notaProfessor" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="idControleNotas" Type="Int32" />
           <Property Name="dtInicio" Type="DateTime" Precision="0" />
           <Property Name="dtFim" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Grupo" Relationship="pblsolutionModel.FK_AvaliacaoTutoria_Grupo" FromRole="AvaliacaoTutoria" ToRole="Grupo" />
           <NavigationProperty Name="FichaAvaliacao" Relationship="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" FromRole="AvaliacaoTutoria" ToRole="FichaAvaliacao" />
           <NavigationProperty Name="ControleNotas" Relationship="pblsolutionModel.FK_FichaAvaliacao_ControleNotas" FromRole="AvaliacaoTutoria" ToRole="ControleNotas" />
           <NavigationProperty Name="ProblemaXMed" Relationship="pblsolutionModel.FK_FichaAvaliacao_ProblemaXMed" FromRole="AvaliacaoTutoria" ToRole="ProblemaXMed" />
-          <Property Name="idGrupo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Grupo" Relationship="pblsolutionModel.FK_AvaliacaoTutoria_Grupo" FromRole="AvaliacaoTutoria" ToRole="Grupo" />
         </EntityType>
         <EntityType Name="ControleNotas">
           <Key>
@@ -1395,10 +1444,10 @@
           <Property Name="idMed" Type="Int32" Nullable="false" />
           <Property Name="descGrupo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ativo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AvaliacaoTutoria" Relationship="pblsolutionModel.FK_AvaliacaoTutoria_Grupo" FromRole="Grupo" ToRole="AvaliacaoTutoria" />
           <NavigationProperty Name="Med" Relationship="pblsolutionModel.FK_Grupo_Med" FromRole="Grupo" ToRole="Med" />
           <NavigationProperty Name="Professor" Relationship="pblsolutionModel.FK_Grupo_Professor1" FromRole="Grupo" ToRole="Professor" />
           <NavigationProperty Name="InscricaoTurma" Relationship="pblsolutionModel.InscricaoTurmaXGrupo" FromRole="Grupo" ToRole="InscricaoTurma" />
-          <NavigationProperty Name="AvaliacaoTutoria" Relationship="pblsolutionModel.FK_AvaliacaoTutoria_Grupo" FromRole="Grupo" ToRole="AvaliacaoTutoria" />
         </EntityType>
         <EntityType Name="InscricaoTurma">
           <Key>
@@ -1443,7 +1492,7 @@
           <Key>
             <PropertyRef Name="idPergunta" />
           </Key>
-          <Property Name="idPergunta" Type="Int32" Nullable="false" />
+          <Property Name="idPergunta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="pergunta1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="valor" Type="Decimal" Precision="5" Scale="2" />
           <NavigationProperty Name="PerguntaXFicha" Relationship="pblsolutionModel.FK_PerguntaXFicha_Pergunta" FromRole="Pergunta" ToRole="PerguntaXFicha" />
@@ -1528,8 +1577,8 @@
             <PropertyRef Name="idTipoProva" />
           </Key>
           <Property Name="idTipoProva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pesoProva" Type="Decimal" Precision="5" Scale="2" />
-          <Property Name="descTipoProva" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pesoProva" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="descTipoProva" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Prova" Relationship="pblsolutionModel.FK_Prova_TipoProva" FromRole="TipoProva" ToRole="Prova" />
         </EntityType>
         <EntityType Name="TipoUsuario">
@@ -1633,6 +1682,18 @@
             </Principal>
             <Dependent Role="Aula">
               <PropertyRef Name="idProfessor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AvaliacaoTutoria_Grupo">
+          <End Type="pblsolutionModel.Grupo" Role="Grupo" Multiplicity="1" />
+          <End Type="pblsolutionModel.AvaliacaoTutoria" Role="AvaliacaoTutoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grupo">
+              <PropertyRef Name="idGrupo" />
+            </Principal>
+            <Dependent Role="AvaliacaoTutoria">
+              <PropertyRef Name="idGrupo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1904,60 +1965,12 @@
           <End Type="pblsolutionModel.Professor" Role="Professor" Multiplicity="*" />
           <End Type="pblsolutionModel.Usuario" Role="Usuario" Multiplicity="*" />
         </Association>
-        <Association Name="FK_AvaliacaoTutoria_Grupo">
-          <End Type="pblsolutionModel.Grupo" Role="Grupo" Multiplicity="1" />
-          <End Type="pblsolutionModel.AvaliacaoTutoria" Role="AvaliacaoTutoria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Grupo">
-              <PropertyRef Name="idGrupo" />
-            </Principal>
-            <Dependent Role="AvaliacaoTutoria">
-              <PropertyRef Name="idGrupo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="pblsolutionModelStoreContainer" CdmEntityContainer="FamervEntities">
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="pblsolutionModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="pblsolutionModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="pblsolutionModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="pblsolutionModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="pblsolutionModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="pblsolutionModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="pblsolutionModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="pblsolutionModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="pblsolutionModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="SpCrudAluno" FunctionName="pblsolutionModel.Store.SpCrudAluno" />
-          <FunctionImportMapping FunctionImportName="SpCrudAno" FunctionName="pblsolutionModel.Store.SpCrudAno" />
-          <FunctionImportMapping FunctionImportName="SpCrudDisciplina" FunctionName="pblsolutionModel.Store.SpCrudDisciplina" />
-          <FunctionImportMapping FunctionImportName="SpCrudGrupo" FunctionName="pblsolutionModel.Store.SpCrudGrupo" />
-          <FunctionImportMapping FunctionImportName="SpCrudMed" FunctionName="pblsolutionModel.Store.SpCrudMed" />
-          <FunctionImportMapping FunctionImportName="SpCrudModulo" FunctionName="pblsolutionModel.Store.SpCrudModulo" />
-          <FunctionImportMapping FunctionImportName="SpCrudProblema" FunctionName="pblsolutionModel.Store.SpCrudProblema" />
-          <FunctionImportMapping FunctionImportName="SpCrudProfessor" FunctionName="pblsolutionModel.Store.SpCrudProfessor" />
-          <FunctionImportMapping FunctionImportName="SpCrudProva" FunctionName="pblsolutionModel.Store.SpCrudProva" />
-          <FunctionImportMapping FunctionImportName="SpCrudSemestre" FunctionName="pblsolutionModel.Store.SpCrudSemestre" />
-          <FunctionImportMapping FunctionImportName="SpCrudTipoDisciplina" FunctionName="pblsolutionModel.Store.SpCrudTipoDisciplina" />
-          <FunctionImportMapping FunctionImportName="SpCrudTipoProva" FunctionName="pblsolutionModel.Store.SpCrudTipoProva" />
           <EntitySetMapping Name="Aluno">
             <EntityTypeMapping TypeName="pblsolutionModel.Aluno">
               <MappingFragment StoreEntitySet="Aluno">
@@ -1991,11 +2004,11 @@
           <EntitySetMapping Name="AvaliacaoTutoria">
             <EntityTypeMapping TypeName="pblsolutionModel.AvaliacaoTutoria">
               <MappingFragment StoreEntitySet="AvaliacaoTutoria">
-                <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
                 <ScalarProperty Name="dtFim" ColumnName="dtFim" />
                 <ScalarProperty Name="dtInicio" ColumnName="dtInicio" />
                 <ScalarProperty Name="idControleNotas" ColumnName="idControleNotas" />
                 <ScalarProperty Name="notaProfessor" ColumnName="notaProfessor" />
+                <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
                 <ScalarProperty Name="idProblemaxMed" ColumnName="idProblemaxMed" />
                 <ScalarProperty Name="idAvaliacaoTutoria" ColumnName="idAvaliacaoTutoria" />
               </MappingFragment>
@@ -2234,7 +2247,20 @@
               <ScalarProperty Name="idProfessor" ColumnName="idProfessor" />
             </EndProperty>
           </AssociationSetMapping>
-          </EntityContainerMapping>
+          <FunctionImportMapping FunctionImportName="SpCrudAluno1" FunctionName="pblsolutionModel.Store.SpCrudAluno" />
+          <FunctionImportMapping FunctionImportName="SpCrudAno1" FunctionName="pblsolutionModel.Store.SpCrudAno" />
+          <FunctionImportMapping FunctionImportName="SpCrudDisciplina1" FunctionName="pblsolutionModel.Store.SpCrudDisciplina" />
+          <FunctionImportMapping FunctionImportName="SpCrudGrupo1" FunctionName="pblsolutionModel.Store.SpCrudGrupo" />
+          <FunctionImportMapping FunctionImportName="SpCrudMed1" FunctionName="pblsolutionModel.Store.SpCrudMed" />
+          <FunctionImportMapping FunctionImportName="SpCrudModulo1" FunctionName="pblsolutionModel.Store.SpCrudModulo" />
+          <FunctionImportMapping FunctionImportName="SpCrudProblema1" FunctionName="pblsolutionModel.Store.SpCrudProblema" />
+          <FunctionImportMapping FunctionImportName="SpCrudProfessor1" FunctionName="pblsolutionModel.Store.SpCrudProfessor" />
+          <FunctionImportMapping FunctionImportName="SpCrudProva1" FunctionName="pblsolutionModel.Store.SpCrudProva" />
+          <FunctionImportMapping FunctionImportName="SpCrudSemestre1" FunctionName="pblsolutionModel.Store.SpCrudSemestre" />
+          <FunctionImportMapping FunctionImportName="SpCrudTipoDisciplina1" FunctionName="pblsolutionModel.Store.SpCrudTipoDisciplina" />
+          <FunctionImportMapping FunctionImportName="SpCrudTipoProva1" FunctionName="pblsolutionModel.Store.SpCrudTipoProva" />
+          <FunctionImportMapping FunctionImportName="SpVerificaSemestreAtivo" FunctionName="pblsolutionModel.Store.SpVerificaSemestreAtivo" />
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

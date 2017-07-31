@@ -21,7 +21,7 @@ namespace Pbl.Models
         }
     
         public int idTipoProva { get; set; }
-        public Nullable<decimal> pesoProva { get; set; }
+        public decimal pesoProva { get; set; }
         public string descTipoProva { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

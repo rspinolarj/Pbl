@@ -45,5 +45,15 @@ namespace Pbl.Models.DbClasses
         {
             throw new NotImplementedException();
         }
+
+        public void AdicionarDisciplinas(int idMed, List<Disciplina> disciplinas)
+        {
+            Med med = db.Med.SingleOrDefault(c => c.idMed == idMed);
+            foreach (var disciplina in disciplinas)
+            {
+                med.Disciplina.Add(disciplina);
+            }
+            db.SaveChanges();
+        }
     }
 }

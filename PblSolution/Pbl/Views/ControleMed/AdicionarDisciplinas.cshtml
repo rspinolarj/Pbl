@@ -11,97 +11,97 @@
 </h3>
 
 
-    <form action="@Url.Action("VincularDisciplinasMed","ControleMed")" id="frmDisciplinaMed" method="post">
-
-        @Html.AntiForgeryToken()
-        <div class="container-fluid">
-            <!-- START DATATABLE 1 -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h2>Disponíveis</h2>
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-
-                                <table id="example" class="display DataTable" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr><th>Código</th><th>Disciplina</th><th>Tipo de Disciplina</th></tr>
-                                    </thead>
-
-                                    <tbody>
-                                        @foreach (var item in Model.disciplinasDisponiveis)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.idDisciplina)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.descDisciplina)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.TipoDisciplina.descTipoDisciplina)
-                                                </td>
-
-                                            </tr>
-                                        }
-
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
+<form action="@Url.Action("VincularDisciplinasMed","ControleMed")" id="frmDisciplinaMed" method="post">
+    
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <!-- START DATATABLE 1 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>Disponíveis</h2>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12" style="text-align:center;">
-                    <button type="button" id="delRow"><<</button>
-                    <button type="button" id="addRow">>></button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h2>Selecionadas</h2>
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table id="datatableDemo2" class="display DataTable" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr><th>Código</th><th>Disciplina</th><th>Tipo de Disciplina</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model.disciplinasCadastradas)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.idDisciplina)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.descDisciplina)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.TipoDisciplina.descTipoDisciplina)
-                                                </td>
+                    <div class="panel-body">
+                        <div class="table-responsive">
 
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                                <div id="hiddensForm">
-                                    <input type="hidden" name="idMed" value="@Model.med.idMed" />
-                                </div>
-                                <button type="button" id="enviaForm">Enviar</button>
-                            </div>
+                            <table id="example" class="display DataTable" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr><th>Código</th><th>Disciplina</th><th>Tipo de Disciplina</th></tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model.disciplinasDisponiveis)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.idDisciplina)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.descDisciplina)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TipoDisciplina.descTipoDisciplina)
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+        <div class="row">
+            <div class="col-md-12" style="text-align:center;">
+                <button type="button" id="delRow"><<</button>
+                <button type="button" id="addRow">>></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>Selecionadas</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="datatableDemo2" class="display DataTable" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr><th>Código</th><th>Disciplina</th><th>Tipo de Disciplina</th></tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.disciplinasCadastradas)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.idDisciplina)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.descDisciplina)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.TipoDisciplina.descTipoDisciplina)
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div id="hiddensForm">
+                                <input type="hidden" name="idMed" value="@Model.med.idMed" />
+                            </div>
+                            <button type="button" id="enviaForm">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 @section Styles {
     @Styles.Render("~/bundles/datatablesCss")
     <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -156,19 +156,19 @@
                 var row = dTable.row(pos).data();
                 console.log(row);
             });
-            
+
 
             $('#addRow').click(function () {
                 var oData = oTable.rows('.selected').data();
-                
+
                 for (var i = 0; i < oData.length; i++) {
-                    
+
                     dTable.row.add([
-                            oData[i][0],
-                            oData[i][1],
-                            oData[i][2]
+                        oData[i][0],
+                        oData[i][1],
+                        oData[i][2]
                     ]).draw(false);
-                       
+
                     //alert("Disciplina: " + oData[i][0] + " Tipo de Disciplina: " + oData[i][1]);
                 }
                 var rows = oTable
@@ -202,7 +202,7 @@
     </script>
     <script>
         var table = $('#datatableDemo2').DataTable();
-              
+
         // Handle form submission event
         $('#enviaForm').on('click', function (e) {
             e.preventDefault();
@@ -222,77 +222,3 @@
     </script>
 
 }
-
-@*
-    <h2>AdicionarDisciplinas</h2>
-
-    <h2>Cadastradas</h2>
-    <table class="table">
-        <tr>
-            <th>
-                Disciplina
-            </th>
-            <th>
-                Ativa
-            </th>
-            <th>
-                Tipo Disciplina
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model.disciplinasCadastradas)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.descDisciplina)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ativo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoDisciplina.descTipoDisciplina)
-                </td>
-                <td>
-                    <a href="">Remover</a>
-                </td>
-            </tr>
-        }
-    </table>
-
-
-    <h2>Disponiveis</h2>
-    <table class="table">
-        <tr>
-            <th>
-                Disciplina
-            </th>
-            <th>
-                Ativa
-            </th>
-            <th>
-                Tipo Disciplina
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model.disciplinasDisponiveis)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.descDisciplina)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ativo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoDisciplina.descTipoDisciplina)
-                </td>
-                <td>
-                    <a href="">Adicionar</a>
-                </td>
-            </tr>
-        }
-
-    </table>
-*@

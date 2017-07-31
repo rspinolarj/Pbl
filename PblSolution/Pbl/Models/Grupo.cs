@@ -17,8 +17,8 @@ namespace Pbl.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Grupo()
         {
-            this.InscricaoTurma = new HashSet<InscricaoTurma>();
             this.AvaliacaoTutoria = new HashSet<AvaliacaoTutoria>();
+            this.InscricaoTurma = new HashSet<InscricaoTurma>();
         }
     
         public int idGrupo { get; set; }
@@ -27,11 +27,11 @@ namespace Pbl.Models
         public string descGrupo { get; set; }
         public bool ativo { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AvaliacaoTutoria> AvaliacaoTutoria { get; set; }
         public virtual Med Med { get; set; }
         public virtual Professor Professor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InscricaoTurma> InscricaoTurma { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AvaliacaoTutoria> AvaliacaoTutoria { get; set; }
     }
 }

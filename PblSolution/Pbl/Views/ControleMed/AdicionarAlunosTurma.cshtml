@@ -9,7 +9,7 @@
 </h3>
 
 
-<form action="@Url.Action("VincularDisciplinasMed","ControleMed")" id="frmDisciplinaMed" method="post">
+<form action="@Url.Action("AdicionarAlunosTurmaAction","ControleMed")" id="frmDisciplinaMed" method="post">
 
     @Html.AntiForgeryToken()
     <div class="container-fluid">
@@ -201,7 +201,7 @@
                     $('#hiddensForm').append(
                         $('<input>')
                             .attr('type', 'hidden')
-                            .attr('name', 'disciplina[]')
+                            .attr('name', 'alunos[]')
                             .val(value)
                     );
                 });
