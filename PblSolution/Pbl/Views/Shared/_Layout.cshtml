@@ -13,7 +13,7 @@
     @Styles.Render("~/bundles/whirl")
     <!-- =============== PAGE VENDOR STYLES =============== -->
     @if (IsSectionDefined("Styles"))
-        {@RenderSection("Styles", required: false)}
+    {@RenderSection("Styles", required: false)}
     <!-- =============== BOOTSTRAP STYLES ===============-->
     <link href="@Styles.Url("~/Content/app/css/bootstrap.css")" rel="stylesheet" type="text/css" id="bscss" />
     <!-- =============== APP STYLES ===============-->
@@ -29,7 +29,21 @@
         </header>
         <!-- sidebar-->
         <aside class="aside">
-            @Html.Partial("_SidebarDiretor")
+            @{
+                if (User.IsInRole("Diretor"))
+                {
+                    @Html.Partial("_SidebarDiretor")
+                }
+                else if (User.IsInRole("Professor"))
+                {
+                    @Html.Partial("_SidebarProfessor")
+                }
+                else if (User.IsInRole("Aluno"))
+                {
+                    @Html.Partial("_SidebarAluno")
+                }
+            }
+
         </aside>
         <!-- offsidebar-->
         <aside class="offsidebar hide">
@@ -48,7 +62,7 @@
         </footer>
     </div>
     @if (IsSectionDefined("BodyArea"))
-        {@RenderSection("BodyArea", required: false)}
+    {@RenderSection("BodyArea", required: false)}
     <!-- =============== VENDOR SCRIPTS ===============-->
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/matchMedia")

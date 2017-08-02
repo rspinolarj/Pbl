@@ -27,22 +27,17 @@
             <li class="nav-heading">
                 <span>Main Navigation</span>
             </li>
-            <li class="@Html.isActive(controller: "ControleAlunos")">
-                <a href="#alunos" title="ControleAlunos" data-toggle="collapse">
+            <li class="@Html.isActive(controller: "AcompanhamentoMeds")">
+                <a href="#acompanhamento" title="ControleAlunos" data-toggle="collapse">
                     <div class="label label-info pull-right">3</div>
                     <em class="icon-speedometer"></em>
                     <span data-localize="sidebar.nav.ALUNOS">Alunos</span>
                 </a>
-                <ul id="alunos" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Alunos</li>
-                    <li class="@Html.isActive("ControleAlunos", "Create")">
-                        <a href="@Url.Action("Create", "ControleAlunos")" title="Novo">
+                <ul id="acompanhamento" class="nav sidebar-subnav collapse">
+                    <li class="sidebar-subnav-header">Acompanhamento</li>
+                    <li class="@Html.isActive("AcompanhamentoMeds", "Index")">
+                        <a href="@Url.Action("Index", "AcompanhamentoMeds")" title="Novo">
                             <span>Novo</span>
-                        </a>
-                    </li>
-                    <li class="@Html.isActive("ControleAlunos", "Index")">
-                        <a href="@Url.Action("Index", "ControleAlunos")" title="Listar">
-                            <span>Listar</span>
                         </a>
                     </li>
                 </ul>
