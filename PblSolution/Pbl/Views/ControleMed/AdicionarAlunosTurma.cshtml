@@ -25,6 +25,7 @@
                             <table id="example" class="display DataTable" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Id</th>
                                         <th>Nome</th>
                                         <th>Cpf</th>
                                         <th>Matricula</th>
@@ -34,6 +35,7 @@
                                     @foreach (var aluno in Model.AlunosDisponiveis)
                                     {
                                         <tr>
+                                            <td>@Html.DisplayFor(modelItem => aluno.idAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.nomeAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.cpfAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.matriculaAluno)</td>
@@ -63,6 +65,7 @@
                             <table id="datatableDemo2" class="display DataTable" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Id</th>
                                         <th>Nome</th>
                                         <th>Cpf</th>
                                         <th>Matricula</th>
@@ -72,6 +75,7 @@
                                     @foreach (var aluno in Model.AlunosCadastrados)
                                     {
                                         <tr class="gradeX">
+                                            <td>@Html.DisplayFor(modelItem => aluno.idAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.nomeAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.cpfAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.matriculaAluno)</td>
@@ -154,7 +158,8 @@
                     dTable.row.add([
                         oData[i][0],
                         oData[i][1],
-                        oData[i][2]
+                        oData[i][2],
+                        oData[i][3]
                     ]).draw(false);
 
                     //alert("Disciplina: " + oData[i][0] + " Tipo de Disciplina: " + oData[i][1]);
@@ -173,7 +178,8 @@
                     oTable.row.add([
                         dData[i][0],
                         dData[i][1],
-                        dData[i][2]
+                        dData[i][2],
+                        oData[i][3]
                     ]).draw(false);
 
 

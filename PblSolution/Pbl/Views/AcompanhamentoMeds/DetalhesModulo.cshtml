@@ -1,0 +1,79 @@
+﻿@model Pbl.Models.ViewModel.DetalhesModuloViewModel
+
+@{
+    ViewBag.Title = "DetalhesModulo";
+}
+
+<h2>DetalhesModulo</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Disciplina
+        </th>
+        <th>
+            Professor
+        </th>
+    </tr>
+    <tr>
+        @foreach (var item in Model.avaliacoesAula)
+        {
+            <td>
+                @Html.DisplayFor(model => item.Aula.Disciplina.descDisciplina)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Aula.Professor.nomeProfessor)
+            </td>
+        }
+    </tr>
+</table>
+
+<table class="table">
+    <tr>
+        <th>
+            Tipo Prova
+        </th>
+        <th>
+            Nota
+        </th>
+    </tr>
+    <tr>
+        @foreach (var item in Model.avaliacoesProva)
+        {
+            <td>
+                @Html.DisplayFor(model => item.Prova.TipoProva.descTipoProva)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.numAcertos * item.Prova.valorQuestao)
+            </td>
+        }
+    </tr>
+</table>
+
+<table class="table">
+    <tr>
+        <th>
+            Problema
+        </th>
+        <th>
+            Nota
+        </th>
+    </tr>
+    <tr>
+        @foreach (var item in Model.avaliacoesTutoria)
+        {
+            <td>
+                @Html.DisplayFor(model => item.problema)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.nota)
+            </td>
+            <td>
+                @if (item.emAberto)
+                {
+                    @Html.ActionLink("Avaliar", "AvaliarProblema", new { id = item.idAvaliacaoTutoria })
+                }
+            </td>
+        }
+    </tr>
+</table>
