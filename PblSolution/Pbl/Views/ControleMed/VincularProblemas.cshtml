@@ -15,7 +15,7 @@
 </h3>
 
 
-<form action="@Url.Action("AdicionarProblemas","ControleMed")" id="frmDisciplinaMed" method="post">
+<form action="@Url.Action("AdicionarProblemas","ControleMed")" id="frmProblemaMed" method="post">
 
     @Html.AntiForgeryToken()
     <div class="container-fluid">
@@ -24,7 +24,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h2>Disponíveis</h2>
+                        <h2>Problemas Disponíveis</h2>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -32,6 +32,7 @@
                             <table id="example" class="display DataTable" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Código</th>
                                         <th>Título</th>
                                         <th>Descrição</th>
                                     </tr>
@@ -40,6 +41,7 @@
                                     @foreach (var problema in Model.ListProblemaDisponiveis)
                                     {
                                         <tr>
+                                            <td>@Html.DisplayFor(modelItem => problema.idProblema)</td>
                                             <td>@Html.DisplayFor(modelItem => problema.tituloProblema)</td>
                                             <td>@Html.DisplayFor(modelItem => problema.descProblema)</td>
                                         </tr>
@@ -62,13 +64,14 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h2>Selecionadas</h2>
+                        <h2>Problemas Selecionados</h2>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table id="datatableDemo2" class="display DataTable" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Código</th>
                                         <th>Título</th>
                                         <th>Descrição</th>
                                     </tr>
@@ -77,6 +80,7 @@
                                     @foreach (var problema in Model.ListProblemasCadastrados)
                                     {
                                         <tr>
+                                            <td>@Html.DisplayFor(modelItem => problema.Problema.idProblema)</td>
                                             <td>@Html.DisplayFor(modelItem => problema.Problema.tituloProblema)</td>
                                             <td>@Html.DisplayFor(modelItem => problema.Problema.descProblema)</td>
                                         </tr>
@@ -213,7 +217,7 @@
                             .val(value)
                     );
                 });
-            document.getElementById("frmDisciplinaMed").submit();
+            document.getElementById("frmProblemaMed").submit();
         });
     </script>
 

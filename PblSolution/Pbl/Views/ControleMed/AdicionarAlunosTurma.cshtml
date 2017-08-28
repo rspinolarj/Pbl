@@ -9,7 +9,7 @@
 </h3>
 
 
-<form action="@Url.Action("AdicionarAlunosTurmaAction","ControleMed")" id="frmDisciplinaMed" method="post">
+<form action="@Url.Action("AdicionarAlunosTurmaAction","ControleMed")" id="frmTurmaAluno" method="post">
 
     @Html.AntiForgeryToken()
     <div class="container-fluid">
@@ -18,13 +18,14 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h2>Disponíveis</h2>
+                        <h2>Alunos Disponíveis</h2>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table id="example" class="display DataTable" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Código</th>
                                         <th>Nome</th>
                                         <th>Cpf</th>
                                         <th>Matricula</th>
@@ -34,6 +35,7 @@
                                     @foreach (var aluno in Model.AlunosDisponiveis)
                                     {
                                         <tr>
+                                            <td>@Html.DisplayFor(modelItem => aluno.idAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.nomeAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.cpfAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.matriculaAluno)</td>
@@ -56,13 +58,14 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h2>Selecionadas</h2>
+                        <h2>Alunos Selecionados</h2>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table id="datatableDemo2" class="display DataTable" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
+                                        <th>Código</th>
                                         <th>Nome</th>
                                         <th>Cpf</th>
                                         <th>Matricula</th>
@@ -72,6 +75,7 @@
                                     @foreach (var aluno in Model.AlunosCadastrados)
                                     {
                                         <tr class="gradeX">
+                                            <td>@Html.DisplayFor(modelItem => aluno.idAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.nomeAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.cpfAluno)</td>
                                             <td>@Html.DisplayFor(modelItem => aluno.matriculaAluno)</td>
@@ -154,7 +158,8 @@
                     dTable.row.add([
                         oData[i][0],
                         oData[i][1],
-                        oData[i][2]
+                        oData[i][2],
+                        oData[i][3]
                     ]).draw(false);
 
                     //alert("Disciplina: " + oData[i][0] + " Tipo de Disciplina: " + oData[i][1]);
@@ -173,7 +178,8 @@
                     oTable.row.add([
                         dData[i][0],
                         dData[i][1],
-                        dData[i][2]
+                        dData[i][2],
+                        dData[i][3]
                     ]).draw(false);
 
 
@@ -205,7 +211,7 @@
                             .val(value)
                     );
                 });
-            document.getElementById("frmDisciplinaMed").submit();
+            document.getElementById("frmTurmaAluno").submit();
         });
     </script>
 
