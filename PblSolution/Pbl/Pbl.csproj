@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -195,6 +196,7 @@
     <Compile Include="Models\DbClasses\MAvaliacaoTutoria.cs" />
     <Compile Include="Models\DbClasses\MControleNotas.cs" />
     <Compile Include="Models\DbClasses\MControleNotasXAula.cs" />
+    <Compile Include="Models\DbClasses\MControleNotasXProva.cs" />
     <Compile Include="Models\DbClasses\MDisciplina.cs" />
     <Compile Include="Models\DbClasses\MGrupo.cs" />
     <Compile Include="Models\DbClasses\MInscricaoTurma.cs" />
@@ -294,9 +296,11 @@
     <Compile Include="Models\ViewModel\AdicionarTurmaViewModel.cs" />
     <Compile Include="Models\ViewModel\AlunosGrupoViewModel.cs" />
     <Compile Include="Models\ViewModel\AlunosTurmaViewModel.cs" />
+    <Compile Include="Models\ViewModel\DetalhesModuloViewModel.cs" />
     <Compile Include="Models\ViewModel\DisciplinaViewModel.cs" />
     <Compile Include="Models\ViewModel\GerenciarMedViewModel.cs" />
     <Compile Include="Models\ViewModel\InscricaoAlunoViewModel.cs" />
+    <Compile Include="Models\ViewModel\NotasProblemaViewModel.cs" />
     <Compile Include="Models\ViewModel\SelecionarAlunosViewModel.cs" />
     <Compile Include="Models\ViewModel\SemestreViewModel.cs" />
     <Compile Include="Models\ViewModel\VincularProblemaViewModel.cs" />
@@ -1164,6 +1168,8 @@
     <Content Include="Views\ControleMed\GerenciarTurmas.cshtml" />
     <Content Include="Views\ControleMed\GerenciarGrupos.cshtml" />
     <Content Include="Views\Shared\_SidebarProfessor.cshtml" />
+    <Content Include="Views\AcompanhamentoMeds\DetalhesMed.cshtml" />
+    <Content Include="Views\AcompanhamentoMeds\DetalhesModulo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

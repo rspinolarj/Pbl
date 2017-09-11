@@ -6,7 +6,7 @@ namespace Pbl.Controllers
     public class HomeController : Controller
     {
 
-        [Authorize]
+        [Authorize(Roles = "Aluno,Diretor,Professor")]
         public ActionResult Index()
         {
             return View();

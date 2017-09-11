@@ -9,7 +9,7 @@
 </h3>
 
 
-<form action="@Url.Action("AdicionarAlunosTurmaAction","ControleMed")" id="frmTurmaAluno" method="post">
+<form action="@Url.Action("AdicionarAlunosTurmaAction","ControleMed")" id="frmDisciplinaMed" method="post">
 
     @Html.AntiForgeryToken()
     <div class="container-fluid">
@@ -18,14 +18,14 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h2>Alunos Disponíveis</h2>
+                        <h2>Disponíveis</h2>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table id="example" class="display DataTable" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Código</th>
+                                        <th>Id</th>
                                         <th>Nome</th>
                                         <th>Cpf</th>
                                         <th>Matricula</th>
@@ -58,14 +58,14 @@
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h2>Alunos Selecionados</h2>
+                        <h2>Selecionadas</h2>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
                             <table id="datatableDemo2" class="display DataTable" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
-                                        <th>Código</th>
+                                        <th>Id</th>
                                         <th>Nome</th>
                                         <th>Cpf</th>
                                         <th>Matricula</th>
@@ -179,7 +179,7 @@
                         dData[i][0],
                         dData[i][1],
                         dData[i][2],
-                        dData[i][3]
+                        oData[i][3]
                     ]).draw(false);
 
 
@@ -211,7 +211,7 @@
                             .val(value)
                     );
                 });
-            document.getElementById("frmTurmaAluno").submit();
+            document.getElementById("frmDisciplinaMed").submit();
         });
     </script>
 
