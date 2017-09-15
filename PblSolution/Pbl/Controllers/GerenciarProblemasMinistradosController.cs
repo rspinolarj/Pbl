@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Pbl.Controllers
 {
-    public class GerenciarProblemasMinistadosController : Controller
+    public class GerenciarProblemasMinistradosController : Controller
     {
         // GET: GerenciarProblemasMinistados
         [Authorize(Roles = "Diretor,Professor")]
@@ -37,9 +37,11 @@ namespace Pbl.Controllers
             ProblemaXMed problemaXMed = new MProblemaXMed().BringOne(c => c.idProblemaxMed == idProblemaXMed);
             MAvaliacaoTutoria mAvaliacaoTutoria = new MAvaliacaoTutoria();
             List<AvaliacaoTutoria> avaliacaoTutoria = mAvaliacaoTutoria.Bring(c => (c.idGrupo == idGrupo) && (c.idProblemaxMed == idProblemaXMed));
+            Grupo grupo = new MGrupo().BringOne(c => c.idGrupo == idGrupo);
+            //grupo.InscricaoTurma.Count != avaliacaoTutoria.First().
             if (avaliacaoTutoria.Count != 0)
             {
-                return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistados", new { avaliacoes = avaliacaoTutoria });
+                return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistrados", new { avaliacoes = avaliacaoTutoria });
             }
             List<Modulo> modulos = new MModulo().Bring(c => c.idSemestre == problemaXMed.Med.idSemestre);
             AvaliacaoTutoria novaAvaliacao = new AvaliacaoTutoria();
@@ -74,7 +76,7 @@ namespace Pbl.Controllers
                 mAvaliacaoTutoria.Add(avaliacaoAluno);
             }
             List<AvaliacaoTutoria> avaliacoesTutoria = mAvaliacaoTutoria.Bring(c => (c.idGrupo == grupo.idGrupo) && (c.idProblemaxMed == novaAvaliacao.idProblemaxMed));
-            return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistados", new { avaliacoes = avaliacoesTutoria });
+            return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistrados", new { avaliacoes = avaliacoesTutoria });
         }
 
         [Authorize(Roles = "Diretor,Professor")]

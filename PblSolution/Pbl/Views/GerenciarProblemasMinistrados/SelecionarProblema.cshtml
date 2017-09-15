@@ -29,7 +29,7 @@
             @Html.DisplayFor(modelItem => item.Problema.tituloProblema)
         </td>
         <td>
-            @Html.ActionLink("Selecionar", "MontarFichaAvaliativa", "GerenciarProblemasMinistados", new { idProblemaXMed = item.idProblemaxMed, idGrupo = ((Pbl.Models.Grupo) ViewData["Grupo"]).idGrupo }, new { @class = "alter" })
+            @Html.ActionLink("Selecionar", "MontarFichaAvaliativa", "GerenciarProblemasMinistrados", new { idProblemaXMed = item.idProblemaxMed, idGrupo = ((Pbl.Models.Grupo) ViewData["Grupo"]).idGrupo }, new { @class = "alter" })
         </td>
     </tr>
 }

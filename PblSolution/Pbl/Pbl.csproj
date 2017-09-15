@@ -162,7 +162,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\GerenciarDisciplinasMinistradasController.cs" />
-    <Compile Include="Controllers\GerenciarProblemasMinistadosController.cs" />
+    <Compile Include="Controllers\GerenciarProblemasMinistradosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -1124,10 +1124,10 @@
     <Content Include="Views\GerenciarDisciplinasMinistradas\SelecionarModulo.cshtml" />
     <Content Include="Views\GerenciarDisciplinasMinistradas\AvaliarAluno.cshtml" />
     <Content Include="Views\GerenciarDisciplinasMinistradas\SelecionarAlunos.cshtml" />
-    <Content Include="Views\GerenciarProblemasMinistados\Index.cshtml" />
-    <Content Include="Views\GerenciarProblemasMinistados\SelecionarProblema.cshtml" />
-    <Content Include="Views\GerenciarProblemasMinistados\MontarFichaAvaliativa.cshtml" />
-    <Content Include="Views\GerenciarProblemasMinistados\SelecionarAluno.cshtml" />
+    <Content Include="Views\GerenciarProblemasMinistrados\Index.cshtml" />
+    <Content Include="Views\GerenciarProblemasMinistrados\SelecionarProblema.cshtml" />
+    <Content Include="Views\GerenciarProblemasMinistrados\MontarFichaAvaliativa.cshtml" />
+    <Content Include="Views\GerenciarProblemasMinistrados\SelecionarAluno.cshtml" />
     <Content Include="Vendor\datatables\media\images\Sorting icons.psd" />
     <Content Include="Vendor\fontawesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Vendor\fontawesome\fonts\fontawesome-webfont.ttf" />
