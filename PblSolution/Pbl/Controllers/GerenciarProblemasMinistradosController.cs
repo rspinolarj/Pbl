@@ -86,6 +86,7 @@ namespace Pbl.Controllers
             novaAvaliacao.idGrupo = idGrupo;
             novaAvaliacao.idProblemaxMed = idProblemaXMed;
             ViewData["idModulo"] = new SelectList(modulos, "idModulo", "descModulo");
+            ViewData["modulos"] = modulos;
             return View(novaAvaliacao);
         }
 
