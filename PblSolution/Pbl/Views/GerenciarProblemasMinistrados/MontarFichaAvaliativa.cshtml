@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "MontarFichaAvaliativa";
-    
+    Html.Raw(Json.Encode(ViewData["modulos"]));
 }
 
 <h3>
@@ -91,6 +91,9 @@
     </script>
 
 @{
+    <script>
+        var obj = jQuery.parseJSON(@{Html.Raw(Json.Encode(ViewData["modulos"]));});
+    </script>
     foreach (var item in (List<Pbl.Models.Modulo>)ViewData["modulos"])
     {
         <script>
