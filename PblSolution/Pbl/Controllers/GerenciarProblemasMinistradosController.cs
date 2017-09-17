@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace Pbl.Controllers
 {
@@ -86,7 +87,8 @@ namespace Pbl.Controllers
             novaAvaliacao.idGrupo = idGrupo;
             novaAvaliacao.idProblemaxMed = idProblemaXMed;
             ViewData["idModulo"] = new SelectList(modulos, "idModulo", "descModulo");
-            ViewData["modulos"] = modulos;
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            ViewData["modulos"] = serializer.Serialize(modulos);
             return View(novaAvaliacao);
         }
 
@@ -127,6 +129,13 @@ namespace Pbl.Controllers
                 avaliacoes = new List<AvaliacaoTutoria>();
             }
             return View(avaliacoes);
+        }
+
+        [Authorize(Roles = "Diretor,Professor")]
+        public ActionResult AvaliarAluno(int idAvaliacaoTutoria)
+        {
+            AvaliacaoTutoria avaliacaoTutoria = new MAvaliacaoTutoria().BringOne(c => c.idAvaliacaoTutoria == idAvaliacaoTutoria);
+            return View();
         }
     }
 }
