@@ -65,7 +65,7 @@ namespace Pbl.Controllers
                         }
                         else
                         {
-                            if (alunoInscrito.ControleNotas.SingleOrDefault(c => c.idModulo == idModulo).AvaliacaoTutoria.Where(c => c.idProblemaxMed == idProblemaXMed) == null)
+                            if (alunoInscrito.ControleNotas.SingleOrDefault(c => c.idModulo == idModulo).AvaliacaoTutoria.SingleOrDefault(c => c.idProblemaxMed == idProblemaXMed) == null)
                             {
                                 AvaliacaoTutoria avaliacaoAluno = new AvaliacaoTutoria();
                                 avaliacaoAluno.dtFim = dataFimAvaliacao;
