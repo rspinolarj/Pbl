@@ -165,6 +165,7 @@
     <Compile Include="Controllers\GerenciarProblemasMinistadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -688,6 +689,7 @@
     <Content Include="Content\Json\jqgrid-tree.json" />
     <Content Include="Content\Json\jqgrid.json" />
     <Content Include="Content\Json\xeditable-groups.json" />
+    <None Include="Properties\PublishProfiles\Pbl20170828094125 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />
     <Content Include="Scripts\jquery-2.2.4.min.js" />
@@ -1170,6 +1172,14 @@
     <Content Include="Views\Shared\_SidebarProfessor.cshtml" />
     <Content Include="Views\AcompanhamentoMeds\DetalhesMed.cshtml" />
     <Content Include="Views\AcompanhamentoMeds\DetalhesModulo.cshtml" />
+    <Content Include="Views\Pages\Error_404.cshtml" />
+    <Content Include="Views\Pages\Error_500.cshtml" />
+    <Content Include="Views\Pages\Lock.cshtml" />
+    <Content Include="Views\Pages\Login.cshtml" />
+    <Content Include="Views\Pages\Maintenance.cshtml" />
+    <Content Include="Views\Pages\Recover.cshtml" />
+    <Content Include="Views\Pages\Register.cshtml" />
+    <Content Include="Views\Pages\Template.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
