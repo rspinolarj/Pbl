@@ -91,7 +91,7 @@
           <Key>
             <PropertyRef Name="idFichaAvaliacao" />
           </Key>
-          <Property Name="idFichaAvaliacao" Type="int" Nullable="false" />
+          <Property Name="idFichaAvaliacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idInscricaoTurma" Type="int" />
           <Property Name="idAvaliacaoTutoria" Type="int" />
           <Property Name="nota" Type="decimal" Precision="5" Scale="2" />
@@ -951,137 +951,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="pblsolutionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="FamervEntities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(pblsolutionModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(pblsolutionModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="SpCrudAluno">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="nome" Mode="In" Type="String" />
-            <Parameter Name="cpf" Mode="In" Type="String" />
-            <Parameter Name="senha" Mode="In" Type="String" />
-            <Parameter Name="matricula" Mode="In" Type="String" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudAno">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="ano" Mode="In" Type="String" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudDisciplina">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="idTipoDisciplina" Mode="In" Type="Int32" />
-            <Parameter Name="descricao" Mode="In" Type="String" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudGrupo">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="idProfessor" Mode="In" Type="Int32" />
-            <Parameter Name="descricao" Mode="In" Type="String" />
-            <Parameter Name="idMed" Mode="In" Type="Int32" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudInscricaoMed">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="idAluno" Mode="In" Type="Int32" />
-            <Parameter Name="idMed" Mode="In" Type="Int32" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudMed">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="descricao" Mode="In" Type="String" />
-            <Parameter Name="idSemestre" Mode="In" Type="Int32" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudModulo">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="descricao" Mode="In" Type="String" />
-            <Parameter Name="dtInicio" Mode="In" Type="DateTime" />
-            <Parameter Name="dtFim" Mode="In" Type="DateTime" />
-            <Parameter Name="idSemestre" Mode="In" Type="Int32" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudProblema">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="titulo" Mode="In" Type="String" />
-            <Parameter Name="descricao" Mode="In" Type="String" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudProfessor">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="nome" Mode="In" Type="String" />
-            <Parameter Name="cpf" Mode="In" Type="String" />
-            <Parameter Name="senha" Mode="In" Type="String" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudProva">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="idTipoProva" Mode="In" Type="Int32" />
-            <Parameter Name="valorQuestao" Mode="In" Type="Decimal" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudSemestre">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="descricao" Mode="In" Type="String" />
-            <Parameter Name="dtIni1" Mode="In" Type="DateTime" />
-            <Parameter Name="dtIni2" Mode="In" Type="DateTime" />
-            <Parameter Name="dtIni3" Mode="In" Type="DateTime" />
-            <Parameter Name="dtFim1" Mode="In" Type="DateTime" />
-            <Parameter Name="dtFim2" Mode="In" Type="DateTime" />
-            <Parameter Name="dtFim3" Mode="In" Type="DateTime" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudTipoDisciplina">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="descricao" Mode="In" Type="String" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudTipoProva">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="descricao" Mode="In" Type="String" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpCrudTurma">
-            <Parameter Name="id" Mode="In" Type="Int32" />
-            <Parameter Name="descricao" Mode="In" Type="String" />
-            <Parameter Name="idDisciplina" Mode="In" Type="Int32" />
-            <Parameter Name="idMed" Mode="In" Type="Int32" />
-            <Parameter Name="idProfessor" Mode="In" Type="Int32" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="SpGerenciaAlunoTurma">
-            <Parameter Name="idInscricaoMed" Mode="In" Type="Int32" />
-            <Parameter Name="idTurma" Mode="In" Type="Int32" />
-            <Parameter Name="idModulo" Mode="In" Type="Int32" />
-            <Parameter Name="nota" Mode="In" Type="Decimal" />
-            <Parameter Name="StatementType" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="Aluno" EntityType="pblsolutionModel.Aluno" />
           <EntitySet Name="Ano" EntityType="pblsolutionModel.Ano" />
           <EntitySet Name="Aula" EntityType="pblsolutionModel.Aula" />
@@ -1235,7 +1104,7 @@
             <End Role="Professor" EntitySet="Professor" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-          <FunctionImport Name="SpCrudAluno1">
+          <FunctionImport Name="SpCrudAluno">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="nome" Mode="In" Type="String" />
             <Parameter Name="cpf" Mode="In" Type="String" />
@@ -1243,31 +1112,31 @@
             <Parameter Name="matricula" Mode="In" Type="String" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudAno1">
+          <FunctionImport Name="SpCrudAno">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="ano" Mode="In" Type="String" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudDisciplina1">
+          <FunctionImport Name="SpCrudDisciplina">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="idTipoDisciplina" Mode="In" Type="Int32" />
             <Parameter Name="descricao" Mode="In" Type="String" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudGrupo1">
+          <FunctionImport Name="SpCrudGrupo">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="idProfessor" Mode="In" Type="Int32" />
             <Parameter Name="descricao" Mode="In" Type="String" />
             <Parameter Name="idMed" Mode="In" Type="Int32" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudMed1">
+          <FunctionImport Name="SpCrudMed">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="descricao" Mode="In" Type="String" />
             <Parameter Name="idSemestre" Mode="In" Type="Int32" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudModulo1">
+          <FunctionImport Name="SpCrudModulo">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="descricao" Mode="In" Type="String" />
             <Parameter Name="dtInicio" Mode="In" Type="DateTime" />
@@ -1275,26 +1144,26 @@
             <Parameter Name="idSemestre" Mode="In" Type="Int32" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudProblema1">
+          <FunctionImport Name="SpCrudProblema">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="titulo" Mode="In" Type="String" />
             <Parameter Name="descricao" Mode="In" Type="String" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudProfessor1">
+          <FunctionImport Name="SpCrudProfessor">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="nome" Mode="In" Type="String" />
             <Parameter Name="cpf" Mode="In" Type="String" />
             <Parameter Name="senha" Mode="In" Type="String" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudProva1">
+          <FunctionImport Name="SpCrudProva">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="idTipoProva" Mode="In" Type="Int32" />
             <Parameter Name="valorQuestao" Mode="In" Type="Decimal" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudSemestre1">
+          <FunctionImport Name="SpCrudSemestre">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="dtIni1" Mode="In" Type="DateTime" />
             <Parameter Name="dtIni2" Mode="In" Type="DateTime" />
@@ -1304,12 +1173,12 @@
             <Parameter Name="dtFim3" Mode="In" Type="DateTime" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudTipoDisciplina1">
+          <FunctionImport Name="SpCrudTipoDisciplina">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="descricao" Mode="In" Type="String" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="SpCrudTipoProva1">
+          <FunctionImport Name="SpCrudTipoProva">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="descricao" Mode="In" Type="String" />
             <Parameter Name="StatementType" Mode="In" Type="String" />
@@ -2247,18 +2116,18 @@
               <ScalarProperty Name="idProfessor" ColumnName="idProfessor" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="SpCrudAluno1" FunctionName="pblsolutionModel.Store.SpCrudAluno" />
-          <FunctionImportMapping FunctionImportName="SpCrudAno1" FunctionName="pblsolutionModel.Store.SpCrudAno" />
-          <FunctionImportMapping FunctionImportName="SpCrudDisciplina1" FunctionName="pblsolutionModel.Store.SpCrudDisciplina" />
-          <FunctionImportMapping FunctionImportName="SpCrudGrupo1" FunctionName="pblsolutionModel.Store.SpCrudGrupo" />
-          <FunctionImportMapping FunctionImportName="SpCrudMed1" FunctionName="pblsolutionModel.Store.SpCrudMed" />
-          <FunctionImportMapping FunctionImportName="SpCrudModulo1" FunctionName="pblsolutionModel.Store.SpCrudModulo" />
-          <FunctionImportMapping FunctionImportName="SpCrudProblema1" FunctionName="pblsolutionModel.Store.SpCrudProblema" />
-          <FunctionImportMapping FunctionImportName="SpCrudProfessor1" FunctionName="pblsolutionModel.Store.SpCrudProfessor" />
-          <FunctionImportMapping FunctionImportName="SpCrudProva1" FunctionName="pblsolutionModel.Store.SpCrudProva" />
-          <FunctionImportMapping FunctionImportName="SpCrudSemestre1" FunctionName="pblsolutionModel.Store.SpCrudSemestre" />
-          <FunctionImportMapping FunctionImportName="SpCrudTipoDisciplina1" FunctionName="pblsolutionModel.Store.SpCrudTipoDisciplina" />
-          <FunctionImportMapping FunctionImportName="SpCrudTipoProva1" FunctionName="pblsolutionModel.Store.SpCrudTipoProva" />
+          <FunctionImportMapping FunctionImportName="SpCrudAluno" FunctionName="pblsolutionModel.Store.SpCrudAluno" />
+          <FunctionImportMapping FunctionImportName="SpCrudAno" FunctionName="pblsolutionModel.Store.SpCrudAno" />
+          <FunctionImportMapping FunctionImportName="SpCrudDisciplina" FunctionName="pblsolutionModel.Store.SpCrudDisciplina" />
+          <FunctionImportMapping FunctionImportName="SpCrudGrupo" FunctionName="pblsolutionModel.Store.SpCrudGrupo" />
+          <FunctionImportMapping FunctionImportName="SpCrudMed" FunctionName="pblsolutionModel.Store.SpCrudMed" />
+          <FunctionImportMapping FunctionImportName="SpCrudModulo" FunctionName="pblsolutionModel.Store.SpCrudModulo" />
+          <FunctionImportMapping FunctionImportName="SpCrudProblema" FunctionName="pblsolutionModel.Store.SpCrudProblema" />
+          <FunctionImportMapping FunctionImportName="SpCrudProfessor" FunctionName="pblsolutionModel.Store.SpCrudProfessor" />
+          <FunctionImportMapping FunctionImportName="SpCrudProva" FunctionName="pblsolutionModel.Store.SpCrudProva" />
+          <FunctionImportMapping FunctionImportName="SpCrudSemestre" FunctionName="pblsolutionModel.Store.SpCrudSemestre" />
+          <FunctionImportMapping FunctionImportName="SpCrudTipoDisciplina" FunctionName="pblsolutionModel.Store.SpCrudTipoDisciplina" />
+          <FunctionImportMapping FunctionImportName="SpCrudTipoProva" FunctionName="pblsolutionModel.Store.SpCrudTipoProva" />
           <FunctionImportMapping FunctionImportName="SpVerificaSemestreAtivo" FunctionName="pblsolutionModel.Store.SpVerificaSemestreAtivo" />
         </EntityContainerMapping>
       </Mapping>

@@ -29,7 +29,7 @@ namespace Pbl.Models.DbClasses
                 return false;
             }
             return true;
-            
+
         }
 
         public List<Turma> Bring(Expression<Func<Turma, bool>> predicate)
@@ -51,7 +51,9 @@ namespace Pbl.Models.DbClasses
         {
             try
             {
-                db.SpCrudTurma(T.idTurma, null, null, null, null, "Inativa");
+                db.Turma.Remove(T);
+                db.SaveChanges();
+                //db.SpCrudTurma(T.idTurma, null, null, null, null, "Inativa");
             }
             catch (Exception Ex)
             {
@@ -65,7 +67,11 @@ namespace Pbl.Models.DbClasses
         {
             try
             {
-                db.SpCrudTurma(t.idTurma, null, null, null, null, "Update");
+                Turma turma = db.Turma.SingleOrDefault(c => c.idTurma == t.idTurma);
+                turma.ativo = t.ativo;
+                turma.descTurma = t.descTurma;
+                db.SaveChanges();
+                //db.SpCrudTurma(t.idTurma, null, null, null, null, "Update");
             }
             catch (Exception Ex)
             {

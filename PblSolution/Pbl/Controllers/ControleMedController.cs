@@ -253,7 +253,7 @@ namespace Pbl.Controllers
                 novo.idProblema = item.idProblema;
                 mProblemaXMed.Add(novo);
             }
-            return View("GerenciarMed", new { id = idMed });
+            return RedirectToAction("GerenciarMed", new { id = idMed });
         }
         #endregion
 

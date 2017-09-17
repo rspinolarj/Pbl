@@ -38,10 +38,48 @@ namespace Pbl.Controllers
             MAvaliacaoTutoria mAvaliacaoTutoria = new MAvaliacaoTutoria();
             List<AvaliacaoTutoria> avaliacaoTutoria = mAvaliacaoTutoria.Bring(c => (c.idGrupo == idGrupo) && (c.idProblemaxMed == idProblemaXMed));
             Grupo grupo = new MGrupo().BringOne(c => c.idGrupo == idGrupo);
-            //grupo.InscricaoTurma.Count != avaliacaoTutoria.First().
             if (avaliacaoTutoria.Count != 0)
             {
-                return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistrados", new { avaliacoes = avaliacaoTutoria });
+                int idModulo = (int)avaliacaoTutoria.FirstOrDefault().ControleNotas.idModulo;
+                DateTime dataFimAvaliacao = avaliacaoTutoria.FirstOrDefault().dtFim.Value;
+                DateTime dataInicioAvaliacao = avaliacaoTutoria.FirstOrDefault().dtInicio.Value;
+                if (grupo.InscricaoTurma.Count != avaliacaoTutoria.Count)
+                {
+                    List<InscricaoTurma> alunosInscritos = grupo.InscricaoTurma.ToList();
+                    MControleNotas mControleNotas = new MControleNotas();
+                    foreach (InscricaoTurma alunoInscrito in alunosInscritos)
+                    {
+                        ControleNotas controleNotas = alunoInscrito.ControleNotas.SingleOrDefault(c => c.idModulo == idModulo);
+                        if (controleNotas == null)
+                        {
+                            controleNotas.idModulo = idModulo;
+                            controleNotas.idInscricaoTurma = alunoInscrito.idInscricaoTurma;
+                            mControleNotas.Add(controleNotas);
+                            AvaliacaoTutoria avaliacaoAluno = new AvaliacaoTutoria();
+                            avaliacaoAluno.dtFim = dataFimAvaliacao;
+                            avaliacaoAluno.dtInicio = dataInicioAvaliacao;
+                            avaliacaoAluno.idControleNotas = controleNotas.idControleNotas;
+                            avaliacaoAluno.idGrupo = grupo.idGrupo;
+                            avaliacaoAluno.idProblemaxMed = idProblemaXMed;
+                            mAvaliacaoTutoria.Add(avaliacaoAluno);
+                        }
+                        else
+                        {
+                            if (alunoInscrito.ControleNotas.SingleOrDefault(c => c.idModulo == idModulo).AvaliacaoTutoria.Where(c => c.idProblemaxMed == idProblemaXMed) == null)
+                            {
+                                AvaliacaoTutoria avaliacaoAluno = new AvaliacaoTutoria();
+                                avaliacaoAluno.dtFim = dataFimAvaliacao;
+                                avaliacaoAluno.dtInicio = dataInicioAvaliacao;
+                                avaliacaoAluno.idControleNotas = controleNotas.idControleNotas;
+                                avaliacaoAluno.idGrupo = grupo.idGrupo;
+                                avaliacaoAluno.idProblemaxMed = idProblemaXMed;
+                                mAvaliacaoTutoria.Add(avaliacaoAluno);
+                            }
+                        }
+
+                    }
+                }
+                return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistrados", new { idProblemaXMed = idProblemaXMed, idGrupo = idGrupo });
             }
             List<Modulo> modulos = new MModulo().Bring(c => c.idSemestre == problemaXMed.Med.idSemestre);
             AvaliacaoTutoria novaAvaliacao = new AvaliacaoTutoria();
@@ -80,13 +118,14 @@ namespace Pbl.Controllers
         }
 
         [Authorize(Roles = "Diretor,Professor")]
-        public ActionResult SelecionarAluno(List<AvaliacaoTutoria> avalicoes)
+        public ActionResult SelecionarAluno(int idProblemaXMed, int idGrupo)
         {
-            if (avalicoes == null)
+            List<AvaliacaoTutoria> avaliacoes = new MAvaliacaoTutoria().Bring(c => (c.idProblemaxMed == idProblemaXMed) && (c.idGrupo == idGrupo));
+            if (avaliacoes == null)
             {
-                avalicoes = new List<AvaliacaoTutoria>();
+                avaliacoes = new List<AvaliacaoTutoria>();
             }
-            return View(avalicoes);
+            return View(avaliacoes);
         }
     }
 }
