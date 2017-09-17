@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 
 namespace Pbl.Controllers
 {
@@ -87,8 +86,7 @@ namespace Pbl.Controllers
             novaAvaliacao.idGrupo = idGrupo;
             novaAvaliacao.idProblemaxMed = idProblemaXMed;
             ViewData["idModulo"] = new SelectList(modulos, "idModulo", "descModulo");
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            ViewData["modulos"] = serializer.Serialize(modulos);
+            ViewData["modulos"] = modulos;
             return View(novaAvaliacao);
         }
 
