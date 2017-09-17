@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "MontarFichaAvaliativa";
+    
 }
 
 <h3>
@@ -23,24 +24,28 @@
 
         <div class="form-group">
             <div class="col-md-2">
-                <label>Data de Início</label>
-                @Html.EditorFor(model => model.dtInicio, new { htmlAttributes = new { @class = "form-control input-sm", @type = "date" } })
-                @Html.ValidationMessageFor(model => model.dtInicio, "", new { @class = "text-danger" })
+                <label for="idModulo">Módulo: </label>
+                @Html.DropDownList("idModulo", (SelectList)ViewData["idModulo"], string.Empty, new {@id = "selModulo" })
             </div>
+            <div class="col-md-10"></div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="display:none" id="divDtInicio">
+            <div class="col-md-2">
+                <label>Data de Início</label>
+                @Html.EditorFor(model => model.dtInicio, new { htmlAttributes = new { @class = "form-control input-sm", @type = "date", @onfocus = "validateDataInicio(this)", @id = "dtInicio" } })
+                @Html.ValidationMessageFor(model => model.dtInicio, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-10"></div>
+        </div>
+
+        <div class="form-group" style="display:none" id="divDtFim">
             <div class="col-md-2">
                 <label>Data Final</label>
-                @Html.EditorFor(model => model.dtFim, new { htmlAttributes = new { @class = "form-control input-sm", @type = "date" } })
+                @Html.EditorFor(model => model.dtFim, new { htmlAttributes = new { @class = "form-control input-sm", @type = "date", @onfocus = "validateDataFim(this)", @id = "dtFim" } })
                 @Html.ValidationMessageFor(model => model.dtFim, "", new { @class = "text-danger" })
             </div>
-        </div>
-        <div class="form-group">
-            <label for="idModulo" >Modulo: </label>
-            <div class="col-md-10">
-                @Html.DropDownList("idModulo", (SelectList)ViewData["idModulo"])
-            </div>
+            <div class="col-md-10"></div>
         </div>
 
         <div class="form-group">
@@ -56,5 +61,63 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    
+    <script>
+        var idModuloLista;
+        var idModuloSelecionado;
+        var dataInicioModulo;
+        var dataFimModulo;
+
+
+        $('#selModulo').change(function () {
+            idModuloSelecionado = document.getElementById('selModulo').value;
+            //alert(idModuloSelecionado);
+            document.getElementById('divDtInicio').style.display = "block";
+        });
+
+        $('#dtInicio').change(function () {
+            document.getElementById('divDtFim').style.display = "block";
+        });
+
+        alert(@ViewData["modulos"]);
+
+  
+        //var data = JSON.parse(model);
+
+        for (i = 0; i < data.length; i++) {
+            alert(data[i].idModulo);
+        }
+
+    </script>
+
+@{
+    foreach (var item in (List<Pbl.Models.Modulo>)ViewData["modulos"])
+    {
+        <script>
+            idModuloLista = @item.idModulo;
+            if(idModuloSelecionado == idModuloLista) {
+                dataInicioModulo = '@item.dtInicio.Value.ToShortDateString()';
+                dataFimModulo = '@item.dtFim.Value.ToShortDateString()';
+                alert(dataInicioModulo);
+            }
+        </script>
+    }
+}
+    <script>
+            function validateDataInicio(dataInicio) {
+                alert(dataInicioModulo);
+                return 0;
+                var dataMin = new Date(dataInicioModulo).toISOString().slice(0, 10);
+                var dataMax = new Date(dataFimModulo).toISOString().slice(0, 10);
+                alert(dataMin);
+                $(dataInicio).attr("min", "2000-01-01");
+                $(dataInicio).attr("max", dataMax);
+            }
+
+            function validateDataFim(dataFim) {
+                var todayDate = new Date().toISOString().slice(0, 10);
+                $(dataFim).attr("min", "2000-01-01");
+                $(dataFim).attr("max", todayDate);
+            }
+    </script>
 }
