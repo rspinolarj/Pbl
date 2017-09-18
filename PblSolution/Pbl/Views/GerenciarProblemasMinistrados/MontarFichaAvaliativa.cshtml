@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "MontarFichaAvaliativa";
-    Html.Raw(Json.Encode(ViewData["modulos"]));
 }
 
 <h3>
@@ -14,55 +13,68 @@
 @using (Html.BeginForm("CriarAvaliacao", "GerenciarProblemasMinistrados"))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-    
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.idAvaliacaoTutoria)
-        @Html.HiddenFor(model => model.idProblemaxMed)
-        @Html.HiddenFor(model => model.idGrupo)
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-head">
+                    <h5>Ficha Avaliativa</h5>
+                </div>
+                <div class="panel-body">
 
-        <div class="form-group">
-            <div class="col-md-2">
-                <label for="idModulo">Módulo: </label>
-                @Html.DropDownList("idModulo", (SelectList)ViewData["idModulo"], string.Empty, new {@id = "selModulo" })
-            </div>
-            <div class="col-md-10"></div>
-        </div>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.idAvaliacaoTutoria)
+                    @Html.HiddenFor(model => model.idProblemaxMed)
+                    @Html.HiddenFor(model => model.idGrupo)
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <label for="idModulo">Módulo: </label>
+                                @Html.DropDownList("idModulo", (SelectList)ViewData["idModulo"], string.Empty, new { @id = "selModulo", @required = "required" })
+                            </div>
+                            <div class="col-md-10"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group" style="display:none" id="divDtInicio">
+                                <label>Data de Início</label>
+                                @Html.EditorFor(model => model.dtInicio, new { htmlAttributes = new { @class = "form-control input-sm", @type = "date", @onfocus = "validateDataInicio(this)", @id = "dtInicio", @required = "required" } })
+                                @Html.ValidationMessageFor(model => model.dtInicio, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group" style="display:none" id="divDtFim">
+                                <label>Data Final</label>
+                                @Html.EditorFor(model => model.dtFim, new { htmlAttributes = new { @class = "form-control input-sm", @type = "date", @onfocus = "validateDataFim(this)", @id = "dtFim", @required = "required" } })
+                                @Html.ValidationMessageFor(model => model.dtFim, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
 
-        <div class="form-group" style="display:none" id="divDtInicio">
-            <div class="col-md-2">
-                <label>Data de Início</label>
-                @Html.EditorFor(model => model.dtInicio, new { htmlAttributes = new { @class = "form-control input-sm", @type = "date", @onfocus = "validateDataInicio(this)", @id = "dtInicio" } })
-                @Html.ValidationMessageFor(model => model.dtInicio, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-10"></div>
-        </div>
-
-        <div class="form-group" style="display:none" id="divDtFim">
-            <div class="col-md-2">
-                <label>Data Final</label>
-                @Html.EditorFor(model => model.dtFim, new { htmlAttributes = new { @class = "form-control input-sm", @type = "date", @onfocus = "validateDataFim(this)", @id = "dtFim" } })
-                @Html.ValidationMessageFor(model => model.dtFim, "", new { @class = "text-danger" })
-            </div>
-            <div class="col-md-10"></div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                    <hr class="hidden-print" />
+                    <div class="clearfix">
+                        <button type="button" class="btn btn-labeled btn-default" onclick="history.back();">
+                            <span class="btn-label">
+                                <i class="fa fa-arrow-left"></i>
+                            </span>Voltar
+                        </button>
+                        <button type="submit" id="btnSubmit" class="btn btn-labeled btn-success pull-right">
+                            <span class="btn-label">
+                                <i class="fa fa-check"></i>
+                            </span>Cadastrar
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="col-md-4"></div>
     </div>
-}
+}   
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    @section Scripts {
 
-@section Scripts {
-    
-    <script>
+        <script>
         var idModuloLista;
         var idModuloSelecionado;
         var dataInicioModulo;
@@ -71,56 +83,37 @@
 
         $('#selModulo').change(function () {
             idModuloSelecionado = document.getElementById('selModulo').value;
-            //alert(idModuloSelecionado);
+            for (i = 0; i < data.length; i++) {
+                if (data[i].idModulo == idModuloSelecionado) {
+                    dataInicioModulo = new Date(data[i].dtInicio).toISOString().slice(0, 10);
+                    dataFimModulo = new Date(data[i].dtFim).toISOString().slice(0, 10);
+                }
+            }
             document.getElementById('divDtInicio').style.display = "block";
+            $('#dtInicio').val('');
+            $('#dtFim').val('');
         });
 
         $('#dtInicio').change(function () {
             document.getElementById('divDtFim').style.display = "block";
         });
 
-        alert(@ViewData["modulos"]);
 
-  
-        //var data = JSON.parse(model);
+        var data = @Html.Raw((string)ViewData["modulos"]);
 
-        for (i = 0; i < data.length; i++) {
-            alert(data[i].idModulo);
-        }
-
-    </script>
-
-@{
-    <script>
-        var obj = jQuery.parseJSON(@{Html.Raw(Json.Encode(ViewData["modulos"]));});
-    </script>
-    foreach (var item in (List<Pbl.Models.Modulo>)ViewData["modulos"])
-    {
-        <script>
-            idModuloLista = @item.idModulo;
-            if(idModuloSelecionado == idModuloLista) {
-                dataInicioModulo = '@item.dtInicio.Value.ToShortDateString()';
-                dataFimModulo = '@item.dtFim.Value.ToShortDateString()';
-                alert(dataInicioModulo);
-            }
         </script>
-    }
-}
-    <script>
+
+
+        <script>
             function validateDataInicio(dataInicio) {
-                alert(dataInicioModulo);
-                return 0;
-                var dataMin = new Date(dataInicioModulo).toISOString().slice(0, 10);
-                var dataMax = new Date(dataFimModulo).toISOString().slice(0, 10);
-                alert(dataMin);
-                $(dataInicio).attr("min", "2000-01-01");
-                $(dataInicio).attr("max", dataMax);
+                $(dataInicio).attr("min", dataInicioModulo);
+                $(dataInicio).attr("max", dataFimModulo);
             }
 
             function validateDataFim(dataFim) {
-                var todayDate = new Date().toISOString().slice(0, 10);
-                $(dataFim).attr("min", "2000-01-01");
-                $(dataFim).attr("max", todayDate);
+                var dataInicio = new Date($('#dtInicio').val()).toISOString().slice(0, 10);
+                $(dataFim).attr("min", dataInicio);
+                $(dataFim).attr("max", dataFimModulo);
             }
-    </script>
-}
+        </script>
+    }

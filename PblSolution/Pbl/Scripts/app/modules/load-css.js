@@ -4,7 +4,8 @@
 (function(window, document, $, undefined){
 
   $(function(){
-
+    var savedTheme = $.localStorage.get('jqThemeCSS');
+    if (savedTheme) createLink(savedTheme);
     $('[data-load-css]').on('click', function (e) {
         
       var element = $(this);
@@ -20,6 +21,7 @@
         if ( !link ) {
           $.error('Error creating stylesheet link element.');
         }
+        $.localStorage.set('jqThemeCSS', uri);
       }
       else {
         $.error('No stylesheet location defined.');

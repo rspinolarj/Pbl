@@ -1,4 +1,5 @@
-﻿using Pbl.Models;
+﻿using Newtonsoft.Json;
+using Pbl.Models;
 using Pbl.Models.DbClasses;
 using System;
 using System.Collections.Generic;
@@ -86,7 +87,12 @@ namespace Pbl.Controllers
             novaAvaliacao.idGrupo = idGrupo;
             novaAvaliacao.idProblemaxMed = idProblemaXMed;
             ViewData["idModulo"] = new SelectList(modulos, "idModulo", "descModulo");
-            ViewData["modulos"] = modulos;
+            string js = JsonConvert.SerializeObject(modulos, Formatting.Indented,
+                            new JsonSerializerSettings
+                            {
+                                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                            });
+            ViewData["modulos"] = js;
             return View(novaAvaliacao);
         }
 
