@@ -138,8 +138,35 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor,Professor")]
         public ActionResult AvaliarAluno(int idAvaliacaoTutoria)
         {
+            int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
             AvaliacaoTutoria avaliacaoTutoria = new MAvaliacaoTutoria().BringOne(c => c.idAvaliacaoTutoria == idAvaliacaoTutoria);
-            return View();
+            MFichaAvaliacao mFichaAvaliacao = new MFichaAvaliacao();
+            FichaAvaliacao fichaAvaliacao = mFichaAvaliacao.BringOne(c => (c.idAvaliacaoTutoria == idAvaliacaoTutoria) && (c.idAvaliador == idUsuario));
+            MPerguntaXFicha mPerguntaXFicha = new MPerguntaXFicha();
+            if (fichaAvaliacao == null)
+            {
+                Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
+                Professor prof = user.Professor.First();
+                if (avaliacaoTutoria.Grupo.idProfessor == prof.idProfessor)
+                {
+                    FichaAvaliacao nova = new FichaAvaliacao();
+                    nova.idAvaliacaoTutoria = idAvaliacaoTutoria;
+                    nova.idAvaliador = user.idUsuario;
+                    mFichaAvaliacao.Add(nova);
+                    List<Pergunta> perguntasFicha = new MPergunta().BringAll();
+
+                    foreach (Pergunta item in perguntasFicha)
+                    {
+                        PerguntaXFicha perguntaXFicha = new PerguntaXFicha();
+                        perguntaXFicha.idFichaAvaliacao = nova.idFichaAvaliacao;
+                        perguntaXFicha.idPergunta = item.idPergunta;
+                        perguntaXFicha.marcado = null;
+                        mPerguntaXFicha.Add(perguntaXFicha);
+                    }
+                }
+            }
+            List<PerguntaXFicha> perguntas = mPerguntaXFicha.Bring(c => c.idFichaAvaliacao == fichaAvaliacao.idFichaAvaliacao);
+            return View(perguntas);
         }
     }
 }

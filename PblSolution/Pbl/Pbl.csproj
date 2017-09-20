@@ -199,10 +199,13 @@
     <Compile Include="Models\DbClasses\MControleNotasXAula.cs" />
     <Compile Include="Models\DbClasses\MControleNotasXProva.cs" />
     <Compile Include="Models\DbClasses\MDisciplina.cs" />
+    <Compile Include="Models\DbClasses\MFichaAvaliacao.cs" />
     <Compile Include="Models\DbClasses\MGrupo.cs" />
     <Compile Include="Models\DbClasses\MInscricaoTurma.cs" />
     <Compile Include="Models\DbClasses\MInscricaoTurmaXGrupo.cs" />
     <Compile Include="Models\DbClasses\MModulo.cs" />
+    <Compile Include="Models\DbClasses\MPergunta.cs" />
+    <Compile Include="Models\DbClasses\MPerguntaXFicha.cs" />
     <Compile Include="Models\DbClasses\MUsuario.cs" />
     <Compile Include="Models\DbClasses\MMed.cs" />
     <Compile Include="Models\DbClasses\MProblema.cs" />
