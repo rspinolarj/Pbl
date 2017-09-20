@@ -42,8 +42,8 @@ namespace Pbl.Controllers
             if (avaliacaoTutoria.Count != 0)
             {
                 int idModulo = (int)avaliacaoTutoria.FirstOrDefault().ControleNotas.idModulo;
-                DateTime dataFimAvaliacao = avaliacaoTutoria.FirstOrDefault().dtFim.Value;
-                DateTime dataInicioAvaliacao = avaliacaoTutoria.FirstOrDefault().dtInicio.Value;
+                DateTime dataFimAvaliacao = avaliacaoTutoria.FirstOrDefault().dtFim;
+                DateTime dataInicioAvaliacao = avaliacaoTutoria.FirstOrDefault().dtInicio;
                 if (grupo.InscricaoTurma.Count != avaliacaoTutoria.Count)
                 {
                     List<InscricaoTurma> alunosInscritos = grupo.InscricaoTurma.ToList();

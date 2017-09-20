@@ -25,13 +25,13 @@ namespace Pbl.Models
         public int idGrupo { get; set; }
         public Nullable<decimal> notaProfessor { get; set; }
         public Nullable<int> idControleNotas { get; set; }
-        public Nullable<System.DateTime> dtInicio { get; set; }
-        public Nullable<System.DateTime> dtFim { get; set; }
+        public System.DateTime dtInicio { get; set; }
+        public System.DateTime dtFim { get; set; }
     
         public virtual Grupo Grupo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FichaAvaliacao> FichaAvaliacao { get; set; }
         public virtual ControleNotas ControleNotas { get; set; }
         public virtual ProblemaXMed ProblemaXMed { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FichaAvaliacao> FichaAvaliacao { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace Pbl.Models
         {
             this.Aluno = new HashSet<Aluno>();
             this.Professor = new HashSet<Professor>();
+            this.FichaAvaliacao = new HashSet<FichaAvaliacao>();
         }
     
         public int idUsuario { get; set; }
@@ -31,5 +32,7 @@ namespace Pbl.Models
         public virtual ICollection<Aluno> Aluno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Professor> Professor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FichaAvaliacao> FichaAvaliacao { get; set; }
     }
 }

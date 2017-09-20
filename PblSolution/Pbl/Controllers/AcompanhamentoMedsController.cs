@@ -43,9 +43,9 @@ namespace Pbl.Controllers
                 notasProblemaViewModel.problema = item.ProblemaXMed.Problema.descProblema;
                 notasProblemaViewModel.emAberto = DateTime.Today < item.dtFim && DateTime.Today > item.dtInicio;
                 decimal notaProfessor = item.notaProfessor.HasValue ? item.notaProfessor.Value : 0;
-                decimal notaAutoAvaliacao = item.FichaAvaliacao.SingleOrDefault(c => c.idInscricaoTurma == item.ControleNotas.idInscricaoTurma).nota.HasValue ? item.FichaAvaliacao.SingleOrDefault(c => c.idInscricaoTurma == item.ControleNotas.idInscricaoTurma).nota.Value : 0;
-                decimal notaInterpares = item.FichaAvaliacao.Where(c => c.idInscricaoTurma != item.ControleNotas.idInscricaoTurma).Sum(c => c.nota).HasValue ? item.FichaAvaliacao.Where(c => c.idInscricaoTurma != item.ControleNotas.idInscricaoTurma).Sum(c => c.nota).Value / (item.FichaAvaliacao.Count - 1) : 0;
-                notasProblemaViewModel.nota = (notaProfessor + notaAutoAvaliacao + notaInterpares) / 3;
+                //decimal notaAutoAvaliacao = item.FichaAvaliacao.SingleOrDefault(c => c.idInscricaoTurma == item.ControleNotas.idInscricaoTurma).nota.HasValue ? item.FichaAvaliacao.SingleOrDefault(c => c.idInscricaoTurma == item.ControleNotas.idInscricaoTurma).nota.Value : 0;
+                //decimal notaInterpares = item.FichaAvaliacao.Where(c => c.idInscricaoTurma != item.ControleNotas.idInscricaoTurma).Sum(c => c.nota).HasValue ? item.FichaAvaliacao.Where(c => c.idInscricaoTurma != item.ControleNotas.idInscricaoTurma).Sum(c => c.nota).Value / (item.FichaAvaliacao.Count - 1) : 0;
+                //notasProblemaViewModel.nota = (notaProfessor + notaAutoAvaliacao + notaInterpares) / 3;
             }
             detalhesModuloViewModel.avaliacoesAula = new MControleNotasXAula().Bring(c => c.idControleNotas == controleNotas.idControleNotas);
             detalhesModuloViewModel.avaliacoesProva = new MControleNotasXProva().Bring(c => c.idControleNotas == controleNotas.idControleNotas);

@@ -35,12 +35,10 @@ namespace Pbl.Models
         public virtual DbSet<ControleNotasXAula> ControleNotasXAula { get; set; }
         public virtual DbSet<ControleNotasXProva> ControleNotasXProva { get; set; }
         public virtual DbSet<Disciplina> Disciplina { get; set; }
-        public virtual DbSet<FichaAvaliacao> FichaAvaliacao { get; set; }
         public virtual DbSet<Grupo> Grupo { get; set; }
         public virtual DbSet<InscricaoTurma> InscricaoTurma { get; set; }
         public virtual DbSet<Med> Med { get; set; }
         public virtual DbSet<Modulo> Modulo { get; set; }
-        public virtual DbSet<Pergunta> Pergunta { get; set; }
         public virtual DbSet<PerguntaXFicha> PerguntaXFicha { get; set; }
         public virtual DbSet<Problema> Problema { get; set; }
         public virtual DbSet<ProblemaXMed> ProblemaXMed { get; set; }
@@ -52,6 +50,8 @@ namespace Pbl.Models
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Turma> Turma { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<FichaAvaliacao> FichaAvaliacao { get; set; }
+        public virtual DbSet<Pergunta> Pergunta { get; set; }
     
         public virtual int SpCrudAluno(Nullable<int> id, string nome, string cpf, string senha, string matricula, string statementType)
         {

@@ -689,6 +689,7 @@
     <Content Include="Content\Json\jqgrid-tree.json" />
     <Content Include="Content\Json\jqgrid.json" />
     <Content Include="Content\Json\xeditable-groups.json" />
+    <None Include="Properties\PublishProfiles\MedUnirv - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Pbl20170828094125 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.2.4.js" />

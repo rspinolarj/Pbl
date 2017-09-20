@@ -41,8 +41,8 @@
           <Property Name="idGrupo" Type="int" Nullable="false" />
           <Property Name="notaProfessor" Type="decimal" Precision="5" Scale="2" />
           <Property Name="idControleNotas" Type="int" />
-          <Property Name="dtInicio" Type="date" />
-          <Property Name="dtFim" Type="date" />
+          <Property Name="dtInicio" Type="date" Nullable="false" />
+          <Property Name="dtFim" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="ControleNotas">
           <Key>
@@ -91,10 +91,9 @@
           <Key>
             <PropertyRef Name="idFichaAvaliacao" />
           </Key>
+          <Property Name="idAvaliador" Type="int" Nullable="false" />
+          <Property Name="idAvaliacaoTutoria" Type="int" Nullable="false" />
           <Property Name="idFichaAvaliacao" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idInscricaoTurma" Type="int" />
-          <Property Name="idAvaliacaoTutoria" Type="int" />
-          <Property Name="nota" Type="decimal" Precision="5" Scale="2" />
         </EntityType>
         <EntityType Name="Grupo">
           <Key>
@@ -148,7 +147,6 @@
           </Key>
           <Property Name="idPergunta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="pergunta" Type="varchar" MaxLength="300" />
-          <Property Name="valor" Type="decimal" Precision="5" Scale="2" />
         </EntityType>
         <EntityType Name="PerguntaXFicha">
           <Key>
@@ -404,7 +402,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_FichaAvaliacao_AvaliacaoTutoria">
-          <End Role="AvaliacaoTutoria" Type="Self.AvaliacaoTutoria" Multiplicity="0..1" />
+          <End Role="AvaliacaoTutoria" Type="Self.AvaliacaoTutoria" Multiplicity="1" />
           <End Role="FichaAvaliacao" Type="Self.FichaAvaliacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AvaliacaoTutoria">
@@ -436,6 +434,18 @@
             </Principal>
             <Dependent Role="AvaliacaoTutoria">
               <PropertyRef Name="idProblemaxMed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FichaAvaliacao_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="FichaAvaliacao" Type="Self.FichaAvaliacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="FichaAvaliacao">
+              <PropertyRef Name="idAvaliador" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -861,6 +871,10 @@
             <End Role="ProblemaXMed" EntitySet="ProblemaXMed" />
             <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
           </AssociationSet>
+          <AssociationSet Name="FK_FichaAvaliacao_Usuario" Association="Self.FK_FichaAvaliacao_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="FichaAvaliacao" EntitySet="FichaAvaliacao" />
+          </AssociationSet>
           <AssociationSet Name="FK_Grupo_Med" Association="Self.FK_Grupo_Med">
             <End Role="Med" EntitySet="Med" />
             <End Role="Grupo" EntitySet="Grupo" />
@@ -959,12 +973,10 @@
           <EntitySet Name="ControleNotasXAula" EntityType="pblsolutionModel.ControleNotasXAula" />
           <EntitySet Name="ControleNotasXProva" EntityType="pblsolutionModel.ControleNotasXProva" />
           <EntitySet Name="Disciplina" EntityType="pblsolutionModel.Disciplina" />
-          <EntitySet Name="FichaAvaliacao" EntityType="pblsolutionModel.FichaAvaliacao" />
           <EntitySet Name="Grupo" EntityType="pblsolutionModel.Grupo" />
           <EntitySet Name="InscricaoTurma" EntityType="pblsolutionModel.InscricaoTurma" />
           <EntitySet Name="Med" EntityType="pblsolutionModel.Med" />
           <EntitySet Name="Modulo" EntityType="pblsolutionModel.Modulo" />
-          <EntitySet Name="Pergunta" EntityType="pblsolutionModel.Pergunta" />
           <EntitySet Name="PerguntaXFicha" EntityType="pblsolutionModel.PerguntaXFicha" />
           <EntitySet Name="Problema" EntityType="pblsolutionModel.Problema" />
           <EntitySet Name="ProblemaXMed" EntityType="pblsolutionModel.ProblemaXMed" />
@@ -1004,10 +1016,6 @@
             <End Role="Grupo" EntitySet="Grupo" />
             <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
           </AssociationSet>
-          <AssociationSet Name="FK_FichaAvaliacao_AvaliacaoTutoria" Association="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria">
-            <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
-            <End Role="FichaAvaliacao" EntitySet="FichaAvaliacao" />
-          </AssociationSet>
           <AssociationSet Name="FK_FichaAvaliacao_ControleNotas" Association="pblsolutionModel.FK_FichaAvaliacao_ControleNotas">
             <End Role="ControleNotas" EntitySet="ControleNotas" />
             <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
@@ -1040,10 +1048,6 @@
             <End Role="TipoDisciplina" EntitySet="TipoDisciplina" />
             <End Role="Disciplina" EntitySet="Disciplina" />
           </AssociationSet>
-          <AssociationSet Name="FK_PerguntaXFicha_FichaAvaliacao1" Association="pblsolutionModel.FK_PerguntaXFicha_FichaAvaliacao1">
-            <End Role="FichaAvaliacao" EntitySet="FichaAvaliacao" />
-            <End Role="PerguntaXFicha" EntitySet="PerguntaXFicha" />
-          </AssociationSet>
           <AssociationSet Name="FK_Grupo_Med" Association="pblsolutionModel.FK_Grupo_Med">
             <End Role="Med" EntitySet="Med" />
             <End Role="Grupo" EntitySet="Grupo" />
@@ -1071,10 +1075,6 @@
           <AssociationSet Name="FK_Modulo_Semestre" Association="pblsolutionModel.FK_Modulo_Semestre">
             <End Role="Semestre" EntitySet="Semestre" />
             <End Role="Modulo" EntitySet="Modulo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PerguntaXFicha_Pergunta" Association="pblsolutionModel.FK_PerguntaXFicha_Pergunta">
-            <End Role="Pergunta" EntitySet="Pergunta" />
-            <End Role="PerguntaXFicha" EntitySet="PerguntaXFicha" />
           </AssociationSet>
           <AssociationSet Name="FK_ProblemaXMed_Problema" Association="pblsolutionModel.FK_ProblemaXMed_Problema">
             <End Role="Problema" EntitySet="Problema" />
@@ -1184,6 +1184,24 @@
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SpVerificaSemestreAtivo" />
+          <EntitySet Name="FichaAvaliacao" EntityType="pblsolutionModel.FichaAvaliacao" />
+          <AssociationSet Name="FK_FichaAvaliacao_AvaliacaoTutoria" Association="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria">
+            <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
+            <End Role="FichaAvaliacao" EntitySet="FichaAvaliacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FichaAvaliacao_Usuario" Association="pblsolutionModel.FK_FichaAvaliacao_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="FichaAvaliacao" EntitySet="FichaAvaliacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerguntaXFicha_FichaAvaliacao1" Association="pblsolutionModel.FK_PerguntaXFicha_FichaAvaliacao1">
+            <End Role="FichaAvaliacao" EntitySet="FichaAvaliacao" />
+            <End Role="PerguntaXFicha" EntitySet="PerguntaXFicha" />
+          </AssociationSet>
+          <EntitySet Name="Pergunta" EntityType="pblsolutionModel.Pergunta" />
+          <AssociationSet Name="FK_PerguntaXFicha_Pergunta" Association="pblsolutionModel.FK_PerguntaXFicha_Pergunta">
+            <End Role="Pergunta" EntitySet="Pergunta" />
+            <End Role="PerguntaXFicha" EntitySet="PerguntaXFicha" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1239,12 +1257,12 @@
           <Property Name="idGrupo" Type="Int32" Nullable="false" />
           <Property Name="notaProfessor" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="idControleNotas" Type="Int32" />
-          <Property Name="dtInicio" Type="DateTime" Precision="0" />
-          <Property Name="dtFim" Type="DateTime" Precision="0" />
+          <Property Name="dtInicio" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="dtFim" Type="DateTime" Precision="0" Nullable="false" />
           <NavigationProperty Name="Grupo" Relationship="pblsolutionModel.FK_AvaliacaoTutoria_Grupo" FromRole="AvaliacaoTutoria" ToRole="Grupo" />
-          <NavigationProperty Name="FichaAvaliacao" Relationship="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" FromRole="AvaliacaoTutoria" ToRole="FichaAvaliacao" />
           <NavigationProperty Name="ControleNotas" Relationship="pblsolutionModel.FK_FichaAvaliacao_ControleNotas" FromRole="AvaliacaoTutoria" ToRole="ControleNotas" />
           <NavigationProperty Name="ProblemaXMed" Relationship="pblsolutionModel.FK_FichaAvaliacao_ProblemaXMed" FromRole="AvaliacaoTutoria" ToRole="ProblemaXMed" />
+          <NavigationProperty Name="FichaAvaliacao" Relationship="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" FromRole="AvaliacaoTutoria" ToRole="FichaAvaliacao" />
         </EntityType>
         <EntityType Name="ControleNotas">
           <Key>
@@ -1292,17 +1310,6 @@
           <NavigationProperty Name="Aula" Relationship="pblsolutionModel.FK_Turma_Disciplina" FromRole="Disciplina" ToRole="Aula" />
           <NavigationProperty Name="TipoDisciplina" Relationship="pblsolutionModel.FK_Disciplina_TipoDisciplina" FromRole="Disciplina" ToRole="TipoDisciplina" />
           <NavigationProperty Name="Med" Relationship="pblsolutionModel.DisciplinaMed" FromRole="Disciplina" ToRole="Med" />
-        </EntityType>
-        <EntityType Name="FichaAvaliacao">
-          <Key>
-            <PropertyRef Name="idFichaAvaliacao" />
-          </Key>
-          <Property Name="idFichaAvaliacao" Type="Int32" Nullable="false" />
-          <Property Name="idInscricaoTurma" Type="Int32" />
-          <Property Name="idAvaliacaoTutoria" Type="Int32" />
-          <Property Name="nota" Type="Decimal" Precision="5" Scale="2" />
-          <NavigationProperty Name="AvaliacaoTutoria" Relationship="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" FromRole="FichaAvaliacao" ToRole="AvaliacaoTutoria" />
-          <NavigationProperty Name="PerguntaXFicha" Relationship="pblsolutionModel.FK_PerguntaXFicha_FichaAvaliacao1" FromRole="FichaAvaliacao" ToRole="PerguntaXFicha" />
         </EntityType>
         <EntityType Name="Grupo">
           <Key>
@@ -1356,15 +1363,6 @@
           <Property Name="idSemestre" Type="Int32" />
           <NavigationProperty Name="ControleNotas" Relationship="pblsolutionModel.FK_ControleNotas_Modulo" FromRole="Modulo" ToRole="ControleNotas" />
           <NavigationProperty Name="Semestre" Relationship="pblsolutionModel.FK_Modulo_Semestre" FromRole="Modulo" ToRole="Semestre" />
-        </EntityType>
-        <EntityType Name="Pergunta">
-          <Key>
-            <PropertyRef Name="idPergunta" />
-          </Key>
-          <Property Name="idPergunta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pergunta1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="valor" Type="Decimal" Precision="5" Scale="2" />
-          <NavigationProperty Name="PerguntaXFicha" Relationship="pblsolutionModel.FK_PerguntaXFicha_Pergunta" FromRole="Pergunta" ToRole="PerguntaXFicha" />
         </EntityType>
         <EntityType Name="PerguntaXFicha">
           <Key>
@@ -1481,6 +1479,7 @@
           <NavigationProperty Name="TipoUsuario" Relationship="pblsolutionModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Aluno" Relationship="pblsolutionModel.UsuarioAluno" FromRole="Usuario" ToRole="Aluno" />
           <NavigationProperty Name="Professor" Relationship="pblsolutionModel.UsuarioProfessor" FromRole="Usuario" ToRole="Professor" />
+          <NavigationProperty Name="FichaAvaliacao" Relationship="pblsolutionModel.FK_FichaAvaliacao_Usuario" FromRole="Usuario" ToRole="FichaAvaliacao" />
         </EntityType>
         <Association Name="FK_InscricaoMed_Aluno">
           <End Type="pblsolutionModel.Aluno" Role="Aluno" Multiplicity="0..1" />
@@ -1563,18 +1562,6 @@
             </Principal>
             <Dependent Role="AvaliacaoTutoria">
               <PropertyRef Name="idGrupo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FichaAvaliacao_AvaliacaoTutoria">
-          <End Type="pblsolutionModel.AvaliacaoTutoria" Role="AvaliacaoTutoria" Multiplicity="0..1" />
-          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AvaliacaoTutoria">
-              <PropertyRef Name="idAvaliacaoTutoria" />
-            </Principal>
-            <Dependent Role="FichaAvaliacao">
-              <PropertyRef Name="idAvaliacaoTutoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1674,18 +1661,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PerguntaXFicha_FichaAvaliacao1">
-          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="1" />
-          <End Type="pblsolutionModel.PerguntaXFicha" Role="PerguntaXFicha" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FichaAvaliacao">
-              <PropertyRef Name="idFichaAvaliacao" />
-            </Principal>
-            <Dependent Role="PerguntaXFicha">
-              <PropertyRef Name="idFichaAvaliacao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Grupo_Med">
           <End Type="pblsolutionModel.Med" Role="Med" Multiplicity="1" />
           <End Type="pblsolutionModel.Grupo" Role="Grupo" Multiplicity="*" />
@@ -1770,18 +1745,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PerguntaXFicha_Pergunta">
-          <End Type="pblsolutionModel.Pergunta" Role="Pergunta" Multiplicity="1" />
-          <End Type="pblsolutionModel.PerguntaXFicha" Role="PerguntaXFicha" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pergunta">
-              <PropertyRef Name="idPergunta" />
-            </Principal>
-            <Dependent Role="PerguntaXFicha">
-              <PropertyRef Name="idPergunta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ProblemaXMed_Problema">
           <End Type="pblsolutionModel.Problema" Role="Problema" Multiplicity="0..1" />
           <End Type="pblsolutionModel.ProblemaXMed" Role="ProblemaXMed" Multiplicity="*" />
@@ -1833,6 +1796,73 @@
         <Association Name="UsuarioProfessor">
           <End Type="pblsolutionModel.Professor" Role="Professor" Multiplicity="*" />
           <End Type="pblsolutionModel.Usuario" Role="Usuario" Multiplicity="*" />
+        </Association>
+        <EntityType Name="FichaAvaliacao">
+          <Key>
+            <PropertyRef Name="idFichaAvaliacao" />
+          </Key>
+          <Property Name="idAvaliador" Type="Int32" Nullable="false" />
+          <Property Name="idAvaliacaoTutoria" Type="Int32" Nullable="false" />
+          <Property Name="idFichaAvaliacao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AvaliacaoTutoria" Relationship="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" FromRole="FichaAvaliacao" ToRole="AvaliacaoTutoria" />
+          <NavigationProperty Name="Usuario" Relationship="pblsolutionModel.FK_FichaAvaliacao_Usuario" FromRole="FichaAvaliacao" ToRole="Usuario" />
+          <NavigationProperty Name="PerguntaXFicha" Relationship="pblsolutionModel.FK_PerguntaXFicha_FichaAvaliacao1" FromRole="FichaAvaliacao" ToRole="PerguntaXFicha" />
+        </EntityType>
+        <Association Name="FK_FichaAvaliacao_AvaliacaoTutoria">
+          <End Type="pblsolutionModel.AvaliacaoTutoria" Role="AvaliacaoTutoria" Multiplicity="1" />
+          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AvaliacaoTutoria">
+              <PropertyRef Name="idAvaliacaoTutoria" />
+            </Principal>
+            <Dependent Role="FichaAvaliacao">
+              <PropertyRef Name="idAvaliacaoTutoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FichaAvaliacao_Usuario">
+          <End Type="pblsolutionModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="FichaAvaliacao">
+              <PropertyRef Name="idAvaliador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerguntaXFicha_FichaAvaliacao1">
+          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="1" />
+          <End Type="pblsolutionModel.PerguntaXFicha" Role="PerguntaXFicha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaAvaliacao">
+              <PropertyRef Name="idFichaAvaliacao" />
+            </Principal>
+            <Dependent Role="PerguntaXFicha">
+              <PropertyRef Name="idFichaAvaliacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Pergunta">
+          <Key>
+            <PropertyRef Name="idPergunta" />
+          </Key>
+          <Property Name="idPergunta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pergunta1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PerguntaXFicha" Relationship="pblsolutionModel.FK_PerguntaXFicha_Pergunta" FromRole="Pergunta" ToRole="PerguntaXFicha" />
+        </EntityType>
+        <Association Name="FK_PerguntaXFicha_Pergunta">
+          <End Type="pblsolutionModel.Pergunta" Role="Pergunta" Multiplicity="1" />
+          <End Type="pblsolutionModel.PerguntaXFicha" Role="PerguntaXFicha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pergunta">
+              <PropertyRef Name="idPergunta" />
+            </Principal>
+            <Dependent Role="PerguntaXFicha">
+              <PropertyRef Name="idPergunta" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1920,16 +1950,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FichaAvaliacao">
-            <EntityTypeMapping TypeName="pblsolutionModel.FichaAvaliacao">
-              <MappingFragment StoreEntitySet="FichaAvaliacao">
-                <ScalarProperty Name="nota" ColumnName="nota" />
-                <ScalarProperty Name="idAvaliacaoTutoria" ColumnName="idAvaliacaoTutoria" />
-                <ScalarProperty Name="idInscricaoTurma" ColumnName="idInscricaoTurma" />
-                <ScalarProperty Name="idFichaAvaliacao" ColumnName="idFichaAvaliacao" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Grupo">
             <EntityTypeMapping TypeName="pblsolutionModel.Grupo">
               <MappingFragment StoreEntitySet="Grupo">
@@ -1969,15 +1989,6 @@
                 <ScalarProperty Name="dtInicio" ColumnName="dtInicio" />
                 <ScalarProperty Name="descModulo" ColumnName="descModulo" />
                 <ScalarProperty Name="idModulo" ColumnName="idModulo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pergunta">
-            <EntityTypeMapping TypeName="pblsolutionModel.Pergunta">
-              <MappingFragment StoreEntitySet="Pergunta">
-                <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="pergunta1" ColumnName="pergunta" />
-                <ScalarProperty Name="idPergunta" ColumnName="idPergunta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2129,6 +2140,23 @@
           <FunctionImportMapping FunctionImportName="SpCrudTipoDisciplina" FunctionName="pblsolutionModel.Store.SpCrudTipoDisciplina" />
           <FunctionImportMapping FunctionImportName="SpCrudTipoProva" FunctionName="pblsolutionModel.Store.SpCrudTipoProva" />
           <FunctionImportMapping FunctionImportName="SpVerificaSemestreAtivo" FunctionName="pblsolutionModel.Store.SpVerificaSemestreAtivo" />
+          <EntitySetMapping Name="FichaAvaliacao">
+            <EntityTypeMapping TypeName="pblsolutionModel.FichaAvaliacao">
+              <MappingFragment StoreEntitySet="FichaAvaliacao">
+                <ScalarProperty Name="idFichaAvaliacao" ColumnName="idFichaAvaliacao" />
+                <ScalarProperty Name="idAvaliacaoTutoria" ColumnName="idAvaliacaoTutoria" />
+                <ScalarProperty Name="idAvaliador" ColumnName="idAvaliador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pergunta">
+            <EntityTypeMapping TypeName="pblsolutionModel.Pergunta">
+              <MappingFragment StoreEntitySet="Pergunta">
+                <ScalarProperty Name="pergunta1" ColumnName="pergunta" />
+                <ScalarProperty Name="idPergunta" ColumnName="idPergunta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

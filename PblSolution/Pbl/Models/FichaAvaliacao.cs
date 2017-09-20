@@ -20,12 +20,12 @@ namespace Pbl.Models
             this.PerguntaXFicha = new HashSet<PerguntaXFicha>();
         }
     
+        public int idAvaliador { get; set; }
+        public int idAvaliacaoTutoria { get; set; }
         public int idFichaAvaliacao { get; set; }
-        public Nullable<int> idInscricaoTurma { get; set; }
-        public Nullable<int> idAvaliacaoTutoria { get; set; }
-        public Nullable<decimal> nota { get; set; }
     
         public virtual AvaliacaoTutoria AvaliacaoTutoria { get; set; }
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PerguntaXFicha> PerguntaXFicha { get; set; }
     }

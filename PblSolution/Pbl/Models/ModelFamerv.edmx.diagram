@@ -13,12 +13,10 @@
         <EntityTypeShape EntityType="pblsolutionModel.ControleNotasXAula" Width="1.5" PointX="10.5" PointY="8.625" />
         <EntityTypeShape EntityType="pblsolutionModel.ControleNotasXProva" Width="1.5" PointX="20.25" PointY="11" />
         <EntityTypeShape EntityType="pblsolutionModel.Disciplina" Width="1.5" PointX="3" PointY="8.375" />
-        <EntityTypeShape EntityType="pblsolutionModel.FichaAvaliacao" Width="1.5" PointX="18" PointY="7.125" />
         <EntityTypeShape EntityType="pblsolutionModel.Grupo" Width="1.5" PointX="13.5" PointY="8.25" />
         <EntityTypeShape EntityType="pblsolutionModel.InscricaoTurma" Width="1.5" PointX="15.75" PointY="10.75" />
         <EntityTypeShape EntityType="pblsolutionModel.Med" Width="1.5" PointX="8.25" PointY="8.25" />
         <EntityTypeShape EntityType="pblsolutionModel.Modulo" Width="1.5" PointX="15.75" PointY="14.25" />
-        <EntityTypeShape EntityType="pblsolutionModel.Pergunta" Width="1.5" PointX="18" PointY="4.375" />
         <EntityTypeShape EntityType="pblsolutionModel.PerguntaXFicha" Width="1.5" PointX="20.25" PointY="7.25" />
         <EntityTypeShape EntityType="pblsolutionModel.Problema" Width="1.5" PointX="8.25" PointY="4.625" />
         <EntityTypeShape EntityType="pblsolutionModel.ProblemaXMed" Width="1.5" PointX="10.5" PointY="5.5" />
@@ -37,7 +35,6 @@
         <AssociationConnector Association="pblsolutionModel.FK_Turma_Disciplina" />
         <AssociationConnector Association="pblsolutionModel.FK_Turma_Professor" />
         <AssociationConnector Association="pblsolutionModel.FK_AvaliacaoTutoria_Grupo" />
-        <AssociationConnector Association="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" />
         <AssociationConnector Association="pblsolutionModel.FK_FichaAvaliacao_ControleNotas" />
         <AssociationConnector Association="pblsolutionModel.FK_FichaAvaliacao_ProblemaXMed" />
         <AssociationConnector Association="pblsolutionModel.FK_ControleNotas_InscricaoTurma" />
@@ -46,7 +43,6 @@
         <AssociationConnector Association="pblsolutionModel.FK_ControleNotasXTurma_ControleNotas" />
         <AssociationConnector Association="pblsolutionModel.FK_ControleNotasXProva_Prova" />
         <AssociationConnector Association="pblsolutionModel.FK_Disciplina_TipoDisciplina" />
-        <AssociationConnector Association="pblsolutionModel.FK_PerguntaXFicha_FichaAvaliacao1" />
         <AssociationConnector Association="pblsolutionModel.FK_Grupo_Med" />
         <AssociationConnector Association="pblsolutionModel.FK_Grupo_Professor1" />
         <AssociationConnector Association="pblsolutionModel.FK_InscricaoTurma_Turma" />
@@ -54,7 +50,6 @@
         <AssociationConnector Association="pblsolutionModel.FK_ProblemaXMed_Med" />
         <AssociationConnector Association="pblsolutionModel.FK_Turma_Med" />
         <AssociationConnector Association="pblsolutionModel.FK_Modulo_Semestre" />
-        <AssociationConnector Association="pblsolutionModel.FK_PerguntaXFicha_Pergunta" />
         <AssociationConnector Association="pblsolutionModel.FK_ProblemaXMed_Problema" />
         <AssociationConnector Association="pblsolutionModel.FK_Prova_TipoProva" />
         <AssociationConnector Association="pblsolutionModel.FK_Usuario_TipoUsuario" />
@@ -62,6 +57,12 @@
         <AssociationConnector Association="pblsolutionModel.InscricaoTurmaXGrupo" />
         <AssociationConnector Association="pblsolutionModel.UsuarioAluno" />
         <AssociationConnector Association="pblsolutionModel.UsuarioProfessor" />
+        <EntityTypeShape EntityType="pblsolutionModel.FichaAvaliacao" Width="1.5" PointX="18" PointY="7.5" />
+        <AssociationConnector Association="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" />
+        <AssociationConnector Association="pblsolutionModel.FK_FichaAvaliacao_Usuario" />
+        <AssociationConnector Association="pblsolutionModel.FK_PerguntaXFicha_FichaAvaliacao1" />
+        <EntityTypeShape EntityType="pblsolutionModel.Pergunta" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="pblsolutionModel.FK_PerguntaXFicha_Pergunta" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
