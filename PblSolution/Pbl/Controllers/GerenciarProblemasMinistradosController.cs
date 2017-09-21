@@ -121,7 +121,7 @@ namespace Pbl.Controllers
                 mAvaliacaoTutoria.Add(avaliacaoAluno);
             }
             List<AvaliacaoTutoria> avaliacoesTutoria = mAvaliacaoTutoria.Bring(c => (c.idGrupo == grupo.idGrupo) && (c.idProblemaxMed == novaAvaliacao.idProblemaxMed));
-            return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistrados", new { avaliacoes = avaliacoesTutoria });
+            return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistrados", new { idProblemaXMed = novaAvaliacao.idProblemaxMed, idGrupo = grupo.idGrupo });
         }
 
         [Authorize(Roles = "Diretor,Professor")]
@@ -168,5 +168,21 @@ namespace Pbl.Controllers
             List<PerguntaXFicha> perguntas = mPerguntaXFicha.Bring(c => c.idFichaAvaliacao == fichaAvaliacao.idFichaAvaliacao);
             return View(perguntas);
         }
+
+        [Authorize(Roles = "Diretor,Professor")]
+        public ActionResult InserirNotas(int idFichaAvaliacao, int[] perguntas, bool[] respostas)
+        {
+            MPerguntaXFicha mPerguntaXFicha = new MPerguntaXFicha();
+            for (int i = 0; i < perguntas.Length; i++)
+            {
+                int idPergunta = perguntas[i];
+                PerguntaXFicha perguntaXFicha = mPerguntaXFicha.BringOne(c => (c.idFichaAvaliacao == idFichaAvaliacao) && (c.idPergunta == idPergunta));
+                perguntaXFicha.marcado = respostas[i];
+                mPerguntaXFicha.Update(perguntaXFicha);
+            }
+            FichaAvaliacao fichaAvaliacao = new MFichaAvaliacao().BringOne(c => c.idFichaAvaliacao == idFichaAvaliacao);
+            return RedirectToAction("SelecionarAluno", new { idProblemaXMed = fichaAvaliacao.AvaliacaoTutoria.idProblemaxMed, idGrupo = fichaAvaliacao.AvaliacaoTutoria.idGrupo });
+        }
     }
+
 }
