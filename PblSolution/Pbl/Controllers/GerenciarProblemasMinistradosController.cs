@@ -146,7 +146,7 @@ namespace Pbl.Controllers
             }
             foreach (AvaliacaoTutoria item in avaliacoes)
             {
-                if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault().PerguntaXFicha != null )
+                if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault() != null )
                 {
                     if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault().PerguntaXFicha.Where(c => c.marcado != null).Count() == 9)
                     {
