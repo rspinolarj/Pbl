@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Pbl.Models;
 using Pbl.Models.DbClasses;
+using Pbl.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -128,11 +129,33 @@ namespace Pbl.Controllers
         public ActionResult SelecionarAluno(int idProblemaXMed, int idGrupo)
         {
             List<AvaliacaoTutoria> avaliacoes = new MAvaliacaoTutoria().Bring(c => (c.idProblemaxMed == idProblemaXMed) && (c.idGrupo == idGrupo));
+            ListarAvaliacaoTutoriaViewModel viewModel = new ListarAvaliacaoTutoriaViewModel();
+            viewModel.alunosAvaliados = new List<AvaliacaoTutoria>();
+            viewModel.alunosNaoAvaliados = new List<AvaliacaoTutoria>();
+            Grupo grupo = new MGrupo().BringOne(c => c.idGrupo == idGrupo);
+            int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
+            Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
+            Professor prof = user.Professor.First();
+            if (grupo.idProfessor != prof.idProfessor)
+            {
+                return View(viewModel);
+            }
             if (avaliacoes == null)
             {
                 avaliacoes = new List<AvaliacaoTutoria>();
             }
-            return View(avaliacoes);
+            foreach (AvaliacaoTutoria item in avaliacoes)
+            {
+                if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault().PerguntaXFicha.Where(c => c.marcado != null).Count() == 9)
+                {
+                    viewModel.alunosAvaliados.Add(item);
+                }
+                else
+                {
+                    viewModel.alunosNaoAvaliados.Add(item);
+                }
+            }
+            return View(viewModel);
         }
 
         [Authorize(Roles = "Diretor,Professor")]
@@ -184,5 +207,4 @@ namespace Pbl.Controllers
             return RedirectToAction("SelecionarAluno", new { idProblemaXMed = fichaAvaliacao.AvaliacaoTutoria.idProblemaxMed, idGrupo = fichaAvaliacao.AvaliacaoTutoria.idGrupo });
         }
     }
-
 }

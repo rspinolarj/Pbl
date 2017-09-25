@@ -306,6 +306,7 @@
     <Compile Include="Models\ViewModel\InscricaoAlunoViewModel.cs" />
     <Compile Include="Models\ViewModel\NotasProblemaViewModel.cs" />
     <Compile Include="Models\ViewModel\SelecionarAlunosViewModel.cs" />
+    <Compile Include="Models\ViewModel\ListarAvaliacaoTutoriaViewModel.cs" />
     <Compile Include="Models\ViewModel\SemestreViewModel.cs" />
     <Compile Include="Models\ViewModel\VincularProblemaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
