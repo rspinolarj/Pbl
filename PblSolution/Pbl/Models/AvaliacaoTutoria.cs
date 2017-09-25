@@ -23,7 +23,6 @@ namespace Pbl.Models
         public int idAvaliacaoTutoria { get; set; }
         public Nullable<int> idProblemaxMed { get; set; }
         public int idGrupo { get; set; }
-        public Nullable<decimal> notaProfessor { get; set; }
         public Nullable<int> idControleNotas { get; set; }
         public System.DateTime dtInicio { get; set; }
         public System.DateTime dtFim { get; set; }

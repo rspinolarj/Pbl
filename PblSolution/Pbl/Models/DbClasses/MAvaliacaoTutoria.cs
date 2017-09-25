@@ -68,7 +68,6 @@ namespace Pbl.Models.DbClasses
                 AvaliacaoTutoria avaliacao = db.AvaliacaoTutoria.SingleOrDefault(c => c.idAvaliacaoTutoria == t.idAvaliacaoTutoria);
                 avaliacao.dtFim = t.dtFim;
                 avaliacao.dtInicio = t.dtInicio;
-                avaliacao.notaProfessor = t.notaProfessor;
                 db.SaveChanges();
             }
             catch (Exception Ex)

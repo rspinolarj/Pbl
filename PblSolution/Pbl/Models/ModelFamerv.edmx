@@ -39,7 +39,6 @@
           <Property Name="idAvaliacaoTutoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idProblemaxMed" Type="int" />
           <Property Name="idGrupo" Type="int" Nullable="false" />
-          <Property Name="notaProfessor" Type="decimal" Precision="5" Scale="2" />
           <Property Name="idControleNotas" Type="int" />
           <Property Name="dtInicio" Type="date" Nullable="false" />
           <Property Name="dtFim" Type="date" Nullable="false" />
@@ -1255,7 +1254,6 @@
           <Property Name="idAvaliacaoTutoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idProblemaxMed" Type="Int32" />
           <Property Name="idGrupo" Type="Int32" Nullable="false" />
-          <Property Name="notaProfessor" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="idControleNotas" Type="Int32" />
           <Property Name="dtInicio" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="dtFim" Type="DateTime" Precision="0" Nullable="false" />
@@ -1906,7 +1904,6 @@
                 <ScalarProperty Name="dtFim" ColumnName="dtFim" />
                 <ScalarProperty Name="dtInicio" ColumnName="dtInicio" />
                 <ScalarProperty Name="idControleNotas" ColumnName="idControleNotas" />
-                <ScalarProperty Name="notaProfessor" ColumnName="notaProfessor" />
                 <ScalarProperty Name="idGrupo" ColumnName="idGrupo" />
                 <ScalarProperty Name="idProblemaxMed" ColumnName="idProblemaxMed" />
                 <ScalarProperty Name="idAvaliacaoTutoria" ColumnName="idAvaliacaoTutoria" />
