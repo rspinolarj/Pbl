@@ -48,9 +48,7 @@
                 @Html.DisplayFor(modelItem => item.Grupo.descGrupo)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.idAvaliacaoTutoria }) |
-                @Html.ActionLink("Details", "Details", new { id = item.idAvaliacaoTutoria }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.idAvaliacaoTutoria })
+                @Html.ActionLink("Avaliar Aluno", "AvaliarAluno", new { idAvaliacaoTutoria = item.idAvaliacaoTutoria }) |
             </td>
         </tr>
     }
