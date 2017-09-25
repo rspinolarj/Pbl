@@ -14,6 +14,9 @@
         <th>
             Professor
         </th>
+        <th>
+            Nota
+        </th>
     </tr>
     <tr>
         @foreach (var item in Model.avaliacoesAula)
@@ -23,6 +26,9 @@
             </td>
             <td>
                 @Html.DisplayFor(model => item.Aula.Professor.nomeProfessor)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.nota)
             </td>
         }
     </tr>

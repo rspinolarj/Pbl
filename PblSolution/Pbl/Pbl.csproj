@@ -1185,6 +1185,7 @@
     <Content Include="Views\Pages\Register.cshtml" />
     <Content Include="Views\Pages\Template.cshtml" />
     <Content Include="Views\GerenciarProblemasMinistrados\AvaliarAluno.cshtml" />
+    <Content Include="Views\AcompanhamentoMeds\AvaliacoesEmAberto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

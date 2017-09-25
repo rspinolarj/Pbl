@@ -51,5 +51,18 @@ namespace Pbl.Controllers
             detalhesModuloViewModel.avaliacoesProva = new MControleNotasXProva().Bring(c => c.idControleNotas == controleNotas.idControleNotas);
             return View(detalhesModuloViewModel);
         }
+
+        [Authorize(Roles = "Aluno")]
+        public ActionResult AvaliacoesEmAberto()
+        {
+            int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
+            Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
+            Aluno aluno = user.Aluno.FirstOrDefault();
+            DateTime hoje = DateTime.Today;
+            InscricaoTurma inscricaoTurma = aluno.InscricaoTurma.FirstOrDefault(c => (c.Turma.Med.Semestre.Modulo.First().dtInicio < hoje) && (c.Turma.Med.Semestre.Modulo.Last().dtFim > hoje));
+            List<AvaliacaoTutoria> avaliacoes =  inscricaoTurma.ControleNotas.SelectMany(c => c.AvaliacaoTutoria.Where(x => (x.dtInicio < hoje) && (x.dtFim > hoje))).ToList();
+            return View(avaliacoes);
+        }
+
     }
 }
