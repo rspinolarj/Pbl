@@ -146,9 +146,16 @@ namespace Pbl.Controllers
             }
             foreach (AvaliacaoTutoria item in avaliacoes)
             {
-                if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault().PerguntaXFicha.Where(c => c.marcado != null).Count() == 9)
+                if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault().PerguntaXFicha != null )
                 {
-                    viewModel.alunosAvaliados.Add(item);
+                    if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault().PerguntaXFicha.Where(c => c.marcado != null).Count() == 9)
+                    {
+                        viewModel.alunosAvaliados.Add(item);
+                    }
+                    else
+                    {
+                        viewModel.alunosNaoAvaliados.Add(item);
+                    }
                 }
                 else
                 {
