@@ -56,10 +56,15 @@
         </div>
         <div class="row">
             <div class="col-md-12" style="text-align:center;">
-                <button type="button" id="delRow"><<</button>
-                <button type="button" id="addRow">>></button>
+                <button type="button" id="delRow" class="btn btn-labeled btn-default">
+                    <i class="fa fa-arrow-up"></i>
+                </button>
+                <button type="button" id="addRow" class="btn btn-labeled btn-default">
+                    <i class="fa fa-arrow-down"></i>
+                </button>
             </div>
         </div>
+        <br />
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -90,9 +95,22 @@
                             <div id="hiddensForm">
                                 <input type="hidden" name="idMed" value="@Model.MedAtual.idMed" />
                             </div>
-                            <button type="button" id="enviaForm">Enviar</button>
                         </div>
                     </div>
+                </div>
+                <hr class="hidden-print" />
+                <div class="clearfix">
+                    <button type="button" class="btn btn-labeled btn-default" id="btnVoltarReboque" role="tab" data-toggle="tab" data-target="#cavalo">
+                        <span class="btn-label">
+                            <i class="fa fa-arrow-left"></i>
+                        </span>Voltar
+                    </button>
+                    <button type="button" id="enviaForm" class="btn btn-labeled btn-success pull-right">
+                        Cadastrar
+                        <span class="btn-label btn-label-right">
+                            <i class="fa fa-arrow-right"></i>
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>

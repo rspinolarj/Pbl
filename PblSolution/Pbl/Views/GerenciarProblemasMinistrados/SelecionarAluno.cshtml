@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Pbl.Models.ViewModel.ListarAvaliacaoTutoriaViewModel>
+﻿@model Pbl.Models.ViewModel.ListarAvaliacaoTutoriaViewModel
 
 @{
     ViewBag.Title = "SelecionarAluno";
@@ -12,43 +12,31 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.dtInicio)
+            Nome
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.dtFim)
+            Grupo 
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ControleNotas.idControleNotas)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProblemaXMed.idProblemaxMed)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Grupo.descGrupo)
+            Módulo
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.alunosNaoAvaliados)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.dtInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dtFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ControleNotas.idControleNotas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProblemaXMed.idProblemaxMed)
+                @Html.DisplayFor(modelItem => item.ControleNotas.InscricaoTurma.Aluno.nomeAluno)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Grupo.descGrupo)
             </td>
             <td>
-                @Html.ActionLink("Avaliar Aluno", "AvaliarAluno", new { idAvaliacaoTutoria = item.idAvaliacaoTutoria }) |
+                @Html.DisplayFor(modelItem => item.ControleNotas.Modulo.descModulo)
+            </td>
+            <td>
+                @Html.ActionLink("Avaliar Aluno", "AvaliarAluno", new { idAvaliacaoTutoria = item.idAvaliacaoTutoria })
             </td>
         </tr>
     }

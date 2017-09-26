@@ -11,16 +11,16 @@
     Aluno
     <small>Formulário para Cadastro de Alunos</small>
 </h3>
-<div class="panel panel-default">
-    <div class="panel-heading">Cadastro</div>
-    <div class="panel-body">
-        <form action="" method="post" class="form-horizontal">
+<form action="" method="post" class="form-horizontal" onsubmit="return validaForm();">
+    <div class="panel panel-default">
+        <div class="panel-heading">Cadastro</div>
+        <div class="panel-body">
             @Html.AntiForgeryToken()
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Nome</label>
                     <div class="col-sm-10">
-                        <input type="text" name="nomeAluno" placeholder="Nome" class="form-control input-sm" />
+                        <input type="text" required name="nomeAluno" placeholder="Nome" class="form-control input-sm" />
                     </div>
                 </div>
             </fieldset>
@@ -28,7 +28,8 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">CPF</label>
                     <div class="col-sm-10">
-                        <input type="text" name="cpfAluno" placeholder="CPF" id="cpf" onsubmit="verificarCPF(this);" class="form-control input-sm"/>
+                        <input type="text" required name="cpfAluno" placeholder="CPF" id="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" onblur="msgErroCpf();" class="form-control input-sm" />
+                        <span id="msgCpf" class="text-danger small"></span>
                     </div>
                 </div>
             </fieldset>
@@ -36,65 +37,51 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Matrícula</label>
                     <div class="col-sm-10">
-                        <input type="text" name="matriculaAluno" placeholder="Matrícula" class="form-control input-sm" />
+                        <input type="text" required name="matriculaAluno" placeholder="Matrícula" class="form-control input-sm" />
                     </div>
                 </div>
             </fieldset>
-            <!-- Success button with label -->
-            <button type="submit" class="btn btn-labeled btn-success">
-                <span class="btn-label">
-                    <i class="fa fa-check"></i>
-                </span>Cadastrar
-            </button>
-        </form>
+
+        </div>
     </div>
-</div>
-<!-- END panel-->
+    <!-- END panel-->
+    <hr class="hidden-print" />
+    <div class="clearfix">
+        <button type="button" class="btn btn-labeled btn-default" onclick="history.back();">
+            <span class="btn-label">
+                <i class="fa fa-arrow-left"></i>
+            </span>Voltar
+        </button>
+        <button type="submit" id="btnSubmit" class="btn btn-labeled btn-success pull-right">
+            <span class="btn-label">
+                <i class="fa fa-check"></i>
+            </span>Cadastrar
+        </button>
+    </div>
+</form>
 
 @section scripts{
+@Scripts.Render("~/bundles/jqueryMask")
+@Scripts.Render("~/bundles/site")
 <script>
-    //arquivo funcoes_cpf.js
-    // validador CPF
-    function verificarCPF(c) {
-        var i;
-        s = c.value;
-        var c = s.substr(0, 9);
-        var dv = s.substr(9, 2);
-        var d1 = 0;
-        var v = false;
-
-        for (i = 0; i < 9; i++) {
-            d1 += c.charAt(i) * (10 - i);
-        }
-        if (d1 == 0) {
-            alert("CPF Inválido")
-            v = true;
+    jQuery(function ($) {
+        $("#cpf").mask("999.999.999-99");
+    });
+    function validaForm() {
+        if (!validarCPF('cpf')) {
+            document.getElementById('cpf').focus();
             return false;
-        }
-        d1 = 11 - (d1 % 11);
-        if (d1 > 9) d1 = 0;
-        if (dv.charAt(0) != d1) {
-            alert("CPF Inválido")
-            v = true;
-            return false;
-        }
-
-        d1 *= 2;
-        for (i = 0; i < 9; i++) {
-            d1 += c.charAt(i) * (11 - i);
-        }
-        d1 = 11 - (d1 % 11);
-        if (d1 > 9) d1 = 0;
-        if (dv.charAt(1) != d1) {
-            alert("CPF Inválido")
-            v = true;
-            return false;
-        }
-        if (!v) {
-            alert(c + "nCPF Válido")
         }
     }
 
+    function msgErroCpf() {
+        if (!validarCPF('cpf')) {
+            document.getElementById('msgCpf').innerText = "CPF inválido";
+            return false;
+        } else {
+            document.getElementById('msgCpf').innerText = "";
+        }
+    }
     
 </script>    
 }

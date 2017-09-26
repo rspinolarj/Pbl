@@ -279,6 +279,14 @@ namespace Pbl
               "~/Vendor/flot-spline/js/jquery.flot.spline.min.js"
             ));
 
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+              "~/Vendor/site/site.js"
+            ));
+
+            bundles.Add(new ScriptBundle("~/bundles/jqueryMask").Include(
+              "~/Vendor/jquery-mask/jquery.mask.min.js"
+            ));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryUi").Include(
               "~/Vendor/jquery-ui/jquery-ui.js"
             ));

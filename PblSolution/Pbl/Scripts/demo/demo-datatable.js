@@ -13,6 +13,7 @@
     //
 
     $('#datatable1').dataTable({
+        "scrollX": true,
         'paging':   true,  // Table pagination
         'ordering': true,  // Column ordering
         'info':     true,  // Bottom left status text
