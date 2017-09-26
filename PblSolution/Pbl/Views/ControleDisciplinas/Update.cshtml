@@ -14,88 +14,88 @@
     <div class="panel-body">
         <form action="" method="post" class="form-horizontal">
             <input name="disciplina.idDisciplina" type="hidden" value="@Model.disciplina.idDisciplina" />
-                @Html.ValidationSummary(true, "Algo não está certo");
-                <fieldset>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Disciplina</label>
-                        <div class="col-sm-10">
-                            <textarea class="form-control" name="disciplina.descDisciplina" placeholder="Disciplina">@Model.disciplina.descDisciplina</textarea>
-                        </div>
+            @Html.ValidationSummary(true, "Algo não está certo");
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Disciplina</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="disciplina.descDisciplina" placeholder="Disciplina">@Model.disciplina.descDisciplina</textarea>
                     </div>
-                </fieldset>
-                <fieldset>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Tipo Disciplina</label>
-                        <div class="col-sm-10">
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Tipo Disciplina</label>
+                    <div class="col-sm-10">
+                        @Html.DropDownListFor(c => c.disciplina.idTipoDisciplina, Model.listaTipoDisciplina, new { @class = "form-control selectpicker" })
                             @Html.DropDownListFor(c => c.disciplina.idTipoDisciplina, new SelectList(Model.listaTipoDisciplina, "idTipoDisciplina", "descTipoDisciplina"), "", new { @class = "form-control selectpicker" })
                             @Html.ValidationMessageFor(c => c.disciplina.idTipoDisciplina)
                         </div>
                     </div>
                 </fieldset>
-            <!-- Success button with label -->
+                <!-- Success button with label -->
                 <button type="submit" value="salvar" class="btn btn-labeled btn-success">
                     <span class="btn-label">
                         <i class="fa fa-check"></i>
                     </span>Alterar
                 </button>
-        </form>
-    </div>
-</div>
-<!-- END panel-->
-
-@*
-
-<div id="content-header">
-    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><img src="~/Content/img/home.png" class="home" />Home</a><a href="@Url.Action("Index","ControleDisciplinas")" title="Vá para Controle Disciplinas" class="tip-bottom"><img src="~/Content/img/client.png" class="home" />Disciplinas</a></div>
-</div>
-
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span6">
-            <div class="widget-box">
-
-                <form action="" method="post" class="form-styles">
-                    <input name="disciplina.idDisciplina" type="hidden" value="@Model.disciplina.idDisciplina" />
-                    <h1>Atualizar Aluno</h1>
-                    <ul>
-                        <li>
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Disciplina</label>
-                                <div class="col-md-4 inputGroupContainer">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                                        <textarea class="form-control" name="disciplina.descDisciplina" placeholder="Disciplina">@Model.disciplina.descDisciplina</textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="form-group formselect">
-                                <label class="col-md-4 control-label tiposelect">Tipo Disciplina</label>
-                                <div class="col-md-4 selectContainer">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                       @Html.DropDownListFor(c => c.disciplina.idTipoDisciplina, new SelectList(Model.listaTipoDisciplina, "idTipoDisciplina", "descTipoDisciplina"), "", new { @class = "form-control selectpicker" })
-                                    @Html.ValidationMessageFor(c => c.disciplina.idTipoDisciplina)
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        @Html.AntiForgeryToken()
-                        <li>
-                            <div class="form-group groupbutton">
-                                <label class="col-md-4 control-label"></label>
-                                <div class="col-md-4">
-                                    <button type="submit" value="Alterar" class="btn btn-warning">Alterar <span class="glyphicon glyphicon-send"></span></button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
-</div>
+    <!-- END panel-->
+    @*
+
+        <div id="content-header">
+            <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><img src="~/Content/img/home.png" class="home" />Home</a><a href="@Url.Action("Index","ControleDisciplinas")" title="Vá para Controle Disciplinas" class="tip-bottom"><img src="~/Content/img/client.png" class="home" />Disciplinas</a></div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="widget-box">
+
+                        <form action="" method="post" class="form-styles">
+                            <input name="disciplina.idDisciplina" type="hidden" value="@Model.disciplina.idDisciplina" />
+                            <h1>Atualizar Aluno</h1>
+                            <ul>
+                                <li>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Disciplina</label>
+                                        <div class="col-md-4 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                                <textarea class="form-control" name="disciplina.descDisciplina" placeholder="Disciplina">@Model.disciplina.descDisciplina</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="form-group formselect">
+                                        <label class="col-md-4 control-label tiposelect">Tipo Disciplina</label>
+                                        <div class="col-md-4 selectContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                               @Html.DropDownListFor(c => c.disciplina.idTipoDisciplina, new SelectList(Model.listaTipoDisciplina, "idTipoDisciplina", "descTipoDisciplina"), "", new { @class = "form-control selectpicker" })
+                                            @Html.ValidationMessageFor(c => c.disciplina.idTipoDisciplina)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                @Html.AntiForgeryToken()
+                                <li>
+                                    <div class="form-group groupbutton">
+                                        <label class="col-md-4 control-label"></label>
+                                        <div class="col-md-4">
+                                            <button type="submit" value="Alterar" class="btn btn-warning">Alterar <span class="glyphicon glyphicon-send"></span></button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
-*@  
+    *@  

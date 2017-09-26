@@ -25,7 +25,7 @@ namespace Pbl.Controllers
             //MDisciplina mDisciplina = new MDisciplina();
             MTipoDisciplina mTipoDisciplina = new MTipoDisciplina();
             DisciplinaViewModel viewModel = new DisciplinaViewModel();
-            viewModel.listaTipoDisciplina = mTipoDisciplina.BringAll();
+            viewModel.listaTipoDisciplina = new SelectList(mTipoDisciplina.BringAll(), "idTipoDisciplina", "descTipoDisciplina");
             ViewBag.Message = TempData["Message"];
             return View(viewModel);
         }
@@ -47,8 +47,9 @@ namespace Pbl.Controllers
             MDisciplina mDisciplina = new MDisciplina();
             DisciplinaViewModel viewModel = new DisciplinaViewModel();
             MTipoDisciplina mTipoDisciplina = new MTipoDisciplina();
-            viewModel.disciplina = mDisciplina.BringOne(c => c.idDisciplina == id);
-            viewModel.listaTipoDisciplina = mTipoDisciplina.BringAll();
+            Disciplina disciplina = mDisciplina.BringOne(c => c.idDisciplina == id);
+            viewModel.disciplina = disciplina;
+            viewModel.listaTipoDisciplina = new SelectList(mTipoDisciplina.BringAll(), "idTipoDisciplina", "descTipoDisciplina", disciplina.idDisciplina);
             return View(viewModel);
         }
         
