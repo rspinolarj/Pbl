@@ -12,13 +12,13 @@
         <div class="panel-heading">Update</div>
         <div class="panel-body">
 
-            <input name="disciplina.idDisciplina" type="hidden" value="@Model.idDisciplina" />
+            <input name="idDisciplina" type="hidden" value="@Model.idDisciplina" />
             @Html.ValidationSummary(true, "Algo não está certo")
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Disciplina</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="disciplina.descDisciplina" placeholder="Disciplina">@Model.descDisciplina</textarea>
+                        <textarea class="form-control" name="descDisciplina" placeholder="Disciplina">@Model.descDisciplina</textarea>
                     </div>
                 </div>
             </fieldset>
@@ -26,22 +26,33 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Tipo Disciplina</label>
                     <div class="col-sm-4">
-                        @Html.DropDownListFor(c => c.idTipoDisciplina, (SelectList)ViewBag.listaTipoDisciplina, "", new { @class = "form-control selectpicker", @name = "disciplina.idTipoDisciplina" })
+                        @Html.DropDownListFor(c => c.idTipoDisciplina, (SelectList)ViewBag.listaTipoDisciplina, "", new { @class = "form-control selectpicker"})
                     </div>
                     <div class="col-sm-6"></div>
                 </div>
             </fieldset>
             <fieldset>
                 <div class="form-group">
-                    @Html.HiddenFor(c => c.ativo)
-                    @if (Model.ativo)
-                    {
-                        <label class="col-sm-2 control-label">Disciplina Ativa</label>
-                    }
-                    else
-                    {
-                        <label class="col-sm-2 control-label">Disciplina Inativa</label>
-                    }
+                    <label class="col-sm-2 control-label">Tipo Disciplina</label>
+                    <div class="col-sm-4">
+                        @{
+                            if (Model.ativo)
+                            {
+                                <label>Ativo</label>
+                                <input type="radio" required="required" value="true" checked id="ativo" name="ativo" style="float:left" ; /><br />
+                                <label>Inativo</label>
+                                <input type="radio" value="false" id="ativo" name="ativo" style="float:left" ; />
+                            }
+                            else
+                            {
+                                <label>Ativo</label>
+                                <input type="radio" required="required" value="false" id="ativo" name="ativo" style="float:left" ; /><br />
+                                <label>Inativo</label>
+                                <input type="radio" value="true" id="ativo" checked name="ativo" style="float:left" ; />
+                            }
+                        }
+                    </div>
+                    <div class="col-sm-6"></div>
                 </div>
             </fieldset>
         </div>

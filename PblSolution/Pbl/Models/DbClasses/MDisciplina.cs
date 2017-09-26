@@ -66,6 +66,7 @@ namespace Pbl.Models.DbClasses
             {
                 Disciplina alterar = this.BringOne(c => c.idDisciplina == t.idDisciplina);
                 alterar.descDisciplina = t.descDisciplina;
+                alterar.ativo = t.ativo;
                 alterar.idTipoDisciplina = t.idTipoDisciplina;
                 db.SaveChanges();
             }
