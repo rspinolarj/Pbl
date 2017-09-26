@@ -11,7 +11,7 @@
 
 <h3>
     Vincular Problemas
-    <small> Página para vincular problemas com uma determinada MED.</small>
+    <small> Página para vincular problemas com a @Model.MedAtual.descMed - @Model.MedAtual.Semestre.descSemestre</small>
 </h3>
 
 
@@ -100,7 +100,7 @@
                 </div>
                 <hr class="hidden-print" />
                 <div class="clearfix">
-                    <button type="button" class="btn btn-labeled btn-default" id="btnVoltarReboque" role="tab" data-toggle="tab" data-target="#cavalo">
+                    <button type="button" class="btn btn-labeled btn-default" id="btnVoltar" onclick="history.back();">
                         <span class="btn-label">
                             <i class="fa fa-arrow-left"></i>
                         </span>Voltar
