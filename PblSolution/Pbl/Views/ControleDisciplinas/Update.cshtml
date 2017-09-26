@@ -1,9 +1,7 @@
-﻿@model Pbl.Models.ViewModel.DisciplinaViewModel
+﻿@model Pbl.Models.Disciplina
 @{
     ViewBag.Title = "Alterar Disciplina";
 }
-
-
 
 <h3>
     Atualização de Disciplina
@@ -14,13 +12,13 @@
         <div class="panel-heading">Update</div>
         <div class="panel-body">
 
-            <input name="disciplina.idDisciplina" type="hidden" value="@Model.disciplina.idDisciplina" />
+            <input name="disciplina.idDisciplina" type="hidden" value="@Model.idDisciplina" />
             @Html.ValidationSummary(true, "Algo não está certo")
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Disciplina</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="disciplina.descDisciplina" placeholder="Disciplina">@Model.disciplina.descDisciplina</textarea>
+                        <textarea class="form-control" name="disciplina.descDisciplina" placeholder="Disciplina">@Model.descDisciplina</textarea>
                     </div>
                 </div>
             </fieldset>
@@ -28,15 +26,28 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Tipo Disciplina</label>
                     <div class="col-sm-4">
-                        @Html.DropDownListFor(c => c.disciplina.idTipoDisciplina, new SelectList(Model.listaTipoDisciplina, "idTipoDisciplina", "descTipoDisciplina"), "", new { @class = "form-control selectpicker", @name = "idTipoDisciplina" })
+                        @Html.DropDownListFor(c => c.idTipoDisciplina, (SelectList)ViewBag.listaTipoDisciplina, "", new { @class = "form-control selectpicker", @name = "disciplina.idTipoDisciplina" })
                     </div>
                     <div class="col-sm-6"></div>
                 </div>
             </fieldset>
-
+            <fieldset>
+                <div class="form-group">
+                    @Html.HiddenFor(c => c.ativo)
+                    @if (Model.ativo)
+                    {
+                        <label class="col-sm-2 control-label">Disciplina Ativa</label>
+                    }
+                    else
+                    {
+                        <label class="col-sm-2 control-label">Disciplina Inativa</label>
+                    }
+                </div>
+            </fieldset>
         </div>
     </div>
     <!-- END panel-->
+    @Html.AntiForgeryToken()
     <hr class="hidden-print" />
     <div class="clearfix">
         <button type="button" class="btn btn-labeled btn-default" onclick="history.back();">

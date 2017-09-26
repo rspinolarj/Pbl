@@ -24,10 +24,9 @@ namespace Pbl.Controllers
         {
             //MDisciplina mDisciplina = new MDisciplina();
             MTipoDisciplina mTipoDisciplina = new MTipoDisciplina();
-            DisciplinaViewModel viewModel = new DisciplinaViewModel();
-            viewModel.listaTipoDisciplina = new SelectList(mTipoDisciplina.BringAll(), "idTipoDisciplina", "descTipoDisciplina");
+            ViewBag.listaTipoDisciplina = new SelectList(mTipoDisciplina.BringAll(), "idTipoDisciplina", "descTipoDisciplina");
             ViewBag.Message = TempData["Message"];
-            return View(viewModel);
+            return View();
         }
 
         [HttpPost]
@@ -38,19 +37,17 @@ namespace Pbl.Controllers
             Disciplina.ativo = true;
             MDisciplina mDisciplina = new MDisciplina();
             TempData["Message"] = mDisciplina.Add(Disciplina) ? "Disciplina cadastrada" : "Ação não foi realizada";
-            return RedirectToAction("Create");
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "Diretor")]
         public ActionResult Update(int id)
         {
             MDisciplina mDisciplina = new MDisciplina();
-            DisciplinaViewModel viewModel = new DisciplinaViewModel();
             MTipoDisciplina mTipoDisciplina = new MTipoDisciplina();
             Disciplina disciplina = mDisciplina.BringOne(c => c.idDisciplina == id);
-            viewModel.disciplina = disciplina;
-            viewModel.listaTipoDisciplina = new SelectList(mTipoDisciplina.BringAll(), "idTipoDisciplina", "descTipoDisciplina", disciplina.idDisciplina);
-            return View(viewModel);
+            ViewBag.listaTipoDisciplina = new SelectList(mTipoDisciplina.BringAll(), "idTipoDisciplina", "descTipoDisciplina", disciplina.idDisciplina);
+            return View(disciplina);
         }
         
         [HttpPost]
@@ -58,6 +55,7 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult Update(Disciplina Disciplina)
         {
+            
             TempData["Message"] = new MDisciplina().Update(Disciplina)? "Disciplina atualizada com sucesso" : "Ação não foi realizada";
             return RedirectToAction("Index");
         }
