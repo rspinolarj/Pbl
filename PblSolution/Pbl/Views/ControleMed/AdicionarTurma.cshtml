@@ -2,30 +2,68 @@
 @{
     ViewBag.Title = "AdicionarTurma";
 }
-<div id="content-header">
-    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><img src="~/Content/img/home.png" class="home" />Home</a><a href="@Url.Action("Index","ControleMed")" title="Vá para Controle Med" class="tip-bottom"><img src="~/Content/img/client.png" class="home" />Med</a></div>
-</div>
 
-    <h2>Adicionar Turma</h2>
 
-    @using (Html.BeginForm("AdicionarNovaTurma", "ControleMed"))
-    {
-        @Html.ValidationSummary(true, "Algo deu errado");
-        @Html.TextBoxFor(c => c.idMed, new { @class = "form-control", value = Model.idMed, type = "hidden" })
-        <div class="form-group">
-            <label for="descTurma">Descrição</label>
-            @Html.TextBoxFor(c => c.descTurma, new { @class = "form-control" })
-            @Html.ValidationMessageFor(c => c.descTurma)
+<h3>
+    Turma
+    <small>Formulário para Cadastro de uma nova Turma</small>
+</h3>
+<form action="" method="post" class="form-horizontal" onsubmit="return validaForm();">
+    <div class="panel panel-default">
+        <div class="panel-heading">Cadastro</div>
+        <div class="panel-body">
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nome da Turma</label>
+                    <div class="col-sm-10">
+                        <input type="text" required name="descTurma" placeholder="Turma A" class="form-control input-sm" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Disciplinas</label>
+                    <div class="col-sm-10">
+                        @foreach (var item in (SelectList)ViewData["disciplinasMinistradas"])
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="hidden" name="idDisciplina[]" value="@item.Value" />
+                                    <label>@item.Text com o professor </label>
+                                </div>
+                                <div class="col-md-6">
+                                    @Html.DropDownList("idProfessor[]", (SelectList)ViewData["idProfessor"], string.Empty, htmlAttributes: new { @class = "chosen-select input-md form-control" })
+                                </div>
+                                
+                            </div>
+                        }
+                    </div>
+                </div>
+            </fieldset>
         </div>
-        <div class="form-group">
-            @foreach (var item in (SelectList)ViewData["disciplinasMinistradas"])
-            {
-                <label>Disciplina</label>
-                <input type="hidden" name="idDisciplina[]" value="@item.Value"/>
-                <label>@item.Text</label>
-                @Html.DropDownList("idProfessor[]",(SelectList)ViewData["idProfessor"])
-            }
-        </div>
-        @Html.AntiForgeryToken();
-        <button type="submit" class="btn btn-primary">Salvar</button>
-    }
+    </div>
+    <!-- END panel-->
+    <hr class="hidden-print" />
+    <div class="clearfix">
+        <button type="button" class="btn btn-labeled btn-default" onclick="history.back();">
+            <span class="btn-label">
+                <i class="fa fa-arrow-left"></i>
+            </span>Voltar
+        </button>
+        <button type="submit" id="btnSubmit" class="btn btn-labeled btn-success pull-right">
+            <span class="btn-label">
+                <i class="fa fa-check"></i>
+            </span>Cadastrar
+        </button>
+    </div>
+</form>
+
+@section Styles {
+    @Styles.Render("~/bundles/chosenCss")
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/chosen")
+    @Scripts.Render("~/bundles/demoSearch")
+}

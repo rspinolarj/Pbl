@@ -4,9 +4,61 @@
     ViewBag.Title = "AdicionarGrupos";
 }
 
-<h2>AdicionarGrupos</h2>
+<h3>
+    Grupo
+    <small>Formulário para Cadastro de um novo Grupo</small>
+</h3>
+<form action="" method="post" class="form-horizontal" onsubmit="return validaForm();">
+    <div class="panel panel-default">
+        <div class="panel-heading">Cadastro</div>
+        <div class="panel-body">
+            @Html.AntiForgeryToken()
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Grupo</label>
+                    <div class="col-sm-10">
+                        <input type="text" required name="descGrupo" placeholder="Grupo 1" class="form-control input-sm" />
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Tutor</label>
+                    <div class="col-sm-10">
+                        @Html.DropDownList("idProfessor", null,string.Empty, htmlAttributes: new { @class = "chosen-select input-md form-control", @name = "idProfessor", @id = "idProfessor" })
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <!-- END panel-->
+    <hr class="hidden-print" />
+    <div class="clearfix">
+        <button type="button" class="btn btn-labeled btn-default" onclick="history.back();">
+            <span class="btn-label">
+                <i class="fa fa-arrow-left"></i>
+            </span>Voltar
+        </button>
+        <button type="submit" id="btnSubmit" class="btn btn-labeled btn-success pull-right">
+            <span class="btn-label">
+                <i class="fa fa-check"></i>
+            </span>Cadastrar
+        </button>
+    </div>
+</form>
 
-@using (Html.BeginForm("AdicionarGrupoAction","ControleMed")) 
+@section Styles {
+    @Styles.Render("~/bundles/chosenCss")
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/chosen")
+    @Scripts.Render("~/bundles/demoSearch")
+}
+
+
+
+@*using (Html.BeginForm("AdicionarGrupoAction","ControleMed")) 
 {
     @Html.AntiForgeryToken()
     
@@ -41,3 +93,4 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+*@

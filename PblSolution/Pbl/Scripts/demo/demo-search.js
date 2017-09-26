@@ -9,13 +9,13 @@
     // BOOTSTRAP SLIDER CTRL
     // ----------------------------------- 
 
-    $('[data-ui-slider]').slider();
+    //$('[data-ui-slider]').slider();
 
     // CHOSEN
     // ----------------------------------- 
 
     $('.chosen-select').chosen();
-
+/*
     // DATETIMEPICKER
     // ----------------------------------- 
 
@@ -31,7 +31,7 @@
           clear: 'fa fa-trash'
         }
     });
-
+*/
   });
-
+ 
 })(window, document, window.jQuery);
