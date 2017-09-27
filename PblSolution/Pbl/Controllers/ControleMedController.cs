@@ -4,10 +4,7 @@ using Pbl.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
-using System.Web.UI;
 
 namespace Pbl.Controllers
 {
@@ -51,13 +48,17 @@ namespace Pbl.Controllers
             int idMed = Convert.ToInt32(Request.Form["idMed"]);
             var disciplinas = Request.Form["disciplina[]"].Split(',');
             MDisciplina mdisciplina = new MDisciplina();
-            List<Disciplina> listDisciplinas = new List<Disciplina>();
+            List<Disciplina> listDisciplinasVincular = new List<Disciplina>();
             foreach (var disciplina in disciplinas)
             {
                 int idDisciplina = Convert.ToInt32(disciplina);
-                listDisciplinas.Add(mdisciplina.BringOne(c => c.idDisciplina == idDisciplina));
+                listDisciplinasVincular.Add(mdisciplina.BringOne(c => c.idDisciplina == idDisciplina));
             }
-            new MMed().AdicionarDisciplinas(idMed, listDisciplinas);
+            MMed mMed = new MMed();
+            Med med = mMed.BringOne(c => c.idMed == idMed);
+            List<Disciplina> listDisciplinasVinculadas = med.Disciplina.ToList();
+            //List<Disciplina> 
+            //new MMed().AdicionarDisciplinas(idMed, listDisciplinasVincular);
             return RedirectToAction("GerenciarMed", new { id = idMed });
         }
         #endregion
