@@ -14,278 +14,153 @@
     Cadastro de Semestres
     <small> Formulario para Cadastro dos Semestres</small>
 </h3>
-<div class="panel panel-default">
-    <div class="panel-heading">Cadastro</div>
-    <div class="panel-body">
-        <form action="" method="post" class="form-horizontal">
-        @using (Html.BeginForm("Create", "ControleSemestres"))
-        {
+@using (Html.BeginForm("Create", "ControleSemestres"))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">Cadastro</div>
+        <div class="panel-body">
+
             @Html.AntiForgeryToken()
             <fieldset>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Data Inicio Modulo 1</label>
+                <div class="row">
+                    <label class="col-sm-2">Módulo 1</label>
                     <div class="col-sm-10">
-                        @Html.TextBoxFor(c => c.DataInicioModulo1, new { @class = "form-control", @type = "date" })
-                        @Html.ValidationMessageFor(c => c.DataInicioModulo1)
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(c => c.DataInicioModulo1, new { @class = "form-control input-sm widDate toRight", @type = "date", @id = "inicioModulo1" })
+                            @Html.ValidationMessageFor(c => c.DataInicioModulo1)
+                        </div>
+                        <div class="col-sm-1 textMiddle" style="display:none" id="divLabelModulo1"><label>até</label></div>
+                        <div class="col-sm-4" style="display:none" id="divDtFimModulo1">
+                            @Html.TextBoxFor(c => c.DataFinalModulo1, new { @class = "form-control input-sm widDate", @type = "date", @id = "fimModulo1", @onfocus = "validateDataFimModulo1(this);" })
+                            @Html.ValidationMessageFor(c => c.DataFinalModulo1)
+                        </div>
+                        <div class="col-sm-3"></div>
                     </div>
                 </div>
             </fieldset>
-            <fieldset>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Data Final Modulo 1</label>
+            <fieldset id="fieldsetModulo2" style="display:none;">
+                <div class="row">
+                    <label class="col-sm-2">Módulo 2</label>
                     <div class="col-sm-10">
-                        @Html.TextBoxFor(c => c.DataFinalModulo1, new { @class = "form-control", @type = "date" })
-                        @Html.ValidationMessageFor(c => c.DataFinalModulo1)
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(c => c.DataInicioModulo2, new { @class = "form-control input-sm widDate toRight", @type = "date", @onfocus = "validateDataInicioModulo1(this);", @id = "inicioModulo2" })
+                            @Html.ValidationMessageFor(c => c.DataInicioModulo2)
+                        </div>
+                        <div class="col-sm-1 textMiddle" style="display:none" id="divLabelModulo2"><label>até</label></div>
+                        <div class="col-sm-4" style="display:none" id="divDtFimModulo2">
+                            @Html.TextBoxFor(c => c.DataFinalModulo2, new { @class = "form-control input-sm widDate", @type = "date", @id = "fimModulo2" })
+                            @Html.ValidationMessageFor(c => c.DataFinalModulo2)
+                        </div>
+                        <div class="col-sm-3"></div>
                     </div>
                 </div>
             </fieldset>
-
-            <fieldset>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Data Inicio Modulo 2</label>
+            <fieldset id="fieldsetModulo3" style="display:none;">
+                <div class="row">
+                    <label class="col-sm-2">Módulo 3</label>
                     <div class="col-sm-10">
-                        @Html.TextBoxFor(c => c.DataInicioModulo2, new { @class = "form-control", @type = "date" })
-                        @Html.ValidationMessageFor(c => c.DataInicioModulo2)
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Data Final Modulo 2</label>
-                    <div class="col-sm-10">
-                        @Html.TextBoxFor(c => c.DataFinalModulo2, new { @class = "form-control", @type = "date" })
-                        @Html.ValidationMessageFor(c => c.DataFinalModulo2)
-                    </div>
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Data Inicio Modulo 3</label>
-                    <div class="col-sm-10">
-                        @Html.TextBoxFor(c => c.DataInicioModulo3, new { @class = "form-control", @type = "date" })
-                        @Html.ValidationMessageFor(c => c.DataInicioModulo3)
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Data Final Modulo 3</label>
-                    <div class="col-sm-10">
-                        @Html.TextBoxFor(c => c.DataFinalModulo3, new { @class = "form-control", @type = "date" })
-                        @Html.ValidationMessageFor(c => c.DataFinalModulo3)
+                        <div class="col-sm-4">
+                            @Html.TextBoxFor(c => c.DataInicioModulo3, new { @class = "form-control input-sm widDate toRight", @type = "date", @onfocus = "validateDataInicioModulo1(this);", @id = "inicioModulo3" })
+                            @Html.ValidationMessageFor(c => c.DataInicioModulo3)
+                        </div>
+                        <div class="col-sm-1 textMiddle" style="display:none" id="divLabelModulo3"><label>até</label></div>
+                        <div class="col-sm-4" style="display:none" id="divDtFimModulo3">
+                            @Html.TextBoxFor(c => c.DataFinalModulo3, new { @class = "form-control input-sm widDate", @type = "date", @id = "fimModulo3" })
+                            @Html.ValidationMessageFor(c => c.DataFinalModulo3)
+                        </div>
+                        <div class="col-sm-3"></div>
                     </div>
                 </div>
             </fieldset>
 
-            <fieldset>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Descrição</label>
-                    <div class="col-sm-10">
-                        @Html.TextBoxFor(c => c.Descricao, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(c => c.Descricao)
-                    </div>
-                </div>
-            </fieldset>
-
-            <!-- Success button with label -->
-            <button type="submit" class="btn btn-labeled btn-success">
-                <span class="btn-label">
-                    <i class="fa fa-check"></i>
-                </span>Cadastrar
-            </button>
-        }
-        </form>
-    </div>
-</div>
-
-<!-- END panel-->
-
-@*
-
-
-<div id="content-header">
-    <div id="breadcrumb"> <a href="@Url.Action("Index","Home")" title="Vá para Home" class="tip-bottom"><img src="~/Content/img/home.png" class="home" />Home</a><a href="@Url.Action("Index","ControleSemestres")" title="Vá para Controle Semestres" class="tip-bottom"><img src="~/Content/img/client.png" class="home" />Semestres</a></div>
-</div>
-
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span6">
-            <div class="widget-box">
-                <form action="" method="post" class="form-styles">
-                    <h1>Cadastro de Semestre</h1>
-                   @using (Html.BeginForm("Create", "ControleSemestres"))
-                   {
-                        <ul>
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="DataInicioModulo1">Data inicio modulo 1</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="	glyphicon glyphicon-calendar"></i></span>
-                                            @Html.TextBoxFor(c => c.DataInicioModulo1, new { @class = "form-control", @type = "date" })
-                                            @Html.ValidationMessageFor(c => c.DataInicioModulo1)
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="DataFinalModulo1">Data Final modulo 1</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="	glyphicon glyphicon-calendar"></i></span>
-                                            @Html.TextBoxFor(c => c.DataFinalModulo1, new { @class = "form-control", @type = "date" })
-                                            @Html.ValidationMessageFor(c => c.DataFinalModulo1)
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="dataInicioModulo2">Data inicio modulo 2</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="	glyphicon glyphicon-calendar"></i></span>
-                                            @Html.TextBoxFor(c => c.DataFinalModulo2, new { @class = "form-control", @type = "date" })
-                                            @Html.ValidationMessageFor(c => c.DataFinalModulo2)
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="DataFinalModulo2">Data Final modulo 2</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="	glyphicon glyphicon-calendar"></i></span>
-                                            @Html.TextBoxFor(c => c.DataFinalModulo2, new { @class = "form-control", @type = "date" })
-                                            @Html.ValidationMessageFor(c => c.DataFinalModulo2)
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="dataInicioModulo3">Data inicio modulo 3</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="	glyphicon glyphicon-calendar"></i></span>
-                                            @Html.TextBoxFor(c => c.DataFinalModulo3, new { @class = "form-control", @type = "date" })
-                                            @Html.ValidationMessageFor(c => c.DataFinalModulo3)
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label" for="DataFinalModulo3">Data Final modulo 3</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="	glyphicon glyphicon-calendar"></i></span>
-                                            @Html.TextBoxFor(c => c.DataFinalModulo3, new { @class = "form-control", @type = "date" })
-                                            @Html.ValidationMessageFor(c => c.DataFinalModulo3)
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Descrição</label>
-                                    <div class="col-md-4 inputGroupContainer">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                                            @Html.TextBoxFor(c => c.Descricao, new { @class = "form-control" })
-                                            @Html.ValidationMessageFor(c => c.Descricao)
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            @Html.AntiForgeryToken()
-                            <li>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label"></label>
-                                    <div class="col-md-4">
-                                        <button type="submit" value="Salvar" class="btn btn-warning">Cadastrar <span class="glyphicon glyphicon-send"></span></button>
-                                    </div>
-                                </div>
-
-                            </li>
-                        </ul>
-                        @*
-                            <ul>
-                                <li>
-                                    <input name="nomeProfessor" type="text" placeholder="Nome Professor" />
-                                    <span>Informe o Nome</span>
-                                </li>
-                                <li>
-                                    <input name="cpfProfessor" type="text" placeholder="CPF" />
-                                    <span>Informe o CPF</span>
-                                </li>
-                                <li>
-                                    <input name="senhaProfessor" type="password" placeholder="Senha" />
-                                    <span>Informe a senha</span>
-                                </li>
-                                @Html.AntiForgeryToken()
-                                <li>
-                                    <input type="submit" value="Salvar" />
-                                </li>
-                            </ul>
-                        
-                    }
-                </form>
-
-            </div>
         </div>
     </div>
-</div>
+    <hr class="hidden-print" />
+    <div class="clearfix">
+        <button type="button" class="btn btn-labeled btn-default" onclick="history.back();">
+            <span class="btn-label">
+                <i class="fa fa-arrow-left"></i>
+            </span>Voltar
+        </button>
+        <button type="submit" id="btnSubmit" class="btn btn-labeled btn-success pull-right">
+            <span class="btn-label">
+                <i class="fa fa-check"></i>
+            </span>Cadastrar
+        </button>
+    </div>
+}
 
-@*
-    <h2>Cadastro de Semestre</h2>
+<!-- END panel-->
+@section Styles {
+    @Styles.Render("~/bundles/siteCss")
+}
+@section Scripts {
+    <script>
+        var todayDate = new Date().toISOString().slice(0, 10);
+        var inicioModulo1 = "";
+        var inicioModulo2 = "";
+        var inicioModulo3 = "";
+        var fimModulo1 = "";
+        var fimModulo2 = "";
+        var fimModulo3 = "";
 
-
-        @using (Html.BeginForm("Create", "ControleSemestres"))
-        {
-            @Html.ValidationSummary(true, "Algo não está certo")
-            <div class="form-group">
-                <label for="DataInicioModulo1">Data Inicial Modulo 1</label>
-                @Html.TextBoxFor(c => c.DataInicioModulo1, new { @class = "form-control", @type = "date" })
-                @Html.ValidationMessageFor(c => c.DataInicioModulo1)
-            </div>
-                            <div class="form-group">
-                                <label for="DataFinalModulo1">Data Final Modulo 1</label>
-                                @Html.TextBoxFor(c => c.DataFinalModulo1, new { @class = "form-control", @type = "date" })
-                                @Html.ValidationMessageFor(c => c.DataFinalModulo1)
-                            </div>
-                            <div class="form-group">
-                                <label for="dataInicioModulo2">Data Inicial Modulo 2</label>
-                                @Html.TextBoxFor(c => c.DataInicioModulo2, new { @class = "form-control", @type = "date" })
-                                @Html.ValidationMessageFor(c => c.DataInicioModulo2)
-                            </div>
-                                <div class="form-group">
-                                    <label for="DataFinalModulo2">Data Final Modulo 2</label>
-                                    @Html.TextBoxFor(c => c.DataFinalModulo2, new { @class = "form-control", @type = "date" })
-                                    @Html.ValidationMessageFor(c => c.DataFinalModulo2)
-                                </div>
-                                <div class="form-group">
-                                    <label for="DataInicioModulo3">Data Inicial Modulo 3</label>
-                                    @Html.TextBoxFor(c => c.DataInicioModulo3, new { @class = "form-control", @type = "date" })
-                                    @Html.ValidationMessageFor(c => c.DataInicioModulo3)
-                                </div>
-                                <div class="form-group">
-                                    <label for="DataFinalModulo3">Data Final Modulo 3</label>
-                                    @Html.TextBoxFor(c => c.DataFinalModulo3, new { @class = "form-control", @type = "date" })
-                                    @Html.ValidationMessageFor(c => c.DataFinalModulo3)
-                                </div>
-                                <div class="form-group">
-                                    <label for="Descricao">Descrição</label>
-                                    @Html.TextBoxFor(c => c.Descricao, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(c => c.Descricao)
-                                </div>
-                                @Html.AntiForgeryToken()
-                                <button type="submit" class="btn btn-primary">Salvar</button>
+        function validateDataInicioModulo1(dataInicio) {
+            var todayDate = new Date().toISOString().slice(0, 10);
+            $(dataInicio).attr("min", todayDate);
+            $(dataInicio).attr("max", "2099-12-31");
         }
-*@
+        $('#inicioModulo1').change(function () {
+            document.getElementById('divDtFimModulo1').style.display = "block";
+            document.getElementById('divLabelModulo1').style.display = "block";
+            inicioModulo1 = $('#inicioModulo1').val();
+        });
+        $('#fimModulo1').change(function () {
+            document.getElementById('fieldsetModulo2').style.display = "block";
+            fimModulo1 = $('#fimModulo1').val();
+        });
+        $('#inicioModulo2').change(function () {
+            document.getElementById('divDtFimModulo2').style.display = "block";
+            document.getElementById('divLabelModulo2').style.display = "block";
+            inicioModulo2 = $('#inicioModulo2').val();
+        });
+        $('#fimModulo2').change(function () {
+            document.getElementById('fieldsetModulo3').style.display = "block";
+            fimModulo2 = $('#fimModulo2').val();
+        });
+        $('#inicioModulo3').change(function () {
+            document.getElementById('divDtFimModulo3').style.display = "block";
+            document.getElementById('divLabelModulo3').style.display = "block";
+            inicioModulo3 = $('#inicioModulo3').val();
+        });
+        function validateDate(objValidacao, dataInicio) {
+            var todayDate = new Date().toISOString().slice(0, 10);
+            $(objValidacao).attr("min", dataInicio);
+            $(objValidacao).attr("max", "2099-12-31");
+        }
+
+        $("#inicioModulo1").focus(function () {
+            validateDate(this, todayDate);
+        });
+
+        $("#fimModulo1").focus(function () {
+            validateDate(this, inicioModulo1);
+        });
+
+        $("#inicioModulo2").focus(function () {
+            validateDate(this, fimModulo1);
+        });
+
+        $("#fimModulo2").focus(function () {
+            validateDate(this, inicioModulo2);
+        });
+
+        $("#inicioModulo3").focus(function () {
+            validateDate(this, fimModulo2);
+        });
+
+        $("#fimModulo3").focus(function () {
+            validateDate(this, inicioModulo3);
+        });
+
+    </script>
+}
