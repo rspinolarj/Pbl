@@ -61,7 +61,12 @@ namespace Pbl.Controllers
             foreach (var disciplina in idsDisciplinasRemover)
             {
                 int idDisciplina = Convert.ToInt32(disciplina);
-                listDisciplinasRemover.Add(mdisciplina.BringOne(c => c.idDisciplina == idDisciplina));
+                Disciplina disciplinaRemover = mdisciplina.BringOne(c => c.idDisciplina == idDisciplina);
+                if (disciplinaRemover.Aula.Where(c => c.Turma.idMed == idMed).Count() > 0)
+                {
+                    continue;
+                }
+                listDisciplinasRemover.Add(disciplinaRemover);
             }
             listDisciplinasVincular = listDisciplinasVincular.Where(c => !med.Disciplina.ToList().Exists(x => x.idDisciplina == c.idDisciplina)).ToList();
             List<Disciplina> listDisciplinasVinculadas = med.Disciplina.ToList();
