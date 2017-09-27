@@ -40,6 +40,13 @@ namespace Pbl.Controllers
         public ActionResult Update(int id)
         {
             SemestreViewModel novo = new SemestreViewModel();
+            Semestre semestre = new MSemestre().BringOne(c => c.idSemestre == id);
+            novo.DataInicioModulo1 = semestre.Modulo.OrderBy(c => c.dtInicio).ElementAt(0).dtInicio.Value;
+            novo.DataInicioModulo2 = semestre.Modulo.OrderBy(c => c.dtInicio).ElementAt(1).dtInicio.Value;
+            novo.DataInicioModulo3 = semestre.Modulo.OrderBy(c => c.dtInicio).ElementAt(2).dtInicio.Value;
+            novo.DataFinalModulo1 = semestre.Modulo.OrderBy(c => c.dtInicio).ElementAt(0).dtFim.Value;
+            novo.DataFinalModulo2 = semestre.Modulo.OrderBy(c => c.dtInicio).ElementAt(1).dtFim.Value;
+            novo.DataFinalModulo3 = semestre.Modulo.OrderBy(c => c.dtInicio).ElementAt(2).dtFim.Value;
             novo.idSemestre = id;
             return View(novo);
         }
