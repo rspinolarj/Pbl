@@ -56,9 +56,22 @@ namespace Pbl.Controllers
             }
             MMed mMed = new MMed();
             Med med = mMed.BringOne(c => c.idMed == idMed);
+            int[] idsDisciplinasRemover = med.Disciplina.Where(c => !listDisciplinasVincular.Exists(x => x.idDisciplina == c.idDisciplina)).Select(c => c.idDisciplina).ToArray();
+            List<Disciplina> listDisciplinasRemover = new List<Disciplina>();
+            foreach (var disciplina in idsDisciplinasRemover)
+            {
+                int idDisciplina = Convert.ToInt32(disciplina);
+                Disciplina disciplinaRemover = mdisciplina.BringOne(c => c.idDisciplina == idDisciplina);
+                if (disciplinaRemover.Aula.Where(c => c.Turma.idMed == idMed).Count() > 0)
+                {
+                    continue;
+                }
+                listDisciplinasRemover.Add(disciplinaRemover);
+            }
+            listDisciplinasVincular = listDisciplinasVincular.Where(c => !med.Disciplina.ToList().Exists(x => x.idDisciplina == c.idDisciplina)).ToList();
             List<Disciplina> listDisciplinasVinculadas = med.Disciplina.ToList();
-            //List<Disciplina> 
-            //new MMed().AdicionarDisciplinas(idMed, listDisciplinasVincular);
+            mMed.DesvincularDisciplinas(med.idMed, listDisciplinasRemover);
+            mMed.AdicionarDisciplinas(med.idMed, listDisciplinasVincular);
             return RedirectToAction("GerenciarMed", new { id = idMed });
         }
         #endregion
