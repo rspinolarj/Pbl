@@ -279,6 +279,10 @@ namespace Pbl
               "~/Vendor/flot-spline/js/jquery.flot.spline.min.js"
             ));
 
+            bundles.Add(new StyleBundle("~/bundles/siteCss").Include(
+              "~/Vendor/site/site.css"
+            ));
+
             bundles.Add(new ScriptBundle("~/bundles/site").Include(
               "~/Vendor/site/site.js"
             ));
