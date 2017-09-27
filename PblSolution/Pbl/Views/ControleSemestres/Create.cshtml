@@ -26,12 +26,12 @@
                     <label class="col-sm-2">Módulo 1</label>
                     <div class="col-sm-10">
                         <div class="col-sm-4">
-                            @Html.TextBoxFor(c => c.DataInicioModulo1, new { @class = "form-control input-sm widDate toRight", @type = "date", @id = "inicioModulo1" })
+                            @Html.TextBoxFor(c => c.DataInicioModulo1, new { @class = "form-control input-sm widDate toRight", @type = "date", @id = "inicioModulo1", @required = "required" })
                             @Html.ValidationMessageFor(c => c.DataInicioModulo1)
                         </div>
                         <div class="col-sm-1 textMiddle" style="display:none" id="divLabelModulo1"><label>até</label></div>
                         <div class="col-sm-4" style="display:none" id="divDtFimModulo1">
-                            @Html.TextBoxFor(c => c.DataFinalModulo1, new { @class = "form-control input-sm widDate", @type = "date", @id = "fimModulo1", @onfocus = "validateDataFimModulo1(this);" })
+                            @Html.TextBoxFor(c => c.DataFinalModulo1, new { @class = "form-control input-sm widDate", @type = "date", @id = "fimModulo1", @required = "required" })
                             @Html.ValidationMessageFor(c => c.DataFinalModulo1)
                         </div>
                         <div class="col-sm-3"></div>
@@ -43,12 +43,12 @@
                     <label class="col-sm-2">Módulo 2</label>
                     <div class="col-sm-10">
                         <div class="col-sm-4">
-                            @Html.TextBoxFor(c => c.DataInicioModulo2, new { @class = "form-control input-sm widDate toRight", @type = "date", @onfocus = "validateDataInicioModulo1(this);", @id = "inicioModulo2" })
+                            @Html.TextBoxFor(c => c.DataInicioModulo2, new { @class = "form-control input-sm widDate toRight", @type = "date", @id = "inicioModulo2", @required = "required" })
                             @Html.ValidationMessageFor(c => c.DataInicioModulo2)
                         </div>
                         <div class="col-sm-1 textMiddle" style="display:none" id="divLabelModulo2"><label>até</label></div>
                         <div class="col-sm-4" style="display:none" id="divDtFimModulo2">
-                            @Html.TextBoxFor(c => c.DataFinalModulo2, new { @class = "form-control input-sm widDate", @type = "date", @id = "fimModulo2" })
+                            @Html.TextBoxFor(c => c.DataFinalModulo2, new { @class = "form-control input-sm widDate", @type = "date", @id = "fimModulo2", @required = "required" })
                             @Html.ValidationMessageFor(c => c.DataFinalModulo2)
                         </div>
                         <div class="col-sm-3"></div>
@@ -60,12 +60,12 @@
                     <label class="col-sm-2">Módulo 3</label>
                     <div class="col-sm-10">
                         <div class="col-sm-4">
-                            @Html.TextBoxFor(c => c.DataInicioModulo3, new { @class = "form-control input-sm widDate toRight", @type = "date", @onfocus = "validateDataInicioModulo1(this);", @id = "inicioModulo3" })
+                            @Html.TextBoxFor(c => c.DataInicioModulo3, new { @class = "form-control input-sm widDate toRight", @type = "date", @id = "inicioModulo3", @required = "required" })
                             @Html.ValidationMessageFor(c => c.DataInicioModulo3)
                         </div>
                         <div class="col-sm-1 textMiddle" style="display:none" id="divLabelModulo3"><label>até</label></div>
                         <div class="col-sm-4" style="display:none" id="divDtFimModulo3">
-                            @Html.TextBoxFor(c => c.DataFinalModulo3, new { @class = "form-control input-sm widDate", @type = "date", @id = "fimModulo3" })
+                            @Html.TextBoxFor(c => c.DataFinalModulo3, new { @class = "form-control input-sm widDate", @type = "date", @id = "fimModulo3", @required = "required" })
                             @Html.ValidationMessageFor(c => c.DataFinalModulo3)
                         </div>
                         <div class="col-sm-3"></div>
@@ -104,11 +104,6 @@
         var fimModulo2 = "";
         var fimModulo3 = "";
 
-        function validateDataInicioModulo1(dataInicio) {
-            var todayDate = new Date().toISOString().slice(0, 10);
-            $(dataInicio).attr("min", todayDate);
-            $(dataInicio).attr("max", "2099-12-31");
-        }
         $('#inicioModulo1').change(function () {
             document.getElementById('divDtFimModulo1').style.display = "block";
             document.getElementById('divLabelModulo1').style.display = "block";
