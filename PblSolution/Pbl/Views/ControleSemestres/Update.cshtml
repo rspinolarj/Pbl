@@ -11,12 +11,13 @@
 
 <h3>
     Alteração de Semestre
-    <small> Formulário para Alteração dos Semestres</small>
+    <small> Formulário para Alteração do Semestre @Model.Descricao</small>
 </h3>
 @using (Html.BeginForm("Update", "ControleSemestres"))
 {
+    @Html.AntiForgeryToken()
     <div class="panel panel-default">
-        <div class="panel-heading">Alterar Semestre</div>
+        <div class="panel-heading">Alterar Semestre @Model.Descricao</div>
         <div class="panel-body">
 
             @Html.ValidationSummary(true, "Algo não está certo")
@@ -24,56 +25,62 @@
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Data Inicio Modulo 1</label>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" name="DataInicioModulo1" id="inicioModulo1" value="@Model.DataInicioModulo1.ToString("yyyy-MM-dd")" />
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control input-sm" name="DataInicioModulo1" id="inicioModulo1" value="@Model.DataInicioModulo1.ToString("yyyy-MM-dd")" />
                     </div>
+                    <div class="col-sm-7"></div>
                 </div>
             </fieldset>
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Data Final Modulo 1</label>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" name="DataFinalModulo1" id="fimModulo1" value="@Model.DataFinalModulo1.ToString("yyyy-MM-dd")" />
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control input-sm" name="DataFinalModulo1" id="fimModulo1" value="@Model.DataFinalModulo1.ToString("yyyy-MM-dd")" />
                         @Html.ValidationMessageFor(c => c.DataFinalModulo1)
                     </div>
+                    <div class="col-sm-7"></div>
                 </div>
             </fieldset>
 
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Data Inicio Modulo 2</label>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" name="DataInicioModulo2" id="inicioModulo2" value="@Model.DataInicioModulo2.ToString("yyyy-MM-dd")" />
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control input-sm" name="DataInicioModulo2" id="inicioModulo2" value="@Model.DataInicioModulo2.ToString("yyyy-MM-dd")" />
                         @Html.ValidationMessageFor(c => c.DataInicioModulo2)
                     </div>
+                    <div class="col-sm-7"></div>
                 </div>
             </fieldset>
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Data Final Modulo 2</label>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" name="DataFinalModulo2" id="fimModulo2" value="@Model.DataFinalModulo2.ToString("yyyy-MM-dd")" />
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control input-sm" name="DataFinalModulo2" id="fimModulo2" value="@Model.DataFinalModulo2.ToString("yyyy-MM-dd")" />
                         @Html.ValidationMessageFor(c => c.DataFinalModulo2)
                     </div>
+                    <div class="col-sm-7"></div>
                 </div>
             </fieldset>
 
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Data Inicio Modulo 3</label>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" name="DataInicioModulo3" id="inicioModulo3" value="@Model.DataInicioModulo3.ToString("yyyy-MM-dd")" />
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control input-sm" name="DataInicioModulo3" id="inicioModulo3" value="@Model.DataInicioModulo3.ToString("yyyy-MM-dd")" />
                         @Html.ValidationMessageFor(c => c.DataInicioModulo3)
                     </div>
+                    <div class="col-sm-7"></div>
                 </div>
             </fieldset>
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Data Final Modulo 3</label>
-                    <div class="col-sm-10">
-                        <input type="date" class="form-control" name="DataFinalModulo3" id="fimModulo3" value="@Model.DataFinalModulo3.ToString("yyyy-MM-dd")" />
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control input-sm" name="DataFinalModulo3" id="fimModulo3" value="@Model.DataFinalModulo3.ToString("yyyy-MM-dd")" />
                         @Html.ValidationMessageFor(c => c.DataFinalModulo3)
                     </div>
+                    <div class="col-sm-7"></div>
                 </div>
             </fieldset>
         </div>

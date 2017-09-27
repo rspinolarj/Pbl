@@ -48,6 +48,7 @@ namespace Pbl.Controllers
             novo.DataFinalModulo2 = semestre.Modulo.OrderBy(c => c.dtInicio).ElementAt(1).dtFim.Value;
             novo.DataFinalModulo3 = semestre.Modulo.OrderBy(c => c.dtInicio).ElementAt(2).dtFim.Value;
             novo.idSemestre = id;
+            novo.Descricao = semestre.descSemestre;
             return View(novo);
         }
 
