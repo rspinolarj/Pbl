@@ -55,5 +55,15 @@ namespace Pbl.Models.DbClasses
             }
             db.SaveChanges();
         }
+
+        public void DesvincularDisciplinas(int idMed, List<Disciplina> disciplinas)
+        {
+            Med med = db.Med.SingleOrDefault(c => c.idMed == idMed);
+            foreach (var disciplina in disciplinas)
+            {
+                med.Disciplina.Remove(disciplina);
+            }
+            db.SaveChanges();
+        }
     }
 }
