@@ -9,7 +9,6 @@
 
 namespace Pbl.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -19,6 +18,7 @@ namespace Pbl.Models
         public Modulo()
         {
             this.ControleNotas = new HashSet<ControleNotas>();
+            this.Prova = new HashSet<Prova>();
         }
     
         public int idModulo { get; set; }
@@ -28,9 +28,9 @@ namespace Pbl.Models
         public Nullable<int> idSemestre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [JsonIgnore]
         public virtual ICollection<ControleNotas> ControleNotas { get; set; }
-        [JsonIgnore]
         public virtual Semestre Semestre { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova { get; set; }
     }
 }

@@ -206,6 +206,7 @@
     <Compile Include="Models\DbClasses\MModulo.cs" />
     <Compile Include="Models\DbClasses\MPergunta.cs" />
     <Compile Include="Models\DbClasses\MPerguntaXFicha.cs" />
+    <Compile Include="Models\DbClasses\MProva.cs" />
     <Compile Include="Models\DbClasses\MUsuario.cs" />
     <Compile Include="Models\DbClasses\MMed.cs" />
     <Compile Include="Models\DbClasses\MProblema.cs" />
@@ -1189,6 +1190,7 @@
     <Content Include="Views\Pages\Template.cshtml" />
     <Content Include="Views\GerenciarProblemasMinistrados\AvaliarAluno.cshtml" />
     <Content Include="Views\AcompanhamentoMeds\AvaliacoesEmAberto.cshtml" />
+    <Content Include="Views\ControleMed\GerenciarSimulados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,7 +30,7 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr class="gradeX">
-                                        <td>MED @Html.DisplayFor(c => item.descMed)</td>
+                                        <td>@Html.DisplayFor(c => item.descMed)</td>
                                         <td>@Html.DisplayFor(c => item.Semestre.descSemestre)</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("GerenciarMed","ControleMed", new { id = item.idMed })'">

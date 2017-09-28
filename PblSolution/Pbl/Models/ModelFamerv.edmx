@@ -188,6 +188,8 @@
           </Key>
           <Property Name="idProva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idTipoProva" Type="int" />
+          <Property Name="idMed" Type="int" Nullable="false" />
+          <Property Name="idModulo" Type="int" Nullable="false" />
           <Property Name="valorQuestao" Type="decimal" Precision="5" Scale="2" />
         </EntityType>
         <EntityType Name="Semestre">
@@ -580,6 +582,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Prova_Med">
+          <End Role="Med" Type="Self.Med" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Med">
+              <PropertyRef Name="idMed" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="idMed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_Modulo">
+          <End Role="Modulo" Type="Self.Modulo" Multiplicity="1" />
+          <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulo">
+              <PropertyRef Name="idModulo" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="idModulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Prova_TipoProva">
           <End Role="TipoProva" Type="Self.TipoProva" Multiplicity="0..1" />
           <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
@@ -918,6 +944,14 @@
             <End Role="Problema" EntitySet="Problema" />
             <End Role="ProblemaXMed" EntitySet="ProblemaXMed" />
           </AssociationSet>
+          <AssociationSet Name="FK_Prova_Med" Association="Self.FK_Prova_Med">
+            <End Role="Med" EntitySet="Med" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Modulo" Association="Self.FK_Prova_Modulo">
+            <End Role="Modulo" EntitySet="Modulo" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
           <AssociationSet Name="FK_Prova_TipoProva" Association="Self.FK_Prova_TipoProva">
             <End Role="TipoProva" EntitySet="TipoProva" />
             <End Role="Prova" EntitySet="Prova" />
@@ -1201,6 +1235,14 @@
             <End Role="Pergunta" EntitySet="Pergunta" />
             <End Role="PerguntaXFicha" EntitySet="PerguntaXFicha" />
           </AssociationSet>
+          <AssociationSet Name="FK_Prova_Med" Association="pblsolutionModel.FK_Prova_Med">
+            <End Role="Med" EntitySet="Med" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_Modulo" Association="pblsolutionModel.FK_Prova_Modulo">
+            <End Role="Modulo" EntitySet="Modulo" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1349,6 +1391,7 @@
           <NavigationProperty Name="ProblemaXMed" Relationship="pblsolutionModel.FK_ProblemaXMed_Med" FromRole="Med" ToRole="ProblemaXMed" />
           <NavigationProperty Name="Turma" Relationship="pblsolutionModel.FK_Turma_Med" FromRole="Med" ToRole="Turma" />
           <NavigationProperty Name="Disciplina" Relationship="pblsolutionModel.DisciplinaMed" FromRole="Med" ToRole="Disciplina" />
+          <NavigationProperty Name="Prova" Relationship="pblsolutionModel.FK_Prova_Med" FromRole="Med" ToRole="Prova" />
         </EntityType>
         <EntityType Name="Modulo">
           <Key>
@@ -1361,6 +1404,7 @@
           <Property Name="idSemestre" Type="Int32" />
           <NavigationProperty Name="ControleNotas" Relationship="pblsolutionModel.FK_ControleNotas_Modulo" FromRole="Modulo" ToRole="ControleNotas" />
           <NavigationProperty Name="Semestre" Relationship="pblsolutionModel.FK_Modulo_Semestre" FromRole="Modulo" ToRole="Semestre" />
+          <NavigationProperty Name="Prova" Relationship="pblsolutionModel.FK_Prova_Modulo" FromRole="Modulo" ToRole="Prova" />
         </EntityType>
         <EntityType Name="PerguntaXFicha">
           <Key>
@@ -1415,6 +1459,10 @@
           <Property Name="valorQuestao" Type="Decimal" Precision="5" Scale="2" />
           <NavigationProperty Name="ControleNotasXProva" Relationship="pblsolutionModel.FK_ControleNotasXProva_Prova" FromRole="Prova" ToRole="ControleNotasXProva" />
           <NavigationProperty Name="TipoProva" Relationship="pblsolutionModel.FK_Prova_TipoProva" FromRole="Prova" ToRole="TipoProva" />
+          <Property Name="idMed" Type="Int32" Nullable="false" />
+          <Property Name="idModulo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Med" Relationship="pblsolutionModel.FK_Prova_Med" FromRole="Prova" ToRole="Med" />
+          <NavigationProperty Name="Modulo" Relationship="pblsolutionModel.FK_Prova_Modulo" FromRole="Prova" ToRole="Modulo" />
         </EntityType>
         <EntityType Name="Semestre">
           <Key>
@@ -1862,6 +1910,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Prova_Med">
+          <End Type="pblsolutionModel.Med" Role="Med" Multiplicity="1" />
+          <End Type="pblsolutionModel.Prova" Role="Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Med">
+              <PropertyRef Name="idMed" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="idMed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prova_Modulo">
+          <End Type="pblsolutionModel.Modulo" Role="Modulo" Multiplicity="1" />
+          <End Type="pblsolutionModel.Prova" Role="Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulo">
+              <PropertyRef Name="idModulo" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="idModulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2030,6 +2102,8 @@
           <EntitySetMapping Name="Prova">
             <EntityTypeMapping TypeName="pblsolutionModel.Prova">
               <MappingFragment StoreEntitySet="Prova">
+                <ScalarProperty Name="idModulo" ColumnName="idModulo" />
+                <ScalarProperty Name="idMed" ColumnName="idMed" />
                 <ScalarProperty Name="valorQuestao" ColumnName="valorQuestao" />
                 <ScalarProperty Name="idTipoProva" ColumnName="idTipoProva" />
                 <ScalarProperty Name="idProva" ColumnName="idProva" />

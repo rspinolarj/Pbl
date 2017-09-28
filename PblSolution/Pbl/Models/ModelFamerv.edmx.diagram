@@ -63,6 +63,8 @@
         <AssociationConnector Association="pblsolutionModel.FK_PerguntaXFicha_FichaAvaliacao1" />
         <EntityTypeShape EntityType="pblsolutionModel.Pergunta" Width="1.5" PointX="0.75" PointY="0.875" />
         <AssociationConnector Association="pblsolutionModel.FK_PerguntaXFicha_Pergunta" />
+        <AssociationConnector Association="pblsolutionModel.FK_Prova_Med" />
+        <AssociationConnector Association="pblsolutionModel.FK_Prova_Modulo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

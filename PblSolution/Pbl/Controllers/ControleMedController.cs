@@ -348,16 +348,37 @@ namespace Pbl.Controllers
         }
         #endregion
 
-
-
-
+        #region Simulados
         [Authorize(Roles = "Diretor")]
-        public ActionResult AdicionarAulasTurma(int idTurma)
+        public ActionResult GerenciarSimulados(int idMed)
         {
 
-
-
-            return null;
+            return View();
         }
+
+        [HttpGet, Authorize(Roles = "Diretor")]
+        public ActionResult AdicionarSimulado(int idMed)
+        {
+            return View();
+        }
+
+        [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = "Diretor")]
+        public ActionResult AdicionarSimulado(int idMed, Prova prova)
+        {
+            return View();
+        }
+
+
+        #endregion
+
+        #region Medias
+        [Authorize(Roles = "Diretor")]
+        public ActionResult GerenciarNotas(int idMed)
+        {
+            return View();
+        }
+
+        #endregion
+
     }
 }
