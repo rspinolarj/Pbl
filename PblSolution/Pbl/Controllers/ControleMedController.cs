@@ -352,22 +352,63 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult GerenciarSimulados(int idMed)
         {
-
-            return View();
+            Med med = new MMed().BringOne(c => c.idMed == idMed);
+            ViewBag.idMed = med.idMed;
+            return View(med.Prova);
         }
 
         [HttpGet, Authorize(Roles = "Diretor")]
         public ActionResult AdicionarSimulado(int idMed)
         {
+            Med med = new MMed().BringOne(c => c.idMed == idMed);
+            ViewBag.idTipoProva = new SelectList(new MTipoProva().BringAll(), "idTipoProva", "descTipoProva");
+            ViewBag.idModulo = new SelectList(med.Semestre.Modulo, "idModulo", "descModulo");
+            ViewBag.idMed = idMed;
             return View();
         }
 
         [HttpPost, ValidateAntiForgeryToken, Authorize(Roles = "Diretor")]
-        public ActionResult AdicionarSimulado(int idMed, Prova prova)
+        public ActionResult AdicionarSimulado(Prova prova)
         {
-            return View();
+            MProva mProva = new MProva();
+            if (mProva.Add(prova))
+            {
+                ViewBag.Message = "Simulado inserido";
+                return RedirectToAction("GerenciarSimulados", new { idMed = prova.idMed });
+            }
+            else
+            {
+                ViewBag.Message = "Simulado não inserido";
+                return RedirectToAction("AdicionarSimulado", new { idMed = prova.idMed });
+            }
         }
 
+        [Authorize(Roles = "Diretor")]
+        public ActionResult AvaliarSimulado(int idProva)
+        {
+            Prova prova = new MProva().BringOne(c => c.idProva == idProva);
+            Med med = new MMed().BringOne(c => c.idMed == prova.idMed);
+            List<Turma> turmas = med.Turma.ToList();
+            List<ControleNotasXProva> listAvaliacoes = new List<ControleNotasXProva>();
+            foreach (Turma turma in turmas)
+            {
+                foreach (InscricaoTurma alunoInscrito in turma.InscricaoTurma)
+                {
+                    ControleNotas controleNotas = alunoInscrito.ControleNotas.SingleOrDefault(c => c.idModulo == prova.idModulo);
+                    ControleNotasXProva controleNotasXProva = controleNotas.ControleNotasXProva.SingleOrDefault(c => c.idProva == prova.idProva);
+                    if (controleNotasXProva == null)
+                    {
+                        controleNotasXProva = new ControleNotasXProva()
+                        {
+                            idControleNotas = controleNotas.idControleNotas,
+                            idProva = prova.idProva
+                        };
+                    }
+                    listAvaliacoes.Add(controleNotasXProva);
+                }
+            }
+            return View(listAvaliacoes);
+        }
 
         #endregion
 

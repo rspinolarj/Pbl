@@ -207,6 +207,7 @@
     <Compile Include="Models\DbClasses\MPergunta.cs" />
     <Compile Include="Models\DbClasses\MPerguntaXFicha.cs" />
     <Compile Include="Models\DbClasses\MProva.cs" />
+    <Compile Include="Models\DbClasses\MTipoProva.cs" />
     <Compile Include="Models\DbClasses\MUsuario.cs" />
     <Compile Include="Models\DbClasses\MMed.cs" />
     <Compile Include="Models\DbClasses\MProblema.cs" />
@@ -1191,6 +1192,8 @@
     <Content Include="Views\GerenciarProblemasMinistrados\AvaliarAluno.cshtml" />
     <Content Include="Views\AcompanhamentoMeds\AvaliacoesEmAberto.cshtml" />
     <Content Include="Views\ControleMed\GerenciarSimulados.cshtml" />
+    <Content Include="Views\ControleMed\AdicionarSimulado.cshtml" />
+    <Content Include="Views\ControleMed\AvaliarSimulado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

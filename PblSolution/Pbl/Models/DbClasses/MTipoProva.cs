@@ -6,52 +6,21 @@ using System.Web;
 
 namespace Pbl.Models.DbClasses
 {
-    public class MProva : IFunctions<Prova>
+    public class MTipoProva : IFunctions<TipoProva>
     {
 
         private FamervEntities db;
 
-        public MProva()
+        public MTipoProva()
         {
             db = Singletone.InstanceFamerv;
         }
 
-        public bool Add(Prova t)
+        public bool Add(TipoProva t)
         {
             try
             {
-                db.Prova.Add(t);
-                db.SaveChanges();
-            }
-            catch (Exception Ex)
-            {
-                Singletone.Refresh();
-                Console.WriteLine(Ex.Message);
-                return false;
-            }
-            return true;
-        }
-
-        public List<Prova> Bring(Expression<Func<Prova, bool>> predicate)
-        {
-            return db.Prova.Where(predicate).ToList();
-        }
-
-        public List<Prova> BringAll()
-        {
-            return db.Prova.ToList();
-        }
-
-        public Prova BringOne(Expression<Func<Prova, bool>> predicate)
-        {
-            return db.Prova.SingleOrDefault(predicate);
-        }
-
-        public bool Delete(Prova t)
-        {
-            try
-            {
-                db.Prova.Remove(t);
+                db.TipoProva.Add(t);
                 db.SaveChanges();
             }
             catch (Exception Ex)
@@ -62,13 +31,43 @@ namespace Pbl.Models.DbClasses
             return true;
         }
 
-        public bool Update(Prova t)
+        public List<TipoProva> Bring(Expression<Func<TipoProva, bool>> predicate)
+        {
+            return db.TipoProva.Where(predicate).ToList();
+        }
+
+        public List<TipoProva> BringAll()
+        {
+            return db.TipoProva.ToList();
+        }
+
+        public TipoProva BringOne(Expression<Func<TipoProva, bool>> predicate)
+        {
+            return db.TipoProva.SingleOrDefault(predicate);
+        }
+
+        public bool Delete(TipoProva t)
         {
             try
             {
-                Prova prova = db.Prova.SingleOrDefault(c => c.idProva == t.idProva);
-                prova.valorQuestao = t.valorQuestao;
-                prova.idTipoProva = t.idTipoProva;
+                db.TipoProva.Remove(t);
+                db.SaveChanges();
+            }
+            catch (Exception Ex)
+            {
+                Console.WriteLine(Ex.Message);
+                return false;
+            }
+            return true;
+        }
+
+        public bool Update(TipoProva t)
+        {
+            try
+            {
+                TipoProva tipoProva = db.TipoProva.SingleOrDefault(c => c.idTipoProva == t.idTipoProva);
+                tipoProva.pesoProva = t.pesoProva;
+                tipoProva.descTipoProva = t.descTipoProva;
                 db.SaveChanges();
             }
             catch (Exception Ex)

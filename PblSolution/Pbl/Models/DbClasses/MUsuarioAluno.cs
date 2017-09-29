@@ -21,7 +21,8 @@ namespace Pbl.Models.DbClasses
             {
                 db.Usuario.SingleOrDefault(c => c.idUsuario == idUsuario).Aluno.Add(db.Aluno.SingleOrDefault(h => h.idAluno == idAluno));
                 db.SaveChanges();
-                db = Singletone.Refresh;
+                Singletone.Refresh();
+                db = Singletone.InstanceFamerv;
             }
             catch (Exception Ex)
             {
@@ -37,7 +38,8 @@ namespace Pbl.Models.DbClasses
             {
                 db.Usuario.SingleOrDefault(c => c.idUsuario == idUsuario).Aluno.Remove(db.Aluno.SingleOrDefault(h => h.idAluno == idAluno));
                 db.SaveChanges();
-                db = Singletone.Refresh;
+                Singletone.Refresh();
+                db = Singletone.InstanceFamerv;
             }
             catch (Exception Ex)
             {

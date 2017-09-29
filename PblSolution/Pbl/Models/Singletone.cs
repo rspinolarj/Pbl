@@ -22,14 +22,10 @@ namespace Pbl.Models
         }
 
 
-        public static FamervEntities Refresh
+        public static void Refresh()
         {
-            get
-            {
-                db.Dispose();
-                db = new FamervEntities();
-                return db;
-            }
+            db.Dispose();
+            db = new FamervEntities();
         }
     }
 }

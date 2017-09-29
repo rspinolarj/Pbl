@@ -21,7 +21,8 @@ namespace Pbl.Models.DbClasses
             {
                 db.Grupo.Where(c => c.idGrupo == idGrupo).First().InscricaoTurma.Add(db.InscricaoTurma.Where(c => c.idInscricaoTurma == idInscricaoTurma).First());
                 db.SaveChanges();
-                db = Singletone.Refresh;
+                Singletone.Refresh();
+                db = Singletone.InstanceFamerv;
             }
             catch (Exception Ex)
             {
@@ -37,7 +38,8 @@ namespace Pbl.Models.DbClasses
             {
                 db.Grupo.Where(c => c.idGrupo == idGrupo).First().InscricaoTurma.Remove(db.InscricaoTurma.Where(c => c.idInscricaoTurma == idInscricaoTurma).First());
                 db.SaveChanges();
-                db = Singletone.Refresh;
+                Singletone.Refresh();
+                db = Singletone.InstanceFamerv;
             }
             catch (Exception Ex)
             {
