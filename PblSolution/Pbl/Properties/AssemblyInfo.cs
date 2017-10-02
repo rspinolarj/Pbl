@@ -33,3 +33,7 @@ using System.Runtime.InteropServices;
 // usando o '*' como mostrado abaixo:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: InternalsVisibleTo("Pbl.Tests")]
+[assembly: InternalsVisibleTo("Pbl.Explorables")]
+[assembly: InternalsVisibleTo("Pbl.Tests1")]
+

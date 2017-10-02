@@ -416,7 +416,14 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult GerenciarNotas(int idMed)
         {
-            return View();
+            List<Turma> listTurmas = new MTurma().Bring(c => c.idMed == idMed);
+            List<InscricaoTurma> listAlunosInscritos = new List<InscricaoTurma>();
+            MInscricaoTurma mInscricaoTurma = new MInscricaoTurma();
+            foreach (var turma in listTurmas)
+            {
+                listAlunosInscritos.AddRange(mInscricaoTurma.Bring(c => c.idTurma == turma.idTurma));
+            }
+            return View(listAlunosInscritos);
         }
 
         #endregion
