@@ -15,5 +15,17 @@ namespace Pbl.Models
             Aluno = 3
         }
 
+        public enum TipoProva
+        {
+            Morfofuncional = 1,
+            Tutoria = 2
+        }
+
+        public enum TipoDisciplina
+        {
+            Morfofuncional = 1,
+            Pratica = 2
+        }
+
     }
 }

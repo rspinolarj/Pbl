@@ -65,5 +65,15 @@ namespace Pbl.Models.DbClasses
         {
             throw new NotImplementedException();
         }
+
+        private void RetornaNota(int idControleNotas)
+        {
+            ControleNotas controleNotas = db.ControleNotas.SingleOrDefault(c => c.idControleNotas == idControleNotas);
+            List<ControleNotasXProva> provasMorfofuncionais = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == Enumeradores.TipoProva.Morfofuncional);
+            List<ControleNotasXProva> provasTutoria = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == Enumeradores.TipoProva.Tutoria);
+            List<ControleNotasXAula> disciplinasMorfofuncionais = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == Enumeradores.TipoDisciplina.Morfofuncional);
+            List<ControleNotasXAula> disciplinasPraticas = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == Enumeradores.TipoDisciplina.Pratica);
+            return;
+        }
     }
 }

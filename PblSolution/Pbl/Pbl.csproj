@@ -293,7 +293,6 @@
     <Compile Include="Models\Turma.cs">
       <DependentUpon>ModelFamerv.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>ModelFamerv.tt</DependentUpon>
     </Compile>
