@@ -68,11 +68,11 @@ namespace Pbl.Models.DbClasses
 
         private void RetornaNota(int idControleNotas)
         {
-            ControleNotas controleNotas = db.ControleNotas.SingleOrDefault(c => c.idControleNotas == idControleNotas);
-            List<ControleNotasXProva> provasMorfofuncionais = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == Enumeradores.TipoProva.Morfofuncional);
-            List<ControleNotasXProva> provasTutoria = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == Enumeradores.TipoProva.Tutoria);
-            List<ControleNotasXAula> disciplinasMorfofuncionais = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == Enumeradores.TipoDisciplina.Morfofuncional);
-            List<ControleNotasXAula> disciplinasPraticas = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == Enumeradores.TipoDisciplina.Pratica);
+            var controleNotas = db.ControleNotas.SingleOrDefault(c => c.idControleNotas == idControleNotas);
+            var provasMorfofuncionais = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Morfofuncional).ToList();
+            var provasTutoria = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Tutoria).ToList();
+            var disciplinasMorfofuncionais = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Morfofuncional).ToList();
+            var disciplinasPraticas = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Pratica).ToList();
             return;
         }
     }

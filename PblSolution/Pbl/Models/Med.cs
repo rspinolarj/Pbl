@@ -19,9 +19,9 @@ namespace Pbl.Models
         {
             this.Grupo = new HashSet<Grupo>();
             this.ProblemaXMed = new HashSet<ProblemaXMed>();
+            this.Prova = new HashSet<Prova>();
             this.Turma = new HashSet<Turma>();
             this.Disciplina = new HashSet<Disciplina>();
-            this.Prova = new HashSet<Prova>();
         }
     
         public int idMed { get; set; }
@@ -35,10 +35,10 @@ namespace Pbl.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProblemaXMed> ProblemaXMed { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prova> Prova { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Turma> Turma { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Disciplina> Disciplina { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Prova> Prova { get; set; }
     }
 }

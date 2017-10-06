@@ -22,7 +22,7 @@ namespace Pbl.Models
         }
     
         public int idDisciplina { get; set; }
-        public Nullable<int> idTipoDisciplina { get; set; }
+        public int idTipoDisciplina { get; set; }
         public string descDisciplina { get; set; }
         public bool ativo { get; set; }
     

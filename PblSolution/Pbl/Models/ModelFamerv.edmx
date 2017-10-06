@@ -74,7 +74,7 @@
             <PropertyRef Name="idDisciplina" />
           </Key>
           <Property Name="idDisciplina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idTipoDisciplina" Type="int" />
+          <Property Name="idTipoDisciplina" Type="int" Nullable="false" />
           <Property Name="descDisciplina" Type="varchar" MaxLength="50" />
           <Property Name="ativo" Type="bit" Nullable="false" />
         </EntityType>
@@ -187,7 +187,7 @@
             <PropertyRef Name="idProva" />
           </Key>
           <Property Name="idProva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idTipoProva" Type="int" />
+          <Property Name="idTipoProva" Type="int" Nullable="false" />
           <Property Name="idMed" Type="int" Nullable="false" />
           <Property Name="idModulo" Type="int" Nullable="false" />
           <Property Name="valorQuestao" Type="decimal" Precision="5" Scale="2" />
@@ -367,7 +367,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Disciplina_TipoDisciplina">
-          <End Role="TipoDisciplina" Type="Self.TipoDisciplina" Multiplicity="0..1" />
+          <End Role="TipoDisciplina" Type="Self.TipoDisciplina" Multiplicity="1" />
           <End Role="Disciplina" Type="Self.Disciplina" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoDisciplina">
@@ -607,7 +607,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Prova_TipoProva">
-          <End Role="TipoProva" Type="Self.TipoProva" Multiplicity="0..1" />
+          <End Role="TipoProva" Type="Self.TipoProva" Multiplicity="1" />
           <End Role="Prova" Type="Self.Prova" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoProva">
@@ -998,145 +998,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="pblsolutionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="FamervEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Aluno" EntityType="pblsolutionModel.Aluno" />
-          <EntitySet Name="Ano" EntityType="pblsolutionModel.Ano" />
-          <EntitySet Name="Aula" EntityType="pblsolutionModel.Aula" />
-          <EntitySet Name="AvaliacaoTutoria" EntityType="pblsolutionModel.AvaliacaoTutoria" />
-          <EntitySet Name="ControleNotas" EntityType="pblsolutionModel.ControleNotas" />
-          <EntitySet Name="ControleNotasXAula" EntityType="pblsolutionModel.ControleNotasXAula" />
-          <EntitySet Name="ControleNotasXProva" EntityType="pblsolutionModel.ControleNotasXProva" />
-          <EntitySet Name="Disciplina" EntityType="pblsolutionModel.Disciplina" />
-          <EntitySet Name="Grupo" EntityType="pblsolutionModel.Grupo" />
-          <EntitySet Name="InscricaoTurma" EntityType="pblsolutionModel.InscricaoTurma" />
-          <EntitySet Name="Med" EntityType="pblsolutionModel.Med" />
-          <EntitySet Name="Modulo" EntityType="pblsolutionModel.Modulo" />
-          <EntitySet Name="PerguntaXFicha" EntityType="pblsolutionModel.PerguntaXFicha" />
-          <EntitySet Name="Problema" EntityType="pblsolutionModel.Problema" />
-          <EntitySet Name="ProblemaXMed" EntityType="pblsolutionModel.ProblemaXMed" />
-          <EntitySet Name="Professor" EntityType="pblsolutionModel.Professor" />
-          <EntitySet Name="Prova" EntityType="pblsolutionModel.Prova" />
-          <EntitySet Name="Semestre" EntityType="pblsolutionModel.Semestre" />
-          <EntitySet Name="TipoDisciplina" EntityType="pblsolutionModel.TipoDisciplina" />
-          <EntitySet Name="TipoProva" EntityType="pblsolutionModel.TipoProva" />
-          <EntitySet Name="TipoUsuario" EntityType="pblsolutionModel.TipoUsuario" />
-          <EntitySet Name="Turma" EntityType="pblsolutionModel.Turma" />
-          <EntitySet Name="Usuario" EntityType="pblsolutionModel.Usuario" />
-          <AssociationSet Name="FK_InscricaoMed_Aluno" Association="pblsolutionModel.FK_InscricaoMed_Aluno">
-            <End Role="Aluno" EntitySet="Aluno" />
-            <End Role="InscricaoTurma" EntitySet="InscricaoTurma" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Semestre_Ano" Association="pblsolutionModel.FK_Semestre_Ano">
-            <End Role="Ano" EntitySet="Ano" />
-            <End Role="Semestre" EntitySet="Semestre" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Aula_Turma" Association="pblsolutionModel.FK_Aula_Turma">
-            <End Role="Turma" EntitySet="Turma" />
-            <End Role="Aula" EntitySet="Aula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ControleNotasXAula_Aula" Association="pblsolutionModel.FK_ControleNotasXAula_Aula">
-            <End Role="Aula" EntitySet="Aula" />
-            <End Role="ControleNotasXAula" EntitySet="ControleNotasXAula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Turma_Disciplina" Association="pblsolutionModel.FK_Turma_Disciplina">
-            <End Role="Disciplina" EntitySet="Disciplina" />
-            <End Role="Aula" EntitySet="Aula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Turma_Professor" Association="pblsolutionModel.FK_Turma_Professor">
-            <End Role="Professor" EntitySet="Professor" />
-            <End Role="Aula" EntitySet="Aula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_AvaliacaoTutoria_Grupo" Association="pblsolutionModel.FK_AvaliacaoTutoria_Grupo">
-            <End Role="Grupo" EntitySet="Grupo" />
-            <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FichaAvaliacao_ControleNotas" Association="pblsolutionModel.FK_FichaAvaliacao_ControleNotas">
-            <End Role="ControleNotas" EntitySet="ControleNotas" />
-            <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FichaAvaliacao_ProblemaXMed" Association="pblsolutionModel.FK_FichaAvaliacao_ProblemaXMed">
-            <End Role="ProblemaXMed" EntitySet="ProblemaXMed" />
-            <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ControleNotas_InscricaoTurma" Association="pblsolutionModel.FK_ControleNotas_InscricaoTurma">
-            <End Role="InscricaoTurma" EntitySet="InscricaoTurma" />
-            <End Role="ControleNotas" EntitySet="ControleNotas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ControleNotas_Modulo" Association="pblsolutionModel.FK_ControleNotas_Modulo">
-            <End Role="Modulo" EntitySet="Modulo" />
-            <End Role="ControleNotas" EntitySet="ControleNotas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ControleNotasXProva_ControleNotas" Association="pblsolutionModel.FK_ControleNotasXProva_ControleNotas">
-            <End Role="ControleNotas" EntitySet="ControleNotas" />
-            <End Role="ControleNotasXProva" EntitySet="ControleNotasXProva" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ControleNotasXTurma_ControleNotas" Association="pblsolutionModel.FK_ControleNotasXTurma_ControleNotas">
-            <End Role="ControleNotas" EntitySet="ControleNotas" />
-            <End Role="ControleNotasXAula" EntitySet="ControleNotasXAula" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ControleNotasXProva_Prova" Association="pblsolutionModel.FK_ControleNotasXProva_Prova">
-            <End Role="Prova" EntitySet="Prova" />
-            <End Role="ControleNotasXProva" EntitySet="ControleNotasXProva" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Disciplina_TipoDisciplina" Association="pblsolutionModel.FK_Disciplina_TipoDisciplina">
-            <End Role="TipoDisciplina" EntitySet="TipoDisciplina" />
-            <End Role="Disciplina" EntitySet="Disciplina" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Grupo_Med" Association="pblsolutionModel.FK_Grupo_Med">
-            <End Role="Med" EntitySet="Med" />
-            <End Role="Grupo" EntitySet="Grupo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Grupo_Professor1" Association="pblsolutionModel.FK_Grupo_Professor1">
-            <End Role="Professor" EntitySet="Professor" />
-            <End Role="Grupo" EntitySet="Grupo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_InscricaoTurma_Turma" Association="pblsolutionModel.FK_InscricaoTurma_Turma">
-            <End Role="Turma" EntitySet="Turma" />
-            <End Role="InscricaoTurma" EntitySet="InscricaoTurma" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Med_Semestre" Association="pblsolutionModel.FK_Med_Semestre">
-            <End Role="Semestre" EntitySet="Semestre" />
-            <End Role="Med" EntitySet="Med" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProblemaXMed_Med" Association="pblsolutionModel.FK_ProblemaXMed_Med">
-            <End Role="Med" EntitySet="Med" />
-            <End Role="ProblemaXMed" EntitySet="ProblemaXMed" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Turma_Med" Association="pblsolutionModel.FK_Turma_Med">
-            <End Role="Med" EntitySet="Med" />
-            <End Role="Turma" EntitySet="Turma" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Modulo_Semestre" Association="pblsolutionModel.FK_Modulo_Semestre">
-            <End Role="Semestre" EntitySet="Semestre" />
-            <End Role="Modulo" EntitySet="Modulo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProblemaXMed_Problema" Association="pblsolutionModel.FK_ProblemaXMed_Problema">
-            <End Role="Problema" EntitySet="Problema" />
-            <End Role="ProblemaXMed" EntitySet="ProblemaXMed" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Prova_TipoProva" Association="pblsolutionModel.FK_Prova_TipoProva">
-            <End Role="TipoProva" EntitySet="TipoProva" />
-            <End Role="Prova" EntitySet="Prova" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="pblsolutionModel.FK_Usuario_TipoUsuario">
-            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="DisciplinaMed" Association="pblsolutionModel.DisciplinaMed">
-            <End Role="Disciplina" EntitySet="Disciplina" />
-            <End Role="Med" EntitySet="Med" />
-          </AssociationSet>
-          <AssociationSet Name="InscricaoTurmaXGrupo" Association="pblsolutionModel.InscricaoTurmaXGrupo">
-            <End Role="Grupo" EntitySet="Grupo" />
-            <End Role="InscricaoTurma" EntitySet="InscricaoTurma" />
-          </AssociationSet>
-          <AssociationSet Name="UsuarioAluno" Association="pblsolutionModel.UsuarioAluno">
-            <End Role="Aluno" EntitySet="Aluno" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="UsuarioProfessor" Association="pblsolutionModel.UsuarioProfessor">
-            <End Role="Professor" EntitySet="Professor" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
           <FunctionImport Name="SpCrudAluno">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="nome" Mode="In" Type="String" />
@@ -1217,10 +1078,94 @@
             <Parameter Name="StatementType" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SpVerificaSemestreAtivo" />
+          <EntitySet Name="Aluno" EntityType="pblsolutionModel.Aluno" />
+          <EntitySet Name="Ano" EntityType="pblsolutionModel.Ano" />
+          <EntitySet Name="Aula" EntityType="pblsolutionModel.Aula" />
+          <EntitySet Name="AvaliacaoTutoria" EntityType="pblsolutionModel.AvaliacaoTutoria" />
+          <EntitySet Name="ControleNotas" EntityType="pblsolutionModel.ControleNotas" />
+          <EntitySet Name="ControleNotasXAula" EntityType="pblsolutionModel.ControleNotasXAula" />
+          <EntitySet Name="ControleNotasXProva" EntityType="pblsolutionModel.ControleNotasXProva" />
+          <EntitySet Name="Disciplina" EntityType="pblsolutionModel.Disciplina" />
           <EntitySet Name="FichaAvaliacao" EntityType="pblsolutionModel.FichaAvaliacao" />
+          <EntitySet Name="Grupo" EntityType="pblsolutionModel.Grupo" />
+          <EntitySet Name="InscricaoTurma" EntityType="pblsolutionModel.InscricaoTurma" />
+          <EntitySet Name="Med" EntityType="pblsolutionModel.Med" />
+          <EntitySet Name="Modulo" EntityType="pblsolutionModel.Modulo" />
+          <EntitySet Name="Pergunta" EntityType="pblsolutionModel.Pergunta" />
+          <EntitySet Name="PerguntaXFicha" EntityType="pblsolutionModel.PerguntaXFicha" />
+          <EntitySet Name="Problema" EntityType="pblsolutionModel.Problema" />
+          <EntitySet Name="ProblemaXMed" EntityType="pblsolutionModel.ProblemaXMed" />
+          <EntitySet Name="Professor" EntityType="pblsolutionModel.Professor" />
+          <EntitySet Name="Prova" EntityType="pblsolutionModel.Prova" />
+          <EntitySet Name="Semestre" EntityType="pblsolutionModel.Semestre" />
+          <EntitySet Name="TipoDisciplina" EntityType="pblsolutionModel.TipoDisciplina" />
+          <EntitySet Name="TipoProva" EntityType="pblsolutionModel.TipoProva" />
+          <EntitySet Name="TipoUsuario" EntityType="pblsolutionModel.TipoUsuario" />
+          <EntitySet Name="Turma" EntityType="pblsolutionModel.Turma" />
+          <EntitySet Name="Usuario" EntityType="pblsolutionModel.Usuario" />
+          <AssociationSet Name="FK_InscricaoMed_Aluno" Association="pblsolutionModel.FK_InscricaoMed_Aluno">
+            <End Role="Aluno" EntitySet="Aluno" />
+            <End Role="InscricaoTurma" EntitySet="InscricaoTurma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Semestre_Ano" Association="pblsolutionModel.FK_Semestre_Ano">
+            <End Role="Ano" EntitySet="Ano" />
+            <End Role="Semestre" EntitySet="Semestre" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Aula_Turma" Association="pblsolutionModel.FK_Aula_Turma">
+            <End Role="Turma" EntitySet="Turma" />
+            <End Role="Aula" EntitySet="Aula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ControleNotasXAula_Aula" Association="pblsolutionModel.FK_ControleNotasXAula_Aula">
+            <End Role="Aula" EntitySet="Aula" />
+            <End Role="ControleNotasXAula" EntitySet="ControleNotasXAula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turma_Disciplina" Association="pblsolutionModel.FK_Turma_Disciplina">
+            <End Role="Disciplina" EntitySet="Disciplina" />
+            <End Role="Aula" EntitySet="Aula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Turma_Professor" Association="pblsolutionModel.FK_Turma_Professor">
+            <End Role="Professor" EntitySet="Professor" />
+            <End Role="Aula" EntitySet="Aula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AvaliacaoTutoria_Grupo" Association="pblsolutionModel.FK_AvaliacaoTutoria_Grupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
+          </AssociationSet>
           <AssociationSet Name="FK_FichaAvaliacao_AvaliacaoTutoria" Association="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria">
             <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
             <End Role="FichaAvaliacao" EntitySet="FichaAvaliacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FichaAvaliacao_ControleNotas" Association="pblsolutionModel.FK_FichaAvaliacao_ControleNotas">
+            <End Role="ControleNotas" EntitySet="ControleNotas" />
+            <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FichaAvaliacao_ProblemaXMed" Association="pblsolutionModel.FK_FichaAvaliacao_ProblemaXMed">
+            <End Role="ProblemaXMed" EntitySet="ProblemaXMed" />
+            <End Role="AvaliacaoTutoria" EntitySet="AvaliacaoTutoria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ControleNotas_InscricaoTurma" Association="pblsolutionModel.FK_ControleNotas_InscricaoTurma">
+            <End Role="InscricaoTurma" EntitySet="InscricaoTurma" />
+            <End Role="ControleNotas" EntitySet="ControleNotas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ControleNotas_Modulo" Association="pblsolutionModel.FK_ControleNotas_Modulo">
+            <End Role="Modulo" EntitySet="Modulo" />
+            <End Role="ControleNotas" EntitySet="ControleNotas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ControleNotasXProva_ControleNotas" Association="pblsolutionModel.FK_ControleNotasXProva_ControleNotas">
+            <End Role="ControleNotas" EntitySet="ControleNotas" />
+            <End Role="ControleNotasXProva" EntitySet="ControleNotasXProva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ControleNotasXTurma_ControleNotas" Association="pblsolutionModel.FK_ControleNotasXTurma_ControleNotas">
+            <End Role="ControleNotas" EntitySet="ControleNotas" />
+            <End Role="ControleNotasXAula" EntitySet="ControleNotasXAula" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ControleNotasXProva_Prova" Association="pblsolutionModel.FK_ControleNotasXProva_Prova">
+            <End Role="Prova" EntitySet="Prova" />
+            <End Role="ControleNotasXProva" EntitySet="ControleNotasXProva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Disciplina_TipoDisciplina" Association="pblsolutionModel.FK_Disciplina_TipoDisciplina">
+            <End Role="TipoDisciplina" EntitySet="TipoDisciplina" />
+            <End Role="Disciplina" EntitySet="Disciplina" />
           </AssociationSet>
           <AssociationSet Name="FK_FichaAvaliacao_Usuario" Association="pblsolutionModel.FK_FichaAvaliacao_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -1230,18 +1175,73 @@
             <End Role="FichaAvaliacao" EntitySet="FichaAvaliacao" />
             <End Role="PerguntaXFicha" EntitySet="PerguntaXFicha" />
           </AssociationSet>
-          <EntitySet Name="Pergunta" EntityType="pblsolutionModel.Pergunta" />
-          <AssociationSet Name="FK_PerguntaXFicha_Pergunta" Association="pblsolutionModel.FK_PerguntaXFicha_Pergunta">
-            <End Role="Pergunta" EntitySet="Pergunta" />
-            <End Role="PerguntaXFicha" EntitySet="PerguntaXFicha" />
+          <AssociationSet Name="FK_Grupo_Med" Association="pblsolutionModel.FK_Grupo_Med">
+            <End Role="Med" EntitySet="Med" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grupo_Professor1" Association="pblsolutionModel.FK_Grupo_Professor1">
+            <End Role="Professor" EntitySet="Professor" />
+            <End Role="Grupo" EntitySet="Grupo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InscricaoTurma_Turma" Association="pblsolutionModel.FK_InscricaoTurma_Turma">
+            <End Role="Turma" EntitySet="Turma" />
+            <End Role="InscricaoTurma" EntitySet="InscricaoTurma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Med_Semestre" Association="pblsolutionModel.FK_Med_Semestre">
+            <End Role="Semestre" EntitySet="Semestre" />
+            <End Role="Med" EntitySet="Med" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProblemaXMed_Med" Association="pblsolutionModel.FK_ProblemaXMed_Med">
+            <End Role="Med" EntitySet="Med" />
+            <End Role="ProblemaXMed" EntitySet="ProblemaXMed" />
           </AssociationSet>
           <AssociationSet Name="FK_Prova_Med" Association="pblsolutionModel.FK_Prova_Med">
             <End Role="Med" EntitySet="Med" />
             <End Role="Prova" EntitySet="Prova" />
           </AssociationSet>
+          <AssociationSet Name="FK_Turma_Med" Association="pblsolutionModel.FK_Turma_Med">
+            <End Role="Med" EntitySet="Med" />
+            <End Role="Turma" EntitySet="Turma" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modulo_Semestre" Association="pblsolutionModel.FK_Modulo_Semestre">
+            <End Role="Semestre" EntitySet="Semestre" />
+            <End Role="Modulo" EntitySet="Modulo" />
+          </AssociationSet>
           <AssociationSet Name="FK_Prova_Modulo" Association="pblsolutionModel.FK_Prova_Modulo">
             <End Role="Modulo" EntitySet="Modulo" />
             <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PerguntaXFicha_Pergunta" Association="pblsolutionModel.FK_PerguntaXFicha_Pergunta">
+            <End Role="Pergunta" EntitySet="Pergunta" />
+            <End Role="PerguntaXFicha" EntitySet="PerguntaXFicha" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProblemaXMed_Problema" Association="pblsolutionModel.FK_ProblemaXMed_Problema">
+            <End Role="Problema" EntitySet="Problema" />
+            <End Role="ProblemaXMed" EntitySet="ProblemaXMed" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prova_TipoProva" Association="pblsolutionModel.FK_Prova_TipoProva">
+            <End Role="TipoProva" EntitySet="TipoProva" />
+            <End Role="Prova" EntitySet="Prova" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="pblsolutionModel.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="DisciplinaMed" Association="pblsolutionModel.DisciplinaMed">
+            <End Role="Disciplina" EntitySet="Disciplina" />
+            <End Role="Med" EntitySet="Med" />
+          </AssociationSet>
+          <AssociationSet Name="InscricaoTurmaXGrupo" Association="pblsolutionModel.InscricaoTurmaXGrupo">
+            <End Role="Grupo" EntitySet="Grupo" />
+            <End Role="InscricaoTurma" EntitySet="InscricaoTurma" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioAluno" Association="pblsolutionModel.UsuarioAluno">
+            <End Role="Aluno" EntitySet="Aluno" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="UsuarioProfessor" Association="pblsolutionModel.UsuarioProfessor">
+            <End Role="Professor" EntitySet="Professor" />
+            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -1297,12 +1297,12 @@
           <Property Name="idProblemaxMed" Type="Int32" />
           <Property Name="idGrupo" Type="Int32" Nullable="false" />
           <Property Name="idControleNotas" Type="Int32" />
-          <Property Name="dtInicio" Type="DateTime" Precision="0" Nullable="false" />
-          <Property Name="dtFim" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="dtInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dtFim" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Grupo" Relationship="pblsolutionModel.FK_AvaliacaoTutoria_Grupo" FromRole="AvaliacaoTutoria" ToRole="Grupo" />
+          <NavigationProperty Name="FichaAvaliacao" Relationship="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" FromRole="AvaliacaoTutoria" ToRole="FichaAvaliacao" />
           <NavigationProperty Name="ControleNotas" Relationship="pblsolutionModel.FK_FichaAvaliacao_ControleNotas" FromRole="AvaliacaoTutoria" ToRole="ControleNotas" />
           <NavigationProperty Name="ProblemaXMed" Relationship="pblsolutionModel.FK_FichaAvaliacao_ProblemaXMed" FromRole="AvaliacaoTutoria" ToRole="ProblemaXMed" />
-          <NavigationProperty Name="FichaAvaliacao" Relationship="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" FromRole="AvaliacaoTutoria" ToRole="FichaAvaliacao" />
         </EntityType>
         <EntityType Name="ControleNotas">
           <Key>
@@ -1344,12 +1344,23 @@
             <PropertyRef Name="idDisciplina" />
           </Key>
           <Property Name="idDisciplina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idTipoDisciplina" Type="Int32" />
+          <Property Name="idTipoDisciplina" Type="Int32" Nullable="false" />
           <Property Name="descDisciplina" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ativo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Aula" Relationship="pblsolutionModel.FK_Turma_Disciplina" FromRole="Disciplina" ToRole="Aula" />
           <NavigationProperty Name="TipoDisciplina" Relationship="pblsolutionModel.FK_Disciplina_TipoDisciplina" FromRole="Disciplina" ToRole="TipoDisciplina" />
           <NavigationProperty Name="Med" Relationship="pblsolutionModel.DisciplinaMed" FromRole="Disciplina" ToRole="Med" />
+        </EntityType>
+        <EntityType Name="FichaAvaliacao">
+          <Key>
+            <PropertyRef Name="idFichaAvaliacao" />
+          </Key>
+          <Property Name="idAvaliador" Type="Int32" Nullable="false" />
+          <Property Name="idAvaliacaoTutoria" Type="Int32" Nullable="false" />
+          <Property Name="idFichaAvaliacao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="AvaliacaoTutoria" Relationship="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" FromRole="FichaAvaliacao" ToRole="AvaliacaoTutoria" />
+          <NavigationProperty Name="Usuario" Relationship="pblsolutionModel.FK_FichaAvaliacao_Usuario" FromRole="FichaAvaliacao" ToRole="Usuario" />
+          <NavigationProperty Name="PerguntaXFicha" Relationship="pblsolutionModel.FK_PerguntaXFicha_FichaAvaliacao1" FromRole="FichaAvaliacao" ToRole="PerguntaXFicha" />
         </EntityType>
         <EntityType Name="Grupo">
           <Key>
@@ -1389,9 +1400,9 @@
           <NavigationProperty Name="Grupo" Relationship="pblsolutionModel.FK_Grupo_Med" FromRole="Med" ToRole="Grupo" />
           <NavigationProperty Name="Semestre" Relationship="pblsolutionModel.FK_Med_Semestre" FromRole="Med" ToRole="Semestre" />
           <NavigationProperty Name="ProblemaXMed" Relationship="pblsolutionModel.FK_ProblemaXMed_Med" FromRole="Med" ToRole="ProblemaXMed" />
+          <NavigationProperty Name="Prova" Relationship="pblsolutionModel.FK_Prova_Med" FromRole="Med" ToRole="Prova" />
           <NavigationProperty Name="Turma" Relationship="pblsolutionModel.FK_Turma_Med" FromRole="Med" ToRole="Turma" />
           <NavigationProperty Name="Disciplina" Relationship="pblsolutionModel.DisciplinaMed" FromRole="Med" ToRole="Disciplina" />
-          <NavigationProperty Name="Prova" Relationship="pblsolutionModel.FK_Prova_Med" FromRole="Med" ToRole="Prova" />
         </EntityType>
         <EntityType Name="Modulo">
           <Key>
@@ -1405,6 +1416,14 @@
           <NavigationProperty Name="ControleNotas" Relationship="pblsolutionModel.FK_ControleNotas_Modulo" FromRole="Modulo" ToRole="ControleNotas" />
           <NavigationProperty Name="Semestre" Relationship="pblsolutionModel.FK_Modulo_Semestre" FromRole="Modulo" ToRole="Semestre" />
           <NavigationProperty Name="Prova" Relationship="pblsolutionModel.FK_Prova_Modulo" FromRole="Modulo" ToRole="Prova" />
+        </EntityType>
+        <EntityType Name="Pergunta">
+          <Key>
+            <PropertyRef Name="idPergunta" />
+          </Key>
+          <Property Name="idPergunta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pergunta1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PerguntaXFicha" Relationship="pblsolutionModel.FK_PerguntaXFicha_Pergunta" FromRole="Pergunta" ToRole="PerguntaXFicha" />
         </EntityType>
         <EntityType Name="PerguntaXFicha">
           <Key>
@@ -1455,14 +1474,14 @@
             <PropertyRef Name="idProva" />
           </Key>
           <Property Name="idProva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idTipoProva" Type="Int32" />
-          <Property Name="valorQuestao" Type="Decimal" Precision="5" Scale="2" />
-          <NavigationProperty Name="ControleNotasXProva" Relationship="pblsolutionModel.FK_ControleNotasXProva_Prova" FromRole="Prova" ToRole="ControleNotasXProva" />
-          <NavigationProperty Name="TipoProva" Relationship="pblsolutionModel.FK_Prova_TipoProva" FromRole="Prova" ToRole="TipoProva" />
+          <Property Name="idTipoProva" Type="Int32" Nullable="false" />
           <Property Name="idMed" Type="Int32" Nullable="false" />
           <Property Name="idModulo" Type="Int32" Nullable="false" />
+          <Property Name="valorQuestao" Type="Decimal" Precision="5" Scale="2" />
+          <NavigationProperty Name="ControleNotasXProva" Relationship="pblsolutionModel.FK_ControleNotasXProva_Prova" FromRole="Prova" ToRole="ControleNotasXProva" />
           <NavigationProperty Name="Med" Relationship="pblsolutionModel.FK_Prova_Med" FromRole="Prova" ToRole="Med" />
           <NavigationProperty Name="Modulo" Relationship="pblsolutionModel.FK_Prova_Modulo" FromRole="Prova" ToRole="Modulo" />
+          <NavigationProperty Name="TipoProva" Relationship="pblsolutionModel.FK_Prova_TipoProva" FromRole="Prova" ToRole="TipoProva" />
         </EntityType>
         <EntityType Name="Semestre">
           <Key>
@@ -1522,10 +1541,10 @@
           <Property Name="login" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="senha" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="idTipoUsuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FichaAvaliacao" Relationship="pblsolutionModel.FK_FichaAvaliacao_Usuario" FromRole="Usuario" ToRole="FichaAvaliacao" />
           <NavigationProperty Name="TipoUsuario" Relationship="pblsolutionModel.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
           <NavigationProperty Name="Aluno" Relationship="pblsolutionModel.UsuarioAluno" FromRole="Usuario" ToRole="Aluno" />
           <NavigationProperty Name="Professor" Relationship="pblsolutionModel.UsuarioProfessor" FromRole="Usuario" ToRole="Professor" />
-          <NavigationProperty Name="FichaAvaliacao" Relationship="pblsolutionModel.FK_FichaAvaliacao_Usuario" FromRole="Usuario" ToRole="FichaAvaliacao" />
         </EntityType>
         <Association Name="FK_InscricaoMed_Aluno">
           <End Type="pblsolutionModel.Aluno" Role="Aluno" Multiplicity="0..1" />
@@ -1608,6 +1627,18 @@
             </Principal>
             <Dependent Role="AvaliacaoTutoria">
               <PropertyRef Name="idGrupo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FichaAvaliacao_AvaliacaoTutoria">
+          <End Type="pblsolutionModel.AvaliacaoTutoria" Role="AvaliacaoTutoria" Multiplicity="1" />
+          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AvaliacaoTutoria">
+              <PropertyRef Name="idAvaliacaoTutoria" />
+            </Principal>
+            <Dependent Role="FichaAvaliacao">
+              <PropertyRef Name="idAvaliacaoTutoria" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1696,7 +1727,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Disciplina_TipoDisciplina">
-          <End Type="pblsolutionModel.TipoDisciplina" Role="TipoDisciplina" Multiplicity="0..1" />
+          <End Type="pblsolutionModel.TipoDisciplina" Role="TipoDisciplina" Multiplicity="1" />
           <End Type="pblsolutionModel.Disciplina" Role="Disciplina" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoDisciplina">
@@ -1704,6 +1735,30 @@
             </Principal>
             <Dependent Role="Disciplina">
               <PropertyRef Name="idTipoDisciplina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FichaAvaliacao_Usuario">
+          <End Type="pblsolutionModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="idUsuario" />
+            </Principal>
+            <Dependent Role="FichaAvaliacao">
+              <PropertyRef Name="idAvaliador" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerguntaXFicha_FichaAvaliacao1">
+          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="1" />
+          <End Type="pblsolutionModel.PerguntaXFicha" Role="PerguntaXFicha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FichaAvaliacao">
+              <PropertyRef Name="idFichaAvaliacao" />
+            </Principal>
+            <Dependent Role="PerguntaXFicha">
+              <PropertyRef Name="idFichaAvaliacao" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1767,6 +1822,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Prova_Med">
+          <End Type="pblsolutionModel.Med" Role="Med" Multiplicity="1" />
+          <End Type="pblsolutionModel.Prova" Role="Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Med">
+              <PropertyRef Name="idMed" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="idMed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Turma_Med">
           <End Type="pblsolutionModel.Med" Role="Med" Multiplicity="0..1" />
           <End Type="pblsolutionModel.Turma" Role="Turma" Multiplicity="*" />
@@ -1791,6 +1858,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Prova_Modulo">
+          <End Type="pblsolutionModel.Modulo" Role="Modulo" Multiplicity="1" />
+          <End Type="pblsolutionModel.Prova" Role="Prova" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modulo">
+              <PropertyRef Name="idModulo" />
+            </Principal>
+            <Dependent Role="Prova">
+              <PropertyRef Name="idModulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PerguntaXFicha_Pergunta">
+          <End Type="pblsolutionModel.Pergunta" Role="Pergunta" Multiplicity="1" />
+          <End Type="pblsolutionModel.PerguntaXFicha" Role="PerguntaXFicha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pergunta">
+              <PropertyRef Name="idPergunta" />
+            </Principal>
+            <Dependent Role="PerguntaXFicha">
+              <PropertyRef Name="idPergunta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ProblemaXMed_Problema">
           <End Type="pblsolutionModel.Problema" Role="Problema" Multiplicity="0..1" />
           <End Type="pblsolutionModel.ProblemaXMed" Role="ProblemaXMed" Multiplicity="*" />
@@ -1804,7 +1895,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Prova_TipoProva">
-          <End Type="pblsolutionModel.TipoProva" Role="TipoProva" Multiplicity="0..1" />
+          <End Type="pblsolutionModel.TipoProva" Role="TipoProva" Multiplicity="1" />
           <End Type="pblsolutionModel.Prova" Role="Prova" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TipoProva">
@@ -1843,103 +1934,25 @@
           <End Type="pblsolutionModel.Professor" Role="Professor" Multiplicity="*" />
           <End Type="pblsolutionModel.Usuario" Role="Usuario" Multiplicity="*" />
         </Association>
-        <EntityType Name="FichaAvaliacao">
-          <Key>
-            <PropertyRef Name="idFichaAvaliacao" />
-          </Key>
-          <Property Name="idAvaliador" Type="Int32" Nullable="false" />
-          <Property Name="idAvaliacaoTutoria" Type="Int32" Nullable="false" />
-          <Property Name="idFichaAvaliacao" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="AvaliacaoTutoria" Relationship="pblsolutionModel.FK_FichaAvaliacao_AvaliacaoTutoria" FromRole="FichaAvaliacao" ToRole="AvaliacaoTutoria" />
-          <NavigationProperty Name="Usuario" Relationship="pblsolutionModel.FK_FichaAvaliacao_Usuario" FromRole="FichaAvaliacao" ToRole="Usuario" />
-          <NavigationProperty Name="PerguntaXFicha" Relationship="pblsolutionModel.FK_PerguntaXFicha_FichaAvaliacao1" FromRole="FichaAvaliacao" ToRole="PerguntaXFicha" />
-        </EntityType>
-        <Association Name="FK_FichaAvaliacao_AvaliacaoTutoria">
-          <End Type="pblsolutionModel.AvaliacaoTutoria" Role="AvaliacaoTutoria" Multiplicity="1" />
-          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AvaliacaoTutoria">
-              <PropertyRef Name="idAvaliacaoTutoria" />
-            </Principal>
-            <Dependent Role="FichaAvaliacao">
-              <PropertyRef Name="idAvaliacaoTutoria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FichaAvaliacao_Usuario">
-          <End Type="pblsolutionModel.Usuario" Role="Usuario" Multiplicity="1" />
-          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="idUsuario" />
-            </Principal>
-            <Dependent Role="FichaAvaliacao">
-              <PropertyRef Name="idAvaliador" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PerguntaXFicha_FichaAvaliacao1">
-          <End Type="pblsolutionModel.FichaAvaliacao" Role="FichaAvaliacao" Multiplicity="1" />
-          <End Type="pblsolutionModel.PerguntaXFicha" Role="PerguntaXFicha" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FichaAvaliacao">
-              <PropertyRef Name="idFichaAvaliacao" />
-            </Principal>
-            <Dependent Role="PerguntaXFicha">
-              <PropertyRef Name="idFichaAvaliacao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Pergunta">
-          <Key>
-            <PropertyRef Name="idPergunta" />
-          </Key>
-          <Property Name="idPergunta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="pergunta1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PerguntaXFicha" Relationship="pblsolutionModel.FK_PerguntaXFicha_Pergunta" FromRole="Pergunta" ToRole="PerguntaXFicha" />
-        </EntityType>
-        <Association Name="FK_PerguntaXFicha_Pergunta">
-          <End Type="pblsolutionModel.Pergunta" Role="Pergunta" Multiplicity="1" />
-          <End Type="pblsolutionModel.PerguntaXFicha" Role="PerguntaXFicha" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pergunta">
-              <PropertyRef Name="idPergunta" />
-            </Principal>
-            <Dependent Role="PerguntaXFicha">
-              <PropertyRef Name="idPergunta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Prova_Med">
-          <End Type="pblsolutionModel.Med" Role="Med" Multiplicity="1" />
-          <End Type="pblsolutionModel.Prova" Role="Prova" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Med">
-              <PropertyRef Name="idMed" />
-            </Principal>
-            <Dependent Role="Prova">
-              <PropertyRef Name="idMed" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Prova_Modulo">
-          <End Type="pblsolutionModel.Modulo" Role="Modulo" Multiplicity="1" />
-          <End Type="pblsolutionModel.Prova" Role="Prova" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Modulo">
-              <PropertyRef Name="idModulo" />
-            </Principal>
-            <Dependent Role="Prova">
-              <PropertyRef Name="idModulo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="pblsolutionModelStoreContainer" CdmEntityContainer="FamervEntities">
+          <FunctionImportMapping FunctionImportName="SpCrudAluno" FunctionName="pblsolutionModel.Store.SpCrudAluno" />
+          <FunctionImportMapping FunctionImportName="SpCrudAno" FunctionName="pblsolutionModel.Store.SpCrudAno" />
+          <FunctionImportMapping FunctionImportName="SpCrudDisciplina" FunctionName="pblsolutionModel.Store.SpCrudDisciplina" />
+          <FunctionImportMapping FunctionImportName="SpCrudGrupo" FunctionName="pblsolutionModel.Store.SpCrudGrupo" />
+          <FunctionImportMapping FunctionImportName="SpCrudMed" FunctionName="pblsolutionModel.Store.SpCrudMed" />
+          <FunctionImportMapping FunctionImportName="SpCrudModulo" FunctionName="pblsolutionModel.Store.SpCrudModulo" />
+          <FunctionImportMapping FunctionImportName="SpCrudProblema" FunctionName="pblsolutionModel.Store.SpCrudProblema" />
+          <FunctionImportMapping FunctionImportName="SpCrudProfessor" FunctionName="pblsolutionModel.Store.SpCrudProfessor" />
+          <FunctionImportMapping FunctionImportName="SpCrudProva" FunctionName="pblsolutionModel.Store.SpCrudProva" />
+          <FunctionImportMapping FunctionImportName="SpCrudSemestre" FunctionName="pblsolutionModel.Store.SpCrudSemestre" />
+          <FunctionImportMapping FunctionImportName="SpCrudTipoDisciplina" FunctionName="pblsolutionModel.Store.SpCrudTipoDisciplina" />
+          <FunctionImportMapping FunctionImportName="SpCrudTipoProva" FunctionName="pblsolutionModel.Store.SpCrudTipoProva" />
+          <FunctionImportMapping FunctionImportName="SpVerificaSemestreAtivo" FunctionName="pblsolutionModel.Store.SpVerificaSemestreAtivo" />
           <EntitySetMapping Name="Aluno">
             <EntityTypeMapping TypeName="pblsolutionModel.Aluno">
               <MappingFragment StoreEntitySet="Aluno">
@@ -2019,6 +2032,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="FichaAvaliacao">
+            <EntityTypeMapping TypeName="pblsolutionModel.FichaAvaliacao">
+              <MappingFragment StoreEntitySet="FichaAvaliacao">
+                <ScalarProperty Name="idFichaAvaliacao" ColumnName="idFichaAvaliacao" />
+                <ScalarProperty Name="idAvaliacaoTutoria" ColumnName="idAvaliacaoTutoria" />
+                <ScalarProperty Name="idAvaliador" ColumnName="idAvaliador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Grupo">
             <EntityTypeMapping TypeName="pblsolutionModel.Grupo">
               <MappingFragment StoreEntitySet="Grupo">
@@ -2058,6 +2080,14 @@
                 <ScalarProperty Name="dtInicio" ColumnName="dtInicio" />
                 <ScalarProperty Name="descModulo" ColumnName="descModulo" />
                 <ScalarProperty Name="idModulo" ColumnName="idModulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pergunta">
+            <EntityTypeMapping TypeName="pblsolutionModel.Pergunta">
+              <MappingFragment StoreEntitySet="Pergunta">
+                <ScalarProperty Name="pergunta1" ColumnName="pergunta" />
+                <ScalarProperty Name="idPergunta" ColumnName="idPergunta" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2102,9 +2132,9 @@
           <EntitySetMapping Name="Prova">
             <EntityTypeMapping TypeName="pblsolutionModel.Prova">
               <MappingFragment StoreEntitySet="Prova">
+                <ScalarProperty Name="valorQuestao" ColumnName="valorQuestao" />
                 <ScalarProperty Name="idModulo" ColumnName="idModulo" />
                 <ScalarProperty Name="idMed" ColumnName="idMed" />
-                <ScalarProperty Name="valorQuestao" ColumnName="valorQuestao" />
                 <ScalarProperty Name="idTipoProva" ColumnName="idTipoProva" />
                 <ScalarProperty Name="idProva" ColumnName="idProva" />
               </MappingFragment>
@@ -2198,37 +2228,7 @@
               <ScalarProperty Name="idProfessor" ColumnName="idProfessor" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="SpCrudAluno" FunctionName="pblsolutionModel.Store.SpCrudAluno" />
-          <FunctionImportMapping FunctionImportName="SpCrudAno" FunctionName="pblsolutionModel.Store.SpCrudAno" />
-          <FunctionImportMapping FunctionImportName="SpCrudDisciplina" FunctionName="pblsolutionModel.Store.SpCrudDisciplina" />
-          <FunctionImportMapping FunctionImportName="SpCrudGrupo" FunctionName="pblsolutionModel.Store.SpCrudGrupo" />
-          <FunctionImportMapping FunctionImportName="SpCrudMed" FunctionName="pblsolutionModel.Store.SpCrudMed" />
-          <FunctionImportMapping FunctionImportName="SpCrudModulo" FunctionName="pblsolutionModel.Store.SpCrudModulo" />
-          <FunctionImportMapping FunctionImportName="SpCrudProblema" FunctionName="pblsolutionModel.Store.SpCrudProblema" />
-          <FunctionImportMapping FunctionImportName="SpCrudProfessor" FunctionName="pblsolutionModel.Store.SpCrudProfessor" />
-          <FunctionImportMapping FunctionImportName="SpCrudProva" FunctionName="pblsolutionModel.Store.SpCrudProva" />
-          <FunctionImportMapping FunctionImportName="SpCrudSemestre" FunctionName="pblsolutionModel.Store.SpCrudSemestre" />
-          <FunctionImportMapping FunctionImportName="SpCrudTipoDisciplina" FunctionName="pblsolutionModel.Store.SpCrudTipoDisciplina" />
-          <FunctionImportMapping FunctionImportName="SpCrudTipoProva" FunctionName="pblsolutionModel.Store.SpCrudTipoProva" />
-          <FunctionImportMapping FunctionImportName="SpVerificaSemestreAtivo" FunctionName="pblsolutionModel.Store.SpVerificaSemestreAtivo" />
-          <EntitySetMapping Name="FichaAvaliacao">
-            <EntityTypeMapping TypeName="pblsolutionModel.FichaAvaliacao">
-              <MappingFragment StoreEntitySet="FichaAvaliacao">
-                <ScalarProperty Name="idFichaAvaliacao" ColumnName="idFichaAvaliacao" />
-                <ScalarProperty Name="idAvaliacaoTutoria" ColumnName="idAvaliacaoTutoria" />
-                <ScalarProperty Name="idAvaliador" ColumnName="idAvaliador" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pergunta">
-            <EntityTypeMapping TypeName="pblsolutionModel.Pergunta">
-              <MappingFragment StoreEntitySet="Pergunta">
-                <ScalarProperty Name="pergunta1" ColumnName="pergunta" />
-                <ScalarProperty Name="idPergunta" ColumnName="idPergunta" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
