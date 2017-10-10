@@ -66,14 +66,15 @@ namespace Pbl.Models.DbClasses
             throw new NotImplementedException();
         }
 
-        private void RetornaNota(int idControleNotas)
+        private decimal RetornaNota(int idControleNotas)
         {
             var controleNotas = db.ControleNotas.SingleOrDefault(c => c.idControleNotas == idControleNotas);
             var provasMorfofuncionais = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Morfofuncional).ToList();
             var provasTutoria = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Tutoria).ToList();
             var disciplinasMorfofuncionais = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Morfofuncional).ToList();
             var disciplinasPraticas = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Pratica).ToList();
-            return;
+            var notaFinal = decimal.Zero;
+            return notaFinal;
         }
     }
 }
