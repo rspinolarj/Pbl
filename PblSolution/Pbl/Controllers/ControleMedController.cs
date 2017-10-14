@@ -390,6 +390,7 @@ namespace Pbl.Controllers
             Med med = new MMed().BringOne(c => c.idMed == prova.idMed);
             List<Turma> turmas = med.Turma.ToList();
             List<ControleNotasXProva> listAvaliacoes = new List<ControleNotasXProva>();
+            MControleNotasXProva mControleNotasXProva = new MControleNotasXProva();
             foreach (Turma turma in turmas)
             {
                 foreach (InscricaoTurma alunoInscrito in turma.InscricaoTurma)
@@ -403,6 +404,7 @@ namespace Pbl.Controllers
                             idControleNotas = controleNotas.idControleNotas,
                             idProva = prova.idProva
                         };
+                        mControleNotasXProva.Add(controleNotasXProva);
                     }
                     listAvaliacoes.Add(controleNotasXProva);
                 }

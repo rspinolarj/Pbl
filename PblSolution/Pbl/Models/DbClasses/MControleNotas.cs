@@ -73,6 +73,34 @@ namespace Pbl.Models.DbClasses
             var provasTutoria = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Tutoria).ToList();
             var disciplinasMorfofuncionais = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Morfofuncional).ToList();
             var disciplinasPraticas = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Pratica).ToList();
+            List<decimal> notaProblema = new List<decimal>();
+            foreach (var avaliacaoTutoria in controleNotas.AvaliacaoTutoria)
+            {
+                decimal notaAuto = 0;
+                decimal notaProfessor = 0;
+                decimal notaInterpartes = 0;
+                foreach (var fichaAvaliacao in avaliacaoTutoria.FichaAvaliacao)
+                {
+                    if (fichaAvaliacao.Usuario.Aluno.Count > 0)
+                    {
+                        Aluno aluno = fichaAvaliacao.Usuario.Aluno.FirstOrDefault();
+                        if (aluno.idAluno == avaliacaoTutoria.ControleNotas.InscricaoTurma.idAluno)
+                        {
+                            //notaAuto = 
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else if (fichaAvaliacao.Usuario.Professor.Count > 0)
+                    {
+                        Professor professor = fichaAvaliacao.Usuario.Professor.FirstOrDefault();
+                    }
+                }
+            }
+            var notaMorfofuncional = decimal.Zero;
+            var notaTutoria = decimal.Zero;
             var notaFinal = decimal.Zero;
             return notaFinal;
         }
