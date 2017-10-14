@@ -24,7 +24,7 @@ namespace Pbl.Models
         public int idTipoProva { get; set; }
         public int idMed { get; set; }
         public int idModulo { get; set; }
-        public Nullable<decimal> valorQuestao { get; set; }
+        public int numeroQuestoes { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ControleNotasXProva> ControleNotasXProva { get; set; }

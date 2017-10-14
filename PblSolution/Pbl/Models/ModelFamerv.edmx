@@ -190,7 +190,7 @@
           <Property Name="idTipoProva" Type="int" Nullable="false" />
           <Property Name="idMed" Type="int" Nullable="false" />
           <Property Name="idModulo" Type="int" Nullable="false" />
-          <Property Name="valorQuestao" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="numeroQuestoes" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Semestre">
           <Key>
@@ -1477,11 +1477,11 @@
           <Property Name="idTipoProva" Type="Int32" Nullable="false" />
           <Property Name="idMed" Type="Int32" Nullable="false" />
           <Property Name="idModulo" Type="Int32" Nullable="false" />
-          <Property Name="valorQuestao" Type="Decimal" Precision="5" Scale="2" />
           <NavigationProperty Name="ControleNotasXProva" Relationship="pblsolutionModel.FK_ControleNotasXProva_Prova" FromRole="Prova" ToRole="ControleNotasXProva" />
           <NavigationProperty Name="Med" Relationship="pblsolutionModel.FK_Prova_Med" FromRole="Prova" ToRole="Med" />
           <NavigationProperty Name="Modulo" Relationship="pblsolutionModel.FK_Prova_Modulo" FromRole="Prova" ToRole="Modulo" />
           <NavigationProperty Name="TipoProva" Relationship="pblsolutionModel.FK_Prova_TipoProva" FromRole="Prova" ToRole="TipoProva" />
+          <Property Name="numeroQuestoes" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Semestre">
           <Key>
@@ -2132,7 +2132,7 @@
           <EntitySetMapping Name="Prova">
             <EntityTypeMapping TypeName="pblsolutionModel.Prova">
               <MappingFragment StoreEntitySet="Prova">
-                <ScalarProperty Name="valorQuestao" ColumnName="valorQuestao" />
+                <ScalarProperty Name="numeroQuestoes" ColumnName="numeroQuestoes" />
                 <ScalarProperty Name="idModulo" ColumnName="idModulo" />
                 <ScalarProperty Name="idMed" ColumnName="idMed" />
                 <ScalarProperty Name="idTipoProva" ColumnName="idTipoProva" />

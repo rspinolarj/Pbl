@@ -67,7 +67,7 @@ namespace Pbl.Models.DbClasses
             try
             {
                 Prova prova = db.Prova.SingleOrDefault(c => c.idProva == t.idProva);
-                prova.valorQuestao = t.valorQuestao;
+                prova.numeroQuestoes = t.numeroQuestoes;
                 prova.idTipoProva = t.idTipoProva;
                 db.SaveChanges();
             }
