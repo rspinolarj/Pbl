@@ -8,45 +8,62 @@
     Avaliação de @Model.LastOrDefault().FichaAvaliacao.AvaliacaoTutoria.ControleNotas.InscricaoTurma.Aluno.nomeAluno
     <small>Subtitle</small>
 </h3>
-@foreach (var item in Model)
-{
+@Html.BeginForm(){ 
+    @foreach (var item in Model)
+    {
     <!-- START row-->
-    <div class="row">
-        <div class="col-lg-6">
-            <!-- START panel-->
-            <div class="panel panel-default">
-                <div class="panel-heading">@item.idPergunta</div>
-                <div class="panel-body">
-                    <!-- START table-responsive-->
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                                <tr>
-                                    <th>@item.Pergunta.pergunta1</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td align="center">
-                                        <div class="input-group">
-                                            <div class="btn-group radioBtn">
-                                                <a class="btn btn-primary btn-sm notActive" data-toggle="hipotese+@item.idPergunta" data-title="1">SIM</a>
-                                                <a class="btn btn-primary btn-sm notActive" data-toggle="hipotese+@item.idPergunta" data-title="0">NÃO</a>
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- START panel-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">@item.idPergunta</div>
+                    <div class="panel-body">
+                        <!-- START table-responsive-->
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>@item.Pergunta.pergunta1</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td align="center">
+                                            <div class="input-group">
+                                                <div class="btn-group radioBtn">
+                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="hipotese+@item.idPergunta" data-title="1">SIM</a>
+                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="hipotese+@item.idPergunta" data-title="0">NÃO</a>
+                                                </div>
+                                                <input type="hidden" value="@item.marcado" name="respostas[]" id="hipotese+@item.idPergunta">
+                                                <input type="hidden" value="@item.idPergunta" name="perguntas[]">
                                             </div>
-                                            <input type="hidden" value="@item.marcado" name="hipotese[]" id="hipotese+@item.idPergunta">
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- END table-responsive-->
                     </div>
-                    <!-- END table-responsive-->
                 </div>
+                <!-- END panel-->
             </div>
-            <!-- END panel-->
         </div>
+    }
+    <hr class="hidden-print" />
+    <div class="clearfix">
+        <button type="button" class="btn btn-labeled btn-default" onclick="history.back();">
+            <span class="btn-label">
+                <i class="fa fa-arrow-left"></i>
+            </span>Voltar
+        </button>
+        <button type="submit" id="btnSubmit" class="btn btn-labeled btn-success pull-right">
+            <span class="btn-label">
+                <i class="fa fa-check"></i>
+            </span>Cadastrar
+        </button>
     </div>
 }
+
 
 
 @section Styles {
