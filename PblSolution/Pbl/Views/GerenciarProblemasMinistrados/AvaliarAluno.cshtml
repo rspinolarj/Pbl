@@ -8,7 +8,8 @@
     Avaliação de @Model.LastOrDefault().FichaAvaliacao.AvaliacaoTutoria.ControleNotas.InscricaoTurma.Aluno.nomeAluno
     <small>Subtitle</small>
 </h3>
-@Html.BeginForm(){ 
+@Html.BeginForm("InserirNotas", "GerenciarProblemasMinistrados"){ 
+    <input type="hidden" name="idFichaAvaliacao" value="@Model.FirstOrDefault().idFichaAvaliacao" />
     @foreach (var item in Model)
     {
     <!-- START row-->
@@ -31,10 +32,10 @@
                                         <td align="center">
                                             <div class="input-group">
                                                 <div class="btn-group radioBtn">
-                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="hipotese+@item.idPergunta" data-title="1">SIM</a>
-                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="hipotese+@item.idPergunta" data-title="0">NÃO</a>
+                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="@item.idPergunta" data-title="true">SIM</a>
+                                                    <a class="btn btn-primary btn-sm notActive" data-toggle="@item.idPergunta" data-title="false">NÃO</a>
                                                 </div>
-                                                <input type="hidden" value="@item.marcado" name="respostas[]" id="hipotese+@item.idPergunta">
+                                                <input type="hidden" value="@item.marcado" name="respostas[]" id="@item.idPergunta">
                                                 <input type="hidden" value="@item.idPergunta" name="perguntas[]">
                                             </div>
                                         </td>
@@ -63,6 +64,8 @@
         </button>
     </div>
 }
+    
+
 
 
 
