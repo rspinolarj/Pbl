@@ -66,19 +66,19 @@ namespace Pbl.Models.DbClasses
             throw new NotImplementedException();
         }
 
-        private decimal RetornaNota(int idControleNotas)
+        private double RetornaNota(int idControleNotas)
         {
             var controleNotas = db.ControleNotas.SingleOrDefault(c => c.idControleNotas == idControleNotas);
-            var provasMorfofuncionais = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Morfofuncional).ToList();
-            var provasTutoria = controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Tutoria).ToList();
-            var disciplinasMorfofuncionais = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Morfofuncional).ToList();
+            var provaMorfofuncional = controleNotas.ControleNotasXProva.SingleOrDefault(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Morfofuncional);
+            var provaTutoria = controleNotas.ControleNotasXProva.SingleOrDefault(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Tutoria);
+            var disciplinasFormativas = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Morfofuncional).ToList();
             var disciplinasPraticas = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Pratica).ToList();
-            List<decimal> notaProblema = new List<decimal>();
+            double notaProblema = 0;
             foreach (var avaliacaoTutoria in controleNotas.AvaliacaoTutoria)
             {
-                decimal notaAuto = 0;
-                decimal notaProfessor = 0;
-                decimal notaInterpartes = 0;
+                double notaAuto = 0;
+                double notaProfessor = 0;
+                double notaInterpartes = 0;
                 foreach (var fichaAvaliacao in avaliacaoTutoria.FichaAvaliacao)
                 {
                     if (fichaAvaliacao.Usuario.Aluno.Count > 0)
@@ -86,22 +86,26 @@ namespace Pbl.Models.DbClasses
                         Aluno aluno = fichaAvaliacao.Usuario.Aluno.FirstOrDefault();
                         if (aluno.idAluno == avaliacaoTutoria.ControleNotas.InscricaoTurma.idAluno)
                         {
-                            //notaAuto = 
+                            notaAuto = fichaAvaliacao.PerguntaXFicha.Count(c => c.marcado == true);
                         }
                         else
                         {
-
+                            notaInterpartes = fichaAvaliacao.PerguntaXFicha.Count(c => c.marcado == true);
                         }
                     }
                     else if (fichaAvaliacao.Usuario.Professor.Count > 0)
                     {
                         Professor professor = fichaAvaliacao.Usuario.Professor.FirstOrDefault();
+                        notaProfessor = fichaAvaliacao.PerguntaXFicha.Count(c => c.marcado == true);
                     }
                 }
+                notaProblema += (((notaProfessor * 0.2) + (notaAuto * 0.05) + ((notaInterpartes / avaliacaoTutoria.FichaAvaliacao.Count - 2) * 0.05)) / 0.9);
             }
-            var notaMorfofuncional = decimal.Zero;
-            var notaTutoria = decimal.Zero;
-            var notaFinal = decimal.Zero;
+            var notaTutoria = (notaProblema / controleNotas.AvaliacaoTutoria.Count()) + ((provaTutoria.Prova.numeroQuestoes / 70) * provaTutoria.numAcertos.Value);
+            var notaDisciplinasPraticas = disciplinasPraticas.Sum(c => c.nota.Value) / disciplinasPraticas.Count();
+            var notaDisciplinasFormativas = disciplinasFormativas.Sum(c => c.nota.Value) / disciplinasFormativas.Count();
+            var notaMorfofuncional = (((double)notaDisciplinasPraticas * 0.3) + ((double)notaDisciplinasFormativas * 0.2) + ((provaMorfofuncional.Prova.numeroQuestoes / 50) * provaMorfofuncional.numAcertos.Value));
+            var notaFinal = ((notaTutoria * 0.6) + (notaMorfofuncional * 0.4));
             return notaFinal;
         }
     }

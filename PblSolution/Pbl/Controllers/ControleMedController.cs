@@ -412,6 +412,12 @@ namespace Pbl.Controllers
             return View(listAvaliacoes);
         }
 
+        [Authorize]
+        public ActionResult InserirNotasSimulado(int[] idControleNotas, int[] numeroAcertos, int idProva)
+        {
+            return null;
+        }
+
         #endregion
 
         #region Medias
