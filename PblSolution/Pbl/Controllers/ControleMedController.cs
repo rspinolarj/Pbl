@@ -415,7 +415,16 @@ namespace Pbl.Controllers
         [Authorize]
         public ActionResult InserirNotasSimulado(int[] idControleNotas, int[] numeroAcertos, int idProva)
         {
-            return null;
+            MControleNotasXProva mControleNotasXProva = new MControleNotasXProva();
+            for (int i = 0; i < idControleNotas.Length; i++)
+            {
+                var item = idControleNotas[i];
+                ControleNotasXProva controleNotasXProva = mControleNotasXProva.BringOne(c => (c.idControleNotas == item) && (c.idProva == idProva));
+                controleNotasXProva.numAcertos = numeroAcertos[i];
+                mControleNotasXProva.Update(controleNotasXProva);
+            }
+            Prova prova = new MProva().BringOne(c => c.idProva == idProva);
+            return RedirectToAction("GerenciarSimulados", new { idMed = prova.idMed });
         }
 
         #endregion
