@@ -14,17 +14,24 @@
         <h4>ControleNotasXProva</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.idControleNotas)
-
-        @Html.HiddenFor(model => model.idProva)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.numAcertos, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.numAcertos, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.numAcertos, "", new { @class = "text-danger" })
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-xs-3 col-xs-offset-3">
+                    <div class="input-group number-spinner">
+                        <input type="hidden" name="idControleNotas[]" value="@item.ControleNotas.idControleNotas" />
+                        <span class="input-group-btn data-dwn">
+                            <button class="btn btn-default btn-info" data-dir="dwn"><span class="glyphicon glyphicon-minus"></span></button>
+                        </span>
+                        <input type="text" name="numAcertos[]" class="form-control text-center" value="1" min="-10" max="@item.Prova.numeroQuestoes">
+                        <span class="input-group-btn data-up">
+                            <button class="btn btn-default btn-info" data-dir="up"><span class="glyphicon glyphicon-plus"></span></button>
+                        </span>
+                    </div>
+                </div>
             </div>
-        </div>
+        }
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
