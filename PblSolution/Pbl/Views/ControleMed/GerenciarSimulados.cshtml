@@ -4,35 +4,71 @@
     ViewBag.Title = "GerenciarSimulados";
 }
 
-<h2>GerenciarSimulados</h2>
-
-<p>
-    @Html.ActionLink("Adicionar Simulado", "AdicionarSimulado", new { idMed = ViewBag.idMed })
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.numeroQuestoes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TipoProva.descTipoProva)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.numeroQuestoes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoProva.descTipoProva)
-            </td>
-            <td>
-                @Html.ActionLink("Avaliar", "AvaliarSimulado", new { idProva = item.idProva })
-            </td>
-        </tr>
+<script type="text/javascript">
+    $mensagem = "@ViewBag.Message";
+    if ($mensagem) {
+        alert($mensagem);
     }
+</script>
+<h3>
+    Controle de Simulados
+    <small> Página de Controle dos Simulados da @Model.FirstOrDefault().Med.descMed</small>
+</h3>
 
-</table>
+
+<div class="container-fluid">
+    <!-- START DATATABLE 1 -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+
+                    <a href="@Url.Action("AdicionarSimulado", "ControleDisciplinas")">
+                        <i class="fa fa-plus"></i>
+                        Adicionar Disciplina
+                    </a>
+
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="datatable1" class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Tipo de Simulado</th>
+                                    <th>Med</th>
+                                    <th>Módulo</th>
+                                    <th>Número de Questões</th>
+                                    <th>Opções</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="gradeX">
+                                        <td>@item.TipoProva.descTipoProva</td>
+                                        <td>@item.Med.descMed</td>
+                                        <td>@item.Modulo.descModulo</td>
+                                        <td>@item.numeroQuestoes</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info" title="Avaliar Alunos" onclick="window.location = '@Url.Action("AvaliarSimulado","ControleMed", new { idProva = item.idProva })'">
+                                                <em class="fa fa-bar-chart"></em>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    @Styles.Render("~/bundles/datatablesCss")
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/demoDatatable")
+}
