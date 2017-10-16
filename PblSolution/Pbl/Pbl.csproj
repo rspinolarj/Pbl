@@ -300,8 +300,10 @@
     <Compile Include="Models\ViewModel\AdicionarTurmaViewModel.cs" />
     <Compile Include="Models\ViewModel\AlunosGrupoViewModel.cs" />
     <Compile Include="Models\ViewModel\AlunosTurmaViewModel.cs" />
+    <Compile Include="Models\ViewModel\ControleNotasViewModel.cs" />
     <Compile Include="Models\ViewModel\DetalhesModuloViewModel.cs" />
     <Compile Include="Models\ViewModel\GerenciarMedViewModel.cs" />
+    <Compile Include="Models\ViewModel\GerenciarNotasViewModel.cs" />
     <Compile Include="Models\ViewModel\InscricaoAlunoViewModel.cs" />
     <Compile Include="Models\ViewModel\NotasProblemaViewModel.cs" />
     <Compile Include="Models\ViewModel\SelecionarAlunosViewModel.cs" />
@@ -1190,7 +1192,6 @@
     <Content Include="Views\ControleMed\GerenciarSimulados.cshtml" />
     <Content Include="Views\ControleMed\AdicionarSimulado.cshtml" />
     <Content Include="Views\ControleMed\AvaliarSimulado.cshtml" />
-    <Content Include="Views\ControleMed\GerenciarNotas.cshtml" />
     <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Usuarios\Delete.cshtml" />
     <Content Include="Views\Usuarios\Details.cshtml" />

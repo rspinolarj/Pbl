@@ -440,7 +440,23 @@ namespace Pbl.Controllers
             {
                 listAlunosInscritos.AddRange(mInscricaoTurma.Bring(c => c.idTurma == turma.idTurma));
             }
-            return View(listAlunosInscritos);
+            List<GerenciarNotasViewModel> listGerenciaNotas = new List<GerenciarNotasViewModel>();
+            MControleNotas mControleNotas = new MControleNotas();
+            foreach (var alunoInscrito in listAlunosInscritos)
+            {
+                GerenciarNotasViewModel notasAluno = new GerenciarNotasViewModel();
+                foreach (var controleNotas in alunoInscrito.ControleNotas)
+                {
+                    notasAluno.controleNotas.Add(new ControleNotasViewModel()
+                    {
+                        controleNotas = controleNotas,
+                        nota = mControleNotas.RetornaNota(controleNotas.idControleNotas)
+                    });
+                }
+                notasAluno.aluno = alunoInscrito;
+                listGerenciaNotas.Add(notasAluno);
+            }
+            return View(listGerenciaNotas);
         }
 
         #endregion
