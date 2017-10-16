@@ -445,6 +445,7 @@ namespace Pbl.Controllers
             foreach (var alunoInscrito in listAlunosInscritos)
             {
                 GerenciarNotasViewModel notasAluno = new GerenciarNotasViewModel();
+                notasAluno.controleNotas = new List<ControleNotasViewModel>();
                 foreach (var controleNotas in alunoInscrito.ControleNotas)
                 {
                     notasAluno.controleNotas.Add(new ControleNotasViewModel()
@@ -457,6 +458,12 @@ namespace Pbl.Controllers
                 listGerenciaNotas.Add(notasAluno);
             }
             return View(listGerenciaNotas);
+        }
+
+        [Authorize(Roles = "Diretor")]
+        public ActionResult AdicionarNotaRecuperacao(int idInscricaoTurma, double notaRecuperacao)
+        {
+            return null;
         }
 
         #endregion

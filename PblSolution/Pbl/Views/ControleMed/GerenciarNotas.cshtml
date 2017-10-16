@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Pbl.Models.ViewModel.GerenciarNotasViewModel>
+
+@{
+    ViewBag.Title = "GerenciarNotas";
+}
+
+<h2>GerenciarNotas</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Nome</th>
+        <th>Módulo 1</th>
+        <th>Módulo 2</th>
+        <th>Módulo 3</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.aluno.Aluno.nomeAluno
+            </td>
+            @foreach (var notaModulo in item.controleNotas)
+            {
+                <td>
+                    @notaModulo.nota
+                </td>
+            }
+            <td>
+                @Html.ActionLink("Recuperação", "AdicionarNotaRecuperacao", new { idInscricaoTurma = item.aluno.idInscricaoTurma })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -9,6 +9,5 @@ namespace Pbl.Models.ViewModel
     {
         public ControleNotas controleNotas { get; set; }
         public double nota { get; set; }
-
     }
 }

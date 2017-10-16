@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.Semestre.descSemestre)
         </td>
         <td>
-            @Html.ActionLink("Selecionar","SelecionarAlunos", new { idAula = ((Pbl.Models.Aula)ViewData["Aula"]).Turma.Med.descMed, idModulo = item.idModulo }, new { @class = "alter" })
+            @Html.ActionLink("Selecionar","SelecionarAlunos", new { idAula = ((Pbl.Models.Aula)ViewData["Aula"]).idAula, idModulo = item.idModulo }, new { @class = "alter" })
         </td>
     </tr>
 }
