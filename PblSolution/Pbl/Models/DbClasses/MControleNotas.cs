@@ -114,7 +114,12 @@ namespace Pbl.Models.DbClasses
             {
                 return 0;
             }
-
         }
+
+        public double retornaNotaProblema(int Ficha)
+        {
+            return 0;
+        }
+
     }
 }
