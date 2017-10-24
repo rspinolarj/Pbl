@@ -116,8 +116,39 @@ namespace Pbl.Models.DbClasses
             }
         }
 
-        public double retornaNotaProblema(int Ficha)
+        public double retornaNotaProblema(int idAvaliacaoTutoria)
         {
+            AvaliacaoTutoria avaliacaoTutoria = db.AvaliacaoTutoria.SingleOrDefault(c => c.idAvaliacaoTutoria == idAvaliacaoTutoria);
+            double notaAuto = 0;
+            double notaProfessor = 0;
+            double notaInterpartes = 0;
+            foreach (var fichaAvaliacao in avaliacaoTutoria.FichaAvaliacao)
+            {
+                if (fichaAvaliacao.Usuario.Aluno.Count > 0)
+                {
+                    Aluno aluno = fichaAvaliacao.Usuario.Aluno.FirstOrDefault();
+                    if (aluno.idAluno == avaliacaoTutoria.ControleNotas.InscricaoTurma.idAluno)
+                    {
+                        notaAuto = fichaAvaliacao.PerguntaXFicha.Count(c => c.marcado == true);
+                    }
+                    else
+                    {
+                        notaInterpartes = fichaAvaliacao.PerguntaXFicha.Count(c => c.marcado == true);
+                    }
+                }
+                else if (fichaAvaliacao.Usuario.Professor.Count > 0)
+                {
+                    Professor professor = fichaAvaliacao.Usuario.Professor.FirstOrDefault();
+                    notaProfessor = fichaAvaliacao.PerguntaXFicha.Count(c => c.marcado == true);
+                }
+            }
+            var notaProblema = (((notaProfessor * 0.2) + (notaAuto * 0.05) + ((notaInterpartes / avaliacaoTutoria.FichaAvaliacao.Count - 2) * 0.05)) / 0.9);
+            return notaProblema;
+        }
+
+        public double retornaNotaDisciplina(int idDisciplina)
+        {
+
             return 0;
         }
 
