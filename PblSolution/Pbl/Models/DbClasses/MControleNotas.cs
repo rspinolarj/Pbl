@@ -146,10 +146,21 @@ namespace Pbl.Models.DbClasses
             return notaProblema;
         }
 
-        public double retornaNotaDisciplina(int idDisciplina)
+        public double retornaNotaDisciplina(int idAula, int idControleNotas)
         {
+            var nota = db.ControleNotasXAula.SingleOrDefault(c => c.idAula == idAula && c.idControleNotas == idControleNotas).nota;
+            return nota.HasValue ? (double)nota.Value : 0;
+        }
 
-            return 0;
+        public double retornaNotaSimulado(int idControleNotas, int idProva)
+        {
+            var controleNotasXProva = db.ControleNotasXProva.SingleOrDefault(c => c.idProva == idProva && c.idControleNotas == idControleNotas);
+            double nota = 0;
+            if (controleNotasXProva.numAcertos.HasValue)
+            {
+                nota = (controleNotasXProva.Prova.numeroQuestoes / 70) * controleNotasXProva.numAcertos.Value;
+            }
+            return nota;
         }
 
     }
