@@ -11,30 +11,23 @@
          </a>
       </div>
       <div class="panel-body">
-         <p class="text-center pv">SIGN IN TO CONTINUE.</p>
+         <p class="text-center pv">Insira suas credenciais.</p>
           <form action="" method="post" class="form-styles">
               <div class="form-group has-feedback">
-                  <input id="exampleInputEmail1" name="login" autocomplete="off" required="required" class="form-control" />
+                  <input id="exampleInputEmail1" name="login" placeholder="Usuário" autocomplete="off" required="required" class="form-control" />
                   <span class="fa fa-envelope form-control-feedback text-muted"></span>
               </div>
               <div class="form-group has-feedback">
-                  <input id="exampleInputPassword1" name="senha" type="password" placeholder="Password" required="required" class="form-control" />
+                  <input id="exampleInputPassword1" name="senha" type="password" placeholder="Senha" required="required" class="form-control" />
                   <span class="fa fa-lock form-control-feedback text-muted"></span>
               </div>
               <div class="clearfix">
-                  <div class="checkbox c-checkbox pull-left mt0">
-                      <label>
-                          <input type="checkbox" value="" name="remember" />
-                          <span class="fa fa-check"></span>Remember Me
-                      </label>
-                  </div>
                   <div class="pull-right">
-                      <a href="@Url.Action("Recover", "Pages")" class="text-muted">Forgot your password?</a>
+                      <a href="@Url.Action("Recover", "Pages")" class="text-muted">Esqueceu a senha?</a>
                   </div>
               </div>
               <button type="submit" class="btn btn-block btn-primary mt-lg">Login</button>
           </form>
-         <p class="pt-lg text-center">Need to Signup?</p><a href="@Url.Action("Register", "Pages")" class="btn btn-block btn-default">Register Now</a>
       </div>
    </div>
    <!-- END panel-->
