@@ -28,32 +28,16 @@
                 <span>Main Navigation</span>
             </li>
             <li class="@Html.isActive(controller: "GerenciarDisciplinasMinistradas")">
-                <a href="#disciplinasMinistradas" title="GerenciarDisciplinasMinistradas" data-toggle="collapse">
+                <a href="@Url.Action("Index", "GerenciarDisciplinasMinistradas")" title="GerenciarDisciplinasMinistradas">
                     <em class="fa fa-th-list"></em>
                     <span data-localize="sidebar.nav.DISCIPLINASMINITRADAS">Disciplinas Ministradas</span>
                 </a>
-                <ul id="disciplinasMinistradas" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Disciplinas Ministradas</li>
-                    <li class="@Html.isActive("GerenciarDisciplinasMinistradas", "Index")">
-                        <a href="@Url.Action("Index", "GerenciarDisciplinasMinistradas")" title="Listar">
-                            <span>Listar</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="@Html.isActive(controller: "GerenciarProblemasMinistrados")">
-                <a href="#problemasMinistrados" title="GerenciarProblemasMinistrados" data-toggle="collapse">
+                <a href="@Url.Action("Index", "GerenciarProblemasMinistrados")" title="GerenciarProblemasMinistrados">
                     <em class="fa fa-list-alt "></em>
                     <span data-localize="sidebar.nav.PROBLEMASMINISTRADOS">Problemas Ministrados</span>
                 </a>
-                <ul id="problemasMinistrados" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Problemas Ministrados</li>
-                    <li class="@Html.isActive("GerenciarProblemasMinistrados", "Index")">
-                        <a href="@Url.Action("Index", "GerenciarProblemasMinistrados")" t title="Listar">
-                            <span>Listar</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
         </ul>
         <!-- END sidebar nav-->

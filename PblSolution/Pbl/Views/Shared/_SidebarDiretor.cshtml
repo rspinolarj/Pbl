@@ -28,141 +28,52 @@
                 <span>Main Navigation</span>
             </li>
             <li class="@Html.isActive(controller: "ControleAlunos")">
-                <a href="#alunos" title="ControleAlunos" data-toggle="collapse">
+                <a href="@Url.Action("Index", "ControleAlunos")" " title="ControleAlunos">
                     <em class="fa fa-user"></em>
                     <span data-localize="sidebar.nav.ALUNOS">Alunos</span>
                 </a>
-                <ul id="alunos" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Alunos</li>
-                    <li class="@Html.isActive("ControleAlunos", "Create")">
-                        <a href="@Url.Action("Create", "ControleAlunos")" title="Novo">
-                            <span>Novo</span>
-                        </a>
-                    </li>
-                    <li class="@Html.isActive("ControleAlunos", "Index")">
-                        <a href="@Url.Action("Index", "ControleAlunos")" title="Listar">
-                            <span>Listar</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="@Html.isActive(controller: "ControleDisciplinas")">
-                <a href="#disciplinas" title="ControleDisciplinas" data-toggle="collapse">
+                <a href="@Url.Action("Index", "ControleDisciplinas")" title="ControleDisciplinas">
                     <em class="fa fa-list"></em>
                     <span data-localize="sidebar.nav.DISCIPLINAS">Disciplinas</span>
                 </a>
-                <ul id="disciplinas" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Disciplinas</li>
-                    <li class="@Html.isActive("ControleDisciplinas", "Create")">
-                        <a href="@Url.Action("Create", "ControleDisciplinas")" title="Nova">
-                            <span>Novo</span>
-                        </a>
-                    </li>
-                    <li class="@Html.isActive("Disciplinas", "Index")">
-                        <a href="@Url.Action("Index", "ControleDisciplinas")" title="Listar">
-                            <span>Listar</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="@Html.isActive(controller: "ControleMed")">
-                <a href="#med" title="ControleMed" data-toggle="collapse">
+                <a href="@Url.Action("Index", "ControleMed")" title="ControleMed">
                     <em class="fa fa-user-md"></em>
                     <span data-localize="sidebar.nav.MED">Med</span>
                 </a>
-                <ul id="med" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Med</li>
-                    <li class="@Html.isActive("ControleMed", "Index")">
-                        <a href="@Url.Action("Index", "ControleMed")" title="Listar">
-                            <span>Listar</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="@Html.isActive(controller: "ControleSemestres")">
-                <a href="#semestre" title="ControleSemestres" data-toggle="collapse">
+                <a href="@Url.Action("Index", "ControleSemestres")" title="ControleSemestres">
                     <em class="fa fa-table"></em>
                     <span data-localize="sidebar.nav.SEMESTRE">Semestre</span>
                 </a>
-                <ul id="semestre" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Semestre</li>
-                    <li class="@Html.isActive("ControleSemestres", "Create")">
-                        <a href="@Url.Action("Create", "ControleSemestres")" title="Novo">
-                            <span>Novo</span>
-                        </a>
-                    </li>
-                    <li class="@Html.isActive("ControleSemestres", "Index")">
-                        <a href="@Url.Action("Index", "ControleSemestres")" title="Listar">
-                            <span>Listar</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="@Html.isActive(controller: "ControleProfessores")">
-                <a href="#professores" title="ControleProfessores" data-toggle="collapse">
+                <a href="@Url.Action("Index", "ControleProfessores")" title="ControleProfessores">
                     <em class="fa fa-graduation-cap"></em>
                     <span data-localize="sidebar.nav.PROFESSORES">Professores</span>
                 </a>
-                <ul id="professores" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Professores</li>
-                    <li class="@Html.isActive("ControleProfessores", "Create")">
-                        <a href="@Url.Action("Create", "ControleProfessores")" title="Novo">
-                            <span>Novo</span>
-                        </a>
-                    </li>
-                    <li class="@Html.isActive("ControleProfessores", "Index")">
-                        <a href="@Url.Action("Index", "ControleProfessores")" title="Listar">
-                            <span>Listar</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="@Html.isActive(controller: "ControleProblemas")">
-                <a href="#problemas" title="ControleSemestres" data-toggle="collapse">
+                <a href="@Url.Action("Index", "ControleProblemas")" title="ControleSemestres">
                     <em class="fa fa-warning"></em>
                     <span data-localize="sidebar.nav.PROBLEMAS">Problemas</span>
                 </a>
-                <ul id="problemas" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Problemas</li>
-                    <li class="@Html.isActive("ControleProblemas", "Create")">
-                        <a href="@Url.Action("Create", "ControleProblemas")" title="Novo">
-                            <span>Novo</span>
-                        </a>
-                    </li>
-                    <li class="@Html.isActive("ControleProblemas", "Index")">
-                        <a href="@Url.Action("Index", "ControleProblemas")" title="Listar">
-                            <span>Listar</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="@Html.isActive(controller: "GerenciarDisciplinasMinistradas")">
-                <a href="#disciplinasMinistradas" title="GerenciarDisciplinasMinistradas" data-toggle="collapse">
+                <a href="@Url.Action("Index", "GerenciarDisciplinasMinistradas")" title="GerenciarDisciplinasMinistradas">
                     <em class="fa fa-th-list"></em>
                     <span data-localize="sidebar.nav.DISCIPLINASMINITRADAS">Disciplinas Ministradas</span>
                 </a>
-                <ul id="disciplinasMinistradas" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Disciplinas Ministradas</li>
-                    <li class="@Html.isActive("GerenciarDisciplinasMinistradas", "Index")">
-                        <a href="@Url.Action("Index", "GerenciarDisciplinasMinistradas")" title="Listar">
-                            <span>Listar</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="@Html.isActive(controller: "GerenciarProblemasMinistrados")">
-                <a href="#problemasMinistrados" title="GerenciarProblemasMinistrados" data-toggle="collapse">
+                <a href="@Url.Action("Index", "GerenciarProblemasMinistrados")" title="GerenciarProblemasMinistrados">
                     <em class="fa fa-list-alt "></em>
                     <span data-localize="sidebar.nav.PROBLEMASMINISTRADOS">Problemas Ministrados</span>
                 </a>
-                <ul id="problemasMinistrados" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Problemas Ministrados</li>
-                    <li class="@Html.isActive("GerenciarProblemasMinistrados", "Index")">
-                        <a href="@Url.Action("Index", "GerenciarProblemasMinistrados")" t title="Listar">
-                            <span>Listar</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
         </ul>
         <!-- END sidebar nav-->
