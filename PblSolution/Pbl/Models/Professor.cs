@@ -24,6 +24,7 @@ namespace Pbl.Models
     
         public int idProfessor { get; set; }
         public string nomeProfessor { get; set; }
+        public string emailProfessor { get; set; }
         public string cpfProfessor { get; set; }
         public bool ativo { get; set; }
     

@@ -24,6 +24,8 @@ namespace Pbl.Models
         public int idAluno { get; set; }
         public string nomeAluno { get; set; }
         public string cpfAluno { get; set; }
+        public string telefoneAluno { get; set; }
+        public string emailAluno { get; set; }
         public string matriculaAluno { get; set; }
         public Nullable<bool> ativo { get; set; }
     

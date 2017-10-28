@@ -26,6 +26,8 @@ namespace Pbl.Models
         public string login { get; set; }
         public string senha { get; set; }
         public int idTipoUsuario { get; set; }
+        public string foto { get; set; }
+        public string email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FichaAvaliacao> FichaAvaliacao { get; set; }

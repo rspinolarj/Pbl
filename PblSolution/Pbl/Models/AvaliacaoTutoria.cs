@@ -27,10 +27,10 @@ namespace Pbl.Models
         public System.DateTime dtInicio { get; set; }
         public System.DateTime dtFim { get; set; }
     
+        public virtual ControleNotas ControleNotas { get; set; }
         public virtual Grupo Grupo { get; set; }
+        public virtual ProblemaXMed ProblemaXMed { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FichaAvaliacao> FichaAvaliacao { get; set; }
-        public virtual ControleNotas ControleNotas { get; set; }
-        public virtual ProblemaXMed ProblemaXMed { get; set; }
     }
 }

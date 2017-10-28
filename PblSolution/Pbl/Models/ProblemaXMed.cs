@@ -21,8 +21,8 @@ namespace Pbl.Models
         }
     
         public int idProblemaxMed { get; set; }
-        public Nullable<int> idProblema { get; set; }
-        public Nullable<int> idMed { get; set; }
+        public int idProblema { get; set; }
+        public int idMed { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AvaliacaoTutoria> AvaliacaoTutoria { get; set; }

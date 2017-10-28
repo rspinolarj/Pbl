@@ -26,10 +26,10 @@ namespace Pbl.Models
         public int idProfessor { get; set; }
         public bool ativo { get; set; }
     
+        public virtual Disciplina Disciplina { get; set; }
+        public virtual Professor Professor { get; set; }
         public virtual Turma Turma { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ControleNotasXAula> ControleNotasXAula { get; set; }
-        public virtual Disciplina Disciplina { get; set; }
-        public virtual Professor Professor { get; set; }
     }
 }

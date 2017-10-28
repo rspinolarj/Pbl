@@ -22,7 +22,7 @@ namespace Pbl.Models
         }
     
         public int idTurma { get; set; }
-        public Nullable<int> idMed { get; set; }
+        public int idMed { get; set; }
         public string descTurma { get; set; }
         public bool ativo { get; set; }
     

@@ -39,18 +39,18 @@
                <div class="panel b">
                   <div class="panel-heading bg-gray-lighter text-bold">Senha</div>
                   <div class="panel-body">
-                     <form action="" data-parsley-validate="">
+                     <form action="" data-parsley-validate="" novalidate="">
                         <div class="form-group">
                            <label>Senha Atual</label>
-                           <input type="password" class="form-control" />
+                           <input type="password" name="senhaAtual" required class="form-control" />
                         </div>
                         <div class="form-group">
                            <label>Nova Senha</label>
-                           <input type="password" name="senha", id="senha" class="form-control" />
+                           <input type="password" name="senha" required id="senha" class="form-control" />
                         </div>
                         <div class="form-group">
                            <label>Confirme a nova senha</label>
-                           <input type="password" name="confirmaSenha" class="form-control" data-parsley-equalto="#senha" />
+                           <input type="password" name="confirmaSenha" required class="form-control" data-parsley-equalto="#senha" />
                         </div>
                         <button type="button" class="btn btn-info">Salvar</button>
                      </form>

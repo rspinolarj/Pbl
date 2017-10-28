@@ -23,7 +23,7 @@ namespace Pbl.Models
     
         public int idSemestre { get; set; }
         public string descSemestre { get; set; }
-        public Nullable<int> idAno { get; set; }
+        public int idAno { get; set; }
         public bool ativo { get; set; }
     
         public virtual Ano Ano { get; set; }
