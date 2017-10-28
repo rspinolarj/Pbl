@@ -43,18 +43,16 @@ namespace Pbl.Controllers
             Usuario usuario = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
             viewModel.usuario = usuario.login;
             viewModel.senha = usuario.senha;
-            viewModel.email = usuario.;
+            viewModel.email = usuario.email;
             if (usuario.idTipoUsuario == (int)Enumeradores.TipoUsuario.Aluno)
             {
-                //viewModel.nome = 
+                viewModel.nome = usuario.Aluno.GetEnumerator().Current.nomeAluno;
             }
             else
             {
-
+                viewModel.nome = usuario.Professor.GetEnumerator().Current.nomeProfessor;
             }
-            return View();
+            return View(viewModel);
         }
-
-
     }
 }
