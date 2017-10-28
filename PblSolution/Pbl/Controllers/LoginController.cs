@@ -1,5 +1,7 @@
 ﻿using Pbl.Models;
 using Pbl.Models.DbClasses;
+using Pbl.Models.ViewModel;
+using System;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -33,9 +35,26 @@ namespace Pbl.Controllers
             return RedirectToAction("Login", "Login");
         }
 
+        [Authorize(Roles = "Diretor,Professor,Aluno")]
         public ActionResult Perfil()
         {
+            PerfilViewModel viewModel = new PerfilViewModel();
+            int idUsuario = Convert.ToInt32(User.Identity.Name);
+            Usuario usuario = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
+            viewModel.usuario = usuario.login;
+            viewModel.senha = usuario.senha;
+            viewModel.email = usuario.;
+            if (usuario.idTipoUsuario == (int)Enumeradores.TipoUsuario.Aluno)
+            {
+                //viewModel.nome = 
+            }
+            else
+            {
+
+            }
             return View();
         }
+
+
     }
 }

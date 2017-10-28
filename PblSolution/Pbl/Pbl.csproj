@@ -169,27 +169,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
-    <Compile Include="Models\Aluno.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Ano.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Aula.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AvaliacaoTutoria.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ControleNotas.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ControleNotasXAula.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ControleNotasXProva.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DbClasses\MAluno.cs" />
     <Compile Include="Models\DbClasses\MAula.cs" />
     <Compile Include="Models\DbClasses\MAvaliacaoTutoria.cs" />
@@ -216,23 +195,8 @@
     <Compile Include="Models\DbClasses\MTurma.cs" />
     <Compile Include="Models\DbClasses\MUsuarioAluno.cs" />
     <Compile Include="Models\DbClasses\MUsuarioProfessor.cs" />
-    <Compile Include="Models\Disciplina.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Enumeradores.cs" />
-    <Compile Include="Models\FichaAvaliacao.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Grupo.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IFunctions.cs" />
-    <Compile Include="Models\InscricaoTurma.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Med.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ModelFamerv.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -248,53 +212,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelFamerv.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Modulo.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Pergunta.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PerguntaXFicha.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Problema.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProblemaXMed.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Professor.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Prova.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Semestre.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Singletone.cs" />
     <Compile Include="Models\SiteRole.cs" />
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TipoDisciplina.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TipoProva.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TipoUsuario.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Turma.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usuario.cs">
-      <DependentUpon>ModelFamerv.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ViewModel\AdicionarDisciplinasViewModel.cs" />
     <Compile Include="Models\ViewModel\AdicionarTurmaViewModel.cs" />
     <Compile Include="Models\ViewModel\AlunosGrupoViewModel.cs" />
@@ -305,6 +224,7 @@
     <Compile Include="Models\ViewModel\GerenciarNotasViewModel.cs" />
     <Compile Include="Models\ViewModel\InscricaoAlunoViewModel.cs" />
     <Compile Include="Models\ViewModel\NotasProblemaViewModel.cs" />
+    <Compile Include="Models\ViewModel\PerfilViewModel.cs" />
     <Compile Include="Models\ViewModel\SelecionarAlunosViewModel.cs" />
     <Compile Include="Models\ViewModel\ListarAvaliacaoTutoriaViewModel.cs" />
     <Compile Include="Models\ViewModel\SemestreViewModel.cs" />
