@@ -46,11 +46,19 @@ namespace Pbl.Controllers
             viewModel.email = usuario.email;
             if (usuario.idTipoUsuario == (int)Enumeradores.TipoUsuario.Aluno)
             {
-                viewModel.nome = usuario.Aluno.GetEnumerator().Current.nomeAluno;
+                foreach (var item in usuario.Aluno)
+                {
+                    viewModel.nome = item.nomeAluno;
+                }
+                //viewModel.nome = usuario.Aluno.GetEnumerator().Current.nomeAluno;
             }
             else
             {
-                viewModel.nome = usuario.Professor.GetEnumerator().Current.nomeProfessor;
+                foreach (var item in usuario.Professor)
+                {
+                    viewModel.nome = item.nomeProfessor;
+                }
+                //.GetEnumerator().Current.nomeProfessor;
             }
             return View(viewModel);
         }

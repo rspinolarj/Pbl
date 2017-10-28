@@ -69,6 +69,7 @@ namespace Pbl.Models.DbClasses
                 user.login = t.login;
                 user.senha = t.senha;
                 user.idTipoUsuario = t.idTipoUsuario;
+                user.email = t.email;
                 db.SaveChanges();
             }
             catch (Exception Ex)
