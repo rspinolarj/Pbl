@@ -23,7 +23,7 @@ namespace Pbl.Controllers
                 return View();
             }
             FormsAuthentication.SetAuthCookie(user.idUsuario.ToString(), false);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize]
@@ -31,6 +31,11 @@ namespace Pbl.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Login");
+        }
+
+        public ActionResult Perfil()
+        {
+            return View();
         }
     }
 }

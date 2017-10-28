@@ -253,6 +253,10 @@ namespace Pbl.Controllers
                 if (!listProblemasAdicionar.Contains(item))
                 {
                     ProblemaXMed problemaXMed = mProblemaXMed.BringOne(c => (c.idMed == idMed) && (c.idProblema == item.idProblema));
+                    if (problemaXMed.AvaliacaoTutoria.Any(c => c.FichaAvaliacao.Any(y => y.PerguntaXFicha.Any(z => z.marcado != null))))
+                    {
+                        continue;
+                    }
                     mProblemaXMed.Delete(problemaXMed);
                 }
             }

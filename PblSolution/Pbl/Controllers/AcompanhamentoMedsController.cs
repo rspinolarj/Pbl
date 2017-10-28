@@ -102,6 +102,5 @@ namespace Pbl.Controllers
             List<AvaliacaoTutoria> avaliacoes = inscricaoTurma.ControleNotas.SelectMany(c => c.AvaliacaoTutoria.Where(x => (x.dtInicio < hoje) && (x.dtFim > hoje))).ToList();
             return View(avaliacoes);
         }
-
     }
 }
