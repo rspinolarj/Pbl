@@ -30,6 +30,7 @@
                                 <tr>
                                     <th class="all">Código</th>
                                     <th class="all">Grupo</th>
+                                    <th class="all">Tutor</th>
                                     <th class="all">Quantidade de Alunos</th>
                                     <th class="all">MED</th>
                                     <th class="all">Opções</th>
@@ -41,13 +42,14 @@
                                     <tr class="gradeX">
                                         <td>@grupo.idGrupo</td>
                                         <td>@grupo.descGrupo</td>
+                                        <td>@grupo.Professor.nomeProfessor</td>
                                         <td>@grupo.InscricaoTurma.Count</td>
                                         <td>@grupo.Med.descMed - @grupo.Med.Semestre.descSemestre</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("Update","ControleAlunos", new { id = grupo.idGrupo })'">
-                                                <em class="fa fa-pencil"></em>
+                                            <button type="button" class="btn btn-sm btn-default" title="Adicionar Alunos" onclick="window.location = '@Url.Action("AdicionarAlunosGrupo","ControleMed", new { idGrupo = grupo.idGrupo })'">
+                                                <em class="fa fa-user-plus"></em>
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '@Url.Action("Delete","ControleAlunos", new { id = grupo.idGrupo })'">
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '@Url.Action("DeletarGrupo","ControleMed", new { idGrupo = grupo.idGrupo })'">
                                                 <em class="fa fa-times"></em>
                                             </button>
 

@@ -4,73 +4,233 @@
     ViewBag.Title = "View";
 }
 
-<h1>Grupo: @Model.grupo.descGrupo</h1>
-<h1>Professor: @Model.grupo.Professor.nomeProfessor</h1>
+<h3>
+    Grupo: @Model.grupo.descGrupo
+    <small>Adicionar alunos ao grupo @Model.grupo.descGrupo</small>
+    <small>Tutor: @Model.grupo.Professor.nomeProfessor</small>
+</h3>
 
-<h2>Alunos Cadastrados</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            Nome
-        </th>
-        <th>
-            Cpf
-        </th>
-        <th>
-            Matricula
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model.AlunosInscritos)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aluno.nomeAluno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aluno.cpfAluno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aluno.matriculaAluno)
-            </td>
-            <td><a href="@Url.Action("RemoverAlunosGrupo", "ControleMed", new { idGrupo = Model.grupo.idGrupo, idInscricaoTurma = item.idInscricaoTurma })">Desvincular</a></td>
-        </tr>
-    }
+<form action="@Url.Action("AdicionarAlunosGrupo","ControleMed")" id="frmAlunoGrupo" method="post">
 
-</table>
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <!-- START DATATABLE 1 -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>Alunos Disponíveis</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
 
-<h2>Alunos Disponiveis</h2>
+                            <table id="example" class="display DataTable" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Inscrição na turma</th>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var aluno in Model.AlunosDisponiveis)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => aluno.idInscricaoTurma)</td>
+                                            <td>@Html.DisplayFor(modelItem => aluno.Aluno.nomeAluno)</td>
+                                            <td>@Html.DisplayFor(modelItem => aluno.Aluno.cpfAluno)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
 
-<table class="table">
-    <tr>
-        <th>
-            Nome
-        </th>
-        <th>
-            Cpf
-        </th>
-        <th>
-            Matricula
-        </th>
-        <th></th>
-    </tr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" style="text-align:center;">
+                <button type="button" id="delRow" class="btn btn-labeled btn-default">
+                    <i class="fa fa-arrow-up"></i>
+                </button>
+                <button type="button" id="addRow" class="btn btn-labeled btn-default">
+                    <i class="fa fa-arrow-down"></i>
+                </button>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2>Alunos Selecionados</h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="datatableDemo2" class="display DataTable" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>Inscrição na Turma</th>
+                                        <th>Nome</th>
+                                        <th>CPF</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var aluno in Model.AlunosInscritos)
+                                    {
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => aluno.idInscricaoTurma)</td>
+                                            <td>@Html.DisplayFor(modelItem => aluno.Aluno.nomeAluno)</td>
+                                            <td>@Html.DisplayFor(modelItem => aluno.Aluno.cpfAluno)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div id="hiddensForm">
+                                <input type="hidden" name="idGrupo" value="@Model.grupo.idGrupo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="hidden-print" />
+                <div class="clearfix">
+                    <button type="button" class="btn btn-labeled btn-default" id="btnVoltar" onclick="history.back();">
+                        <span class="btn-label">
+                            <i class="fa fa-arrow-left"></i>
+                        </span>Voltar
+                    </button>
+                    <button type="button" id="enviaForm" class="btn btn-labeled btn-success pull-right">
+                        Salvar
+                        <span class="btn-label btn-label-right">
+                            <i class="fa fa-arrow-right"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
-    @foreach (var item in Model.AlunosDisponiveis)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aluno.nomeAluno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aluno.cpfAluno)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aluno.matriculaAluno)
-            </td>
-            <td><a href="@Url.Action("AdicionarAlunosGrupo", "ControleMed", new { idGrupo = Model.grupo.idGrupo, idInscricaoTurma = item.idInscricaoTurma })">Vincular</a></td>
-        </tr>
-    }
+@section Styles {
+    @Styles.Render("~/bundles/datatablesCss")
+    <link href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/demoDatatable")
 
-</table>
+    <script>
+        var dtInstance2 = $('#datatableDemo2').dataTable({
+            'paging': true,  // Table pagination
+            'ordering': true,  // Column ordering
+            'info': true,  // Bottom left status text
+            'responsive': true, // https://datatables.net/extensions/responsive/examples/
+            // Text translation options
+            // Note the required keywords between underscores (e.g _MENU_)
+            oLanguage: {
+                sSearch: 'Search all columns:',
+                sLengthMenu: '_MENU_ records per page',
+                info: 'Showing page _PAGE_ of _PAGES_',
+                zeroRecords: 'Nothing found - sorry',
+                infoEmpty: 'No records available',
+                infoFiltered: '(filtered from _MAX_ total records)'
+            }
+        });
+        var inputSearchClass = 'datatable_input_col_search';
+        var columnInputs = $('tfoot .' + inputSearchClass);
+
+        // On input keyup trigger filtering
+        columnInputs
+            .keyup(function () {
+                dtInstance2.fnFilter(this.value, columnInputs.index(this));
+            });
+
+    </script>
+    <script>
+
+        $(document).ready(function () {
+            var oTable = $('#example').DataTable();
+            var dTable = $('#datatableDemo2').DataTable();
+
+            $('#example tbody').on('click', 'tr', function () {
+                $(this).toggleClass('selected');
+                var pos = oTable.row(this).index();
+                var row = oTable.row(pos).data();
+                console.log(row);
+            });
+
+            $('#datatableDemo2 tbody').on('click', 'tr', function () {
+                $(this).toggleClass('selected');
+                var pos = dTable.row(this).index();
+                var row = dTable.row(pos).data();
+                console.log(row);
+            });
+
+
+            $('#addRow').click(function () {
+                var oData = oTable.rows('.selected').data();
+
+                for (var i = 0; i < oData.length; i++) {
+
+                    dTable.row.add([
+                        oData[i][0],
+                        oData[i][1],
+                        oData[i][2]
+                    ]).draw(false);
+
+                    //alert("Disciplina: " + oData[i][0] + " Tipo de Disciplina: " + oData[i][1]);
+                }
+                var rows = oTable
+                    .rows('.selected')
+                    .remove()
+                    .draw();
+
+            });
+            $('#delRow').click(function () {
+                var dData = dTable.rows('.selected').data();
+
+                for (var i = 0; i < dData.length; i++) {
+
+                    oTable.row.add([
+                        dData[i][0],
+                        dData[i][1],
+                        dData[i][2]
+                    ]).draw(false);
+
+
+
+                    //alert("Disciplina: " + oData[i][0] + " Tipo de Disciplina: " + oData[i][1]);
+                }
+                var rows = dTable
+                    .rows('.selected')
+                    .remove()
+                    .draw();
+
+            });
+        });
+    </script>
+    <script>
+        var table = $('#datatableDemo2').DataTable();
+
+        // Handle form submission event
+        $('#enviaForm').on('click', function (e) {
+            e.preventDefault();
+            table
+                .column(0)
+                .data()
+                .each(function (value, index) {
+                    $('#hiddensForm').append(
+                        $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('name', 'problemas[]')
+                            .val(value)
+                    );
+                });
+            document.getElementById("frmAlunoGrupo").submit();
+        });
+    </script>
+
+}
