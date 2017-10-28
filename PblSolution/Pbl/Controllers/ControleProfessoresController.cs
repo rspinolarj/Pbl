@@ -39,7 +39,7 @@ namespace Pbl.Controllers
                 novo.idTipoUsuario = 3;
                 new MUsuario().Add(novo);
                 TempData["Message"] = new MUsuarioProfessor().Add(novo.idUsuario, professor.idProfessor) ? "Professor cadastrado" : "Ação não foi realizada";
-            }            
+            }
             return RedirectToAction("Create");
         }
 
@@ -55,7 +55,22 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult Update(Professor professor, bool tornarDiretor)
         {
-            TempData["Message"] = new MProfessor().Update(professor) ? "Professor atualizado com sucesso" : "Ação não foi realizada";
+            MProfessor mProfessor = new MProfessor();
+            Usuario usuarioProfessor = mProfessor.BringOne(c => c.idProfessor == professor.idProfessor).Usuario.FirstOrDefault();
+            if (usuarioProfessor.idTipoUsuario != (int)Enumeradores.TipoUsuario.Diretor)
+            {
+                if (tornarDiretor)
+                {
+                    usuarioProfessor.idTipoUsuario = (int)Enumeradores.TipoUsuario.Diretor;
+                    MUsuario mUsuario = new MUsuario();
+                    mUsuario.Update(usuarioProfessor);
+                    int idUsuario = Convert.ToInt32(User.Identity.Name);
+                    Usuario usuarioAtual = mUsuario.BringOne(c => c.idUsuario == idUsuario);
+                    usuarioAtual.idTipoUsuario = (int)Enumeradores.TipoUsuario.Professor;
+                    mUsuario.Update(usuarioAtual);
+                }
+            }
+            TempData["Message"] = mProfessor.Update(professor) ? "Professor atualizado com sucesso" : "Ação não foi realizada";
             return RedirectToAction("Index");
         }
 

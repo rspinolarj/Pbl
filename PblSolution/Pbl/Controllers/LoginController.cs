@@ -33,7 +33,7 @@ namespace Pbl.Controllers
             return RedirectToAction("Login", "Login");
         }
 
-        public ActionResult EsqueciASenha()
+        public ActionResult Perfil()
         {
             return View();
         }
