@@ -53,7 +53,7 @@ namespace Pbl.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Diretor")]
-        public ActionResult Update(Professor professor)
+        public ActionResult Update(Professor professor, bool tornarDiretor)
         {
             TempData["Message"] = new MProfessor().Update(professor) ? "Professor atualizado com sucesso" : "Ação não foi realizada";
             return RedirectToAction("Index");
