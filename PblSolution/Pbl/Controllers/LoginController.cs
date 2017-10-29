@@ -25,6 +25,10 @@ namespace Pbl.Controllers
                 return View();
             }
             FormsAuthentication.SetAuthCookie(user.idUsuario.ToString(), false);
+            if (string.IsNullOrEmpty(user.email))
+            {
+                RedirectToAction("Perfil");
+            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -61,6 +65,23 @@ namespace Pbl.Controllers
                 //.GetEnumerator().Current.nomeProfessor;
             }
             return View(viewModel);
+        }
+
+        [Authorize(Roles = "Diretor,Professor,Aluno")]
+        public ActionResult AtualizarInformacoes()
+        {
+            return null;
+        }
+
+        [Authorize(Roles = "Diretor,Professor,Aluno")]
+        public ActionResult AlterarSenha()
+        {
+            return null;
+        }
+
+        public ActionResult RecuperarSenha()
+        {
+            return View();
         }
     }
 }
