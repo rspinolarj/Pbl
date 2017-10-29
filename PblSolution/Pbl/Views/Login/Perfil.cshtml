@@ -1,4 +1,4 @@
-
+@model Pbl.Models.ViewModel.PerfilViewModel
 <div class="container-md">
    <div class="row">
       <div class="col-md-3">
@@ -16,21 +16,21 @@
                <div class="panel b">
                   <div class="panel-heading bg-gray-lighter text-bold">Perfil</div>
                   <div class="panel-body">
-                     <form action="">
+                     <form action="@Url.Action("AtualizarInformacoes","Login")">
                         <div class="form-group">
                            <label>Foto</label>
-                           <input type="file" data-input="false" data-classbutton="btn btn-default" data-classinput="form-control inline" data-buttontext="Nova Foto" data-iconname="fa fa-upload mr" class="form-control filestyle"
+                           <input type="file" name="foto" data-input="false" data-classbutton="btn btn-default" data-classinput="form-control inline" data-buttontext="Nova Foto" data-iconname="fa fa-upload mr" class="form-control filestyle"
                            />
                         </div>
                         <div class="form-group">
                            <label>Nome</label>
-                           <input type="text" class="form-control" />
+                           <input type="text" name="nome" readonly value="@Model.nome" class="form-control" />
                         </div>
                         <div class="form-group">
                            <label>Email</label>
-                           <input type="email" class="form-control" />
+                           <input type="email" required name="email" value="@Model.email" class="form-control" />
                         </div>
-                        <button type="button" class="btn btn-info">Salvar</button>
+                        <button type="submit" class="btn btn-info">Salvar</button>
                      </form>
                   </div>
                </div>
@@ -39,11 +39,7 @@
                <div class="panel b">
                   <div class="panel-heading bg-gray-lighter text-bold">Senha</div>
                   <div class="panel-body">
-                     <form action="" data-parsley-validate="" novalidate="">
-                        <div class="form-group">
-                           <label>Senha Atual</label>
-                           <input type="password" name="senhaAtual" required class="form-control" />
-                        </div>
+                     <form action="@Url.Action("AlterarSenha","Login")" data-parsley-validate="" novalidate="">
                         <div class="form-group">
                            <label>Nova Senha</label>
                            <input type="password" name="senha" required id="senha" class="form-control" />
@@ -52,7 +48,7 @@
                            <label>Confirme a nova senha</label>
                            <input type="password" name="confirmaSenha" required class="form-control" data-parsley-equalto="#senha" />
                         </div>
-                        <button type="button" class="btn btn-info">Salvar</button>
+                        <button type="submit" class="btn btn-info">Salvar</button>
                      </form>
                   </div>
                </div>

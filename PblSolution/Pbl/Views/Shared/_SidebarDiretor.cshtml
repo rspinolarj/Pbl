@@ -10,14 +10,13 @@
                         <!-- User picture-->
                         <div class="user-block-picture">
                             <div class="user-block-status">
-                                <img src="~/Content/Images/user/02.jpg" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
+                                <img src="~/Content/Images/user/default-user.png" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle" />
                                 <div class="circle circle-success circle-lg"></div>
                             </div>
                         </div>
                         <!-- Name and Job-->
                         <div class="user-block-info">
-                            <span class="user-block-name">Hello, Mike</span>
-                            <span class="user-block-role">Designer</span>
+                            <span class="user-block-name">@Html.ActionLink("Ver Perfil","Perfil","Login")</span>
                         </div>
                     </div>
                 </div>
@@ -28,7 +27,7 @@
                 <span>Main Navigation</span>
             </li>
             <li class="@Html.isActive(controller: "ControleAlunos")">
-                <a href="@Url.Action("Index", "ControleAlunos")" " title="ControleAlunos">
+                <a href="@Url.Action("Index", "ControleAlunos")" title="ControleAlunos">
                     <em class="fa fa-user"></em>
                     <span data-localize="sidebar.nav.ALUNOS">Alunos</span>
                 </a>

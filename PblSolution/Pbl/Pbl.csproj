@@ -521,6 +521,7 @@
     <Content Include="Content\Images\user\11.jpg" />
     <Content Include="Content\Images\user\12.jpg" />
     <Content Include="Content\Images\user\13.jpg" />
+    <Content Include="Content\Images\user\default-user.png" />
     <Content Include="Content\Json\xeditable.res" />
     <Content Include="Content\mvc-override.css" />
     <Content Include="favicon.ico" />

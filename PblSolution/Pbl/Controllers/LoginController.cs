@@ -68,13 +68,13 @@ namespace Pbl.Controllers
         }
 
         [Authorize(Roles = "Diretor,Professor,Aluno")]
-        public ActionResult AtualizarInformacoes()
+        public ActionResult AtualizarInformacoes(string email)
         {
             return null;
         }
 
         [Authorize(Roles = "Diretor,Professor,Aluno")]
-        public ActionResult AlterarSenha()
+        public ActionResult AlterarSenha(string senha)
         {
             return null;
         }
