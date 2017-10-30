@@ -1,39 +1,12 @@
-﻿@model Pbl.Models.ViewModel.GerenciarNotasViewModel
+﻿@model IEnumerable<Pbl.Models.ViewModel.DetalhesModuloAlunoViewModel>
 
 @{
     ViewBag.Title = "DetalhesMed";
 }
 
-<h2>DetalhesMed</h2>
+<h2>@ViewBag.DescMed</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Modulo
-        </th>
-        <th>
-            Nota
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.controleNotas)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.controleNotas.Modulo.descModulo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nota)
-            </td>
-            <td>
-                @Html.ActionLink("Detalhes", "DetalhesModulo", new { id = item.controleNotas.idControleNotas })
-            </td>
-        </tr>
-    }
-
-
-</table>
+@foreach (var modulo in Model)
+{
+    <div></div>
+}

@@ -31,23 +31,23 @@ namespace Pbl.Controllers
             {
                 descMed = "MED 2",
                 descSemestre = "2017.1",
-                idMed = 1,
+                idMed = 2,
                 notas = new int[] { 70, 82, 60 }
             });
             viewModel.Add(new ListagemMedsAlunoViewModel()
             {
                 descMed = "MED 3",
                 descSemestre = "2017.2",
-                idMed = 1,
+                idMed = 3,
                 notas = new int[] { 100, 85, 80 }
             });
-            return View();
+            return View(viewModel);
         }
 
         [Authorize(Roles = "Aluno")]
-        public ActionResult DetalhesMed(int id)
+        public ActionResult DetalhesMed(int idMed)
         {
-            InscricaoTurma inscricaoTurma = new MInscricaoTurma().BringOne(c => c.idInscricaoTurma == id);
+            /*InscricaoTurma inscricaoTurma = new MInscricaoTurma().BringOne(c => c.idInscricaoTurma == id);
             MControleNotas mControleNotas = new MControleNotas();
             GerenciarNotasViewModel viewModel = new GerenciarNotasViewModel();
             viewModel.controleNotas = new List<ControleNotasViewModel>();
@@ -59,7 +59,131 @@ namespace Pbl.Controllers
                     nota = mControleNotas.RetornaNota(item.idControleNotas)
                 };
                 viewModel.controleNotas.Add(novo);
-            }
+            }*/
+            ViewBag.DescMed = "MED 2 - 2017.2";
+            List<DetalhesModuloAlunoViewModel> viewModel = new List<DetalhesModuloAlunoViewModel>();
+            viewModel.Add(new DetalhesModuloAlunoViewModel()
+            {
+                descModulo = "Módulo 1",
+                notaSimuladoMorfofuncional = 50,
+                notaSimuladoTutoria = 70,
+                disciplinas = new List<DetalhesDisciplinaAlunoViewModel>
+                {
+                    new DetalhesDisciplinaAlunoViewModel()
+                    {
+                        descDisciplina = "Anatomia",
+                        nota = 70,
+                        tipoAvaliacao = "Pratica"
+                    },
+                    new DetalhesDisciplinaAlunoViewModel
+                    {
+                        descDisciplina = "Histologia",
+                        nota = 100,
+                        tipoAvaliacao = "Pratica"
+                    },
+                    new DetalhesDisciplinaAlunoViewModel()
+                    {
+                        descDisciplina = "Farmaco",
+                        nota = 85,
+                        tipoAvaliacao = "Formativa"
+
+                    },
+                },
+                problemas = new List<DetalhesProblemaAlunoViewModel>
+                {
+                    new DetalhesProblemaAlunoViewModel()
+                    {
+                        tituloProblema = "Problema 1",
+                        notaFinal = 25
+                    },
+                    new DetalhesProblemaAlunoViewModel()
+                    {
+                        tituloProblema = "Problema 2",
+                        notaFinal = 30
+                    }
+                }
+            });
+            viewModel.Add(new DetalhesModuloAlunoViewModel()
+            {
+                descModulo = "Módulo 2",
+                notaSimuladoMorfofuncional = 50,
+                notaSimuladoTutoria = 70,
+                disciplinas = new List<DetalhesDisciplinaAlunoViewModel>
+                {
+                    new DetalhesDisciplinaAlunoViewModel()
+                    {
+                        descDisciplina = "Anatomia",
+                        nota = 75,
+                        tipoAvaliacao = "Pratica"
+                    },
+                    new DetalhesDisciplinaAlunoViewModel
+                    {
+                        descDisciplina = "Histologia",
+                        nota = 89,
+                        tipoAvaliacao = "Pratica"
+                    },
+                    new DetalhesDisciplinaAlunoViewModel()
+                    {
+                        descDisciplina = "Farmaco",
+                        nota = 95,
+                        tipoAvaliacao = "Formativa"
+                    },
+                },
+                problemas = new List<DetalhesProblemaAlunoViewModel>
+                {
+                    new DetalhesProblemaAlunoViewModel()
+                    {
+                        tituloProblema = "Problema 3",
+                        notaFinal = 25
+                    },
+                    new DetalhesProblemaAlunoViewModel()
+                    {
+                        tituloProblema = "Problema 4",
+                        notaFinal = 30
+                    }
+                }
+            });
+            viewModel.Add(new DetalhesModuloAlunoViewModel()
+            {
+                descModulo = "Módulo 3",
+                notaSimuladoMorfofuncional = 50,
+                notaSimuladoTutoria = 70,
+                disciplinas = new List<DetalhesDisciplinaAlunoViewModel>
+                {
+                    new DetalhesDisciplinaAlunoViewModel()
+                    {
+                        descDisciplina = "Anatomia",
+                        nota = 70,
+                        tipoAvaliacao = "Pratica"
+                    },
+                    new DetalhesDisciplinaAlunoViewModel
+                    {
+                        descDisciplina = "Histologia",
+                        nota = 80,
+                        tipoAvaliacao = "Pratica"
+                    },
+                    new DetalhesDisciplinaAlunoViewModel()
+                    {
+                        descDisciplina = "Farmaco",
+                        nota = 80,
+                        tipoAvaliacao = "Formativa"
+
+                    },
+                },
+                problemas = new List<DetalhesProblemaAlunoViewModel>
+                {
+                    new DetalhesProblemaAlunoViewModel()
+                    {
+                        tituloProblema = "Problema 5",
+                        notaFinal = 25
+                    },
+                    new DetalhesProblemaAlunoViewModel()
+                    {
+                        tituloProblema = "Problema 6",
+                        notaFinal = 30
+                    }
+                }
+            });
             return View(viewModel);
         }
 

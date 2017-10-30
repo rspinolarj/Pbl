@@ -300,7 +300,10 @@
     <Compile Include="Models\ViewModel\AlunosGrupoViewModel.cs" />
     <Compile Include="Models\ViewModel\AlunosTurmaViewModel.cs" />
     <Compile Include="Models\ViewModel\ControleNotasViewModel.cs" />
+    <Compile Include="Models\ViewModel\DetalhesDisciplinaAlunoViewModel.cs" />
+    <Compile Include="Models\ViewModel\DetalhesModuloAlunoViewModel.cs" />
     <Compile Include="Models\ViewModel\DetalhesModuloViewModel.cs" />
+    <Compile Include="Models\ViewModel\DetalhesProblemaAlunoViewModel.cs" />
     <Compile Include="Models\ViewModel\GerenciarMedViewModel.cs" />
     <Compile Include="Models\ViewModel\GerenciarNotasViewModel.cs" />
     <Compile Include="Models\ViewModel\InscricaoAlunoViewModel.cs" />
