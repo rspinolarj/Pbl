@@ -1185,7 +1185,7 @@
     <Content Include="Views\Pages\Lock.cshtml" />
     <Content Include="Views\Pages\Login.cshtml" />
     <Content Include="Views\Pages\Maintenance.cshtml" />
-    <Content Include="Views\Pages\Recover.cshtml" />
+    <Content Include="Views\Login\Recover.cshtml" />
     <Content Include="Views\Pages\Register.cshtml" />
     <Content Include="Views\Pages\Template.cshtml" />
     <Content Include="Views\GerenciarProblemasMinistrados\AvaliarAluno.cshtml" />

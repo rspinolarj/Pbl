@@ -13,6 +13,7 @@
     <small>Formulário para atualização de Professor</small>
 </h3>
 <form action="" method="post" class="form-horizontal" onsubmit="return validaForm();">
+    <input type="hidden" name="idProfessor" value="@Model.idProfessor" />
     <div class="panel panel-default">
         <div class="panel-heading">Update</div>
         <div class="panel-body">
@@ -32,6 +33,14 @@
                     <div class="col-sm-10">
                         <input type="text" required name="cpfProfessor" placeholder="CPF" id="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" onblur="msgErroCpf();" class="form-control input-sm" value="@Model.cpfProfessor" />
                         <span id="msgCpf" class="text-danger small"></span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Tornar Diretor</label>
+                    <div class="col-sm-10">
+                        <input type="checkbox" name="tornarDiretor" value="1" />
                     </div>
                 </div>
             </fieldset>

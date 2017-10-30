@@ -53,13 +53,13 @@ namespace Pbl.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Diretor")]
-        public ActionResult Update(Professor professor, bool tornarDiretor)
+        public ActionResult Update(Professor professor, bool? tornarDiretor)
         {
             MProfessor mProfessor = new MProfessor();
             Usuario usuarioProfessor = mProfessor.BringOne(c => c.idProfessor == professor.idProfessor).Usuario.FirstOrDefault();
             if (usuarioProfessor.idTipoUsuario != (int)Enumeradores.TipoUsuario.Diretor)
             {
-                if (tornarDiretor)
+                if (tornarDiretor.HasValue && tornarDiretor.Value)
                 {
                     usuarioProfessor.idTipoUsuario = (int)Enumeradores.TipoUsuario.Diretor;
                     MUsuario mUsuario = new MUsuario();

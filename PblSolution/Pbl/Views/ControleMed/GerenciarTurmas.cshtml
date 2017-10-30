@@ -42,10 +42,10 @@
                                         <td>@turma.descTurma</td>
                                         <td>@turma.Med.descMed - @turma.Med.Semestre.descSemestre</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("Update","ControleAlunos", new { id = turma.idTurma })'">
-                                                <em class="fa fa-pencil"></em>
+                                            <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("AdicionarAlunosTurma","ControleMed", new { idTurma = turma.idTurma})'">
+                                                <em class="fa fa-user-plus"></em>
                                             </button>
-                                            <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '@Url.Action("Delete","ControleAlunos", new { id = turma.idTurma })'">
+                                            <button type="button" class="btn btn-sm btn-danger" onclick="window.location = '@Url.Action("Delete","ControleAlunos", new { idTurma = turma.idTurma })'">
                                                 <em class="fa fa-times"></em>
                                             </button>
 

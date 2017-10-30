@@ -23,9 +23,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
 
-                    <a href="@Url.Action("AdicionarSimulado", "ControleDisciplinas")">
+                    <a href="@Url.Action("AdicionarSimulado", "ControleMed", new {idMed = Model.FirstOrDefault().idMed })">
                         <i class="fa fa-plus"></i>
-                        Adicionar Disciplina
+                        Adicionar Simulado
                     </a>
 
                 </div>
@@ -34,9 +34,9 @@
                         <table id="datatable1" class="table table-striped table-hover">
                             <thead>
                                 <tr>
+                                    <th>Módulo</th>
                                     <th>Tipo de Simulado</th>
                                     <th>Med</th>
-                                    <th>Módulo</th>
                                     <th>Número de Questões</th>
                                     <th>Opções</th>
                                 </tr>
@@ -45,9 +45,9 @@
                                 @foreach (var item in Model)
                                 {
                                     <tr class="gradeX">
+                                        <td>@item.Modulo.descModulo</td>
                                         <td>@item.TipoProva.descTipoProva</td>
                                         <td>@item.Med.descMed</td>
-                                        <td>@item.Modulo.descModulo</td>
                                         <td>@item.numeroQuestoes</td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-info" title="Avaliar Alunos" onclick="window.location = '@Url.Action("AvaliarSimulado","ControleMed", new { idProva = item.idProva })'">
@@ -63,6 +63,14 @@
             </div>
         </div>
     </div>
+</div>
+<hr class="hidden-print" />
+<div class="clearfix">
+    <button type="button" class="btn btn-labeled btn-default" onclick="window.location = '@Url.Action("GerenciarMed","ControleMed", new { id = Model.FirstOrDefault().idMed })'">
+        <span class="btn-label">
+            <i class="fa fa-arrow-left"></i>
+        </span>Voltar
+    </button>
 </div>
 
 @section Styles {
