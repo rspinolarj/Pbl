@@ -4,44 +4,65 @@
     ViewBag.Title = "SelecionarAlunos";
 }
 
-<h2>SelecionarAlunos</h2>
+<h3>
+    Turma: @(((Pbl.Models.Aula)ViewData["Aula"]).Turma.descTurma) |
+    Disciplina: @(((Pbl.Models.Aula)ViewData["Aula"]).Disciplina.descDisciplina) |
+    Módulo: @Model.FirstOrDefault().inscricao.ControleNotas.FirstOrDefault().Modulo.descModulo
+    <small> Selecione o aluno a ser Avaliado</small>
+</h3>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.inscricao.ativo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.inscricao.Aluno.nomeAluno)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.inscricao.Turma.descTurma)
-        </th>
-        <th>Nota</th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.inscricao.ativo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.inscricao.Aluno.nomeAluno)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.inscricao.Turma.descTurma)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nota)
-        </td>
-        <td>
-            @Html.ActionLink("Avaliar", "AvaliarAluno", "GerenciarDisciplinasMinistradas", new { idInscricaoTurma = item.inscricao.idInscricaoTurma, idModulo = ((Pbl.Models.Modulo)ViewData["Modulo"]).idModulo, idAula = ((Pbl.Models.Aula)ViewData["Aula"]).idAula }, new { @class = "alter" })
-        </td>
-    </tr>
+<div class="container-fluid">
+    <!-- START DATATABLE 1 -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="datatable1" class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="all">Aluno</th>
+                                    <th class="all">Nota</th>
+                                    <th class="all">Opções</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="gradeX">
+                                        <td>@item.inscricao.Aluno.nomeAluno</td>
+                                        <td>@Html.DisplayFor(modelItem => item.nota)</td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-info" title="Selecionar Módulo" onclick="window.location = '@Url.Action("AvaliarAluno", "GerenciarDisciplinasMinistradas", new { idInscricaoTurma = item.inscricao.idInscricaoTurma, idModulo = ((Pbl.Models.Modulo)ViewData["Modulo"]).idModulo, idAula = ((Pbl.Models.Aula)ViewData["Aula"]).idAula })'">
+                                                <em class="fa fa-bar-chart"></em>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="hidden-print" />
+<div class="clearfix">
+    <button type="button" class="btn btn-labeled btn-default" onclick="history.back();">
+        <span class="btn-label">
+            <i class="fa fa-arrow-left"></i>
+        </span>Voltar
+    </button>
+</div>
+
+@section Styles {
+    @Styles.Render("~/bundles/datatablesCss")
 }
-
-</table>
+@section Scripts {
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/demoDatatable")
+}
