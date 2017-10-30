@@ -25,7 +25,7 @@ namespace Pbl.Controllers
                 descMed = "MED 1",
                 descSemestre = "2016.2",
                 idMed = 1,
-                notas = new int[] { 88, 65, 90 }
+                notas = new int[] { 88, 65, 90 },             
             });
             viewModel.Add(new ListagemMedsAlunoViewModel()
             {
@@ -217,7 +217,7 @@ namespace Pbl.Controllers
             }
              */
 
-
+            /*
 
             ControleNotas controleNotas = new MControleNotas().BringOne(c => c.idControleNotas == id);
             DetalhesModuloViewModel detalhesModuloViewModel = new DetalhesModuloViewModel();
@@ -234,7 +234,48 @@ namespace Pbl.Controllers
             }
             detalhesModuloViewModel.avaliacoesAula = new MControleNotasXAula().Bring(c => c.idControleNotas == controleNotas.idControleNotas);
             detalhesModuloViewModel.avaliacoesProva = new MControleNotasXProva().Bring(c => c.idControleNotas == controleNotas.idControleNotas);
-            return View(detalhesModuloViewModel);
+            return View(detalhesModuloViewModel);*/
+            var viewModel = new DetalhesModuloAlunoViewModel()
+            {
+                descModulo = "Módulo 2",
+                notaSimuladoMorfofuncional = 50,
+                notaSimuladoTutoria = 70,
+                disciplinas = new List<DetalhesDisciplinaAlunoViewModel>
+                {
+                    new DetalhesDisciplinaAlunoViewModel()
+                    {
+                        descDisciplina = "Anatomia",
+                        nota = 75,
+                        tipoAvaliacao = "Pratica"
+                    },
+                    new DetalhesDisciplinaAlunoViewModel
+                    {
+                        descDisciplina = "Histologia",
+                        nota = 89,
+                        tipoAvaliacao = "Pratica"
+                    },
+                    new DetalhesDisciplinaAlunoViewModel()
+                    {
+                        descDisciplina = "Farmaco",
+                        nota = 95,
+                        tipoAvaliacao = "Formativa"
+                    },
+                },
+                problemas = new List<DetalhesProblemaAlunoViewModel>
+                {
+                    new DetalhesProblemaAlunoViewModel()
+                    {
+                        tituloProblema = "Problema 3",
+                        notaFinal = 25
+                    },
+                    new DetalhesProblemaAlunoViewModel()
+                    {
+                        tituloProblema = "Problema 4",
+                        notaFinal = 30
+                    }
+                }
+            };
+            return View(viewModel);
         }
 
         [Authorize(Roles = "Aluno")]
