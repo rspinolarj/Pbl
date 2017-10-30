@@ -11,5 +11,6 @@ namespace Pbl.Models.ViewModel
         public string descMed { get; set; }
         public string descSemestre { get; set; }
         public int[] notas { get; set; }
+        public int[] idControleNotas { get; set; }
     }
 }

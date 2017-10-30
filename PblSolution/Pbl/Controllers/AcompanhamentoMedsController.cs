@@ -188,7 +188,7 @@ namespace Pbl.Controllers
         }
 
         [Authorize(Roles = "Aluno")]
-        public ActionResult DetalhesModulo(int id)
+        public ActionResult DetalhesModulo(int idControleNotas)
         {
             /*
              List<Turma> listTurmas = new MTurma().Bring(c => c.idMed == idMed);
