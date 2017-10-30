@@ -11,9 +11,30 @@
         <div class="col-lg-4">
             <div class="panel panel-info">
                 <div class="panel-heading">@med.descMed - @med.descSemestre</div>
-                <div class="panel-body">Módulo 1 - @med.notas.ElementAt(0)</div>
-                <div class="panel-body">Módulo 2 - @med.notas.ElementAt(1)</div>
-                <div class="panel-body">Módulo 3 - @med.notas.ElementAt(2)</div>
+                <div class="panel-body">
+                    <div class="col-md-6">Módulo 1 - @med.notas.ElementAt(0)</div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-sm" title="Selecionar Módulo" onclick="window.location = '@Url.Action("DetalhesModulo","AcompanhamentoMeds",new { idControleNotas = med.idControleNotas.ElementAt(0)})'">
+                            <em class="fa fa-search"></em>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-6">Módulo 2 - @med.notas.ElementAt(1)</div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-sm" title="Selecionar Módulo" onclick="window.location = '@Url.Action("DetalhesModulo","AcompanhamentoMeds",new { idControleNotas = med.idControleNotas.ElementAt(0)})'">
+                            <em class="fa fa-search"></em>
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="col-md-6">Módulo 3 - @med.notas.ElementAt(2)</div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-sm" title="Selecionar Módulo" onclick="window.location = '@Url.Action("DetalhesModulo","AcompanhamentoMeds",new { idControleNotas = med.idControleNotas.ElementAt(0)})'">
+                            <em class="fa fa-search"></em>
+                        </button>
+                    </div>
+                </div>
                 <div class="panel-footer"><a href="@Url.Action("DetalhesMed","AcompanhamentoMeds",new { idMed = med.idMed})" class="btn btn-labeled btn-info"><span class="btn-label"><i class="fa fa-exclamation"></i></span>Detalhes</a></div>
             </div>
         </div>

@@ -1,85 +1,104 @@
-﻿@model Pbl.Models.ViewModel.DetalhesModuloViewModel
+﻿@model Pbl.Models.ViewModel.DetalhesModuloAlunoViewModel
 
 @{
     ViewBag.Title = "DetalhesModulo";
 }
 
-<h2>DetalhesModulo</h2>
+<h3>
+    @Model.descModulo
+    <small> Avaliações do Módulo @Model.descModulo</small>
+</h3>
 
-<table class="table">
-    <tr>
-        <th>
-            Disciplina
-        </th>
-        <th>
-            Professor
-        </th>
-        <th>
-            Nota
-        </th>
-    </tr>
-    <tr>
-        @foreach (var item in Model.avaliacoesAula)
-        {
-            <td>
-                @Html.DisplayFor(model => item.Aula.Disciplina.descDisciplina)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.Aula.Professor.nomeProfessor)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.nota)
-            </td>
-        }
-    </tr>
-</table>
+<div class="col-md-4">
+    <!-- START panel-->
+    <div class="panel panel-default">
+        <div class="panel-heading">Disciplinas</div>
+        <!-- START table-responsive-->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Disciplina</th>
+                        <th>Tipo Avaliação</th>
+                        <th>Nota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var disciplina in Model.disciplinas)
+                    {
+                        <tr>
+                            <td>@disciplina.descDisciplina</td>
+                            <td>
+                                @disciplina.tipoAvaliacao
+                            </td>
+                            <td>
+                                @disciplina.nota
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- END table-responsive-->
+    </div>
+    <!-- END panel-->
+</div>
 
-<table class="table">
-    <tr>
-        <th>
-            Tipo Prova
-        </th>
-        <th>
-            Nota
-        </th>
-    </tr>
-    <tr>
-        @foreach (var item in Model.avaliacoesProva)
-        {
-            <td>
-                @Html.DisplayFor(model => item.Prova.TipoProva.descTipoProva)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.numAcertos * item.Prova.valorQuestao)
-            </td>
-        }
-    </tr>
-</table>
+<div class="col-md-4">
+    <!-- START panel-->
+    <div class="panel panel-default">
+        <div class="panel-heading">Problemas</div>
+        <!-- START table-responsive-->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Nota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var problema in Model.problemas)
+                    {
+                        <tr>
+                            <td>@problema.tituloProblema</td>
+                            <td>@problema.notaFinal</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- END table-responsive-->
+    </div>
+    <!-- END panel-->
+</div>
 
-<table class="table">
-    <tr>
-        <th>
-            Problema
-        </th>
-        <th>
-            Nota
-        </th>
-    </tr>
-    <tr>
-        @foreach (var item in Model.avaliacoesTutoria)
-        {
-            <td>
-                @Html.DisplayFor(model => item.problema)
-            </td>
-            <td>
-                @Html.DisplayFor(model => item.nota)
-            </td>
-            <td>
-                @if (item.emAberto)
-                {
-                    @Html.ActionLink("Avaliar", "AvaliarProblema", new { id = item.idAvaliacaoTutoria })
-                }
-            </td>
-        }
-    </tr>
-</table>
+<div class="col-md-4">
+    <!-- START panel-->
+    <div class="panel panel-default">
+        <div class="panel-heading">Simulados</div>
+        <!-- START table-responsive-->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Simulado</th>
+                        <th>Nota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tutoria</td>
+                        <td>@Model.notaSimuladoTutoria</td>
+                    </tr>
+                    <tr>
+                        <td>Morfofuncional</td>
+                        <td>@Model.notaSimuladoMorfofuncional</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- END table-responsive-->
+    </div>
+    <!-- END panel-->
+</div>
