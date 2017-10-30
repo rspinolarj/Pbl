@@ -78,7 +78,6 @@ namespace Pbl.Controllers
                                 mAvaliacaoTutoria.Add(avaliacaoAluno);
                             }
                         }
-
                     }
                 }
                 return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistrados", new { idProblemaXMed = idProblemaXMed, idGrupo = idGrupo });

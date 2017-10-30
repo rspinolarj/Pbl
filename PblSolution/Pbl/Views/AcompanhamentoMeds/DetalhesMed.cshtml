@@ -5,8 +5,54 @@
 }
 
 <h2>@ViewBag.DescMed</h2>
-
-@foreach (var modulo in Model)
-{
-    <div></div>
-}
+<div class="container-fluid">
+    <div class="js-nestable-fluid">
+        <a data-action="expand-all" class="btn btn-default btn-sm mr-sm">Expandir</a><a data-action="collapse-all" class="btn btn-default btn-sm"> Guardar</a>
+    </div>
+    @foreach (var modulo in Model)
+    {
+        <div class="col-md-6 table-bordered">
+            <div id="nestable" class="dd">
+                <ol class="dd-list">
+                    <li data-id="1" class="dd-item">
+                        <div class="dd-handle">@modulo.descModulo</div>
+                        <ol class="dd-list">
+                            <li data-id="1">
+                                <div class="dd-handle">Disciplinas</div>
+                                <ol class="dd-list">
+                                    @foreach (var disciplina in modulo.disciplinas)
+                                    {
+                                        <li class="dd-item">
+                                            <div class="dd-handle">@disciplina.descDisciplina</div>
+                                            <ol class="dd-list">
+                                                <li class="dd-item">
+                                                    <div class="dd-handle">Avaliação @disciplina.tipoAvaliacao, Nota @disciplina.nota</div>
+                                                </li>
+                                            </ol>
+                                        </li>
+                                    }
+                                </ol>
+                                <div class="dd-handle">Simulados</div>
+                                <ol class="dd-list">
+                                    <li class="dd-item">
+                                        <div class="dd-handle">Simulado Morfofuncional - @modulo.notaSimuladoMorfofuncional</div>
+                                        <div class="dd-handle">Simulado Tutoria - @modulo.notaSimuladoTutoria</div>
+                                    </li>
+                                </ol>
+                                <div class="dd-handle">Problemas</div>
+                                <ol class="dd-list">
+                                    @foreach (var problema in modulo.problemas)
+                                    {
+                                        <li class="dd-item">
+                                            <div class="dd-handle">@problema.tituloProblema - @problema.notaFinal</div>
+                                        </li>
+                                    }
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    }
+</div>
