@@ -116,7 +116,7 @@ namespace Pbl.Controllers
             /*dados.problemasCadastrados = new MProblemaXMed().RetornaProblemasCadastrados((int)nova.idMed);
             dados.turmasCadastradas = new MTurma().Bring(c => c.idMed == nova.idMed);
             dados.med = new MMed().BringOne(c => c.idMed == nova.idMed);*/
-            return RedirectToAction("GerenciarMed", new { id = nova.idMed });
+            return RedirectToAction("GerenciarTurmas", new { idMed = nova.idMed });
         }
 
         [Authorize(Roles = "Diretor")]
