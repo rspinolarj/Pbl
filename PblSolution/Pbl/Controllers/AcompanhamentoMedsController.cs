@@ -15,11 +15,33 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Aluno")]
         public ActionResult Index()
         {
-            int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
+            /*int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
             Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
             Aluno aluno = user.Aluno.FirstOrDefault();
-            List<InscricaoTurma> turmasAluno = aluno.InscricaoTurma.ToList();
-            return View(turmasAluno);
+            List<InscricaoTurma> turmasAluno = aluno.InscricaoTurma.ToList();*/
+            List<ListagemMedsAlunoViewModel> viewModel = new List<ListagemMedsAlunoViewModel>();
+            viewModel.Add(new ListagemMedsAlunoViewModel()
+            {
+                descMed = "MED 1",
+                descSemestre = "2016.2",
+                idMed = 1,
+                notas = new int[] { 88, 65, 90 }
+            });
+            viewModel.Add(new ListagemMedsAlunoViewModel()
+            {
+                descMed = "MED 2",
+                descSemestre = "2017.1",
+                idMed = 1,
+                notas = new int[] { 70, 82, 60 }
+            });
+            viewModel.Add(new ListagemMedsAlunoViewModel()
+            {
+                descMed = "MED 3",
+                descSemestre = "2017.2",
+                idMed = 1,
+                notas = new int[] { 100, 85, 80 }
+            });
+            return View();
         }
 
         [Authorize(Roles = "Aluno")]

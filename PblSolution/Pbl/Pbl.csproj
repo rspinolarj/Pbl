@@ -304,6 +304,7 @@
     <Compile Include="Models\ViewModel\GerenciarMedViewModel.cs" />
     <Compile Include="Models\ViewModel\GerenciarNotasViewModel.cs" />
     <Compile Include="Models\ViewModel\InscricaoAlunoViewModel.cs" />
+    <Compile Include="Models\ViewModel\ListagemMedsAlunoViewModel.cs" />
     <Compile Include="Models\ViewModel\NotasProblemaViewModel.cs" />
     <Compile Include="Models\ViewModel\PerfilViewModel.cs" />
     <Compile Include="Models\ViewModel\SelecionarAlunosViewModel.cs" />
