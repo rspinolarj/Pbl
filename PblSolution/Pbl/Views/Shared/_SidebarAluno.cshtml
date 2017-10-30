@@ -27,26 +27,21 @@
             <li class="nav-heading">
                 <span>Main Navigation</span>
             </li>
-            <li class="@Html.isActive(controller: "AcompanhamentoMeds")">
-                <a href="#acompanhamento" title="ControleAlunos" data-toggle="collapse">
+            <li class="@Html.isActive("AcompanhamentoMeds", "Index")">
+                <a href="@Url.Action("Index", "AcompanhamentoMeds")" title="ControleAlunos">
                     <div class="label label-info pull-right">3</div>
                     <em class="icon-speedometer"></em>
-                    <span data-localize="sidebar.nav.ALUNOS">Alunos</span>
+                    <span data-localize="sidebar.nav.ALUNOS">Home</span>
                 </a>
-                <ul id="acompanhamento" class="nav sidebar-subnav collapse">
-                    <li class="sidebar-subnav-header">Acompanhamento</li>
-                    <li class="@Html.isActive("AcompanhamentoMeds", "Index")">
-                        <a href="@Url.Action("Index", "AcompanhamentoMeds")" title="Index">
-                            <span>Index</span>
-                        </a>
-                    </li>
-                    <li class="@Html.isActive("AcompanhamentoMeds", "AvaliacoesEmAberto")">
-                        <a href="@Url.Action("AvaliacoesEmAberto", "AcompanhamentoMeds")" title="Avaliações em Aberto">
-                            <span>Avaliações em aberto</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
+            <li class="@Html.isActive("AcompanhamentoMeds", "AvaliacoesEmAberto")">
+                <a href="@Url.Action("AvaliacoesEmAberto", "AcompanhamentoMeds")" title="ControleAlunos">
+                    <div class="label label-info pull-right">3</div>
+                    <em class="icon-speedometer"></em>
+                    <span data-localize="sidebar.nav.ALUNOS">Avaliações em aberto</span>
+                </a>
+            </li>
+
         </ul>
         <!-- END sidebar nav-->
     </nav>
