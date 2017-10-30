@@ -260,3 +260,6 @@ paket-files/
 __pycache__/
 *.pyc
 /PblSolution/Pbl/Models/SoftwareIdeasModeler32-11-27.zip
+/PblSolution/Pbl
+/PblSolution/Pbl.Tests/Controllers
+/PblSolution/PblTests1/Controllers

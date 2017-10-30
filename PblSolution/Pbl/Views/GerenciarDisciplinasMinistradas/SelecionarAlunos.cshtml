@@ -23,25 +23,25 @@
                     <div class="table-responsive">
                         <table id="datatable1" class="table table-striped table-hover">
                             <thead>
-                                <tr>
-                                    <th class="all">Aluno</th>
-                                    <th class="all">Nota</th>
-                                    <th class="all">Opções</th>
-                                </tr>
+                            <tr>
+                                <th class="all">Aluno</th>
+                                <th class="all">Nota</th>
+                                <th class="all">Opções</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model)
-                                {
-                                    <tr class="gradeX">
-                                        <td>@item.inscricao.Aluno.nomeAluno</td>
-                                        <td>@Html.DisplayFor(modelItem => item.nota)</td>
-                                        <td>
-                                            <button type="button" class="btn btn-sm btn-info" title="Selecionar Módulo" onclick="window.location = '@Url.Action("AvaliarAluno", "GerenciarDisciplinasMinistradas", new { idInscricaoTurma = item.inscricao.idInscricaoTurma, idModulo = ((Pbl.Models.Modulo)ViewData["Modulo"]).idModulo, idAula = ((Pbl.Models.Aula)ViewData["Aula"]).idAula })'">
-                                                <em class="fa fa-bar-chart"></em>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                }
+                            @foreach (var item in Model)
+                            {
+                                <tr class="gradeX">
+                                    <td>@item.inscricao.Aluno.nomeAluno</td>
+                                    <td>@Html.DisplayFor(modelItem => item.nota)</td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-info" title="Selecionar Módulo" onclick="window.location = '@Url.Action("AvaliarAluno", "GerenciarDisciplinasMinistradas", new { idInscricaoTurma = item.inscricao.idInscricaoTurma, idModulo = ((Pbl.Models.Modulo)ViewData["Modulo"]).idModulo, idAula = ((Pbl.Models.Aula)ViewData["Aula"]).idAula })'">
+                                            <em class="fa fa-bar-chart"></em>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                     </div>
