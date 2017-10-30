@@ -25,21 +25,24 @@ namespace Pbl.Controllers
                 descMed = "MED 1",
                 descSemestre = "2016.2",
                 idMed = 1,
-                notas = new int[] { 88, 65, 90 },             
+                notas = new int[] { 88, 65, 90 },     
+                idControleNotas = new int[] {1,1,1,1,}
             });
             viewModel.Add(new ListagemMedsAlunoViewModel()
             {
                 descMed = "MED 2",
                 descSemestre = "2017.1",
                 idMed = 2,
-                notas = new int[] { 70, 82, 60 }
+                notas = new int[] { 70, 82, 60 },
+                idControleNotas = new int[] { 1, 1, 1, 1, }
             });
             viewModel.Add(new ListagemMedsAlunoViewModel()
             {
                 descMed = "MED 3",
                 descSemestre = "2017.2",
                 idMed = 3,
-                notas = new int[] { 100, 85, 80 }
+                notas = new int[] { 100, 85, 80 },
+                idControleNotas = new int[] { 1, 1, 1, 1, }
             });
             return View(viewModel);
         }
