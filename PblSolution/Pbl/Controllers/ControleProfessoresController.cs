@@ -36,7 +36,7 @@ namespace Pbl.Controllers
                 Usuario novo = new Usuario();
                 novo.login = professor.cpfProfessor;
                 novo.senha = professor.cpfProfessor;
-                novo.idTipoUsuario = 3;
+                novo.idTipoUsuario = (int)Enumeradores.TipoUsuario.Professor;
                 new MUsuario().Add(novo);
                 TempData["Message"] = new MUsuarioProfessor().Add(novo.idUsuario, professor.idProfessor) ? "Professor cadastrado" : "Ação não foi realizada";
             }
