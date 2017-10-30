@@ -29,6 +29,10 @@ namespace Pbl.Controllers
             {
                 RedirectToAction("Perfil");
             }
+            if (user.idTipoUsuario == (int)Enumeradores.TipoUsuario.Aluno)
+            {
+                RedirectToAction("Index", "AcompanhamentoMeds");
+            }
             return RedirectToAction("Index", "Home");
         }
 
