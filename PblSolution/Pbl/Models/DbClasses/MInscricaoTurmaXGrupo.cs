@@ -12,7 +12,7 @@ namespace Pbl.Models.DbClasses
 
         public MInscricaoTurmaXGrupo()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(int idGrupo, int idInscricaoTurma)

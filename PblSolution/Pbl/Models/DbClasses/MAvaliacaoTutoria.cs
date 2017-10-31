@@ -13,7 +13,7 @@ namespace Pbl.Models.DbClasses
 
         public MAvaliacaoTutoria()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(AvaliacaoTutoria t)
@@ -59,6 +59,11 @@ namespace Pbl.Models.DbClasses
                 return false;
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
         public bool Update(AvaliacaoTutoria t)

@@ -13,7 +13,7 @@ namespace Pbl.Models.DbClasses
 
         public MSemestre()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(Pbl.Models.ViewModel.SemestreViewModel t)
@@ -62,6 +62,11 @@ namespace Pbl.Models.DbClasses
                 return false;
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
         public bool Update(SemestreViewModel t)

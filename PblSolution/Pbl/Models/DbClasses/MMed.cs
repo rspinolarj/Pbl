@@ -13,7 +13,7 @@ namespace Pbl.Models.DbClasses
 
         public MMed()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(Med t)
@@ -64,6 +64,11 @@ namespace Pbl.Models.DbClasses
                 med.Disciplina.Remove(disciplina);
             }
             db.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
     }
 }

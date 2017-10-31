@@ -12,7 +12,7 @@ namespace Pbl.Models.DbClasses
 
         public MTurma()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(Turma t)
@@ -61,6 +61,11 @@ namespace Pbl.Models.DbClasses
                 return false;
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
         public bool Update(Turma t)

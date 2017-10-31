@@ -12,7 +12,7 @@ namespace Pbl.Models.DbClasses
 
         public MDisciplina()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(Disciplina t)
@@ -58,6 +58,11 @@ namespace Pbl.Models.DbClasses
                 return false;
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
         public bool Update(Disciplina t)

@@ -62,6 +62,11 @@ namespace Pbl.Models.DbClasses
             return true;
         }
 
+        public void Dispose()
+        {
+            db.Dispose();
+        }
+
         public bool Update(Prova t)
         {
             try

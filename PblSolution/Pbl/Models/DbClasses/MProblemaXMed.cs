@@ -13,7 +13,7 @@ namespace Pbl.Models.DbClasses
 
         public MProblemaXMed()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(ProblemaXMed t)
@@ -83,6 +83,11 @@ namespace Pbl.Models.DbClasses
         public bool Update(ProblemaXMed t)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Pbl.Models.DbClasses
 
         public MAula()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(Aula t)
@@ -59,6 +59,11 @@ namespace Pbl.Models.DbClasses
                 return false;
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
         public bool Update(Aula t)

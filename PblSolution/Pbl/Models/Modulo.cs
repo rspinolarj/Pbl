@@ -9,9 +9,10 @@
 
 namespace Pbl.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Modulo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,16 +21,19 @@ namespace Pbl.Models
             this.ControleNotas = new HashSet<ControleNotas>();
             this.Prova = new HashSet<Prova>();
         }
-    
+
         public int idModulo { get; set; }
         public string descModulo { get; set; }
         public Nullable<System.DateTime> dtInicio { get; set; }
         public Nullable<System.DateTime> dtFim { get; set; }
         public int idSemestre { get; set; }
-    
+
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ControleNotas> ControleNotas { get; set; }
+        [JsonIgnore]
         public virtual Semestre Semestre { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Prova> Prova { get; set; }
     }

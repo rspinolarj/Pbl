@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Pbl.Models
 {
-    interface IFunctions<T>
+    interface IFunctions<T> : IDisposable
     {
         bool Add(T t);
         bool Update(T t);

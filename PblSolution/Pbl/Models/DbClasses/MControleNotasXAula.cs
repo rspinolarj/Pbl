@@ -13,7 +13,7 @@ namespace Pbl.Models.DbClasses
 
         public MControleNotasXAula()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(ControleNotasXAula t)
@@ -61,6 +61,11 @@ namespace Pbl.Models.DbClasses
                 return false;
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
         public bool Update(ControleNotasXAula t)

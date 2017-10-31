@@ -13,7 +13,7 @@ namespace Pbl.Models.DbClasses
 
         public MModulo()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(Modulo t)
@@ -39,6 +39,11 @@ namespace Pbl.Models.DbClasses
         public bool Delete(Modulo t)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
         }
 
         public bool Update(Modulo t)

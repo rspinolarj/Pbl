@@ -13,7 +13,7 @@ namespace Pbl.Models.DbClasses
 
         public MPerguntaXFicha()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(PerguntaXFicha t)
@@ -59,6 +59,11 @@ namespace Pbl.Models.DbClasses
                 return false;
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
 
         public bool Update(PerguntaXFicha t)

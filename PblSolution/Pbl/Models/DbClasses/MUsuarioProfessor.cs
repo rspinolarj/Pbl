@@ -12,7 +12,7 @@ namespace Pbl.Models.DbClasses
 
         public MUsuarioProfessor()
         {
-            db = Singletone.InstanceFamerv;
+            db = new FamervEntities();
         }
 
         public bool Add(int idUsuario, int idProfessor)
