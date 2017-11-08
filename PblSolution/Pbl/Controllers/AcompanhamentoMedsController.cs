@@ -15,36 +15,53 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Aluno")]
         public ActionResult Index()
         {
-            /*int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
+            int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
             Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
             Aluno aluno = user.Aluno.FirstOrDefault();
-            List<InscricaoTurma> turmasAluno = aluno.InscricaoTurma.ToList();*/
+            List<InscricaoTurma> turmasAluno = aluno.InscricaoTurma.ToList();
+            MControleNotas mControleNotas = new MControleNotas();
             List<ListagemMedsAlunoViewModel> viewModel = new List<ListagemMedsAlunoViewModel>();
-            viewModel.Add(new ListagemMedsAlunoViewModel()
+            foreach (var med in turmasAluno)
             {
-                descMed = "MED 1",
-                descSemestre = "2016.2",
-                idMed = 1,
-                notas = new int[] { 88, 65, 90 },     
-                idControleNotas = new int[] {1,1,1,1,}
-            });
-            viewModel.Add(new ListagemMedsAlunoViewModel()
-            {
-                descMed = "MED 2",
-                descSemestre = "2017.1",
-                idMed = 2,
-                notas = new int[] { 70, 82, 60 },
-                idControleNotas = new int[] { 1, 1, 1, 1, }
-            });
-            viewModel.Add(new ListagemMedsAlunoViewModel()
-            {
-                descMed = "MED 3",
-                descSemestre = "2017.2",
-                idMed = 3,
-                notas = new int[] { 100, 85, 80 },
-                idControleNotas = new int[] { 1, 1, 1, 1, }
-            });
+                var itemAdciononar = new ListagemMedsAlunoViewModel()
+                {
+                    descMed = med.Turma.Med.descMed,
+                    descSemestre = med.ControleNotas.FirstOrDefault().Modulo.Semestre.descSemestre,
+                    idMed = med.Turma.idMed
+                };
+                for (int i = 0; i < med.ControleNotas.Count; i++)
+                {
+                    itemAdciononar.notas[i] = mControleNotas.RetornaNota(med.ControleNotas.ElementAt(i).idControleNotas);
+                    itemAdciononar.idControleNotas[i] = med.ControleNotas.ElementAt(i).idControleNotas;
+                }   
+            }
             return View(viewModel);
+            //List<ListagemMedsAlunoViewModel> viewModel = new List<ListagemMedsAlunoViewModel>();
+            //viewModel.Add(new ListagemMedsAlunoViewModel()
+            //{
+            //    descMed = "MED 1",
+            //    descSemestre = "2016.2",
+            //    idMed = 1,
+            //    notas = new int[] { 88, 65, 90 },     
+            //    idControleNotas = new int[] {1,1,1,1,}
+            //});
+            //viewModel.Add(new ListagemMedsAlunoViewModel()
+            //{
+            //    descMed = "MED 2",
+            //    descSemestre = "2017.1",
+            //    idMed = 2,
+            //    notas = new int[] { 70, 82, 60 },
+            //    idControleNotas = new int[] { 1, 1, 1, 1, }
+            //});
+            //viewModel.Add(new ListagemMedsAlunoViewModel()
+            //{
+            //    descMed = "MED 3",
+            //    descSemestre = "2017.2",
+            //    idMed = 3,
+            //    notas = new int[] { 100, 85, 80 },
+            //    idControleNotas = new int[] { 1, 1, 1, 1, }
+            //});
+            //return View(viewModel);
         }
 
         [Authorize(Roles = "Aluno")]
