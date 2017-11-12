@@ -30,8 +30,8 @@ namespace Pbl.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AvaliacaoTutoria> AvaliacaoTutoria { get; set; }
         public virtual Med Med { get; set; }
-        public virtual Professor Professor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InscricaoTurma> InscricaoTurma { get; set; }
+        public virtual Professor Professor { get; set; }
     }
 }

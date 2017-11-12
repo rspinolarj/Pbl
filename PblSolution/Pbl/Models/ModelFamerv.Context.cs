@@ -27,7 +27,6 @@ namespace Pbl.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Aluno> Aluno { get; set; }
         public virtual DbSet<Ano> Ano { get; set; }
         public virtual DbSet<Aula> Aula { get; set; }
         public virtual DbSet<AvaliacaoTutoria> AvaliacaoTutoria { get; set; }
@@ -44,7 +43,6 @@ namespace Pbl.Models
         public virtual DbSet<PerguntaXFicha> PerguntaXFicha { get; set; }
         public virtual DbSet<Problema> Problema { get; set; }
         public virtual DbSet<ProblemaXMed> ProblemaXMed { get; set; }
-        public virtual DbSet<Professor> Professor { get; set; }
         public virtual DbSet<Prova> Prova { get; set; }
         public virtual DbSet<Semestre> Semestre { get; set; }
         public virtual DbSet<TipoDisciplina> TipoDisciplina { get; set; }
@@ -52,6 +50,8 @@ namespace Pbl.Models
         public virtual DbSet<TipoUsuario> TipoUsuario { get; set; }
         public virtual DbSet<Turma> Turma { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Aluno> Aluno { get; set; }
+        public virtual DbSet<Professor> Professor { get; set; }
     
         public virtual int SpCrudAluno(Nullable<int> id, string nome, string cpf, string senha, string matricula, string statementType)
         {

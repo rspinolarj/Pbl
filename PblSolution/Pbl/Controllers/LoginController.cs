@@ -83,7 +83,12 @@ namespace Pbl.Controllers
             return null;
         }
 
-        public ActionResult RecuperarSenha()
+        public ActionResult RecuperarSenha(string cpf)
+        {
+            return null;
+        }
+
+        public ActionResult Recover()
         {
             return View();
         }
