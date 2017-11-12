@@ -74,6 +74,7 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor,Professor,Aluno")]
         public ActionResult AtualizarInformacoes(string email)
         {
+            var qtd = Request.Files.AllKeys;
             return null;
         }
 
