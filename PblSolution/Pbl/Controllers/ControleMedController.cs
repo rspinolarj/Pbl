@@ -70,8 +70,8 @@ namespace Pbl.Controllers
             }
             listDisciplinasVincular = listDisciplinasVincular.Where(c => !med.Disciplina.ToList().Exists(x => x.idDisciplina == c.idDisciplina)).ToList();
             List<Disciplina> listDisciplinasVinculadas = med.Disciplina.ToList();
-            mMed.DesvincularDisciplinas(med.idMed, listDisciplinasRemover);
-            mMed.AdicionarDisciplinas(med.idMed, listDisciplinasVincular);
+            mMed.DesvincularDisciplinas(med.idMed, listDisciplinasRemover.Select(c => c.idDisciplina).ToArray());
+            mMed.AdicionarDisciplinas(med.idMed, listDisciplinasVincular.Select(c => c.idDisciplina).ToArray());
             return RedirectToAction("GerenciarMed", new { id = idMed });
         }
         #endregion
@@ -152,7 +152,7 @@ namespace Pbl.Controllers
             List<Aluno> AlunosCadastrados = mInscricaoTurma.Bring(c => c.idTurma == idTurma).Select(c => c.Aluno).ToList();
             viewModel.AlunosCadastrados = AlunosCadastrados;
             List<Aluno> AlunosDisponiveis = mAluno.BringAll();
-            AlunosDisponiveis.RemoveAll(c => AlunosCadastrados.Contains(c));
+            AlunosDisponiveis.RemoveAll(c => AlunosCadastrados.Exists(x => x.idAluno == c.idAluno));
             viewModel.AlunosDisponiveis = AlunosDisponiveis;
             viewModel.turmaAtual = mTurma.BringOne(c => c.idTurma == idTurma);
             //Teste(viewModel);
@@ -313,11 +313,6 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult AdicionarAlunosGrupo(int idGrupo, int? idInscricaoTurma)
         {
-            var keys = Request.Form.AllKeys;
-            if (idInscricaoTurma.HasValue)
-            {
-                new MInscricaoTurmaXGrupo().Add(idGrupo, idInscricaoTurma.Value);
-            }
             AlunosGrupoViewModel viewModel = new AlunosGrupoViewModel();
             MGrupo mGrupo = new MGrupo();
             MInscricaoTurma mIncricaoTurma = new MInscricaoTurma();
@@ -335,14 +330,14 @@ namespace Pbl.Controllers
             }
             List<Aluno> AlunosInscritos = new List<Aluno>();
             viewModel.AlunosInscritos = mGrupo.BringOne(c => c.idGrupo == idGrupo).InscricaoTurma.ToList();
-            viewModel.AlunosDisponiveis.RemoveAll(c => viewModel.AlunosInscritos.Contains(c));
+            viewModel.AlunosDisponiveis.RemoveAll(c => viewModel.AlunosInscritos.Exists(x => c.idAluno == x.idAluno));
             var test = viewModel.grupo.InscricaoTurma;
             foreach (var inscrito in test)
             {
                 AlunosInscritos.Add(inscrito.Aluno);
             }
 
-            return View(viewModel); //View(viewModel);
+            return View(viewModel);
         }
 
         public ActionResult VincularAlunosGrupo()
@@ -365,17 +360,13 @@ namespace Pbl.Controllers
             {
                 int idInscricaoTurma = Convert.ToInt32(aluno);
                 InscricaoTurma alunoRemover = mInscricaoTurma.BringOne(c => c.idInscricaoTurma == idInscricaoTurma);
-                if (alunoRemover.Grupo.Where(c => c.idGrupo == idGrupo).Count() > 0)
-                {
-                    continue;
-                }
                 listAlunosRemover.Add(alunoRemover);
             }
             listInscricaoTurma = listInscricaoTurma.Where(c => !grupo.InscricaoTurma.ToList().Exists(x => x.idInscricaoTurma == c.idInscricaoTurma)).ToList();
-            List<Disciplina> listDisciplinasVinculadas = med.Disciplina.ToList();
-            mMed.DesvincularDisciplinas(med.idMed, listDisciplinasRemover);
-            mMed.AdicionarDisciplinas(med.idMed, listDisciplinasVincular);
-            return RedirectToAction("GerenciarMed", new { id = idMed });
+            List<InscricaoTurma> listAlunosVinculados = grupo.InscricaoTurma.ToList();
+            mGrupo.DesvincularAlunoGrupo(grupo.idGrupo, listAlunosRemover.Select(c => c.idInscricaoTurma).ToArray());
+            mGrupo.AdicionarAlunoGrupo(grupo.idGrupo, listInscricaoTurma.Select(c => c.idInscricaoTurma).ToArray());
+            return RedirectToAction("GerenciarGrupos", new { idMed = grupo.idMed });
         }
 
         [Authorize(Roles = "Diretor")]

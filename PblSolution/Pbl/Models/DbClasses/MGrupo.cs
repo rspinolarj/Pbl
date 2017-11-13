@@ -83,5 +83,25 @@ namespace Pbl.Models.DbClasses
             }
             return true;
         }
+
+        public void AdicionarAlunoGrupo(int idGrupo, int[] listIdInscricaoTurma)
+        {
+            Grupo grupo = db.Grupo.SingleOrDefault(c => c.idGrupo == idGrupo);
+            foreach (var idInscricaoTurma in listIdInscricaoTurma)
+            {
+                grupo.InscricaoTurma.Add(db.InscricaoTurma.SingleOrDefault(c => c.idInscricaoTurma == idInscricaoTurma));
+            }
+            db.SaveChanges();
+        }
+
+        public void DesvincularAlunoGrupo(int idGrupo, int[] listIdInscricaoTurma)
+        {
+            Grupo grupo = db.Grupo.SingleOrDefault(c => c.idGrupo == idGrupo);
+            foreach (var idInscricaoTurma in listIdInscricaoTurma)
+            {
+                grupo.InscricaoTurma.Remove(db.InscricaoTurma.SingleOrDefault(c => c.idInscricaoTurma == idInscricaoTurma));
+            }
+            db.SaveChanges();
+        }
     }
 }

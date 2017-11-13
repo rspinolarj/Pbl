@@ -23,292 +23,99 @@ namespace Pbl.Controllers
             List<ListagemMedsAlunoViewModel> viewModel = new List<ListagemMedsAlunoViewModel>();
             foreach (var med in turmasAluno)
             {
-                var itemAdciononar = new ListagemMedsAlunoViewModel()
+                var itemAdciononar = new ListagemMedsAlunoViewModel
                 {
                     descMed = med.Turma.Med.descMed,
                     descSemestre = med.ControleNotas.FirstOrDefault().Modulo.Semestre.descSemestre,
-                    idMed = med.Turma.idMed
+                    idMed = med.Turma.idMed,
+                    notas = new double[] { 0, 0, 0 },
+                    idControleNotas = new int[] { 0, 0, 0 }
                 };
                 for (int i = 0; i < med.ControleNotas.Count; i++)
                 {
                     itemAdciononar.notas[i] = mControleNotas.RetornaNota(med.ControleNotas.ElementAt(i).idControleNotas);
                     itemAdciononar.idControleNotas[i] = med.ControleNotas.ElementAt(i).idControleNotas;
-                }   
+                }
+                viewModel.Add(itemAdciononar);
             }
-            return View(viewModel);
-            //List<ListagemMedsAlunoViewModel> viewModel = new List<ListagemMedsAlunoViewModel>();
-            //viewModel.Add(new ListagemMedsAlunoViewModel()
-            //{
-            //    descMed = "MED 1",
-            //    descSemestre = "2016.2",
-            //    idMed = 1,
-            //    notas = new int[] { 88, 65, 90 },     
-            //    idControleNotas = new int[] {1,1,1,1,}
-            //});
-            //viewModel.Add(new ListagemMedsAlunoViewModel()
-            //{
-            //    descMed = "MED 2",
-            //    descSemestre = "2017.1",
-            //    idMed = 2,
-            //    notas = new int[] { 70, 82, 60 },
-            //    idControleNotas = new int[] { 1, 1, 1, 1, }
-            //});
-            //viewModel.Add(new ListagemMedsAlunoViewModel()
-            //{
-            //    descMed = "MED 3",
-            //    descSemestre = "2017.2",
-            //    idMed = 3,
-            //    notas = new int[] { 100, 85, 80 },
-            //    idControleNotas = new int[] { 1, 1, 1, 1, }
-            //});
-            //return View(viewModel);
-        }
-
-        [Authorize(Roles = "Aluno")]
-        public ActionResult DetalhesMed(int idMed)
-        {
-            /*InscricaoTurma inscricaoTurma = new MInscricaoTurma().BringOne(c => c.idInscricaoTurma == id);
-            MControleNotas mControleNotas = new MControleNotas();
-            GerenciarNotasViewModel viewModel = new GerenciarNotasViewModel();
-            viewModel.controleNotas = new List<ControleNotasViewModel>();
-            foreach (var item in inscricaoTurma.ControleNotas)
-            {
-                ControleNotasViewModel novo = new ControleNotasViewModel()
-                {
-                    controleNotas = item,
-                    nota = mControleNotas.RetornaNota(item.idControleNotas)
-                };
-                viewModel.controleNotas.Add(novo);
-            }*/
-            ViewBag.DescMed = "MED 2 - 2017.2";
-            List<DetalhesModuloAlunoViewModel> viewModel = new List<DetalhesModuloAlunoViewModel>();
-            viewModel.Add(new DetalhesModuloAlunoViewModel()
-            {
-                descModulo = "Módulo 1",
-                notaSimuladoMorfofuncional = 50,
-                notaSimuladoTutoria = 70,
-                disciplinas = new List<DetalhesDisciplinaAlunoViewModel>
-                {
-                    new DetalhesDisciplinaAlunoViewModel()
-                    {
-                        descDisciplina = "Anatomia",
-                        nota = 70,
-                        tipoAvaliacao = "Pratica"
-                    },
-                    new DetalhesDisciplinaAlunoViewModel
-                    {
-                        descDisciplina = "Histologia",
-                        nota = 100,
-                        tipoAvaliacao = "Pratica"
-                    },
-                    new DetalhesDisciplinaAlunoViewModel()
-                    {
-                        descDisciplina = "Farmaco",
-                        nota = 85,
-                        tipoAvaliacao = "Formativa"
-
-                    },
-                },
-                problemas = new List<DetalhesProblemaAlunoViewModel>
-                {
-                    new DetalhesProblemaAlunoViewModel()
-                    {
-                        tituloProblema = "Problema 1",
-                        notaFinal = 25
-                    },
-                    new DetalhesProblemaAlunoViewModel()
-                    {
-                        tituloProblema = "Problema 2",
-                        notaFinal = 30
-                    }
-                }
-            });
-            viewModel.Add(new DetalhesModuloAlunoViewModel()
-            {
-                descModulo = "Módulo 2",
-                notaSimuladoMorfofuncional = 50,
-                notaSimuladoTutoria = 70,
-                disciplinas = new List<DetalhesDisciplinaAlunoViewModel>
-                {
-                    new DetalhesDisciplinaAlunoViewModel()
-                    {
-                        descDisciplina = "Anatomia",
-                        nota = 75,
-                        tipoAvaliacao = "Pratica"
-                    },
-                    new DetalhesDisciplinaAlunoViewModel
-                    {
-                        descDisciplina = "Histologia",
-                        nota = 89,
-                        tipoAvaliacao = "Pratica"
-                    },
-                    new DetalhesDisciplinaAlunoViewModel()
-                    {
-                        descDisciplina = "Farmaco",
-                        nota = 95,
-                        tipoAvaliacao = "Formativa"
-                    },
-                },
-                problemas = new List<DetalhesProblemaAlunoViewModel>
-                {
-                    new DetalhesProblemaAlunoViewModel()
-                    {
-                        tituloProblema = "Problema 3",
-                        notaFinal = 25
-                    },
-                    new DetalhesProblemaAlunoViewModel()
-                    {
-                        tituloProblema = "Problema 4",
-                        notaFinal = 30
-                    }
-                }
-            });
-            viewModel.Add(new DetalhesModuloAlunoViewModel()
-            {
-                descModulo = "Módulo 3",
-                notaSimuladoMorfofuncional = 50,
-                notaSimuladoTutoria = 70,
-                disciplinas = new List<DetalhesDisciplinaAlunoViewModel>
-                {
-                    new DetalhesDisciplinaAlunoViewModel()
-                    {
-                        descDisciplina = "Anatomia",
-                        nota = 70,
-                        tipoAvaliacao = "Pratica"
-                    },
-                    new DetalhesDisciplinaAlunoViewModel
-                    {
-                        descDisciplina = "Histologia",
-                        nota = 80,
-                        tipoAvaliacao = "Pratica"
-                    },
-                    new DetalhesDisciplinaAlunoViewModel()
-                    {
-                        descDisciplina = "Farmaco",
-                        nota = 80,
-                        tipoAvaliacao = "Formativa"
-
-                    },
-                },
-                problemas = new List<DetalhesProblemaAlunoViewModel>
-                {
-                    new DetalhesProblemaAlunoViewModel()
-                    {
-                        tituloProblema = "Problema 5",
-                        notaFinal = 25
-                    },
-                    new DetalhesProblemaAlunoViewModel()
-                    {
-                        tituloProblema = "Problema 6",
-                        notaFinal = 30
-                    }
-                }
-            });
             return View(viewModel);
         }
 
         [Authorize(Roles = "Aluno")]
         public ActionResult DetalhesModulo(int idControleNotas)
         {
-            /*
-             List<Turma> listTurmas = new MTurma().Bring(c => c.idMed == idMed);
-            List<InscricaoTurma> listAlunosInscritos = new List<InscricaoTurma>();
-            MInscricaoTurma mInscricaoTurma = new MInscricaoTurma();
-            foreach (var turma in listTurmas)
-            {
-                listAlunosInscritos.AddRange(mInscricaoTurma.Bring(c => c.idTurma == turma.idTurma));
-            }
-            List<GerenciarNotasViewModel> listGerenciaNotas = new List<GerenciarNotasViewModel>();
+            var viewModel = new DetalhesModuloAlunoViewModel();
             MControleNotas mControleNotas = new MControleNotas();
-            foreach (var alunoInscrito in listAlunosInscritos)
+            ControleNotas controleNotas = mControleNotas.BringOne(c => c.idControleNotas == idControleNotas);
+            viewModel.descModulo = controleNotas.InscricaoTurma.Turma.Med.descMed + " - " + controleNotas.InscricaoTurma.Turma.Med.Semestre.descSemestre + " - " + controleNotas.Modulo.descModulo;
+            viewModel.notaSimuladoMorfofuncional = mControleNotas.retornaNotaSimulado(controleNotas.idControleNotas, controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Morfofuncional).Select(c => c.idProva).FirstOrDefault());
+            viewModel.notaSimuladoTutoria = mControleNotas.retornaNotaSimulado(controleNotas.idControleNotas, controleNotas.ControleNotasXProva.Where(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Tutoria).Select(c => c.idProva).FirstOrDefault());
+            viewModel.disciplinas = new List<DetalhesDisciplinaAlunoViewModel>();
+            foreach (var disciplina in controleNotas.ControleNotasXAula)
             {
-                GerenciarNotasViewModel notasAluno = new GerenciarNotasViewModel();
-                notasAluno.controleNotas = new List<ControleNotasViewModel>();
-                foreach (var controleNotas in alunoInscrito.ControleNotas)
+                viewModel.disciplinas.Add(new DetalhesDisciplinaAlunoViewModel()
                 {
-                    notasAluno.controleNotas.Add(new ControleNotasViewModel()
-                    {
-                        controleNotas = controleNotas,
-                        nota = mControleNotas.RetornaNota(controleNotas.idControleNotas)
-                    });
-                }
-                notasAluno.aluno = alunoInscrito;
-                listGerenciaNotas.Add(notasAluno);
+                    descDisciplina = disciplina.Aula.Disciplina.descDisciplina,
+                    nota = mControleNotas.retornaNotaDisciplina(disciplina.idAula, controleNotas.idControleNotas),
+                    tipoAvaliacao = disciplina.Aula.Disciplina.TipoDisciplina.descTipoDisciplina
+                });
             }
-             */
-
-            /*
-
-            ControleNotas controleNotas = new MControleNotas().BringOne(c => c.idControleNotas == id);
-            DetalhesModuloViewModel detalhesModuloViewModel = new DetalhesModuloViewModel();
-            detalhesModuloViewModel.avaliacoesTutoria = new List<NotasProblemaViewModel>();
-            List<AvaliacaoTutoria> avaliacoesTutoria = new MAvaliacaoTutoria().Bring(c => c.idControleNotas == controleNotas.idControleNotas);
-            foreach (var item in avaliacoesTutoria)
+            viewModel.problemas = new List<DetalhesProblemaAlunoViewModel>();
+            foreach (var problema in controleNotas.AvaliacaoTutoria)
             {
-                NotasProblemaViewModel notasProblemaViewModel = new NotasProblemaViewModel();
-                notasProblemaViewModel.problema = item.ProblemaXMed.Problema.descProblema;
-                notasProblemaViewModel.emAberto = DateTime.Today < item.dtFim && DateTime.Today > item.dtInicio;
-                //decimal notaAutoAvaliacao = item.FichaAvaliacao.SingleOrDefault(c => c.idInscricaoTurma == item.ControleNotas.idInscricaoTurma).nota.HasValue ? item.FichaAvaliacao.SingleOrDefault(c => c.idInscricaoTurma == item.ControleNotas.idInscricaoTurma).nota.Value : 0;
-                //decimal notaInterpares = item.FichaAvaliacao.Where(c => c.idInscricaoTurma != item.ControleNotas.idInscricaoTurma).Sum(c => c.nota).HasValue ? item.FichaAvaliacao.Where(c => c.idInscricaoTurma != item.ControleNotas.idInscricaoTurma).Sum(c => c.nota).Value / (item.FichaAvaliacao.Count - 1) : 0;
-                //notasProblemaViewModel.nota = (notaProfessor + notaAutoAvaliacao + notaInterpares) / 3;
+                viewModel.problemas.Add(new DetalhesProblemaAlunoViewModel()
+                {
+                    tituloProblema = problema.ProblemaXMed.Problema.descProblema,
+                    notaFinal = mControleNotas.retornaNotaProblema(problema.idAvaliacaoTutoria)
+                });
             }
-            detalhesModuloViewModel.avaliacoesAula = new MControleNotasXAula().Bring(c => c.idControleNotas == controleNotas.idControleNotas);
-            detalhesModuloViewModel.avaliacoesProva = new MControleNotasXProva().Bring(c => c.idControleNotas == controleNotas.idControleNotas);
-            return View(detalhesModuloViewModel);*/
-            var viewModel = new DetalhesModuloAlunoViewModel()
-            {
-                descModulo = "MED 2 - 2017.2 - Módulo 2",
-                notaSimuladoMorfofuncional = 50,
-                notaSimuladoTutoria = 70,
-                disciplinas = new List<DetalhesDisciplinaAlunoViewModel>
-                {
-                    new DetalhesDisciplinaAlunoViewModel()
-                    {
-                        descDisciplina = "Anatomia",
-                        nota = 75,
-                        tipoAvaliacao = "Pratica"
-                    },
-                    new DetalhesDisciplinaAlunoViewModel
-                    {
-                        descDisciplina = "Histologia",
-                        nota = 89,
-                        tipoAvaliacao = "Pratica"
-                    },
-                    new DetalhesDisciplinaAlunoViewModel()
-                    {
-                        descDisciplina = "Farmaco",
-                        nota = 95,
-                        tipoAvaliacao = "Formativa"
-                    },
-                },
-                problemas = new List<DetalhesProblemaAlunoViewModel>
-                {
-                    new DetalhesProblemaAlunoViewModel()
-                    {
-                        tituloProblema = "Problema 3",
-                        notaFinal = 25
-                    },
-                    new DetalhesProblemaAlunoViewModel()
-                    {
-                        tituloProblema = "Problema 4",
-                        notaFinal = 30
-                    }
-                }
-            };
             return View(viewModel);
         }
 
         [Authorize(Roles = "Aluno")]
         public ActionResult AvaliacoesEmAberto()
         {
-            /*int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
+            int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
             Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
             Aluno aluno = user.Aluno.FirstOrDefault();
             DateTime hoje = DateTime.Today;
             InscricaoTurma inscricaoTurma = aluno.InscricaoTurma.FirstOrDefault(c => (c.Turma.Med.Semestre.Modulo.First().dtInicio < hoje) && (c.Turma.Med.Semestre.Modulo.Last().dtFim > hoje));
-            List<AvaliacaoTutoria> avaliacoes = inscricaoTurma.ControleNotas.SelectMany(c => c.AvaliacaoTutoria.Where(x => (x.dtInicio < hoje) && (x.dtFim > hoje))).ToList();
-            return View(avaliacoes);*/
-            return null;
+            List<AvaliacaoTutoria> avaliacoes = inscricaoTurma.ControleNotas.SelectMany(c => c.AvaliacaoTutoria/*.Where(x => (x.dtInicio < hoje) && (x.dtFim > hoje))*/).ToList();
+            return View(avaliacoes);
+        }
+
+        [Authorize(Roles = "Aluno")]
+        public ActionResult AvaliacoesInterpares(int idGrupo, int idProblemaXMed)
+        {
+            List<AvaliacaoTutoria> avaliacoes = new MAvaliacaoTutoria().Bring(c => (c.idProblemaxMed == idProblemaXMed) && (c.idGrupo == idGrupo));
+            ListarAvaliacaoTutoriaViewModel viewModel = new ListarAvaliacaoTutoriaViewModel();
+            viewModel.alunosAvaliados = new List<AvaliacaoTutoria>();
+            viewModel.alunosNaoAvaliados = new List<AvaliacaoTutoria>();
+            Grupo grupo = new MGrupo().BringOne(c => c.idGrupo == idGrupo);
+            int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
+            if (avaliacoes == null)
+            {
+                avaliacoes = new List<AvaliacaoTutoria>();
+            }
+            foreach (AvaliacaoTutoria item in avaliacoes)
+            {
+                if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault() != null)
+                {
+                    if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault().PerguntaXFicha.Where(c => c.marcado != null).Count() == 9)
+                    {
+                        viewModel.alunosAvaliados.Add(item);
+                    }
+                    else
+                    {
+                        viewModel.alunosNaoAvaliados.Add(item);
+                    }
+                }
+                else
+                {
+                    viewModel.alunosNaoAvaliados.Add(item);
+                }
+            }
+            return View(viewModel);
         }
     }
 }

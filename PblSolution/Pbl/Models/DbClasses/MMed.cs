@@ -46,22 +46,22 @@ namespace Pbl.Models.DbClasses
             throw new NotImplementedException();
         }
 
-        public void AdicionarDisciplinas(int idMed, List<Disciplina> disciplinas)
+        public void AdicionarDisciplinas(int idMed, int[] disciplinas)
         {
             Med med = db.Med.SingleOrDefault(c => c.idMed == idMed);
             foreach (var disciplina in disciplinas)
             {
-                med.Disciplina.Add(disciplina);
+                med.Disciplina.Add(db.Disciplina.SingleOrDefault(c => c.idDisciplina == disciplina));
             }
             db.SaveChanges();
         }
 
-        public void DesvincularDisciplinas(int idMed, List<Disciplina> disciplinas)
+        public void DesvincularDisciplinas(int idMed, int[] disciplinas)
         {
             Med med = db.Med.SingleOrDefault(c => c.idMed == idMed);
             foreach (var disciplina in disciplinas)
             {
-                med.Disciplina.Remove(disciplina);
+                med.Disciplina.Remove(db.Disciplina.SingleOrDefault(c => c.idDisciplina == disciplina));
             }
             db.SaveChanges();
         }

@@ -107,7 +107,11 @@ namespace Pbl.Models.DbClasses
                 var notaDisciplinasPraticas = disciplinasPraticas.Sum(c => c.nota.Value) / disciplinasPraticas.Count();
                 var notaDisciplinasFormativas = disciplinasFormativas.Sum(c => c.nota.Value) / disciplinasFormativas.Count();
                 var notaMorfofuncional = (((double)notaDisciplinasPraticas * 0.3) + ((double)notaDisciplinasFormativas * 0.2) + ((provaMorfofuncional.Prova.numeroQuestoes / 50) * provaMorfofuncional.numAcertos.Value));
-                var notaFinal = ((notaTutoria * 0.6) + (notaMorfofuncional * 0.4));
+                var notaFinal = ((notaTutoria * 60) + (notaMorfofuncional * 0.4));
+                if (double.IsNaN(notaFinal))
+                {
+                    return 0;
+                }
                 return notaFinal;
             }
             catch (Exception Ex)
@@ -122,6 +126,7 @@ namespace Pbl.Models.DbClasses
             double notaAuto = 0;
             double notaProfessor = 0;
             double notaInterpartes = 0;
+            int numeroInterpares = 0;
             foreach (var fichaAvaliacao in avaliacaoTutoria.FichaAvaliacao)
             {
                 if (fichaAvaliacao.Usuario.Aluno.Count > 0)
@@ -134,6 +139,7 @@ namespace Pbl.Models.DbClasses
                     else
                     {
                         notaInterpartes = fichaAvaliacao.PerguntaXFicha.Count(c => c.marcado == true);
+                        numeroInterpares++;
                     }
                 }
                 else if (fichaAvaliacao.Usuario.Professor.Count > 0)
@@ -142,7 +148,17 @@ namespace Pbl.Models.DbClasses
                     notaProfessor = fichaAvaliacao.PerguntaXFicha.Count(c => c.marcado == true);
                 }
             }
-            var notaProblema = (((notaProfessor * 0.2) + (notaAuto * 0.05) + ((notaInterpartes / avaliacaoTutoria.FichaAvaliacao.Count - 2) * 0.05)) / 0.9);
+            notaProfessor = notaProfessor * 0.2;
+            notaAuto = notaAuto * 0.05;
+            if (numeroInterpares != 0)
+            {
+                notaInterpartes = (notaInterpartes / numeroInterpares) * 0.05;
+            }
+            var notaProblema = ((notaProfessor + notaAuto + notaInterpartes) / 0.9)*10;
+            if (double.IsNaN(notaProblema))
+            {
+                notaProblema = 0;
+            }
             return notaProblema;
         }
 
@@ -158,7 +174,7 @@ namespace Pbl.Models.DbClasses
             double nota = 0;
             if (controleNotasXProva.numAcertos.HasValue)
             {
-                nota = (controleNotasXProva.Prova.numeroQuestoes / 70) * controleNotasXProva.numAcertos.Value;
+                nota = (70 / (double)controleNotasXProva.Prova.numeroQuestoes ) * controleNotasXProva.numAcertos.Value;
             }
             return nota;
         }
