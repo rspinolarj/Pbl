@@ -313,6 +313,7 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult AdicionarAlunosGrupo(int idGrupo, int? idInscricaoTurma)
         {
+            var keys = Request.Form.AllKeys;
             if (idInscricaoTurma.HasValue)
             {
                 new MInscricaoTurmaXGrupo().Add(idGrupo, idInscricaoTurma.Value);
@@ -342,6 +343,39 @@ namespace Pbl.Controllers
             }
 
             return View(viewModel); //View(viewModel);
+        }
+
+        public ActionResult VincularAlunosGrupo()
+        {
+            var keys = Request.Form.AllKeys;
+            int idGrupo = Convert.ToInt32(Request.Form["idGrupo"]);
+            var alunos = Request.Form["alunos[]"].Split(',');
+            MInscricaoTurma mInscricaoTurma = new MInscricaoTurma();
+            List<InscricaoTurma> listInscricaoTurma = new List<InscricaoTurma>();
+            foreach (var aluno in alunos)
+            {
+                int idInscricaoTurma = Convert.ToInt32(aluno);
+                listInscricaoTurma.Add(mInscricaoTurma.BringOne(c => c.idInscricaoTurma == idInscricaoTurma));
+            }
+            MGrupo mGrupo = new MGrupo();
+            Grupo grupo = mGrupo.BringOne(c => c.idGrupo == idGrupo);
+            int[] idsAlunosRemover = grupo.InscricaoTurma.Where(c => !listInscricaoTurma.Exists(x => x.idInscricaoTurma == c.idInscricaoTurma)).Select(c => c.idInscricaoTurma).ToArray();
+            List<InscricaoTurma> listAlunosRemover = new List<InscricaoTurma>();
+            foreach (var aluno in idsAlunosRemover)
+            {
+                int idInscricaoTurma = Convert.ToInt32(aluno);
+                InscricaoTurma alunoRemover = mInscricaoTurma.BringOne(c => c.idInscricaoTurma == idInscricaoTurma);
+                if (alunoRemover.Grupo.Where(c => c.idGrupo == idGrupo).Count() > 0)
+                {
+                    continue;
+                }
+                listAlunosRemover.Add(alunoRemover);
+            }
+            listInscricaoTurma = listInscricaoTurma.Where(c => !grupo.InscricaoTurma.ToList().Exists(x => x.idInscricaoTurma == c.idInscricaoTurma)).ToList();
+            List<Disciplina> listDisciplinasVinculadas = med.Disciplina.ToList();
+            mMed.DesvincularDisciplinas(med.idMed, listDisciplinasRemover);
+            mMed.AdicionarDisciplinas(med.idMed, listDisciplinasVincular);
+            return RedirectToAction("GerenciarMed", new { id = idMed });
         }
 
         [Authorize(Roles = "Diretor")]
