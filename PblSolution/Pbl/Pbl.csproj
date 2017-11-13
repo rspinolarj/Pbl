@@ -1208,6 +1208,9 @@
     <Content Include="Views\ControleMed\AvaliarSimulado.cshtml" />
     <Content Include="Views\ControleMed\GerenciarNotas.cshtml" />
     <Content Include="Views\Login\Perfil.cshtml" />
+    <Content Include="Views\AcompanhamentoMeds\AvaliacoesInterpares.cshtml" />
+    <Content Include="Views\AcompanhamentoMeds\AvaliarAluno.cshtml" />
+    <Content Include="Views\AcompanhamentoMeds\InserirNotas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -117,5 +117,50 @@ namespace Pbl.Controllers
             }
             return View(viewModel);
         }
+
+        [Authorize(Roles = "Aluno")]
+        public ActionResult AvaliarAluno(int idAvaliacaoTutoria)
+        {
+            int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
+            AvaliacaoTutoria avaliacaoTutoria = new MAvaliacaoTutoria().BringOne(c => c.idAvaliacaoTutoria == idAvaliacaoTutoria);
+            MFichaAvaliacao mFichaAvaliacao = new MFichaAvaliacao();
+            FichaAvaliacao fichaAvaliacao = mFichaAvaliacao.BringOne(c => (c.idAvaliacaoTutoria == idAvaliacaoTutoria) && (c.idAvaliador == idUsuario));
+            MPerguntaXFicha mPerguntaXFicha = new MPerguntaXFicha();
+            if (fichaAvaliacao == null)
+            {
+                Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
+
+                FichaAvaliacao nova = new FichaAvaliacao();
+                nova.idAvaliacaoTutoria = idAvaliacaoTutoria;
+                nova.idAvaliador = user.idUsuario;
+                mFichaAvaliacao.Add(nova);
+                List<Pergunta> perguntasFicha = new MPergunta().BringAll();
+                foreach (Pergunta item in perguntasFicha)
+                {
+                    PerguntaXFicha perguntaXFicha = new PerguntaXFicha();
+                    perguntaXFicha.idFichaAvaliacao = nova.idFichaAvaliacao;
+                    perguntaXFicha.idPergunta = item.idPergunta;
+                    perguntaXFicha.marcado = null;
+                    mPerguntaXFicha.Add(perguntaXFicha);
+                }
+            }
+            List<PerguntaXFicha> perguntas = mPerguntaXFicha.Bring(c => c.idFichaAvaliacao == fichaAvaliacao.idFichaAvaliacao);
+            return View(perguntas);
+        }
+
+        [Authorize(Roles = "Aluno")]
+        public ActionResult InserirNotas(int idFichaAvaliacao, int[] perguntas, bool[] respostas)
+        {
+            MPerguntaXFicha mPerguntaXFicha = new MPerguntaXFicha();
+            for (int i = 0; i < perguntas.Length; i++)
+            {
+                int idPergunta = perguntas[i];
+                PerguntaXFicha perguntaXFicha = mPerguntaXFicha.BringOne(c => (c.idFichaAvaliacao == idFichaAvaliacao) && (c.idPergunta == idPergunta));
+                perguntaXFicha.marcado = respostas[i];
+                mPerguntaXFicha.Update(perguntaXFicha);
+            }
+            FichaAvaliacao fichaAvaliacao = new MFichaAvaliacao().BringOne(c => c.idFichaAvaliacao == idFichaAvaliacao);
+            return RedirectToAction("SelecionarAluno", new { idProblemaXMed = fichaAvaliacao.AvaliacaoTutoria.idProblemaxMed, idGrupo = fichaAvaliacao.AvaliacaoTutoria.idGrupo });
+        }
     }
 }
