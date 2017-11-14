@@ -200,30 +200,32 @@ namespace Pbl.Controllers
             AvaliacaoTutoria avaliacaoTutoria = new MAvaliacaoTutoria().BringOne(c => c.idAvaliacaoTutoria == idAvaliacaoTutoria);
             MFichaAvaliacao mFichaAvaliacao = new MFichaAvaliacao();
             FichaAvaliacao fichaAvaliacao = mFichaAvaliacao.BringOne(c => (c.idAvaliacaoTutoria == idAvaliacaoTutoria) && (c.idAvaliador == idUsuario));
-            MPerguntaXFicha mPerguntaXFicha = new MPerguntaXFicha();
+            Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
             if (fichaAvaliacao == null)
             {
-                Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
-                Professor prof = user.Professor.First();
-                if (avaliacaoTutoria.Grupo.idProfessor == prof.idProfessor)
+                fichaAvaliacao = new FichaAvaliacao()
                 {
-                    FichaAvaliacao nova = new FichaAvaliacao();
-                    nova.idAvaliacaoTutoria = idAvaliacaoTutoria;
-                    nova.idAvaliador = user.idUsuario;
-                    mFichaAvaliacao.Add(nova);
-                    List<Pergunta> perguntasFicha = new MPergunta().BringAll();
-
-                    foreach (Pergunta item in perguntasFicha)
-                    {
-                        PerguntaXFicha perguntaXFicha = new PerguntaXFicha();
-                        perguntaXFicha.idFichaAvaliacao = nova.idFichaAvaliacao;
-                        perguntaXFicha.idPergunta = item.idPergunta;
-                        perguntaXFicha.marcado = null;
-                        mPerguntaXFicha.Add(perguntaXFicha);
-                    }
+                    idAvaliacaoTutoria = idAvaliacaoTutoria,
+                    idAvaliador = user.idUsuario
+                };
+                mFichaAvaliacao.Add(fichaAvaliacao);
+            }
+            MPerguntaXFicha mPerguntaXFicha = new MPerguntaXFicha();
+            ViewBag.Aluno = avaliacaoTutoria.ControleNotas.InscricaoTurma.Aluno.nomeAluno;
+            List<PerguntaXFicha> perguntas = new List<PerguntaXFicha>();
+            if (fichaAvaliacao.PerguntaXFicha.Count == 0)
+            {
+                List<Pergunta> perguntasFicha = new MPergunta().BringAll();
+                foreach (Pergunta item in perguntasFicha)
+                {
+                    PerguntaXFicha perguntaXFicha = new PerguntaXFicha();
+                    perguntaXFicha.idFichaAvaliacao = fichaAvaliacao.idFichaAvaliacao;
+                    perguntaXFicha.idPergunta = item.idPergunta;
+                    perguntaXFicha.marcado = null;
+                    mPerguntaXFicha.Add(perguntaXFicha);
                 }
             }
-            List<PerguntaXFicha> perguntas = mPerguntaXFicha.Bring(c => c.idFichaAvaliacao == fichaAvaliacao.idFichaAvaliacao);
+            perguntas = new MPerguntaXFicha().Bring(c => (c.idFichaAvaliacao == fichaAvaliacao.idFichaAvaliacao));
             return View(perguntas);
         }
 
