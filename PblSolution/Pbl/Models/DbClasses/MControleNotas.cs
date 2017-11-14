@@ -73,7 +73,7 @@ namespace Pbl.Models.DbClasses
                 var controleNotas = db.ControleNotas.SingleOrDefault(c => c.idControleNotas == idControleNotas);
                 var provaMorfofuncional = controleNotas.ControleNotasXProva.SingleOrDefault(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Morfofuncional);
                 var provaTutoria = controleNotas.ControleNotasXProva.SingleOrDefault(c => c.Prova.idTipoProva == (int)Enumeradores.TipoProva.Tutoria);
-                var disciplinasFormativas = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Morfofuncional).ToList();
+                var disciplinasFormativas = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Formativas).ToList();
                 var disciplinasPraticas = controleNotas.ControleNotasXAula.Where(c => c.Aula.Disciplina.idTipoDisciplina == (int)Enumeradores.TipoDisciplina.Pratica).ToList();
                 double notaProblema = 0;
                 foreach (var avaliacaoTutoria in controleNotas.AvaliacaoTutoria)

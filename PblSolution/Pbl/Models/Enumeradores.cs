@@ -23,7 +23,7 @@ namespace Pbl.Models
 
         public enum TipoDisciplina
         {
-            Morfofuncional = 1,
+            Formativas = 1,
             Pratica = 2
         }
 
