@@ -76,30 +76,44 @@
 
         <script>
         var idModuloLista;
-        var idModuloSelecionado;
-        var dataInicioModulo;
-        var dataFimModulo;
+        var idModuloSelecionado = '@{if (Model.ControleNotas != null) { @Model.ControleNotas.idModulo } }';
+        var dataInicioModulo = '@Model.dtInicio.ToString("yyyy-MM-dd")';
+            var dataFimModulo = '@Model.dtFim.ToString("yyyy-MM-dd")';
+            var x = document.getElementById("selModulo");
 
-
-        $('#selModulo').change(function () {
-            idModuloSelecionado = document.getElementById('selModulo').value;
-            for (i = 0; i < data.length; i++) {
-                if (data[i].idModulo == idModuloSelecionado) {
-                    dataInicioModulo = new Date(data[i].dtInicio).toISOString().slice(0, 10);
-                    dataFimModulo = new Date(data[i].dtFim).toISOString().slice(0, 10);
+            if ((idModuloSelecionado != '') && (dataInicioModulo != '') && (dataFimModulo != '')){
+                document.getElementById('divDtInicio').style.display = "block";
+                document.getElementById('divDtFim').style.display = "block";
+            $("#dtInicio").val(dataInicioModulo);
+            $("#dtFim").val(dataFimModulo);
+                var i;
+                for (i = 0; i < x.options.length; i++) {
+                    if (idModuloSelecionado == x.options[i].value) {
+                        document.getElementById("selModulo").selectedIndex = i;
+                    }
                 }
             }
-            document.getElementById('divDtInicio').style.display = "block";
+        
+
+        $('#selModulo').change(function () {
+                idModuloSelecionado = document.getElementById('selModulo').value;
+                for (i = 0; i < data.length; i++) {
+                    if (data[i].idModulo == idModuloSelecionado) {
+                        dataInicioModulo = new Date(data[i].dtInicio).toISOString().slice(0, 10);
+                        dataFimModulo = new Date(data[i].dtFim).toISOString().slice(0, 10);
+                    }
+                }
+                document.getElementById('divDtInicio').style.display = "block";
             $('#dtInicio').val('');
             $('#dtFim').val('');
-        });
+            });
 
         $('#dtInicio').change(function () {
-            document.getElementById('divDtFim').style.display = "block";
-        });
+                document.getElementById('divDtFim').style.display = "block";
+            });
 
 
-        var data = @Html.Raw((string)ViewData["modulos"]);
+            var data = @Html.Raw((string)ViewData["modulos"]);
 
         </script>
 

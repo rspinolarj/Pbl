@@ -8,9 +8,10 @@
     Avaliação de @Model.LastOrDefault().FichaAvaliacao.AvaliacaoTutoria.ControleNotas.InscricaoTurma.Aluno.nomeAluno
     <small>Subtitle</small>
 </h3>
-@Html.BeginForm("InserirNotas", "GerenciarProblemasMinistrados"){ 
+@using (Html.BeginForm("InserirNotas", "GerenciarProblemasMinistrados"))
+{ 
     <input type="hidden" name="idFichaAvaliacao" value="@Model.FirstOrDefault().idFichaAvaliacao" />
-    @foreach (var item in Model)
+    foreach (var item in Model)
     {
     <!-- START row-->
         <div class="row">

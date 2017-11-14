@@ -5,12 +5,13 @@
 }
 
 <h3>
-    Avaliação de @Model.LastOrDefault().FichaAvaliacao.AvaliacaoTutoria.ControleNotas.InscricaoTurma.Aluno.nomeAluno
+    Avaliação de @ViewBag.Aluno
     <small>Subtitle</small>
 </h3>
-@Html.BeginForm("InserirNotas", "AcompanhamentoMeds"){
+@using (Html.BeginForm("InserirNotas", "AcompanhamentoMeds"))
+{
 <input type="hidden" name="idFichaAvaliacao" value="@Model.FirstOrDefault().idFichaAvaliacao" />
-@foreach (var item in Model)
+foreach (var item in Model)
 {
     <!-- START row-->
     <div class="row">
@@ -60,7 +61,7 @@
     <button type="submit" id="btnSubmit" class="btn btn-labeled btn-success pull-right">
         <span class="btn-label">
             <i class="fa fa-check"></i>
-        </span>Cadastrar
+        </span>Salvar
     </button>
 </div>
 }
