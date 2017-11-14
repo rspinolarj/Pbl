@@ -395,8 +395,13 @@ namespace Pbl.Controllers
             if (simulados == null)
             {
                 simulados = new List<Prova>();
+                return View(simulados);
             }
-            return View(simulados);
+            else
+            {
+                return View(simulados);
+            }
+            
 
         }
 
