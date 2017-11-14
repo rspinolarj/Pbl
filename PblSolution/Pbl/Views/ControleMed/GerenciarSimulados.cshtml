@@ -23,7 +23,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
 
-                    <a href="@Url.Action("AdicionarSimulado", "ControleMed", new {idMed = Model.FirstOrDefault().idMed })">
+                    <a href="@Url.Action("AdicionarSimulado", "ControleMed", new {idMed = ViewBag.idMed })">
                         <i class="fa fa-plus"></i>
                         Adicionar Simulado
                     </a>
