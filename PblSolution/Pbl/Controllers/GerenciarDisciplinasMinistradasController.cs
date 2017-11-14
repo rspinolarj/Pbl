@@ -80,6 +80,7 @@ namespace Pbl.Controllers
             //controleNotasAula.nota = nota;
             controleNotasAula.idControleNotas = controleNotas.idControleNotas;
             MControleNotasXAula mControleNotasXAula = new MControleNotasXAula();
+            mControleNotasXAula.Add(controleNotasAula);
             return View(controleNotasAula);
         }
 

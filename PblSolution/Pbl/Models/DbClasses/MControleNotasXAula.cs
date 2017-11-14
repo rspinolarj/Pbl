@@ -22,8 +22,6 @@ namespace Pbl.Models.DbClasses
             {
                 db.ControleNotasXAula.Add(t);
                 db.SaveChanges();
-                Singletone.Refresh();
-                db = Singletone.InstanceFamerv;
             }
             catch (Exception Ex)
             {
