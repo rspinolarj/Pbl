@@ -392,6 +392,7 @@ namespace Pbl.Controllers
             ViewBag.idMed = idMed;
             ViewBag.descMedSemestre = med.descMed + " - " + med.Semestre.descSemestre;
             return View(med.Prova);
+
         }
 
         [HttpGet, Authorize(Roles = "Diretor")]
