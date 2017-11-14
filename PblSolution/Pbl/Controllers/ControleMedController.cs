@@ -391,11 +391,12 @@ namespace Pbl.Controllers
             Med med = new MMed().BringOne(c => c.idMed == idMed);
             ViewBag.idMed = idMed;
             ViewBag.descMedSemestre = med.descMed + " - " + med.Semestre.descSemestre;
-            if (med.Prova == null)
+            List<Prova> simulados = med.Prova.ToList();
+            if (simulados == null)
             {
-                return View(new List<Prova>());
+                simulados = new List<Prova>();
             }
-            return View(med.Prova.ToList());
+            return View(simulados);
 
         }
 
