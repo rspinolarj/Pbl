@@ -32,8 +32,8 @@ namespace Pbl.Controllers
         public ActionResult Create(SemestreViewModel semestre)
         {
             MSemestre mSemestre = new MSemestre();
-            TempData["Message"] = mSemestre.Add(semestre) ? "Semestre cadastrado com sucesso" : "Ação não realizada";
-            return RedirectToAction("Create");
+            TempData["Message"] = mSemestre.Add(semestre) ? "Semestre cadastrado com sucesso" : "Açao nao realizada";
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "Diretor")]
@@ -58,7 +58,7 @@ namespace Pbl.Controllers
         public ActionResult Update(SemestreViewModel semestre)
         {
             MSemestre mSemestre = new MSemestre();
-            TempData["Message"] = mSemestre.Update(semestre) ? "Semestre atualizado com sucesso" : "Ação não realizada";
+            TempData["Message"] = mSemestre.Update(semestre) ? "Semestre atualizado com sucesso" : "Açao nao realizada";
             return RedirectToAction("Index");
         }
 
@@ -66,7 +66,7 @@ namespace Pbl.Controllers
         public ActionResult Delete(int idSemestre)
         {
             MSemestre mSemestre = new MSemestre();
-            TempData["Message"] = mSemestre.Delete(mSemestre.BringOne(c => c.idSemestre == idSemestre)) ? "Semestre deletado com sucesso" : "Ação não realizada";
+            TempData["Message"] = mSemestre.Delete(mSemestre.BringOne(c => c.idSemestre == idSemestre)) ? "Semestre deletado com sucesso" : "Açao nao realizada";
             return RedirectToAction("Index");
         }
     }
