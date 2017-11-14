@@ -77,13 +77,28 @@ namespace Pbl.Controllers
                     controleNotas.idInscricaoTurma = inscrito.idInscricaoTurma;
                     mControleNotas.Add(controleNotas);
                 }
-                AvaliacaoTutoria avaliacaoAluno = new AvaliacaoTutoria();
-                avaliacaoAluno.dtFim = novaAvaliacao.dtFim;
-                avaliacaoAluno.dtInicio = novaAvaliacao.dtInicio;
-                avaliacaoAluno.idControleNotas = controleNotas.idControleNotas;
-                avaliacaoAluno.idGrupo = grupo.idGrupo;
-                avaliacaoAluno.idProblemaxMed = novaAvaliacao.idProblemaxMed;
-                mAvaliacaoTutoria.Add(avaliacaoAluno);
+                
+                AvaliacaoTutoria avaliacaoAluno = (AvaliacaoTutoria)(inscrito.ControleNotas.Select(c => c.AvaliacaoTutoria.Where(x => x.idProblemaxMed == novaAvaliacao.idProblemaxMed)));
+                if (avaliacaoAluno == null)
+                {
+                    avaliacaoAluno = new AvaliacaoTutoria();
+                    avaliacaoAluno.dtFim = novaAvaliacao.dtFim;
+                    avaliacaoAluno.dtInicio = novaAvaliacao.dtInicio;
+                    avaliacaoAluno.idControleNotas = controleNotas.idControleNotas;
+                    avaliacaoAluno.idGrupo = grupo.idGrupo;
+                    avaliacaoAluno.idProblemaxMed = novaAvaliacao.idProblemaxMed;
+                    mAvaliacaoTutoria.Add(avaliacaoAluno);
+                }
+                else
+                {
+                    avaliacaoAluno.dtFim = novaAvaliacao.dtFim;
+                    avaliacaoAluno.dtInicio = novaAvaliacao.dtInicio;
+                    avaliacaoAluno.idControleNotas = controleNotas.idControleNotas;
+                    avaliacaoAluno.idGrupo = grupo.idGrupo;
+                    avaliacaoAluno.idProblemaxMed = novaAvaliacao.idProblemaxMed;
+                    mAvaliacaoTutoria.Update(avaliacaoAluno);
+                }
+                
             }
             List<AvaliacaoTutoria> avaliacoesTutoria = mAvaliacaoTutoria.Bring(c => (c.idGrupo == grupo.idGrupo) && (c.idProblemaxMed == novaAvaliacao.idProblemaxMed));
             return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistrados", new { idProblemaXMed = novaAvaliacao.idProblemaxMed, idGrupo = grupo.idGrupo });
