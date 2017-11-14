@@ -25,6 +25,7 @@ namespace Pbl.Models.DbClasses
             }
             catch (Exception Ex)
             {
+                db = new FamervEntities();
                 Console.WriteLine(Ex.Message);
                 return false;
             }
