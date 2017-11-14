@@ -39,7 +39,7 @@ namespace Pbl.Controllers
             novo.login = aluno.cpfAluno;
             novo.senha = aluno.cpfAluno;
             novo.email = email;
-            novo.idTipoUsuario = 3;
+            novo.idTipoUsuario = (int)Enumeradores.TipoUsuario.Aluno;
             aluno.Usuario.Add(novo);
             MAluno mAluno = new MAluno();
             mAluno.Add(aluno);

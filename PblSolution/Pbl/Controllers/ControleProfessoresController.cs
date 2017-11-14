@@ -29,18 +29,15 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult Create(Professor professor)
         {
-            MProfessor mProfessor = new MProfessor();
             professor.ativo = true;
-            if (mProfessor.Add(professor))
-            {
-                Usuario novo = new Usuario();
-                novo.login = professor.cpfProfessor;
-                novo.senha = professor.cpfProfessor;
-                novo.idTipoUsuario = (int)Enumeradores.TipoUsuario.Professor;
-                new MUsuario().Add(novo);
-                TempData["Message"] = new MUsuarioProfessor().Add(novo.idUsuario, professor.idProfessor) ? "Professor cadastrado" : "Ação não foi realizada";
-            }
-            return RedirectToAction("Create");
+            Usuario novo = new Usuario();
+            novo.login = professor.cpfProfessor;
+            novo.senha = professor.cpfProfessor;
+            novo.idTipoUsuario = (int)Enumeradores.TipoUsuario.Professor;
+            professor.Usuario.Add(novo);
+            MProfessor mProfessor = new MProfessor();
+            mProfessor.Add(professor);
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "Diretor")]
@@ -77,9 +74,15 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult Delete(int id)
         {
-            MProfessor mProfessor = new MProfessor();
-            Professor professor = mProfessor.BringOne(c => c.idProfessor == id);
-            TempData["Message"] = mProfessor.Delete(professor) ? "Professor deletado com sucesso" : "Ação não foi realizada";
+            MUsuario mUsuario = new MUsuario();
+            Professor professor = new MProfessor().BringOne(c => c.idProfessor == id);
+            int idUsuario = professor.Usuario.FirstOrDefault().idUsuario;
+            Usuario usuario = mUsuario.BringOne(c => c.idUsuario == idUsuario);
+            usuario.Professor.Remove(professor);
+            professor.Usuario.Remove(usuario);
+            mUsuario.Delete(usuario);
+            MProfessor mAluno = new MProfessor();
+            TempData["Message"] = mAluno.Delete(mAluno.BringOne(c => c.idProfessor == professor.idProfessor)) ? "Professor deletado com sucesso" : "Ação não foi realizada";
             return RedirectToAction("Index");
         }
     }
