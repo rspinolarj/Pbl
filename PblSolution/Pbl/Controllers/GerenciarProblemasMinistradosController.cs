@@ -40,48 +40,7 @@ namespace Pbl.Controllers
             MAvaliacaoTutoria mAvaliacaoTutoria = new MAvaliacaoTutoria();
             List<AvaliacaoTutoria> avaliacaoTutoria = mAvaliacaoTutoria.Bring(c => (c.idGrupo == idGrupo) && (c.idProblemaxMed == idProblemaXMed));
             Grupo grupo = new MGrupo().BringOne(c => c.idGrupo == idGrupo);
-            if (avaliacaoTutoria.Count != 0)
-            {
-                int idModulo = (int)avaliacaoTutoria.FirstOrDefault().ControleNotas.idModulo;
-                DateTime dataFimAvaliacao = avaliacaoTutoria.FirstOrDefault().dtFim;
-                DateTime dataInicioAvaliacao = avaliacaoTutoria.FirstOrDefault().dtInicio;
-                if (grupo.InscricaoTurma.Count != avaliacaoTutoria.Count)
-                {
-                    List<InscricaoTurma> alunosInscritos = grupo.InscricaoTurma.ToList();
-                    MControleNotas mControleNotas = new MControleNotas();
-                    foreach (InscricaoTurma alunoInscrito in alunosInscritos)
-                    {
-                        ControleNotas controleNotas = alunoInscrito.ControleNotas.SingleOrDefault(c => c.idModulo == idModulo);
-                        if (controleNotas == null)
-                        {
-                            controleNotas.idModulo = idModulo;
-                            controleNotas.idInscricaoTurma = alunoInscrito.idInscricaoTurma;
-                            mControleNotas.Add(controleNotas);
-                            AvaliacaoTutoria avaliacaoAluno = new AvaliacaoTutoria();
-                            avaliacaoAluno.dtFim = dataFimAvaliacao;
-                            avaliacaoAluno.dtInicio = dataInicioAvaliacao;
-                            avaliacaoAluno.idControleNotas = controleNotas.idControleNotas;
-                            avaliacaoAluno.idGrupo = grupo.idGrupo;
-                            avaliacaoAluno.idProblemaxMed = idProblemaXMed;
-                            mAvaliacaoTutoria.Add(avaliacaoAluno);
-                        }
-                        else
-                        {
-                            if (alunoInscrito.ControleNotas.SingleOrDefault(c => c.idModulo == idModulo).AvaliacaoTutoria.SingleOrDefault(c => c.idProblemaxMed == idProblemaXMed) == null)
-                            {
-                                AvaliacaoTutoria avaliacaoAluno = new AvaliacaoTutoria();
-                                avaliacaoAluno.dtFim = dataFimAvaliacao;
-                                avaliacaoAluno.dtInicio = dataInicioAvaliacao;
-                                avaliacaoAluno.idControleNotas = controleNotas.idControleNotas;
-                                avaliacaoAluno.idGrupo = grupo.idGrupo;
-                                avaliacaoAluno.idProblemaxMed = idProblemaXMed;
-                                mAvaliacaoTutoria.Add(avaliacaoAluno);
-                            }
-                        }
-                    }
-                }
-                return RedirectToAction("SelecionarAluno", "GerenciarProblemasMinistrados", new { idProblemaXMed = idProblemaXMed, idGrupo = idGrupo });
-            }
+
             List<Modulo> modulos = new MModulo().Bring(c => c.idSemestre == problemaXMed.Med.idSemestre);
             AvaliacaoTutoria novaAvaliacao = new AvaliacaoTutoria();
             novaAvaliacao.idGrupo = idGrupo;
@@ -127,11 +86,59 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor,Professor")]
         public ActionResult SelecionarAluno(int idProblemaXMed, int idGrupo)
         {
-            List<AvaliacaoTutoria> avaliacoes = new MAvaliacaoTutoria().Bring(c => (c.idProblemaxMed == idProblemaXMed) && (c.idGrupo == idGrupo));
+            var mAvaliacaoTutoria = new MAvaliacaoTutoria();
+            List<AvaliacaoTutoria> avaliacoes = mAvaliacaoTutoria.Bring(c => (c.idProblemaxMed == idProblemaXMed) && (c.idGrupo == idGrupo));
             ListarAvaliacaoTutoriaViewModel viewModel = new ListarAvaliacaoTutoriaViewModel();
             viewModel.alunosAvaliados = new List<AvaliacaoTutoria>();
             viewModel.alunosNaoAvaliados = new List<AvaliacaoTutoria>();
             Grupo grupo = new MGrupo().BringOne(c => c.idGrupo == idGrupo);
+
+
+            if (avaliacoes.Count != 0)
+            {
+                return RedirectToAction("MontarFichaAvaliativa", new { idProblemaXMed = idProblemaXMed, idGrupo = idGrupo });
+            }
+            int idModulo = (int)avaliacoes.FirstOrDefault().ControleNotas.idModulo;
+            DateTime dataFimAvaliacao = avaliacoes.FirstOrDefault().dtFim;
+            DateTime dataInicioAvaliacao = avaliacoes.FirstOrDefault().dtInicio;
+            if (grupo.InscricaoTurma.Count != avaliacoes.Count)
+            {
+                List<InscricaoTurma> alunosInscritos = grupo.InscricaoTurma.ToList();
+                MControleNotas mControleNotas = new MControleNotas();
+                foreach (InscricaoTurma alunoInscrito in alunosInscritos)
+                {
+                    ControleNotas controleNotas = alunoInscrito.ControleNotas.SingleOrDefault(c => c.idModulo == idModulo);
+                    if (controleNotas == null)
+                    {
+                        controleNotas.idModulo = idModulo;
+                        controleNotas.idInscricaoTurma = alunoInscrito.idInscricaoTurma;
+                        mControleNotas.Add(controleNotas);
+                        AvaliacaoTutoria avaliacaoAluno = new AvaliacaoTutoria();
+                        avaliacaoAluno.dtFim = dataFimAvaliacao;
+                        avaliacaoAluno.dtInicio = dataInicioAvaliacao;
+                        avaliacaoAluno.idControleNotas = controleNotas.idControleNotas;
+                        avaliacaoAluno.idGrupo = grupo.idGrupo;
+                        avaliacaoAluno.idProblemaxMed = idProblemaXMed;
+                        mAvaliacaoTutoria.Add(avaliacaoAluno);
+                    }
+                    else
+                    {
+                        if (alunoInscrito.ControleNotas.SingleOrDefault(c => c.idModulo == idModulo).AvaliacaoTutoria.SingleOrDefault(c => c.idProblemaxMed == idProblemaXMed) == null)
+                        {
+                            AvaliacaoTutoria avaliacaoAluno = new AvaliacaoTutoria();
+                            avaliacaoAluno.dtFim = dataFimAvaliacao;
+                            avaliacaoAluno.dtInicio = dataInicioAvaliacao;
+                            avaliacaoAluno.idControleNotas = controleNotas.idControleNotas;
+                            avaliacaoAluno.idGrupo = grupo.idGrupo;
+                            avaliacaoAluno.idProblemaxMed = idProblemaXMed;
+                            mAvaliacaoTutoria.Add(avaliacaoAluno);
+                        }
+                    }
+                }
+            }
+
+
+
             int idUsuario = Convert.ToInt32(HttpContext.User.Identity.Name);
             Usuario user = new MUsuario().BringOne(c => c.idUsuario == idUsuario);
             Professor prof = user.Professor.First();
@@ -145,7 +152,7 @@ namespace Pbl.Controllers
             }
             foreach (AvaliacaoTutoria item in avaliacoes)
             {
-                if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault() != null )
+                if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault() != null)
                 {
                     if (item.FichaAvaliacao.Where(c => c.idAvaliador == idUsuario).FirstOrDefault().PerguntaXFicha.Where(c => c.marcado != null).Count() == 9)
                     {
