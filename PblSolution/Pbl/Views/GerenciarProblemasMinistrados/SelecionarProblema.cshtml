@@ -32,8 +32,11 @@
                                     <tr class="gradeX">
                                         <td>@item.Problema.tituloProblema</td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("MontarFichaAvaliativa","GerenciarProblemasMinistrados", new { idProblemaXMed = item.idProblemaxMed, idGrupo = ((Pbl.Models.Grupo)ViewData["Grupo"]).idGrupo })'">
+                                            <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("SelecionarAluno","GerenciarProblemasMinistrados", new { idProblemaXMed = item.idProblemaxMed, idGrupo = ((Pbl.Models.Grupo)ViewData["Grupo"]).idGrupo })'">
                                                 <em class="fa fa-cog"></em>
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-default" onclick="window.location = '@Url.Action("MontarFichaAvaliativa", "GerenciarProblemasMinistrados", new { idProblemaXMed = item.idProblemaxMed, idGrupo = ((Pbl.Models.Grupo)ViewData["Grupo"]).idGrupo })'">
+                                                <em class="fa fa-pencil"></em>
                                             </button>
                                         </td>
                                     </tr>

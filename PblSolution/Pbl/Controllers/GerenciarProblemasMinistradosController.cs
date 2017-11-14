@@ -40,11 +40,17 @@ namespace Pbl.Controllers
             MAvaliacaoTutoria mAvaliacaoTutoria = new MAvaliacaoTutoria();
             List<AvaliacaoTutoria> avaliacaoTutoria = mAvaliacaoTutoria.Bring(c => (c.idGrupo == idGrupo) && (c.idProblemaxMed == idProblemaXMed));
             Grupo grupo = new MGrupo().BringOne(c => c.idGrupo == idGrupo);
-
-            List<Modulo> modulos = new MModulo().Bring(c => c.idSemestre == problemaXMed.Med.idSemestre);
             AvaliacaoTutoria novaAvaliacao = new AvaliacaoTutoria();
-            novaAvaliacao.idGrupo = idGrupo;
-            novaAvaliacao.idProblemaxMed = idProblemaXMed;
+            if (avaliacaoTutoria.Count > 0)
+            {
+                novaAvaliacao = avaliacaoTutoria.FirstOrDefault();
+            }
+            else
+            {
+                novaAvaliacao.idGrupo = idGrupo;
+                novaAvaliacao.idProblemaxMed = idProblemaXMed;
+            }
+            List<Modulo> modulos = new MModulo().Bring(c => c.idSemestre == problemaXMed.Med.idSemestre);
             ViewData["idModulo"] = new SelectList(modulos, "idModulo", "descModulo");
             string js = JsonConvert.SerializeObject(modulos, Formatting.Indented,
                             new JsonSerializerSettings
@@ -94,7 +100,7 @@ namespace Pbl.Controllers
             Grupo grupo = new MGrupo().BringOne(c => c.idGrupo == idGrupo);
 
 
-            if (avaliacoes.Count != 0)
+            if (avaliacoes.Count == 0)
             {
                 return RedirectToAction("MontarFichaAvaliativa", new { idProblemaXMed = idProblemaXMed, idGrupo = idGrupo });
             }
