@@ -13,7 +13,7 @@
         <div class="panel-heading">Cadastro</div>
         <div class="panel-body">
             @Html.AntiForgeryToken()
-            @Html.HiddenFor(c => c.idMed, new { @value = Model.idMed})
+            @Html.HiddenFor(c => c.idMed, new { @value = ViewData["idMed"]})
             <fieldset>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Grupo</label>
