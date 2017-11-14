@@ -77,8 +77,8 @@ namespace Pbl.Controllers
                     controleNotas.idInscricaoTurma = inscrito.idInscricaoTurma;
                     mControleNotas.Add(controleNotas);
                 }
-                
-                AvaliacaoTutoria avaliacaoAluno = (AvaliacaoTutoria)(inscrito.ControleNotas.Select(c => c.AvaliacaoTutoria.Where(x => x.idProblemaxMed == novaAvaliacao.idProblemaxMed)));
+                var teste = (inscrito.ControleNotas.Select(c => c.AvaliacaoTutoria.Where(x => x.idProblemaxMed == novaAvaliacao.idProblemaxMed))).FirstOrDefault().FirstOrDefault();
+                AvaliacaoTutoria avaliacaoAluno = teste;
                 if (avaliacaoAluno == null)
                 {
                     avaliacaoAluno = new AvaliacaoTutoria();
