@@ -172,10 +172,18 @@ namespace Pbl.Models.DbClasses
         {
             var controleNotasXProva = db.ControleNotasXProva.SingleOrDefault(c => c.idProva == idProva && c.idControleNotas == idControleNotas);
             double nota = 0;
-            if (controleNotasXProva.numAcertos.HasValue)
+            try
             {
-                nota = (70 / (double)controleNotasXProva.Prova.numeroQuestoes ) * controleNotasXProva.numAcertos.Value;
+                if (controleNotasXProva.numAcertos.HasValue)
+                {
+                    nota = (70 / (double)controleNotasXProva.Prova.numeroQuestoes) * controleNotasXProva.numAcertos.Value;
+                }
             }
+            catch (Exception Ex)
+            {
+
+            }
+            
             return nota;
         }
 

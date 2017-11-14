@@ -454,6 +454,8 @@ namespace Pbl.Controllers
                         };
                         mControleNotasXProva.Add(controleNotasXProva);
                     }
+                    controleNotas = alunoInscrito.ControleNotas.SingleOrDefault(c => c.idModulo == prova.idModulo);
+                    controleNotasXProva = controleNotas.ControleNotasXProva.SingleOrDefault(c => c.idProva == prova.idProva);
                     listAvaliacoes.Add(controleNotasXProva);
                 }
             }
