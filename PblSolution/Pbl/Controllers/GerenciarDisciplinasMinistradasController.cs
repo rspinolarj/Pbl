@@ -80,7 +80,10 @@ namespace Pbl.Controllers
             //controleNotasAula.nota = nota;
             controleNotasAula.idControleNotas = controleNotas.idControleNotas;
             MControleNotasXAula mControleNotasXAula = new MControleNotasXAula();
-            mControleNotasXAula.Add(controleNotasAula);
+            if (mControleNotasXAula.BringOne(c => (c.idAula == idAula) && (c.idControleNotas == c.idControleNotas)) != null)
+            {
+                mControleNotasXAula.Add(controleNotasAula);
+            }
             return View(controleNotasAula);
         }
 
