@@ -205,7 +205,7 @@ namespace Pbl.Controllers
                     mControleNotas.Add(controleNotas);
                 }
             }
-            return AdicionarAlunosTurma(idTurma);
+            return RedirectToAction("GerenciarTurmas", new { idMed = turma.idMed });
         }
         #endregion
 
