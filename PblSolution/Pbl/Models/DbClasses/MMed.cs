@@ -51,6 +51,10 @@ namespace Pbl.Models.DbClasses
             Med med = db.Med.SingleOrDefault(c => c.idMed == idMed);
             foreach (var disciplina in disciplinas)
             {
+                if (med.Disciplina.ToList().Exists(c => c.idDisciplina == disciplina))
+                {
+                    continue;
+                }
                 med.Disciplina.Add(db.Disciplina.SingleOrDefault(c => c.idDisciplina == disciplina));
             }
             db.SaveChanges();

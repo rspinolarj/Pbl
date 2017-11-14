@@ -82,5 +82,18 @@ namespace Pbl.Models.DbClasses
             }
             return true;
         }
+
+        public List<Disciplina> RetornaDisciplinasDisponiveis(int idMed)
+        {
+            List<Disciplina> listDisciplinas = db.Disciplina.ToList();
+            Med med = db.Med.SingleOrDefault(c => c.idMed == idMed);
+            List<Disciplina> listDisciplinasVinculadas = med.Disciplina.ToList();
+            if (listDisciplinasVinculadas.Count == 0)
+            {
+                return listDisciplinas;
+            }
+            listDisciplinas.RemoveAll(c => listDisciplinasVinculadas.Exists(x => x.idDisciplina == c.idDisciplina));
+            return listDisciplinas;
+        }
     }
 }

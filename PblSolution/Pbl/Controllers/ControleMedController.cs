@@ -36,9 +36,8 @@ namespace Pbl.Controllers
         {
             AdicionarDisciplinasViewModel viewModel = new AdicionarDisciplinasViewModel();
             viewModel.med = new MMed().BringOne(c => c.idMed == idMed);
-            viewModel.disciplinasDisponiveis = new MDisciplina().BringAll();
+            viewModel.disciplinasDisponiveis = new MDisciplina().RetornaDisciplinasDisponiveis(idMed);
             viewModel.disciplinasCadastradas = viewModel.med.Disciplina.ToList();
-            viewModel.disciplinasDisponiveis.RemoveAll(c => viewModel.disciplinasCadastradas.Contains(c));
             return View(viewModel);
         }
 
