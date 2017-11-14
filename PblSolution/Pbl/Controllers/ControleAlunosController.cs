@@ -28,24 +28,22 @@ namespace Pbl.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Diretor")]
-        public ActionResult Create(string nomeAluno, string cpfAluno, string matriculaAluno)
+        public ActionResult Create(string nomeAluno, string cpfAluno, string matriculaAluno, string email)
         {
             Aluno aluno = new Aluno();
             aluno.nomeAluno = nomeAluno;
             aluno.cpfAluno = cpfAluno;
             aluno.matriculaAluno = matriculaAluno;
             aluno.ativo = true;
+            Usuario novo = new Usuario();
+            novo.login = aluno.cpfAluno;
+            novo.senha = aluno.cpfAluno;
+            novo.email = email;
+            novo.idTipoUsuario = 3;
+            aluno.Usuario.Add(novo);
             MAluno mAluno = new MAluno();
-            if (mAluno.Add(aluno))
-            {
-                Usuario novo = new Usuario();
-                novo.login = aluno.cpfAluno;
-                novo.senha = aluno.cpfAluno;
-                novo.idTipoUsuario = 3;
-                new MUsuario().Add(novo);
-                TempData["Message"] = new MUsuarioAluno().Add(novo.idUsuario, aluno.idAluno) ? "Aluno cadastrado" : "Ação não foi realizada";
-            }
-            return RedirectToAction("Create");
+            mAluno.Add(aluno);
+            return RedirectToAction("Index");
         }
         public ActionResult Update(int id)
         {
@@ -75,9 +73,16 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult Delete(int id)
         {
+            
+            MUsuario mUsuario = new MUsuario();
+            Aluno aluno = new MAluno().BringOne(c => c.idAluno == id);
+            int idUsuario = aluno.Usuario.FirstOrDefault().idUsuario;
+            Usuario usuario = mUsuario.BringOne(c => c.idUsuario == idUsuario);
+            usuario.Aluno.Remove(aluno);
+            aluno.Usuario.Remove(usuario);
+            mUsuario.Delete(usuario);
             MAluno mAluno = new MAluno();
-            Aluno aluno = mAluno.BringOne(c => c.idAluno == id);
-            TempData["Message"] = mAluno.Delete(aluno) ? "Aluno deletado com sucesso" : "Ação não foi realizada";
+            TempData["Message"] = mAluno.Delete(mAluno.BringOne(c => c.idAluno == aluno.idAluno)) ? "Aluno deletado com sucesso" : "Ação não foi realizada";
             return RedirectToAction("Index", "ControleAlunos");
         }
     }
