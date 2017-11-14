@@ -161,7 +161,7 @@ namespace Pbl.Controllers
                 mPerguntaXFicha.Update(perguntaXFicha);
             }
             FichaAvaliacao fichaAvaliacao = new MFichaAvaliacao().BringOne(c => c.idFichaAvaliacao == idFichaAvaliacao);
-            return RedirectToAction("SelecionarAluno", new { idProblemaXMed = fichaAvaliacao.AvaliacaoTutoria.idProblemaxMed, idGrupo = fichaAvaliacao.AvaliacaoTutoria.idGrupo });
+            return RedirectToAction("AvaliacoesInterpares", new { idProblemaXMed = fichaAvaliacao.AvaliacaoTutoria.idProblemaxMed, idGrupo = fichaAvaliacao.AvaliacaoTutoria.idGrupo });
         }
     }
 }
