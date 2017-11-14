@@ -303,7 +303,7 @@ namespace Pbl.Controllers
         {
             grupo.ativo = true;
             new MGrupo().Add(grupo);
-            return RedirectToAction("GerenciarMed", "ControleMed", new { id = grupo.idMed });
+            return RedirectToAction("GerenciarGrupos", "ControleMed", new { idMed = grupo.idMed });
             //Redirect(Url.Action("GerenciarMed", "ControleMed", grupo.idMed));
         }
 
