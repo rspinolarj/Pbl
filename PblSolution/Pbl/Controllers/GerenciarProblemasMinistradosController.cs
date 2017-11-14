@@ -113,7 +113,8 @@ namespace Pbl.Controllers
             viewModel.alunosAvaliados = new List<AvaliacaoTutoria>();
             viewModel.alunosNaoAvaliados = new List<AvaliacaoTutoria>();
             Grupo grupo = new MGrupo().BringOne(c => c.idGrupo == idGrupo);
-
+            Problema problema = new MProblemaXMed().BringOne(c => c.idProblemaxMed == idProblemaXMed).Problema;
+            ViewBag.Informativo = problema.tituloProblema + " - " + grupo.descGrupo;
 
             if (avaliacoes.Count == 0)
             {
