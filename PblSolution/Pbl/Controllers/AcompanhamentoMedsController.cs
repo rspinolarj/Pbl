@@ -88,6 +88,7 @@ namespace Pbl.Controllers
         public ActionResult AvaliacoesInterpares(int idGrupo, int idProblemaXMed)
         {
             List<AvaliacaoTutoria> avaliacoes = new MAvaliacaoTutoria().Bring(c => (c.idProblemaxMed == idProblemaXMed) && (c.idGrupo == idGrupo));
+            ViewBag.descProblema = new MProblemaXMed().BringOne(c => c.idProblemaxMed == idProblemaXMed).Problema.descProblema;
             ListarAvaliacaoTutoriaViewModel viewModel = new ListarAvaliacaoTutoriaViewModel();
             viewModel.alunosAvaliados = new List<AvaliacaoTutoria>();
             viewModel.alunosNaoAvaliados = new List<AvaliacaoTutoria>();
