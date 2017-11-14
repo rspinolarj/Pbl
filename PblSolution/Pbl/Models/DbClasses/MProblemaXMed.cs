@@ -51,7 +51,7 @@ namespace Pbl.Models.DbClasses
         {
             List<Problema> TodosOsProblemas = new MProblema().BringAll();
             List<Problema> ProblemasCadastrados = RetornaProblemasCadastrados(idMed);
-            TodosOsProblemas.RemoveAll(c => ProblemasCadastrados.Contains(c));
+            TodosOsProblemas.RemoveAll(c => ProblemasCadastrados.Exists(x => x.idProblema == c.idProblema));
             return TodosOsProblemas;
         }
 
