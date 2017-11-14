@@ -31,8 +31,8 @@ namespace Pbl.Controllers
         public ActionResult Create(Problema problema)
         {
             MProblema mProblema = new MProblema();
-            TempData["Message"] = mProblema.Add(problema) ? "Problema Cadastrado" : "Ação não realizada";
-            return RedirectToAction("Create");
+            TempData["Message"] = mProblema.Add(problema) ? "Problema Cadastrado" : "Açao nao realizada";
+            return RedirectToAction("Index");
         }
 
         [Authorize(Roles = "Diretor")]
@@ -46,7 +46,7 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult Update(Problema problema)
         {
-            TempData["Message"] = new MProblema().Update(problema) ? "Problema atualizado com sucesso" : "Ação não foi realizada";
+            TempData["Message"] = new MProblema().Update(problema) ? "Problema atualizado com sucesso" : "Açao nao foi realizada";
             return RedirectToAction("Index");
         }
 
@@ -55,7 +55,7 @@ namespace Pbl.Controllers
         {
             MProblema mProblema = new MProblema();
             Problema problema = mProblema.BringOne(c => c.idProblema == id);
-            TempData["Message"] = mProblema.Delete(problema) ? "Problema deletado com sucesso" : "Ação não foi realizada";
+            TempData["Message"] = mProblema.Delete(problema) ? "Problema deletado com sucesso" : "Açao nao foi realizada";
             return RedirectToAction("Index");
         }
     }
