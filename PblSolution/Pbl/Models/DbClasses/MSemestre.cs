@@ -73,7 +73,7 @@ namespace Pbl.Models.DbClasses
         {
             try
             {
-                //db.SpCrudSemestre(t.idSemestre, t.Ano.Year, t.Descricao, t.DataInicioModulo1, t.DataInicioModulo2, t.DataInicioModulo3, t.DataFinalModulo1, t.DataFinalModulo2, t.DataFinalModulo3, "Update");
+                db.SpCrudSemestre(t.idSemestre, t.DataInicioModulo1, t.DataInicioModulo2, t.DataInicioModulo3, t.DataFinalModulo1, t.DataFinalModulo2, t.DataFinalModulo3, "Update");
             }
             catch (Exception Ex)
             {
