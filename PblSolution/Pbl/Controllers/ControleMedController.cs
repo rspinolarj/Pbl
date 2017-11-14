@@ -79,7 +79,11 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult GerenciarTurmas(int idMed)
         {
+            MTurma mTurma = new MTurma();
+            var turmas = mTurma.Bring(c => c.idMed == idMed);
+            Med med = new MMed().BringOne(c => c.idMed == idMed);
             ViewBag.idMed = idMed;
+            ViewBag.descMedSemestre = med.descMed + " - " + med.Semestre.descSemestre;
             return View(new MTurma().Bring(c => c.idMed == idMed));
         }
 
@@ -100,6 +104,7 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult AdicionarNovaTurma(Turma nova, int[] idDisciplina, int[] idProfessor)
         {
+            nova.ativo = true;
             TempData["Message"] = new MTurma().Add(nova) ? "Nova Turma Cadastrada" : "Algo Errado Ocorreu";
             MAula mAula = new MAula();
             for (int i = 0; i < idDisciplina.Length; i++)
@@ -279,6 +284,9 @@ namespace Pbl.Controllers
         public ActionResult GerenciarGrupos(int idMed)
         {
             ViewBag.idMed = idMed;
+            Med med = new MMed().BringOne(c => c.idMed == idMed);
+            ViewBag.idMed = idMed;
+            ViewBag.descMedSemestre = med.descMed + " - " + med.Semestre.descSemestre;
             return View(new MGrupo().Bring(c => c.idMed == idMed));
         }
 
@@ -381,7 +389,8 @@ namespace Pbl.Controllers
         public ActionResult GerenciarSimulados(int idMed)
         {
             Med med = new MMed().BringOne(c => c.idMed == idMed);
-            ViewBag.idMed = med.idMed;
+            ViewBag.idMed = idMed;
+            ViewBag.descMedSemestre = med.descMed + " - " + med.Semestre.descSemestre;
             return View(med.Prova);
         }
 
@@ -461,6 +470,9 @@ namespace Pbl.Controllers
         [Authorize(Roles = "Diretor")]
         public ActionResult GerenciarNotas(int idMed)
         {
+            Med med = new MMed().BringOne(c => c.idMed == idMed);
+            ViewBag.idMed = idMed;
+            ViewBag.descMedSemestre = med.descMed + " - " + med.Semestre.descSemestre;
             List<Turma> listTurmas = new MTurma().Bring(c => c.idMed == idMed);
             List<InscricaoTurma> listAlunosInscritos = new List<InscricaoTurma>();
             MInscricaoTurma mInscricaoTurma = new MInscricaoTurma();
