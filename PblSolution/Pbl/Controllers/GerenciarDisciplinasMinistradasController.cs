@@ -95,8 +95,8 @@ namespace Pbl.Controllers
             {
                 mControleNotasXAula.Update(controleNotasAula);
             }
-
-            return RedirectToAction("SelecionarAlunos", "GerenciarDisciplinasMinistradas", new { IdAula = controleNotasAula.idAula, IdModulo = controleNotasAula.ControleNotas.idModulo });
+            controleNotasAula = mControleNotasXAula.BringOne(c => (c.idAula == controleNotasAula.idAula) && (c.idControleNotas == controleNotasAula.idControleNotas));
+            return RedirectToAction("SelecionarAlunos", "GerenciarDisciplinasMinistradas", new { idAula = controleNotasAula.idAula, idModulo = controleNotasAula.ControleNotas.idModulo });
         }
     }
 }
