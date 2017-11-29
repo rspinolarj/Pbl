@@ -56,7 +56,7 @@
                 copySuccess: 'Foram copiadas %d linhas para o clipboard',
                 print: 'Imprimir',
             }
-        }, //Idioma Português
+        }, 
     });
     var inputSearchClass = 'datatable_input_col_search';
     var columnInputs = $('tfoot .'+inputSearchClass);
