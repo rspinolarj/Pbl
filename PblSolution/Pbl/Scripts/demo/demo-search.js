@@ -14,7 +14,11 @@
     // CHOSEN
     // ----------------------------------- 
 
-    $('.chosen-select').chosen();
+      $('.chosen-select').chosen({
+          no_results_text: "Sem resultados...",
+          placeholder_text_single: "Selecione...",
+          placeholder_text_multiple: "Selecione as opções"
+      });
 /*
     // DATETIMEPICKER
     // ----------------------------------- 

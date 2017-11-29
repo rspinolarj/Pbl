@@ -14,20 +14,19 @@
 
     $('#datatable1').dataTable({
         "scrollX": true,
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json",
+            buttons: {
+                copy: 'Copiar',
+                copyTitle: 'Copiado para o clipboard',
+                copySuccess: 'Foram copiadas %d linhas para o clipboard',
+                print: 'Imprimir',
+            }
+        }, //Idioma Português
         'paging':   true,  // Table pagination
         'ordering': true,  // Column ordering
         'info':     true,  // Bottom left status text
         'responsive': true, // https://datatables.net/extensions/responsive/examples/
-        // Text translation options
-        // Note the required keywords between underscores (e.g _MENU_)
-        oLanguage: {
-            sSearch:      'Search all columns:',
-            sLengthMenu:  '_MENU_ records per page',
-            info:         'Showing page _PAGE_ of _PAGES_',
-            zeroRecords:  'Nothing found - sorry',
-            infoEmpty:    'No records available',
-            infoFiltered: '(filtered from _MAX_ total records)'
-        },
         // Datatable Buttons setup
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
@@ -49,16 +48,15 @@
         'ordering': true,  // Column ordering
         'info':     true,  // Bottom left status text
         'responsive': true, // https://datatables.net/extensions/responsive/examples/
-        // Text translation options
-        // Note the required keywords between underscores (e.g _MENU_)
-        oLanguage: {
-            sSearch:      'Search all columns:',
-            sLengthMenu:  '_MENU_ records per page',
-            info:         'Showing page _PAGE_ of _PAGES_',
-            zeroRecords:  'Nothing found - sorry',
-            infoEmpty:    'No records available',
-            infoFiltered: '(filtered from _MAX_ total records)'
-        }
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json",
+            buttons: {
+                copy: 'Copiar',
+                copyTitle: 'Copiado para o clipboard',
+                copySuccess: 'Foram copiadas %d linhas para o clipboard',
+                print: 'Imprimir',
+            }
+        }, //Idioma Português
     });
     var inputSearchClass = 'datatable_input_col_search';
     var columnInputs = $('tfoot .'+inputSearchClass);
